@@ -1,0 +1,17 @@
+- WEB: Account Stats, Account Checker(), G2G Accounts page 
+
+Account Stats:
+
+	- Overall stats
+	- Matches
+	- 
+
+Account Checker:
+	- requires register/login
+	- add limited riot account (unless pro)
+	- check stats for specifc riot accounts
+	- 
+	
+
+
+# no api for security reasons
