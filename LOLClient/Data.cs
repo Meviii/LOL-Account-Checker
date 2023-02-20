@@ -72,7 +72,7 @@ public class Data
 
         var champs = new List<Champion>();
 
-        string filePath = @"..\..\..\Updates\champions.json";
+        string filePath = @"..\..\..\Data\champions.json";
         string content = File.ReadAllText(filePath);
         var localChampJsonData = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(content);
 
@@ -207,7 +207,7 @@ public class Data
     {
         var skins = new List<Skin>();
         var ownedSkinsIds = GetOwnedSkins();
-        string filePath = @"..\..\..\Updates\skins.json";
+        string filePath = @"..\..\..\Data\skins.json";
         string content = File.ReadAllText(filePath);
         var skinJsonData = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, object>>>(content);
 

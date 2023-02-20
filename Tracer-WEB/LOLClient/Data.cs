@@ -1,5 +1,4 @@
 ﻿using LOLClient.Connections;
-using LOLClient.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -14,6 +13,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Tracer_WEB.Models;
 
 namespace LOLClient;
 

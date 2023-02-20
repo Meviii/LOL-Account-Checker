@@ -1,4 +1,4 @@
-- WEB: Account Stats, Account Checker(), G2G Accounts page 
+- WEB: Account Stats, Account Checker
 
 Account Stats:
 
@@ -12,6 +12,3 @@ Account Checker:
 	- check stats for specifc riot accounts
 	- 
 	
-
-
-# no api for security reasons

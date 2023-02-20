@@ -1,40 +1,52 @@
-﻿using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+﻿using LOLClient.UI;
+using Newtonsoft.Json.Linq;
 using System;
-using System.Threading;
-
+using System.IO;
+using System.Windows.Forms;
 namespace LOLClient;
 
 class Program
 {
+
+    [STAThread]
     public static void Main(string[] args)
     {
-        // Pre Update
-        //Update update = new();
-        //update.UpdateChampions();
+        
 
-        var THREADS_LENGTH = 1;
-        Thread[] threads = new Thread[THREADS_LENGTH];
+        ApplicationConfiguration.Initialize();
 
-        // create and assign threads
-        //for (int i = 0; i < THREADS_LENGTH; i++)
-        //{
-        threads[0] = new Thread(() => Work("misaluksmurf8", "ssaluk1967", 1));
-        threads[0].Start();
-        //threads[1] = new Thread(() => Work("mevismurf2", "ssaluk1967", 2));
-        //threads[1].Start();
-        //threads[2] = new Thread(() => Work("mevioce", "ssaluk1967", 3));
-        //threads[2].Start();
-        //threads[3] = new Thread(() => Work("misaluksmurf5", "codblackops2", 4));
-        //threads[3].Start();
-        //}
-
-        // Join threads
-        for (int i = 0; i < THREADS_LENGTH; i++)
+        if (IsSettingsFileEmpty())
         {
-            threads[i].Join();
+            Application.Run(new InitialLoad());
+        }
+        else
+        {
+            Application.Run(new Main());
+        }
+        
+    }
+
+    static bool IsSettingsFileEmpty()
+    {
+        string filePath = @"..\..\..\Data\settings.json";
+
+        JObject settings;
+
+        if (File.Exists(filePath))
+        {
+            string content = File.ReadAllTextAsync(filePath).Result;
+            settings = JObject.Parse(content);
+
+            if (settings.ContainsKey("RiotClientPath") &&
+                settings.ContainsKey("LeagueClientPath"))
+                return false;
+
+            if (settings["RiotClientPath"] != null &&
+                settings["LeagueClientPath"] != null)
+                return false;
         }
 
+        return true;
     }
 
     static void Work(string username, string password, int threadNumber)
