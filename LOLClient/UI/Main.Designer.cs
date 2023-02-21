@@ -44,7 +44,6 @@ namespace LOLClient
             this.StartButton = new System.Windows.Forms.Button();
             this.ProgressBar = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
-            
             // 
             // ConsoleTextBox
             // 
@@ -83,7 +82,7 @@ namespace LOLClient
             this.SettingsButton.TabIndex = 6;
             this.SettingsButton.Text = "Settings";
             this.SettingsButton.UseVisualStyleBackColor = false;
-            this.SettingsButton.Click += new System.EventHandler(this.button1_Click_1);
+            this.SettingsButton.Click += new System.EventHandler(this.SettingsButton_Click);
             // 
             // LoadComboButton
             // 
@@ -146,6 +145,7 @@ namespace LOLClient
             this.ComboListText.ReadOnly = true;
             this.ComboListText.Size = new System.Drawing.Size(131, 29);
             this.ComboListText.TabIndex = 18;
+            this.ComboListText.TextChanged += new System.EventHandler(this.ComboListText_TextChanged);
             // 
             // label4
             // 

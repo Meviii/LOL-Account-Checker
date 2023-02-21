@@ -1,9 +1,12 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using LOLClient.UI;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -43,6 +46,22 @@ public class UIUtility
         }
     }
 
+    public JObject LoadFromSettingsFile()
+    {
+        JObject settings;
+        string filePath = @"..\..\..\Data\settings.json";
+
+        if (File.Exists(filePath))
+        {
+            string content = File.ReadAllTextAsync(filePath).Result;
+            settings = JObject.Parse(content);
+
+            return settings;
+        }
+
+        return null;
+    }
+
     public bool IsDigit(object value)
     {
 
@@ -59,7 +78,21 @@ public class UIUtility
 
     public void LoadMainView()
     {
+
+        foreach (Form form in Application.OpenForms)
+        {
+            if (form.GetType() == typeof(Main))
+            {
+                form.Focus();
+                return;
+            }
+        }
+
         new Main().Show();
     }
 
+    public void LoadSettingsViewAsDialog()
+    {
+        new Settings().ShowDialog();
+    }
 }

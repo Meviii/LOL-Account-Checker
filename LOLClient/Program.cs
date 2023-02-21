@@ -1,6 +1,7 @@
 ﻿using LOLClient.UI;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 namespace LOLClient;
@@ -11,19 +12,18 @@ class Program
     [STAThread]
     public static void Main(string[] args)
     {
-        
 
         ApplicationConfiguration.Initialize();
 
         if (IsSettingsFileEmpty())
         {
-            Application.Run(new InitialLoad());
+            Application.Run(new Settings());
         }
         else
         {
             Application.Run(new Main());
         }
-        
+
     }
 
     static bool IsSettingsFileEmpty()
@@ -47,26 +47,6 @@ class Program
         }
 
         return true;
-    }
-
-    static void Work(string username, string password, int threadNumber)
-    {
-
-        // Runner
-        Runner runner = new();
-
-        bool didRiotSucceed = runner.RiotClientRunner(username, password, "H:\\Riot Games\\Riot Client\\RiotClientServices.exe");
-
-        if (!didRiotSucceed)
-        {
-            runner.CleanUp();
-            return;
-        }
-
-        runner.LeagueClientRunner("H:\\Riot Games\\League of Legends\\LeagueClient.exe");
-        runner.CleanUp();
-        
-        Console.WriteLine($"Thread number {threadNumber} completed.");
     }
 
 }

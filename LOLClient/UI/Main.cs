@@ -1,6 +1,7 @@
 ﻿using LOLClient.Utility;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Windows.Forms;
@@ -16,11 +17,17 @@ public partial class Main : Form
     {
         _uIUtility = new UIUtility();
         InitializeComponent();
-        InitializeConsole();
+        LoadConfig();
+
     }
 
-    private void InitializeConsole()
+    private void LoadConfig()
     {
+        var settings = _uIUtility.LoadFromSettingsFile();
+
+        if (settings.ContainsKey("ComboListPath"))
+            ComboListText.Text = settings["ComboListPath"].ToString();
+
         Console.SetOut(new ConsoleWriter(ConsoleTextBox));
     }
 
@@ -39,9 +46,10 @@ public partial class Main : Form
         ConsoleTextBox.AppendText(text + "\n");
     }
 
-    private void button1_Click_1(object sender, EventArgs e)
+    private void SettingsButton_Click(object sender, EventArgs e)
     {
-
+        
+        _uIUtility.LoadSettingsViewAsDialog();
     }
 
     private void label1_Click(object sender, EventArgs e)
@@ -75,7 +83,7 @@ public partial class Main : Form
         {
             string filePath = openFile.FileName;
 
-            WriteTo_richTextBox1(filePath);
+            ComboListText.Text = filePath;
             _uIUtility.SaveToSettingsFile("ComboListPath", filePath);
         }
 
@@ -100,7 +108,11 @@ public partial class Main : Form
 
     private void StartButton_Click(object sender, EventArgs e)
     {
-        var button = (Button) sender;
+
+        var runner = new Runner();
+        runner.ReadComboList(ComboListText.ToString());
+
+        var button = (Button)sender;
 
         if (button.Text == "Start")
         {
@@ -108,7 +120,8 @@ public partial class Main : Form
             button.ForeColor = System.Drawing.Color.Red;
             ProgressBar.Visible = true;
 
-        }else if (button.Text == "Stop")
+        }
+        else if (button.Text == "Stop")
         {
             button.Text = "Start";
             button.ForeColor = System.Drawing.Color.Black;
@@ -123,4 +136,8 @@ public partial class Main : Form
         this.Close();
     }
 
+    private void ComboListText_TextChanged(object sender, EventArgs e)
+    {
+
+    }
 }

@@ -10,6 +10,9 @@ using System.IO;
 using System.Net.Http;
 using Newtonsoft.Json.Linq;
 using LOLClient.Connections;
+using LOLClient.Utility;
+using System.Runtime.CompilerServices;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace LOLClient;
 
@@ -28,13 +31,14 @@ public class Runner
     private Data _data;
     private string _region;
     private readonly Mutex _runnerMutex = new();
-
+    private readonly UIUtility _utility;
     public Runner()
     {
         try
         {
             _runnerMutex.WaitOne();
 
+            _utility = new UIUtility();
             _account = new(); // Create a new Account object to store account related information
             _logger = GetLoggerFactory().CreateLogger<Runner>(); // Initialize a new logger
             _client = new(_logger); // Initialize Client 
@@ -44,6 +48,69 @@ public class Runner
             _runnerMutex.ReleaseMutex();
         }
 
+    }
+
+    public void RunOperation(int threadCount)
+    {
+
+        var settings = _utility.LoadFromSettingsFile();
+        var comboList = ReadComboList(settings["ComboListPath"].ToString());
+
+        RunThreads(threadCount, comboList, settings);
+
+    }
+
+    public bool RunThreads(int threadCount, List<Tuple<string, string>> comboList, JObject settings)
+    {
+
+        Console.WriteLine($"Remaining Combos: {comboList.Count}");
+
+        if (comboList.Count <= 0)
+            return true;
+
+        for (int i = 0; i < threadCount; i++)
+        {
+            if (comboList.Count <= 0)
+                return true;
+
+            Console.WriteLine($"Thread {i} started.");
+
+            Thread thread = new(() => Work(comboList[0].Item1, comboList[0].Item2, settings));
+            thread.Start();
+
+            comboList.RemoveAt(0);
+        }
+
+        Task.WaitAll();
+
+        return RunThreads(threadCount, comboList, settings);
+    }
+
+    private void Work(string username, string password, JObject settings)
+    {
+        bool didRiotSucceed = RiotClientRunner(username, password, settings["RiotClientPath"].ToString());
+
+        if (!didRiotSucceed)
+        {
+            CleanUp();
+            return;
+        }
+
+        LeagueClientRunner(settings["LeagueClientPath"].ToString());
+        CleanUp();
+    }
+
+    public List<Tuple<string,string>> ReadComboList(string comboListPath)
+    {
+        Console.WriteLine(comboListPath);
+
+        if (!File.Exists(comboListPath))
+            return null;
+
+        string content = File.ReadAllTextAsync(@"C:\Users\Mevi\Desktop\acombo.txt").Result;
+        Console.WriteLine(content);
+
+        return null;
     }
 
     private ILoggerFactory GetLoggerFactory()
@@ -65,7 +132,7 @@ public class Runner
      * 
      * Requires account username, account password and the path to the RiotClientServices.exe
      */
-    public bool RiotClientRunner(string username, string password, string riotClientPath)
+    private bool RiotClientRunner(string username, string password, string riotClientPath)
     {
 
         Connection connection = new(_logger); // Initialize a new connection for the RiotClientServices.exe
@@ -99,7 +166,7 @@ public class Runner
      * 
      * Requires path to the LeagueClient.exe
      */
-    public void LeagueClientRunner(string leagueClientPath)
+    private void LeagueClientRunner(string leagueClientPath)
     {
         Connection connection = new(_logger); // Initialize a new connection for the LeagueClient.exe
 
