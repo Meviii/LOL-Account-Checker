@@ -1,4 +1,5 @@
 ﻿using LOLClient.UI;
+using LOLClient.Utility;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,10 @@ class Program
     [STAThread]
     public static void Main(string[] args)
     {
+
+        //Runner runner = new();
+        //var settings = new UIUtility().LoadFromSettingsFile();
+        //runner.Work("mevismurf2", "", settings);
 
         ApplicationConfiguration.Initialize();
 

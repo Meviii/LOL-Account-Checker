@@ -1,9 +1,9 @@
 {
   "SummonerName": "pycppjavacs",
   "Level": "223",
-  "Region": null,
-  "BE": null,
-  "RP": null,
+  "Region": "OC1",
+  "BE": "128006",
+  "RP": "7164",
   "IsEmailVerified": false,
   "Champions": [
     {

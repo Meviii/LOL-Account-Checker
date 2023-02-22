@@ -13,6 +13,7 @@ using LOLClient.Connections;
 using LOLClient.Utility;
 using System.Runtime.CompilerServices;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using System.Security.Cryptography.X509Certificates;
 
 namespace LOLClient;
 
@@ -32,85 +33,91 @@ public class Runner
     private string _region;
     private readonly Mutex _runnerMutex = new();
     private readonly UIUtility _utility;
+    private static object _lock = new object(); // mutex object
+
     public Runner()
     {
-        try
-        {
-            _runnerMutex.WaitOne();
-
-            _utility = new UIUtility();
-            _account = new(); // Create a new Account object to store account related information
-            _logger = GetLoggerFactory().CreateLogger<Runner>(); // Initialize a new logger
-            _client = new(_logger); // Initialize Client 
-        }
-        finally
-        {
-            _runnerMutex.ReleaseMutex();
-        }
+        _utility = new UIUtility();
+        _account = new(); // Create a new Account object to store account related information
+        _logger = GetLoggerFactory().CreateLogger<Runner>(); // Initialize a new logger
+        _client = new(_logger); // Initialize Client 
 
     }
 
-    public void RunOperation(int threadCount)
+    public void RunOperation(int threadCount, char delimiter)
     {
 
         var settings = _utility.LoadFromSettingsFile();
-        var comboList = ReadComboList(settings["ComboListPath"].ToString());
+        var path = settings.GetValue("ComboListPath").ToString();
+        var comboList = ReadComboList(path, delimiter);
 
-        RunThreads(threadCount, comboList, settings);
+        RunThreadsAsync(threadCount, comboList, settings).Wait();
 
-    }
-
-    public bool RunThreads(int threadCount, List<Tuple<string, string>> comboList, JObject settings)
-    {
-
-        Console.WriteLine($"Remaining Combos: {comboList.Count}");
-
-        if (comboList.Count <= 0)
-            return true;
-
-        for (int i = 0; i < threadCount; i++)
-        {
-            if (comboList.Count <= 0)
-                return true;
-
-            Console.WriteLine($"Thread {i} started.");
-
-            Thread thread = new(() => Work(comboList[0].Item1, comboList[0].Item2, settings));
-            thread.Start();
-
-            comboList.RemoveAt(0);
-        }
-
-        Task.WaitAll();
-
-        return RunThreads(threadCount, comboList, settings);
-    }
-
-    private void Work(string username, string password, JObject settings)
-    {
-        bool didRiotSucceed = RiotClientRunner(username, password, settings["RiotClientPath"].ToString());
-
-        if (!didRiotSucceed)
-        {
-            CleanUp();
-            return;
-        }
-
-        LeagueClientRunner(settings["LeagueClientPath"].ToString());
         CleanUp();
     }
 
-    public List<Tuple<string,string>> ReadComboList(string comboListPath)
+    public async Task<bool> RunThreadsAsync(int threadCount, List<Tuple<string, string>> comboList, JObject settings)
     {
-        Console.WriteLine(comboListPath);
+        var remainingCombos = comboList.Count;
 
+        while (remainingCombos > 0)
+        {
+            Console.WriteLine($"Remaining Combos: {remainingCombos}");
+            var tasks = new List<Task>();
+            for (int i = 0; i < threadCount; i++)
+            {
+                if (remainingCombos <= 0)
+                    return true;
+
+                var combo = comboList[0];
+                
+                Console.WriteLine($"Starting thread for {combo.Item1}");
+                var task = Task.Run(() => Work(combo.Item1, combo.Item2, settings));
+
+                comboList.RemoveAt(0);
+
+                tasks.Add(task);
+                remainingCombos--;
+            }
+
+            await Task.WhenAll(tasks.ToArray());
+        }
+        
+        return false;
+        
+    }
+
+    public void Work(string username, string password, JObject settings)
+    {
+
+        bool didRiotSucceed = RiotClientRunner(username, password, settings["RiotClientPath"].ToString());
+
+        if (!didRiotSucceed)
+            return;
+        
+        LeagueClientRunner(settings["LeagueClientPath"].ToString());
+        
+    }
+
+    public List<Tuple<string,string>> ReadComboList(string comboListPath, char delimiter)
+    {
         if (!File.Exists(comboListPath))
             return null;
 
-        string content = File.ReadAllTextAsync(@"C:\Users\Mevi\Desktop\acombo.txt").Result;
-        Console.WriteLine(content);
+        string content = File.ReadAllTextAsync(comboListPath).Result;
 
-        return null;
+        var accounts = new List<Tuple<string, string>>();
+
+        foreach (string line in content.Split())
+        {
+            if (line != "")
+            {
+                var accString = line.Split(delimiter);
+                accounts.Add(new Tuple<string, string>(accString[0], accString[1]));
+            }
+        }
+
+        return accounts;
     }
 
     private ILoggerFactory GetLoggerFactory()
@@ -149,7 +156,8 @@ public class Runner
         
         if (!didLogin) // Check if login fails
         {
-            _logger.LogWarning("Thread Stopped. Login incorrect.");
+            Console.WriteLine("Thread Stopped. Login incorrect.");
+            _client.CloseClient(riotConnection.ProcessID);
             return false;
         }
 
@@ -168,13 +176,14 @@ public class Runner
      */
     private void LeagueClientRunner(string leagueClientPath)
     {
+        
         Connection connection = new(_logger); // Initialize a new connection for the LeagueClient.exe
-
+        
         LeagueConnection leagueConnection = new(connection, _client, _logger, leagueClientPath, _region) // Creates Client
         {
             RiotCredentials = _riotClientCredentials
         };
-
+        
         leagueConnection.Run(); // Run steps
 
         _data = new(connection); // Sets Data object with LeagueClient's Connection
@@ -190,10 +199,8 @@ public class Runner
         _data.GetSkins(_account);
         _data.GetChampions(_account);
         _data.GetSummonerData(_account);
-
     }
 
-    
     public void CleanUp()
     {
         _client.CloseClients();

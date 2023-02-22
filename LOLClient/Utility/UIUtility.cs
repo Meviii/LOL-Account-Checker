@@ -17,7 +17,16 @@ public class UIUtility
 
     public UIUtility() { }
 
-    
+    public string ReadFromFile(string path)
+    {
+        if (!File.Exists(path))
+            return null;
+
+        string content = File.ReadAllTextAsync(@"C:\Users\Mevi\Desktop\acombo.txt").Result;
+        Console.WriteLine(content);
+
+        return content;
+    }
     public void SaveToSettingsFile(string key, object value)
     {
         string filePath = @"..\..\..\Data\settings.json";

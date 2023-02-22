@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LOLClient;
@@ -39,11 +40,6 @@ public partial class Main : Form
     private void richTextBox1_TextChanged(object sender, EventArgs e)
     {
         
-    }
-
-    private void WriteTo_richTextBox1(string text)
-    {
-        ConsoleTextBox.AppendText(text + "\n");
     }
 
     private void SettingsButton_Click(object sender, EventArgs e)
@@ -106,19 +102,34 @@ public partial class Main : Form
         }
     }
 
-    private void StartButton_Click(object sender, EventArgs e)
+    private async void StartButton_Click(object sender, EventArgs e)
     {
-
-        var runner = new Runner();
-        runner.ReadComboList(ComboListText.ToString());
 
         var button = (Button)sender;
 
         if (button.Text == "Start")
         {
+
             button.Text = "Stop";
             button.ForeColor = System.Drawing.Color.Red;
             ProgressBar.Visible = true;
+
+            // handle if user doesnt enter a thread count
+            int actualThreadCount;
+
+            if (Convert.ToString(ThreadCountTextBox.Text) == "")
+            {
+                actualThreadCount = 1;
+            }
+            else
+            {
+                actualThreadCount = int.Parse(ThreadCountTextBox.Text);
+            }
+
+            var delimiter = Convert.ToChar(DelimiterTextBox.Text);
+
+            await Task.Run(() => InitRunner(actualThreadCount, delimiter));
+
 
         }
         else if (button.Text == "Stop")
@@ -130,6 +141,13 @@ public partial class Main : Form
 
     }
 
+    private void InitRunner(int actualThreadCount, char delimiter)
+    {
+        var runner = new Runner();
+
+        runner.RunOperation(actualThreadCount,
+            Convert.ToChar(delimiter));
+    }
     private void CloseButton_Click(object sender, EventArgs e)
     {
         this.Hide();

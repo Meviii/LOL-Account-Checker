@@ -159,14 +159,25 @@ public class Data
 
     private bool RequestEmailVerification()
     {
-        var response = _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-email-verification/v1/email", null).Result;
+        try
+        {
+            var response = _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-email-verification/v1/email", null).Result;
 
-        var data = JToken.Parse(response.Content.ReadAsStringAsync().Result);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                var data = JToken.Parse(response.Content.ReadAsStringAsync().Result);
 
-        var verified = data["emailVerified"].ToString();
+                var verified = data["emailVerified"].ToString();
 
-        if (verified.ToLower() == "true")
-            return true;
+                if (verified.ToLower() == "true")
+                    return true;
+            }
+        }
+        catch (Exception e)
+        {
+            return true; // better to return null
+        }
+        
 
         return false;
     }

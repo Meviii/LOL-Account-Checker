@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -20,13 +21,18 @@ public class ConsoleWriter : TextWriter
 
     public override void Write(string value)
     {
-        _textBox.AppendText(value);
+
+        if (_textBox.InvokeRequired)
+        {
+            //_textBox.BeginInvoke(new Action(() => _textBox.AppendText(value)));
+            _textBox.Invoke(new Action(() => _textBox.AppendText(value)));
+        }
+        else
+        {
+            _textBox.AppendText(value);
+        }
     }
 
-    public override void Write(char value)
-    {
-        _textBox.AppendText(value.ToString());
-    }
 
     public override Encoding Encoding => Encoding.Unicode;
 }

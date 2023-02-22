@@ -4,7 +4,7 @@
   "Region": "OC1",
   "BE": "8947",
   "RP": "320",
-  "IsEmailVerified": true,
+  "IsEmailVerified": false,
   "Champions": [
     {
       "ID": "1",
