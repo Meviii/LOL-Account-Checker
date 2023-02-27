@@ -21,6 +21,7 @@ public class Data
 {
 
     private readonly Connection _leagueConnection;
+    private readonly object _lock = new object();
 
     public Data(Connection leagueConnection)
     {
@@ -72,11 +73,11 @@ public class Data
 
         var champs = new List<Champion>();
 
-        string filePath = @"..\..\..\Updates\champions.json";
+        string filePath = @"..\..\..\Data\champions.json";
         string content = File.ReadAllText(filePath);
         var localChampJsonData = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(content);
 
-        // Fix to avoid n*m time complexity
+        // Fix to avoid n*m 
         foreach (var localChamp in localChampJsonData)
         {
             foreach (var ownedChamp in ownedChamps)
@@ -142,8 +143,11 @@ public class Data
             if (item["lootId"].ToString() == "CURRENCY_champion")
                 account.BE = item["count"].ToString();
 
-            if (item["lootId"].ToString() == "CURRENCY_cosmetic")
+            if (item["lootId"].ToString() == "CURRENCY_RP")
                 account.RP = item["count"].ToString();
+
+            if (item["lootId"].ToString() == "CURRENCY_cosmetic")
+                account.OE = item["count"].ToString();
         }
     }
 
@@ -159,14 +163,25 @@ public class Data
 
     private bool RequestEmailVerification()
     {
-        var response = _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-email-verification/v1/email", null).Result;
+        try
+        {
+            var response = _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-email-verification/v1/email", null).Result;
 
-        var data = JToken.Parse(response.Content.ReadAsStringAsync().Result);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                var data = JToken.Parse(response.Content.ReadAsStringAsync().Result);
 
-        var verified = data["emailVerified"].ToString();
+                var verified = data["emailVerified"].ToString();
 
-        if (verified.ToLower() == "true")
-            return true;
+                if (verified.ToLower() == "true")
+                    return true;
+            }
+        }
+        catch (Exception e)
+        {
+            return true; // better to return null
+        }
+        
 
         return false;
     }
@@ -207,7 +222,7 @@ public class Data
     {
         var skins = new List<Skin>();
         var ownedSkinsIds = GetOwnedSkins();
-        string filePath = @"..\..\..\Updates\skins.json";
+        string filePath = @"..\..\..\Data\skins.json";
         string content = File.ReadAllText(filePath);
         var skinJsonData = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, object>>>(content);
 
@@ -225,6 +240,26 @@ public class Data
         }
 
         account.Skins = skins;
+    }
+
+
+    public void GetRank()
+    {
+
+    }
+
+    private void RequestRank()
+    {
+        
+        var response = _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-ranked/v1/current-ranked-stats", null).Result;
+
+        if (response.StatusCode == HttpStatusCode.OK)
+        {
+            var data = JToken.Parse(response.Content.ReadAsStringAsync().Result);
+
+            var verified = data["emailVerified"].ToString();
+        }
+        
     }
 
 }

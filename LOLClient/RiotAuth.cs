@@ -27,43 +27,40 @@ public class RiotAuth
 
     }
 
-    private async Task<bool> CanAuthenticate(string username, string password)
+    private bool CanAuthenticate(string username, string password)
     {
 
-        try
+        var data = new Dictionary<string, object>()
         {
-            var data = new Dictionary<string, object>()
+            {"username", username},
+            {"password", password},
+            {"persistLogin", false},
+        };
+
+        while (true)
+        {
+
+
+            var response = _connection.RequestAsync(HttpMethod.Put, "/rso-auth/v1/session/credentials", data).Result;
+            var content = JToken.Parse(response.Content.ReadAsStringAsync().Result);
+
+            if (content.SelectToken("error") != null)
             {
-                {"username", username},
-                {"password", password},
-                {"persistLogin", false},
-            };
-
-            while (true)
-            {
-
-
-                var response = await _connection.RequestAsync(HttpMethod.Put, "/rso-auth/v1/session/credentials", data);
-                var content = JToken.Parse(response.Content.ReadAsStringAsync().Result);
-
-                if (content.SelectToken("error") != null)
+                if (content["error"].ToString() == "auth_failure")
                 {
-                    if (content["error"].ToString() == "auth_failure")
-                    {
 
-                        return false;
-                    }
+                    return false;
                 }
-
-                if (response.IsSuccessStatusCode)
-                {
-                    return true;
-                }
-
-                return false;
             }
+
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+
+            return false;
         }
-        finally { }
+
 
     }
 
@@ -73,9 +70,10 @@ public class RiotAuth
         await _connection.RequestAsync(HttpMethod.Put, "/eula/v1/agreement/acceptance", null);
     }
 
-    public async Task<bool> Login(string username, string password, string riotClientPath)
+    public bool Login(string username, string password, string riotClientPath)
     {
-        bool canAuth = await CanAuthenticate(username, password);
+
+        bool canAuth = CanAuthenticate(username, password);
 
         if (!canAuth)
             return false;

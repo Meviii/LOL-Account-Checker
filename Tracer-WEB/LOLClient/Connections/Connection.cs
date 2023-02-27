@@ -1,16 +1,7 @@
-﻿using System;
-using System.Net.Http;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System.Text;
-using System.Diagnostics;
-using System.IO;
 using System.Net.Sockets;
 using System.Net;
-using System.Threading.Tasks;
-using System.Threading;
-using Microsoft.Extensions.Logging;
-using System.Diagnostics.Metrics;
 
 namespace LOLClient.Connections;
 
@@ -21,8 +12,8 @@ public class Connection
     public readonly HttpClient _httpClient;
     private readonly ILogger _logger;
 
-    private static HashSet<string> _usedPorts = new HashSet<string>();
-    private static object _lock = new object(); // mutex object
+    private readonly HashSet<string> _usedPorts = new HashSet<string>();
+    private readonly object _lock = new object(); // mutex object
    
     public Connection(ILogger logger)
     {

@@ -14,6 +14,7 @@ public class Account
     public string Region { get; set; } // better to be enum
     public string BE { get; set; }
     public string RP { get; set; }
+    public string OE { get; set; }
     public bool IsEmailVerified { get; set; }
     public List<Champion> Champions { get; set; }
     public List<Skin> Skins { get; set; }

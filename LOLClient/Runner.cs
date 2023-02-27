@@ -10,6 +10,7 @@ using System.IO;
 using System.Net.Http;
 using Newtonsoft.Json.Linq;
 using LOLClient.Connections;
+using LOLClient.Utility;
 
 namespace LOLClient;
 
@@ -19,8 +20,11 @@ namespace LOLClient;
  * the league and riot client services.
  */
 
+public delegate void AccountsLeftUpdatedEventHandler(object sender, int accountsLeft);
+
 public class Runner
 {
+
     private readonly ILogger _logger;
     private readonly Client _client;
     private Dictionary<string, object> _riotClientCredentials;
@@ -28,22 +32,122 @@ public class Runner
     private Data _data;
     private string _region;
     private readonly Mutex _runnerMutex = new();
+    private readonly UIUtility _utility;
+    private static object _lock = new object(); // mutex object
+    public event AccountsLeftUpdatedEventHandler AccountsLeftUpdated;
+    private int _accountsLeft;
 
-    public Runner()
+    public Runner(Main main)
     {
-        try
-        {
-            _runnerMutex.WaitOne();
+        _utility = new UIUtility();
+        _account = new(); // Create a new Account object to store account related information
+        _logger = GetLoggerFactory().CreateLogger<Runner>(); // Initialize a new logger
+        _client = new(_logger); // Initialize Client 
+        
+    }
 
-            _account = new(); // Create a new Account object to store account related information
-            _logger = GetLoggerFactory().CreateLogger<Runner>(); // Initialize a new logger
-            _client = new(_logger); // Initialize Client 
-        }
-        finally
+    private void OnAccountsLeftUpdated(int accountsLeft)
+    {
+        AccountsLeftUpdated?.Invoke(this, accountsLeft);
+    }
+
+    public void RunOperation(int threadCount, char delimiter)
+    {
+
+        var settings = _utility.LoadFromSettingsFile();
+        var path = settings.GetValue("ComboListPath").ToString();
+        var comboList = ReadComboList(path, delimiter);
+        RunThreadsAsync(threadCount, comboList, settings).Wait();
+    }
+
+    public async Task<bool> RunThreadsAsync(int threadCount, List<Tuple<string, string>> comboList, JObject settings)
+    {
+
+        var remainingCombos = comboList.Count;
+        _accountsLeft = remainingCombos;
+
+        if (threadCount > remainingCombos)
+            threadCount = remainingCombos;
+
+        while (remainingCombos > 0)
         {
-            _runnerMutex.ReleaseMutex();
+            Console.WriteLine($"Remaining Combos: {remainingCombos}");
+            var tasks = new List<Thread>();
+            
+            for (int i = 0; i < threadCount; i++)
+            {
+                if (remainingCombos <= 0)
+                {
+                    foreach (var t in tasks)
+                    {
+                        t.Join();
+                    }
+                }
+
+                var combo = comboList[0];
+
+                Console.WriteLine($"Starting thread for {combo.Item1}");
+                var task = new Thread(() => Work(combo.Item1, combo.Item2, settings));
+                comboList.RemoveAt(0);
+                tasks.Add(task);
+                remainingCombos--;
+                OnAccountsLeftUpdated(_accountsLeft);
+                _accountsLeft--;
+            }
+            foreach (var task in tasks)
+            {
+                task.Start();
+            }
+            
+            foreach (var task in tasks)
+            {
+                task.Join();
+            }
+            tasks.Clear();
+            CleanUp();
+        }
+        
+        return false;
+        
+    }
+
+    public void Work(string username, string password, JObject settings)
+    {
+        lock (_lock)
+        {
+            bool didRiotSucceed = RiotClientRunner(username, password, settings["RiotClientPath"].ToString());
+
+            if (!didRiotSucceed)
+                return;
+
+            bool didLeagueSucceed = LeagueClientRunner(settings["LeagueClientPath"].ToString());
+
+            if (!didLeagueSucceed)
+                return;
+            
+            Console.WriteLine($"Completed {username}");
+        }
+    }
+
+    public List<Tuple<string,string>> ReadComboList(string comboListPath, char delimiter)
+    {
+        if (!File.Exists(comboListPath))
+            return null;
+
+        string content = File.ReadAllTextAsync(comboListPath).Result;
+
+        var accounts = new List<Tuple<string, string>>();
+
+        foreach (string line in content.Split())
+        {
+            if (line != "")
+            {
+                var accString = line.Split(delimiter);
+                accounts.Add(new Tuple<string, string>(accString[0], accString[1]));
+            }
         }
 
+        return accounts;
     }
 
     private ILoggerFactory GetLoggerFactory()
@@ -65,7 +169,7 @@ public class Runner
      * 
      * Requires account username, account password and the path to the RiotClientServices.exe
      */
-    public bool RiotClientRunner(string username, string password, string riotClientPath)
+    private bool RiotClientRunner(string username, string password, string riotClientPath)
     {
 
         Connection connection = new(_logger); // Initialize a new connection for the RiotClientServices.exe
@@ -73,16 +177,17 @@ public class Runner
         RiotConnection riotConnection = new(_client, connection, _logger); // Creates client 
 
         riotConnection.Run(); // Run steps
-        
+
         _riotClientCredentials = riotConnection.GetRiotCredentials(); // Retrieves Riot Client Connection Credentials for the LeagueClient.
 
         RiotAuth riotAuth = new(connection, riotConnection, _logger); // Initializes Auth session
 
-        bool didLogin = riotAuth.Login(username, password, riotClientPath).Result; // Attempts to login the Summoner
-        
+        bool didLogin = riotAuth.Login(username, password, riotClientPath); // Attempts to login the Summoner
+
         if (!didLogin) // Check if login fails
         {
-            _logger.LogWarning("Thread Stopped. Login incorrect.");
+            Console.WriteLine("Thread Stopped. Login incorrect.");
+            _client.CloseClient(riotConnection.ProcessID);
             return false;
         }
 
@@ -91,6 +196,7 @@ public class Runner
         riotConnection.WaitForLaunch(); // Wait for League Client to Launch. Must be processed after LOGIN
 
         return true;
+        
     }
 
     /* 
@@ -99,8 +205,9 @@ public class Runner
      * 
      * Requires path to the LeagueClient.exe
      */
-    public void LeagueClientRunner(string leagueClientPath)
+    private bool LeagueClientRunner(string leagueClientPath)
     {
+
         Connection connection = new(_logger); // Initialize a new connection for the LeagueClient.exe
 
         LeagueConnection leagueConnection = new(connection, _client, _logger, leagueClientPath, _region) // Creates Client
@@ -108,28 +215,35 @@ public class Runner
             RiotCredentials = _riotClientCredentials
         };
 
-        leagueConnection.Run(); // Run steps
+        var isCreated = leagueConnection.Run(); // Run steps
+
+        if (!isCreated)
+            return false;
 
         _data = new(connection); // Sets Data object with LeagueClient's Connection
         
-        FetchData(); // Fetches Summoner Account data
-        _account.Region = _region;
+        var account = new Account
+        {
+            Region = _region
+        };
+        FetchData(account); // Fetches Summoner Account data
+        _data.ExportAccount(account); // Export account
 
-        _data.ExportAccount(_account); // Export account
+        return true;
     }
 
-    private void FetchData()
+    private void FetchData(Account account)
     {
-        _data.GetSkins(_account);
-        _data.GetChampions(_account);
-        _data.GetSummonerData(_account);
 
+        _data.GetSkins(account);
+        _data.GetChampions(account);
+        _data.GetSummonerData(account);
     }
 
-    
     public void CleanUp()
     {
         _client.CloseClients();
+        
     }
 
 }

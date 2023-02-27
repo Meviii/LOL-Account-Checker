@@ -15,8 +15,8 @@ public class RiotConnection
     private readonly Connection _connection;
     private readonly Client _client;
     private readonly ILogger _logger;
-
-
+    private readonly object _lock = new object();
+    public int ProcessID { get; private set; }
     public RiotConnection(Client client, Connection connection, ILogger logger, string riotClientPath = "H:\\Riot Games\\Riot Client\\RiotClientServices.exe")
     {
         _logger = logger;
@@ -28,25 +28,22 @@ public class RiotConnection
 
     public void Run()
     {
-
-        CreateRiotClient();
-        WaitForConnection();
-
+        lock (_lock)
+        {
+            CreateRiotClient();
+            WaitForConnection();
+        }
     }
 
     public Dictionary<string, object> GetRiotCredentials()
     {
-        try
-        {
 
-            var creds = new Dictionary<string, object>
-            {
-                { "riotPort", _connection.Port },
-                { "riotAuthToken", _connection.AuthToken }
-            };
-            return creds;
-        }
-        finally { }
+        var creds = new Dictionary<string, object>
+        {
+            { "riotPort", _connection.Port },
+            { "riotAuthToken", _connection.AuthToken }
+        };
+        return creds;
 
     }
 
@@ -99,7 +96,7 @@ public class RiotConnection
             "--headless",
         };
 
-        _client.CreateClient(processArgs, _riotClientPath);
+        ProcessID = _client.CreateClient(processArgs, _riotClientPath);
     }
 
 

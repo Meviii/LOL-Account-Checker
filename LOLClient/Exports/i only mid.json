@@ -1,10 +1,11 @@
 {
   "SummonerName": "i only mid",
   "Level": "87",
-  "Region": null,
-  "BE": null,
-  "RP": null,
-  "IsEmailVerified": false,
+  "Region": "OC1",
+  "BE": "22306",
+  "RP": "89",
+  "OE": "2640",
+  "IsEmailVerified": true,
   "Champions": [
     {
       "ID": "1",

@@ -26,18 +26,17 @@ public class Connection
    
     public Connection(ILogger logger)
     {
+
         _logger = logger;
 
         AuthToken = GenerateAuthToken();
         Port = Convert.ToString(GetFreePort());
 
-
         _httpClient = new HttpClient(GetHandlerSettings());
         _httpClient.BaseAddress = new Uri("https://127.0.0.1:" + Port);
         _httpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.ASCII.GetBytes($"riot:{AuthToken}")));
-
-        _logger.LogInformation($"Initializing new Connection. Port: {Port}, Auth Token: {AuthToken}");
-
+        Console.WriteLine($"Initializing new Connection. Port: {Port}, Auth Token: {AuthToken}");
+        
     }
 
     // Finds a free port.
@@ -104,7 +103,7 @@ public class Connection
         URLFixer(ref url);
 
         var requestAddress = _httpClient.BaseAddress + url;
-        _logger.LogInformation($"Sending {method} request. URL: {url}");
+        Console.WriteLine($"Sending {method} request. URL: {url}");
 
         HttpResponseMessage response;
 
@@ -129,7 +128,7 @@ public class Connection
             default:
                 throw new Exception("Unsupported HTTP method.");
         }
-        _logger.LogInformation($"Response: {response.StatusCode}");
+        Console.WriteLine($"Response: {response.StatusCode}");
 
         return response;
     }

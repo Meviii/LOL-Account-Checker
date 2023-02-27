@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.VisualBasic.Devices;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
@@ -9,6 +10,7 @@ public class Client
 {
     private readonly List<Process> _processes;
     private readonly ILogger _logger;
+    private readonly object _lock = new object();
 
     public Client(ILogger logger)
     {
@@ -16,40 +18,52 @@ public class Client
         _processes = new();
     }
 
-    public void CreateClient(List<string> processArgs, string path)
+    public int CreateClient(List<string> processArgs, string path)
     {
-        Process process = new();
-        while (true)
+        lock (_lock)
         {
-            try
+
+
+            Process process = new();
+            while (true)
             {
-                ProcessStartInfo processInfo = new()
+                try
                 {
+                    ProcessStartInfo processInfo = new()
+                    {
 
-                    FileName = path,
-                    Arguments = string.Join(" ", processArgs),
-                    UseShellExecute = false
-                };
+                        FileName = path,
+                        Arguments = string.Join(" ", processArgs),
+                        UseShellExecute = false
+                    };
 
-                process.StartInfo = processInfo;
+                    process.StartInfo = processInfo;
 
-                process.Start();
+                    process.Start();
 
-                _processes.Add(process);
+                    _processes.Add(process);
 
-                Thread.Sleep(2000);
+                    Thread.Sleep(2000);
 
-                return;
+                    return process.Id;
+                }
+                catch
+                {
+                    Thread.Sleep(1000);
+                }
+
             }
-            catch
-            {
-                Thread.Sleep(1000);
-            }
-
         }
     }
 
-
+    public void CloseClient(int processId)
+    {
+        foreach (Process process in _processes)
+        {
+            if (process.Id == processId)
+                process.Kill();
+        }
+    }
     public void CloseClients()
     {
         foreach (Process process in _processes)
