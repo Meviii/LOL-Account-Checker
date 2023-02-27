@@ -3,8 +3,9 @@
   "Level": "90",
   "Region": "OC1",
   "BE": "8947",
-  "RP": "320",
-  "IsEmailVerified": false,
+  "RP": "138",
+  "OE": "320",
+  "IsEmailVerified": true,
   "Champions": [
     {
       "ID": "1",

@@ -1,4 +1,5 @@
-﻿using LOLClient.UI;
+﻿using LOLClient.Models;
+using LOLClient.UI;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -22,11 +23,12 @@ public class UIUtility
         if (!File.Exists(path))
             return null;
 
-        string content = File.ReadAllTextAsync(@"C:\Users\Mevi\Desktop\acombo.txt").Result;
+        string content = File.ReadAllTextAsync(path).Result;
         Console.WriteLine(content);
 
         return content;
     }
+
     public void SaveToSettingsFile(string key, object value)
     {
         string filePath = @"..\..\..\Data\settings.json";
@@ -71,6 +73,34 @@ public class UIUtility
         return null;
     }
 
+    public List<Account> LoadAccountsFromExportsFolder()
+    {
+        JArray accounts = new();
+        string folderPath = @"..\..\..\Exports\";
+
+        foreach (string filePath in Directory.GetFiles(folderPath))
+        {
+
+            if (File.Exists(filePath) && filePath.EndsWith(".json"))
+            {
+                try
+                {
+                    string content = File.ReadAllTextAsync(filePath).Result;
+                    var account = JObject.Parse(content);
+
+                    accounts.Add(account);
+
+                }catch
+                {
+                    continue;
+                }
+            }
+        }
+
+        return JsonConvert.DeserializeObject<List<Account>>(accounts.ToString());
+    }
+
+
     public bool IsDigit(object value)
     {
 
@@ -92,12 +122,33 @@ public class UIUtility
         {
             if (form.GetType() == typeof(Main))
             {
+
+                form.Visible = true;
                 form.Focus();
                 return;
             }
         }
 
         new Main().Show();
+    }
+
+    public void LoadAccountsListView()
+    {
+
+        bool isCreatedAlready = false;
+        foreach (Form form in Application.OpenForms)
+        {
+            if (form.GetType() == typeof(AccountList))
+            {
+                form.StartPosition = FormStartPosition.CenterParent;
+                form.Visible = true;
+                isCreatedAlready = true;
+            }
+        }
+
+        if (!isCreatedAlready)
+            new AccountList().Show();
+
     }
 
     public void LoadSettingsViewAsDialog()

@@ -43,6 +43,9 @@ namespace LOLClient
             this.ThreadCountTextBox = new System.Windows.Forms.TextBox();
             this.StartButton = new System.Windows.Forms.Button();
             this.ProgressBar = new System.Windows.Forms.ProgressBar();
+            this.accountsListButton = new System.Windows.Forms.Button();
+            this.accountsLeftLabel = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ConsoleTextBox
@@ -184,15 +187,51 @@ namespace LOLClient
             this.StartButton.TabIndex = 21;
             this.StartButton.Text = "Start";
             this.StartButton.UseVisualStyleBackColor = false;
-            this.StartButton.Click += new System.EventHandler(this.StartButton_Click);
+            this.StartButton.Click += new System.EventHandler(this.StartOrStopButton_Click);
             // 
             // ProgressBar
             // 
-            this.ProgressBar.Location = new System.Drawing.Point(847, 350);
+            this.ProgressBar.Location = new System.Drawing.Point(847, 456);
             this.ProgressBar.Name = "ProgressBar";
             this.ProgressBar.Size = new System.Drawing.Size(170, 23);
             this.ProgressBar.TabIndex = 22;
             this.ProgressBar.Visible = false;
+            // 
+            // accountsListButton
+            // 
+            this.accountsListButton.BackColor = System.Drawing.Color.LightCyan;
+            this.accountsListButton.FlatAppearance.BorderSize = 0;
+            this.accountsListButton.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.accountsListButton.Location = new System.Drawing.Point(83, 0);
+            this.accountsListButton.Name = "accountsListButton";
+            this.accountsListButton.Size = new System.Drawing.Size(79, 35);
+            this.accountsListButton.TabIndex = 23;
+            this.accountsListButton.Text = "Accounts";
+            this.accountsListButton.UseVisualStyleBackColor = false;
+            this.accountsListButton.Click += new System.EventHandler(this.accountsListButton_Click);
+            // 
+            // accountsLeftLabel
+            // 
+            this.accountsLeftLabel.BackColor = System.Drawing.Color.LightCyan;
+            this.accountsLeftLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.accountsLeftLabel.Location = new System.Drawing.Point(884, 399);
+            this.accountsLeftLabel.Name = "accountsLeftLabel";
+            this.accountsLeftLabel.ReadOnly = true;
+            this.accountsLeftLabel.Size = new System.Drawing.Size(89, 29);
+            this.accountsLeftLabel.TabIndex = 24;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label5.Font = new System.Drawing.Font("Segoe UI Light", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label5.ForeColor = System.Drawing.Color.LightYellow;
+            this.label5.Location = new System.Drawing.Point(863, 359);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(133, 25);
+            this.label5.TabIndex = 25;
+            this.label5.Text = "Accounts Left";
             // 
             // Main
             // 
@@ -202,6 +241,9 @@ namespace LOLClient
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1037, 627);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.accountsLeftLabel);
+            this.Controls.Add(this.accountsListButton);
             this.Controls.Add(this.ProgressBar);
             this.Controls.Add(this.StartButton);
             this.Controls.Add(this.ThreadCountTextBox);
@@ -219,6 +261,7 @@ namespace LOLClient
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Home - Account Checker";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CloseButton_Click);
+            this.Load += new System.EventHandler(this.Main_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -238,5 +281,8 @@ namespace LOLClient
         private System.Windows.Forms.TextBox ThreadCountTextBox;
         private System.Windows.Forms.Button StartButton;
         private System.Windows.Forms.ProgressBar ProgressBar;
+        private Button accountsListButton;
+        private TextBox accountsLeftLabel;
+        private Label label5;
     }
 }

@@ -26,17 +26,17 @@ public class Connection
    
     public Connection(ILogger logger)
     {
+
         _logger = logger;
 
         AuthToken = GenerateAuthToken();
         Port = Convert.ToString(GetFreePort());
 
-
         _httpClient = new HttpClient(GetHandlerSettings());
         _httpClient.BaseAddress = new Uri("https://127.0.0.1:" + Port);
         _httpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.ASCII.GetBytes($"riot:{AuthToken}")));
         Console.WriteLine($"Initializing new Connection. Port: {Port}, Auth Token: {AuthToken}");
-
+        
     }
 
     // Finds a free port.

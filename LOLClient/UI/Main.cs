@@ -1,9 +1,11 @@
-﻿using LOLClient.Utility;
+﻿using LOLClient.UI;
+using LOLClient.Utility;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,14 +15,17 @@ public partial class Main : Form
 {
 
     private readonly UIUtility _uIUtility;
+    public event AccountsLeftUpdatedEventHandler AccountsLeftUpdated;
 
     public Main()
     {
         _uIUtility = new UIUtility();
+
         InitializeComponent();
         LoadConfig();
 
     }
+
 
     private void LoadConfig()
     {
@@ -39,7 +44,8 @@ public partial class Main : Form
 
     private void richTextBox1_TextChanged(object sender, EventArgs e)
     {
-        
+        ConsoleTextBox.SelectionStart = ConsoleTextBox.Text.Length;
+        ConsoleTextBox.ScrollToCaret();
     }
 
     private void SettingsButton_Click(object sender, EventArgs e)
@@ -102,16 +108,16 @@ public partial class Main : Form
         }
     }
 
-    private async void StartButton_Click(object sender, EventArgs e)
+    private async void StartOrStopButton_Click(object sender, EventArgs e)
     {
-
         var button = (Button)sender;
 
         if (button.Text == "Start")
         {
 
-            button.Text = "Stop";
-            button.ForeColor = System.Drawing.Color.Red;
+            button.Text = "Started";
+            button.Enabled = false;
+            button.ForeColor = System.Drawing.Color.Green;
             ProgressBar.Visible = true;
 
             // handle if user doesnt enter a thread count
@@ -128,26 +134,50 @@ public partial class Main : Form
 
             var delimiter = Convert.ToChar(DelimiterTextBox.Text);
 
-            await Task.Run(() => InitRunner(actualThreadCount, delimiter));
+            try
+            {
+                await Task.Run(() =>
+                {
+                    InitRunner(actualThreadCount, delimiter);
 
+                });
 
-        }
-        else if (button.Text == "Stop")
-        {
+                ConsoleTextBox.Clear();
+                Console.WriteLine("Tasks Completed.");
+            }
+            catch
+            {
+                Console.WriteLine("Tasks Unexpectedly Stopped.");
+            }
+
+            
             button.Text = "Start";
-            button.ForeColor = System.Drawing.Color.Black;
             ProgressBar.Visible = false;
+            button.ForeColor = System.Drawing.Color.Black;
         }
 
     }
 
     private void InitRunner(int actualThreadCount, char delimiter)
     {
-        var runner = new Runner();
+        var runner = new Runner(this);
+
+        runner.AccountsLeftUpdated += Runner_AccountsLeftUpdated;
+        var totalAccounts = runner.ReadComboList(ComboListText.Text, delimiter).Count;
+        ProgressBar.Minimum = 0;
+        ProgressBar.Maximum = totalAccounts;
 
         runner.RunOperation(actualThreadCount,
             Convert.ToChar(delimiter));
+
     }
+
+    private void Runner_AccountsLeftUpdated(object sender, int accountsLeft)
+    {
+        accountsLeftLabel.Text = $"{accountsLeft}";
+        ProgressBar.Value += 1;
+    }
+
     private void CloseButton_Click(object sender, EventArgs e)
     {
         this.Hide();
@@ -155,6 +185,17 @@ public partial class Main : Form
     }
 
     private void ComboListText_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    private void accountsListButton_Click(object sender, EventArgs e)
+    {
+        this.Hide();
+        _uIUtility.LoadAccountsListView();
+    }
+
+    private void Main_Load(object sender, EventArgs e)
     {
 
     }

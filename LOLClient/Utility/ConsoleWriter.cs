@@ -24,7 +24,6 @@ public class ConsoleWriter : TextWriter
 
         if (_textBox.InvokeRequired)
         {
-            //_textBox.BeginInvoke(new Action(() => _textBox.AppendText(value)));
             _textBox.Invoke(new Action(() => _textBox.AppendText(value)));
         }
         else

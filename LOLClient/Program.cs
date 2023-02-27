@@ -4,7 +4,9 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using System.Windows.Forms;
+
 namespace LOLClient;
 
 class Program
@@ -27,6 +29,7 @@ class Program
         else
         {
             Application.Run(new Main());
+
         }
 
     }
