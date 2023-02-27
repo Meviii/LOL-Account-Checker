@@ -1,0 +1,625 @@
+{
+  "SummonerName": "i only mid",
+  "Level": "87",
+  "Region": "OC1",
+  "BE": "22306",
+  "RP": "89",
+  "OE": "2640",
+  "IsEmailVerified": true,
+  "Champions": [
+    {
+      "ID": "1",
+      "Name": "Annie",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "2",
+      "Name": "Olaf",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "4",
+      "Name": "Twisted Fate",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "7",
+      "Name": "LeBlanc",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "8",
+      "Name": "Vladimir",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "9",
+      "Name": "Fiddlesticks",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "10",
+      "Name": "Kayle",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "11",
+      "Name": "Master Yi",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "12",
+      "Name": "Alistar",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "13",
+      "Name": "Ryze",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "14",
+      "Name": "Sion",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "15",
+      "Name": "Sivir",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "16",
+      "Name": "Soraka",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "17",
+      "Name": "Teemo",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "18",
+      "Name": "Tristana",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "19",
+      "Name": "Warwick",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "20",
+      "Name": "Nunu & Willump",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "22",
+      "Name": "Ashe",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "23",
+      "Name": "Tryndamere",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "24",
+      "Name": "Jax",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "25",
+      "Name": "Morgana",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "26",
+      "Name": "Zilean",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "27",
+      "Name": "Singed",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "28",
+      "Name": "Evelynn",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "29",
+      "Name": "Twitch",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "30",
+      "Name": "Karthus",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "31",
+      "Name": "Cho'Gath",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "32",
+      "Name": "Amumu",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "34",
+      "Name": "Anivia",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "35",
+      "Name": "Shaco",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "36",
+      "Name": "Dr. Mundo",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "38",
+      "Name": "Kassadin",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "39",
+      "Name": "Irelia",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "40",
+      "Name": "Janna",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "41",
+      "Name": "Gangplank",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "42",
+      "Name": "Corki",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "44",
+      "Name": "Taric",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "45",
+      "Name": "Veigar",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "50",
+      "Name": "Swain",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "51",
+      "Name": "Caitlyn",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "53",
+      "Name": "Blitzcrank",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "54",
+      "Name": "Malphite",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "55",
+      "Name": "Katarina",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "56",
+      "Name": "Nocturne",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "58",
+      "Name": "Renekton",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "59",
+      "Name": "Jarvan IV",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "60",
+      "Name": "Elise",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "61",
+      "Name": "Orianna",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "62",
+      "Name": "Wukong",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "63",
+      "Name": "Brand",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "64",
+      "Name": "Lee Sin",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "67",
+      "Name": "Vayne",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "68",
+      "Name": "Rumble",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "69",
+      "Name": "Cassiopeia",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "75",
+      "Name": "Nasus",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "76",
+      "Name": "Nidalee",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "77",
+      "Name": "Udyr",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "78",
+      "Name": "Poppy",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "79",
+      "Name": "Gragas",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "80",
+      "Name": "Pantheon",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "81",
+      "Name": "Ezreal",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "84",
+      "Name": "Akali",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "85",
+      "Name": "Kennen",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "86",
+      "Name": "Garen",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "91",
+      "Name": "Talon",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "92",
+      "Name": "Riven",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "96",
+      "Name": "Kog'Maw",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "98",
+      "Name": "Shen",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "99",
+      "Name": "Lux",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "101",
+      "Name": "Xerath",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "104",
+      "Name": "Graves",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "112",
+      "Name": "Viktor",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "121",
+      "Name": "Kha'Zix",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "122",
+      "Name": "Darius",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "126",
+      "Name": "Jayce",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "131",
+      "Name": "Diana",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "134",
+      "Name": "Syndra",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "142",
+      "Name": "Zoe",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "145",
+      "Name": "Kai'Sa",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "157",
+      "Name": "Yasuo",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "161",
+      "Name": "Vel'Koz",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "163",
+      "Name": "Taliyah",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "202",
+      "Name": "Jhin",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "234",
+      "Name": "Viego",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "236",
+      "Name": "Lucian",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "238",
+      "Name": "Zed",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "246",
+      "Name": "Qiyana",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "266",
+      "Name": "Aatrox",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "268",
+      "Name": "Azir",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "350",
+      "Name": "Yuumi",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "517",
+      "Name": "Sylas",
+      "SquarePortraitPath": null
+    },
+    {
+      "ID": "875",
+      "Name": "Sett",
+      "SquarePortraitPath": null
+    }
+  ],
+  "Skins": [
+    {
+      "ID": "1012",
+      "Name": "Annie-Versary"
+    },
+    {
+      "ID": "4004",
+      "Name": "Tango Twisted Fate"
+    },
+    {
+      "ID": "7012",
+      "Name": "Program LeBlanc"
+    },
+    {
+      "ID": "8002",
+      "Name": "Marquis Vladimir"
+    },
+    {
+      "ID": "10005",
+      "Name": "Judgment Kayle"
+    },
+    {
+      "ID": "10007",
+      "Name": "Riot Kayle"
+    },
+    {
+      "ID": "13011",
+      "Name": "Championship Ryze"
+    },
+    {
+      "ID": "14002",
+      "Name": "Barbarian Sion"
+    },
+    {
+      "ID": "17006",
+      "Name": "Super Teemo"
+    },
+    {
+      "ID": "24013",
+      "Name": "God Staff Jax"
+    },
+    {
+      "ID": "27009",
+      "Name": "Beekeeper Singed"
+    },
+    {
+      "ID": "28002",
+      "Name": "Masquerade Evelynn"
+    },
+    {
+      "ID": "36005",
+      "Name": "Executioner Mundo"
+    },
+    {
+      "ID": "38003",
+      "Name": "Pre-Void Kassadin"
+    },
+    {
+      "ID": "39015",
+      "Name": "iG Irelia"
+    },
+    {
+      "ID": "40004",
+      "Name": "Victorious Janna"
+    },
+    {
+      "ID": "40013",
+      "Name": "Bewitching Janna"
+    },
+    {
+      "ID": "45007",
+      "Name": "Bad Santa Veigar"
+    },
+    {
+      "ID": "51013",
+      "Name": "Pool Party Caitlyn"
+    },
+    {
+      "ID": "54005",
+      "Name": "Glacial Malphite"
+    },
+    {
+      "ID": "59004",
+      "Name": "Victorious Jarvan IV"
+    },
+    {
+      "ID": "60002",
+      "Name": "Victorious Elise"
+    },
+    {
+      "ID": "61007",
+      "Name": "Dark Star Orianna"
+    },
+    {
+      "ID": "61008",
+      "Name": "Victorious Orianna"
+    },
+    {
+      "ID": "69002",
+      "Name": "Siren Cassiopeia"
+    },
+    {
+      "ID": "77005",
+      "Name": "Dragon Oracle Udyr"
+    },
+    {
+      "ID": "84014",
+      "Name": "PROJECT: Akali"
+    },
+    {
+      "ID": "85003",
+      "Name": "Karate Kennen"
+    },
+    {
+      "ID": "86011",
+      "Name": "Warring Kingdoms Garen"
+    },
+    {
+      "ID": "92016",
+      "Name": "Dawnbringer Riven"
+    },
+    {
+      "ID": "112002",
+      "Name": "Prototype Viktor"
+    },
+    {
+      "ID": "122004",
+      "Name": "Dunkmaster Darius"
+    },
+    {
+      "ID": "126003",
+      "Name": "Forsaken Jayce"
+    },
+    {
+      "ID": "126004",
+      "Name": "Jayce Brighthammer"
+    },
+    {
+      "ID": "142009",
+      "Name": "Star Guardian Zoe"
+    },
+    {
+      "ID": "236008",
+      "Name": "High Noon Lucian"
+    },
+    {
+      "ID": "236025",
+      "Name": "Victorious Lucian"
+    },
+    {
+      "ID": "266009",
+      "Name": "Victorious Aatrox"
+    }
+  ]
+}
