@@ -1,21 +1,17 @@
-﻿using LOLClient.Models;
+﻿using LOLClient.DataFiles;
+using LOLClient.Models;
 using LOLClient.UI;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LOLClient.Utility;
 
 public class UIUtility
 {
-
     public UIUtility() { }
 
     public string ReadFromFile(string path)
@@ -29,14 +25,32 @@ public class UIUtility
         return content;
     }
 
+    public T MapDataRowToModel<T>(DataGridViewRow row) where T : new()
+    {
+        var model = new T();
+
+        foreach (DataGridViewCell cell in row.Cells)
+        {
+            var property = model.GetType().GetProperty(cell.OwningColumn.Name);
+
+            if (property != null && property.CanWrite)
+            {
+                object value = Convert.ChangeType(cell.Value, property.PropertyType);
+                property.SetValue(model, value);
+            }
+        }
+
+        return model;
+    }
+
     public void SaveToSettingsFile(string key, object value)
     {
-        string filePath = @"..\..\..\Data\settings.json";
+        string filePath = $"{Config.SettingsFile}";
 
         JObject settings;
 
-        if (!Directory.Exists(@"..\..\..\Data\"))
-            Directory.CreateDirectory(@"..\..\..\Data\");
+        if (!Directory.Exists($"{Config.DataFolder}"))
+            Directory.CreateDirectory($"{Config.DataFolder}");
 
         if (File.Exists(filePath))
         {
@@ -60,7 +74,7 @@ public class UIUtility
     public JObject LoadFromSettingsFile()
     {
         JObject settings;
-        string filePath = @"..\..\..\Data\settings.json";
+        string filePath = $"{Config.SettingsFile}";
 
         if (File.Exists(filePath))
         {
@@ -76,7 +90,7 @@ public class UIUtility
     public List<Account> LoadAccountsFromExportsFolder()
     {
         JArray accounts = new();
-        string folderPath = @"..\..\..\Exports\";
+        string folderPath = $"{Config.ExportsFolder}";
 
         foreach (string filePath in Directory.GetFiles(folderPath))
         {

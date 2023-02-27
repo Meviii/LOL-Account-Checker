@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using LOLClient.DataFiles;
+using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Net;
@@ -18,7 +19,7 @@ public class Update
 
     public void UpdateChampions()
     {
-        string filePath = @"..\..\..\Updates\champions.json";
+        string filePath = $"{Config.ExportsFolder}";
         try
         {
             var response = _httpClient.GetAsync("https://raw.communitydragon.org/pbe/plugins/rcp-be-lol-game-data/global/default/v1/champion-summary.json").Result;
@@ -53,7 +54,7 @@ public class Update
 
     public void UpdateSkins()
     {
-        string filePath = @"..\..\..\Updates\skins.json";
+        string filePath = $"{Config.SkinsFile}";
         try
         {
             var response = _httpClient.GetAsync("latest/plugins/rcp-be-lol-game-data/global/default/v1/skins.json").Result;

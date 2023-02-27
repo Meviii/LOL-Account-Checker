@@ -11,6 +11,7 @@ public class Skin
     public string ID { get; set; }
     public string Name { get; set; }
 
+    public DateTime PurchaseDate { get; set; }
     public Skin() { }
 
 }

@@ -25,7 +25,6 @@
 
   <ItemGroup>
     <Folder Include="Exports\" />
-    <Folder Include="Data\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +32,9 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="UI\SingleAccount.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\AccountList.cs">
       <SubType>Form</SubType>

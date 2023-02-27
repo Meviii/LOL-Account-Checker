@@ -17,8 +17,10 @@ public partial class Settings : Form
 {
 
     private readonly UIUtility _utility;
+    private readonly Update _update;
     public Settings()
     {
+        _update = new Update();
         _utility = new UIUtility();
         InitializeComponent();
         LoadLabels();
@@ -95,5 +97,13 @@ public partial class Settings : Form
             LeaguePathLabel.Text = filePath;
             _utility.SaveToSettingsFile("LeagueClientPath",  filePath);
         }
+    }
+
+    private void updateButton_Click(object sender, EventArgs e)
+    {
+        updateButton.Enabled = false;
+        _update.UpdateChampions();
+        _update.UpdateSkins();
+        updateButton.Enabled = true;
     }
 }

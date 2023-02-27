@@ -1,5 +1,7 @@
 {
   "SummonerName": "ratirlBros Cup",
+  "UserName": "Mevi20",
+  "Password": "gierczak123",
   "Level": "85",
   "Region": "OC1",
   "BE": "20945",
@@ -10,223 +12,307 @@
     {
       "ID": "1",
       "Name": "Annie",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2019-02-23T03:22:02+11:00",
+      "MasteryPoints": null
     },
     {
       "ID": "7",
       "Name": "LeBlanc",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2019-04-11T00:57:50+10:00",
+      "MasteryPoints": null
     },
     {
       "ID": "10",
       "Name": "Kayle",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2019-02-23T03:23:26+11:00",
+      "MasteryPoints": null
     },
     {
       "ID": "11",
       "Name": "Master Yi",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2018-11-22T00:52:37+11:00",
+      "MasteryPoints": null
     },
     {
       "ID": "13",
       "Name": "Ryze",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2019-02-12T18:39:53+11:00",
+      "MasteryPoints": null
     },
     {
       "ID": "15",
       "Name": "Sivir",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2019-02-23T03:23:33+11:00",
+      "MasteryPoints": null
     },
     {
       "ID": "16",
       "Name": "Soraka",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2019-02-23T03:23:37+11:00",
+      "MasteryPoints": null
     },
     {
       "ID": "17",
       "Name": "Teemo",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2018-12-21T04:15:52+11:00",
+      "MasteryPoints": null
     },
     {
       "ID": "19",
       "Name": "Warwick",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2019-02-07T07:05:12+11:00",
+      "MasteryPoints": null
     },
     {
       "ID": "20",
       "Name": "Nunu & Willump",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2019-02-23T03:23:29+11:00",
+      "MasteryPoints": null
     },
     {
       "ID": "21",
       "Name": "Miss Fortune",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2018-11-18T08:23:28+11:00",
+      "MasteryPoints": null
     },
     {
       "ID": "22",
       "Name": "Ashe",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2019-02-23T03:22:24+11:00",
+      "MasteryPoints": null
     },
     {
       "ID": "25",
       "Name": "Morgana",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2018-11-22T00:54:33+11:00",
+      "MasteryPoints": null
     },
     {
       "ID": "27",
       "Name": "Singed",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2018-11-22T00:54:48+11:00",
+      "MasteryPoints": null
     },
     {
       "ID": "29",
       "Name": "Twitch",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2019-02-14T10:41:34+11:00",
+      "MasteryPoints": null
     },
     {
       "ID": "32",
       "Name": "Amumu",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2019-02-23T03:22:00+11:00",
+      "MasteryPoints": null
     },
     {
       "ID": "36",
       "Name": "Dr. Mundo",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2019-02-23T03:23:24+11:00",
+      "MasteryPoints": null
     },
     {
       "ID": "39",
       "Name": "Irelia",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2019-05-01T20:36:34+10:00",
+      "MasteryPoints": null
     },
     {
       "ID": "40",
       "Name": "Janna",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2018-11-22T00:53:02+11:00",
+      "MasteryPoints": null
     },
     {
       "ID": "45",
       "Name": "Veigar",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2021-06-01T05:03:44+10:00",
+      "MasteryPoints": null
     },
     {
       "ID": "53",
       "Name": "Blitzcrank",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2021-11-20T07:11:36+11:00",
+      "MasteryPoints": null
     },
     {
       "ID": "67",
       "Name": "Vayne",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2020-08-05T21:13:44+10:00",
+      "MasteryPoints": null
     },
     {
       "ID": "76",
       "Name": "Nidalee",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2021-07-15T01:01:12+10:00",
+      "MasteryPoints": null
     },
     {
       "ID": "78",
       "Name": "Poppy",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2019-02-23T03:23:31+11:00",
+      "MasteryPoints": null
     },
     {
       "ID": "81",
       "Name": "Ezreal",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2021-05-25T15:46:45+10:00",
+      "MasteryPoints": null
     },
     {
       "ID": "86",
       "Name": "Garen",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2018-11-22T00:52:53+11:00",
+      "MasteryPoints": null
     },
     {
       "ID": "96",
       "Name": "Kog'Maw",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2018-11-19T01:28:08+11:00",
+      "MasteryPoints": null
     },
     {
       "ID": "119",
       "Name": "Draven",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2018-11-19T02:21:39+11:00",
+      "MasteryPoints": null
     },
     {
       "ID": "134",
       "Name": "Syndra",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2022-07-07T14:44:04+10:00",
+      "MasteryPoints": null
     },
     {
       "ID": "142",
       "Name": "Zoe",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2019-04-11T00:56:57+10:00",
+      "MasteryPoints": null
     },
     {
       "ID": "145",
       "Name": "Kai'Sa",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2022-08-09T22:16:36+10:00",
+      "MasteryPoints": null
     },
     {
       "ID": "163",
       "Name": "Taliyah",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2019-04-11T02:43:18+10:00",
+      "MasteryPoints": null
     },
     {
       "ID": "202",
       "Name": "Jhin",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2021-12-24T14:24:17+11:00",
+      "MasteryPoints": null
     },
     {
       "ID": "222",
       "Name": "Jinx",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2021-11-15T22:04:30+11:00",
+      "MasteryPoints": null
     },
     {
       "ID": "236",
       "Name": "Lucian",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2020-11-12T14:00:36+11:00",
+      "MasteryPoints": null
     },
     {
       "ID": "238",
       "Name": "Zed",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2019-04-11T00:57:13+10:00",
+      "MasteryPoints": null
     },
     {
       "ID": "266",
       "Name": "Aatrox",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2019-12-04T03:34:31+11:00",
+      "MasteryPoints": null
     },
     {
       "ID": "350",
       "Name": "Yuumi",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2021-06-01T05:03:58+10:00",
+      "MasteryPoints": null
     },
     {
       "ID": "517",
       "Name": "Sylas",
-      "SquarePortraitPath": null
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2021-06-18T19:24:34+10:00",
+      "MasteryPoints": null
     }
   ],
   "Skins": [
     {
       "ID": "20005",
-      "Name": "Demolisher Nunu & Willump"
+      "Name": "Demolisher Nunu & Willump",
+      "PurchaseDate": "2021-05-23T08:58:03+10:00"
     },
     {
       "ID": "21006",
-      "Name": "Crime City Miss Fortune"
+      "Name": "Crime City Miss Fortune",
+      "PurchaseDate": "2019-01-11T15:40:17+11:00"
     },
     {
       "ID": "29004",
-      "Name": "Crime City Twitch"
+      "Name": "Crime City Twitch",
+      "PurchaseDate": "2019-02-25T19:34:51+11:00"
     },
     {
       "ID": "53036",
-      "Name": "Victorious Blitzcrank"
+      "Name": "Victorious Blitzcrank",
+      "PurchaseDate": "2021-11-19T20:11:36+11:00"
     },
     {
       "ID": "236025",
-      "Name": "Victorious Lucian"
+      "Name": "Victorious Lucian",
+      "PurchaseDate": "2020-11-12T03:00:36+11:00"
     },
     {
       "ID": "266009",
-      "Name": "Victorious Aatrox"
+      "Name": "Victorious Aatrox",
+      "PurchaseDate": "2019-12-03T16:34:31+11:00"
     }
   ]
 }

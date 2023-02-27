@@ -1,19 +1,15 @@
 ﻿using LOLClient.Connections;
+using LOLClient.DataFiles;
 using LOLClient.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Json;
-using System.Runtime.CompilerServices;
-using System.Security.Principal;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
+
 
 namespace LOLClient;
 
@@ -21,7 +17,7 @@ public class Data
 {
 
     private readonly Connection _leagueConnection;
-    private readonly object _lock = new object();
+    private readonly object _lock = new();
 
     public Data(Connection leagueConnection)
     {
@@ -33,11 +29,11 @@ public class Data
         while (true)
         {
             var response = _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-champions/v1/owned-champions-minimal", null).Result;
-
+            
             if (response.IsSuccessStatusCode)
             {
                 var jsonResponse = JArray.Parse(response.Content.ReadAsStringAsync().Result);
-
+                LogToFile($"Champions from Request: \n{jsonResponse}");
                 if (jsonResponse != null)
                 {
                     return jsonResponse;
@@ -73,10 +69,10 @@ public class Data
 
         var champs = new List<Champion>();
 
-        string filePath = @"..\..\..\Data\champions.json";
+        string filePath = $"{Config.ChampionsFile}";
         string content = File.ReadAllText(filePath);
         var localChampJsonData = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(content);
-
+        LogToFile($"Champions:\n {content}");
         // Fix to avoid n*m 
         foreach (var localChamp in localChampJsonData)
         {
@@ -87,7 +83,8 @@ public class Data
                     Champion champion = new()
                     {
                         Name = (string)ownedChamp["name"],
-                        ID = (string)ownedChamp["id"]
+                        ID = (string)ownedChamp["id"],
+                        PurchaseDate = DateTimeOffset.FromUnixTimeMilliseconds(Convert.ToInt64(ownedChamp["purchased"])).LocalDateTime,
 
                     };
                     champs.Add(champion);
@@ -98,27 +95,11 @@ public class Data
         account.Champions = champs;
     }
 
-    private dynamic RequestSkins()
+    private void LogToFile(string message)
     {
-        while (true)
-        {
-            var response = _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-inventory/v2/inventory/CHAMPION_SKIN", null).Result;
+        string logFilePath = @"..\..\..\log.txt";
 
-            var skinsResult = response.Content.ReadAsStringAsync().Result;
-
-            var jsonSkins = JsonConvert.DeserializeObject<dynamic>(skinsResult);
-
-            if (response.IsSuccessStatusCode)
-            {
-                if (jsonSkins != null)
-                {
-                    return jsonSkins;
-                }
-            }
-
-            Thread.Sleep(5000);
-        }
-
+        File.AppendAllTextAsync(logFilePath, $"{DateTime.Now} - {message}\n\n\n\n\n").Wait();
     }
 
     public void GetSummonerData(Account account)
@@ -137,7 +118,9 @@ public class Data
         var response = _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-loot/v1/player-loot", null).Result;
 
         var data = JArray.Parse(response.Content.ReadAsStringAsync().Result);
-
+        
+        LogToFile($"Loot:\n {data}");
+        
         foreach (var item in data)
         {
             if (item["lootId"].ToString() == "CURRENCY_champion")
@@ -157,7 +140,7 @@ public class Data
         var response = _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-summoner/v1/current-summoner", null).Result;
 
         var data = JToken.Parse(response.Content.ReadAsStringAsync().Result);
-
+        LogToFile($"Current Summoner:\n {data}");
         return new Tuple<string, string>(data["summonerLevel"].ToString(), data["displayName"].ToString());
     }
 
@@ -189,7 +172,7 @@ public class Data
     public void ExportAccount(Account account)
     {
 
-        string filePath = $@"..\..\..\Exports\{account.SummonerName.Trim()}.json";
+        string filePath = $@"{Config.ExportsFolder}{account.SummonerName.Trim()}.json";
 
         if (!File.Exists(filePath))
             File.Create(filePath).Dispose();
@@ -200,42 +183,72 @@ public class Data
 
     }
 
-    private List<string> GetOwnedSkins()
+
+    private JArray RequestSkins()
+    {
+        while (true)
+        {
+            var response = _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-inventory/v2/inventory/CHAMPION_SKIN", null).Result;
+
+            var skinsResult = response.Content.ReadAsStringAsync().Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonSkins = JArray.Parse(skinsResult);
+
+                if (jsonSkins != null)
+                {
+                    LogToFile($"Skins:\n {jsonSkins}");
+                    return jsonSkins;
+                }
+            }
+
+            Thread.Sleep(5000);
+        }
+
+    }
+
+    private JArray GetOwnedSkins()
     {
 
         var skins = RequestSkins();
-        var ownedSkinIds = new List<string>();
+        var ownedSkins = new JArray();
 
         foreach (var skin in skins)
         {
-            string skinName = skin["itemId"];
-            if (skinName != null && skin["ownershipType"] == "OWNED")
+            string skinName = (string) skin["itemId"];
+            if (skinName != null && (string)skin["ownershipType"] == "OWNED")
             {
-                ownedSkinIds.Add(skinName);
+                ownedSkins.Add(skin);
             }
         }
 
-        return ownedSkinIds;
+        return ownedSkins;
     }
 
     public void GetSkins(Account account)
     {
         var skins = new List<Skin>();
-        var ownedSkinsIds = GetOwnedSkins();
-        string filePath = @"..\..\..\Data\skins.json";
+        var ownedSkins = GetOwnedSkins();
+        string filePath = $"{Config.SkinsFile}";
         string content = File.ReadAllText(filePath);
         var skinJsonData = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, object>>>(content);
 
+        
         foreach (var jsonSkin in skinJsonData)
         {
-            if (ownedSkinsIds.Contains(jsonSkin.Key))
+            foreach (var ownedSkin in ownedSkins)
             {
-                Skin skin = new()
+                if ((string) ownedSkin["itemId"] == (jsonSkin.Key))
                 {
-                    ID = jsonSkin.Key,
-                    Name = Convert.ToString(jsonSkin.Value["name"])
-                };
-                skins.Add(skin);
+                    Skin skin = new()
+                    {
+                        ID = jsonSkin.Key,
+                        Name = Convert.ToString(jsonSkin.Value["name"]),
+                        PurchaseDate = DateTimeOffset.ParseExact(Convert.ToString(ownedSkin["purchaseDate"]), "yyyyMMdd'T'HHmmss.fff'Z'", null).LocalDateTime,
+                    };
+                    skins.Add(skin);
+                }
             }
         }
 

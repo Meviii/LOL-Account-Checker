@@ -57,10 +57,11 @@ public class Runner
         var settings = _utility.LoadFromSettingsFile();
         var path = settings.GetValue("ComboListPath").ToString();
         var comboList = ReadComboList(path, delimiter);
-        RunThreadsAsync(threadCount, comboList, settings).Wait();
+        _ = RunThreadsAsync(threadCount, comboList, settings);
+        CleanUp();
     }
 
-    public async Task<bool> RunThreadsAsync(int threadCount, List<Tuple<string, string>> comboList, JObject settings)
+    public bool RunThreadsAsync(int threadCount, List<Tuple<string, string>> comboList, JObject settings)
     {
 
         var remainingCombos = comboList.Count;
@@ -78,10 +79,9 @@ public class Runner
             {
                 if (remainingCombos <= 0)
                 {
-                    foreach (var t in tasks)
-                    {
-                        t.Join();
-                    }
+                    tasks.Clear();
+                    CleanUp();
+                    return true;
                 }
 
                 var combo = comboList[0];
@@ -193,6 +193,9 @@ public class Runner
 
         _region = riotConnection.RequestRegion(); // Gets the Region of the Summoner for the League Client.
 
+        _account.Region = _region;
+        _account.UserName = username;
+        _account.Password = password;
         riotConnection.WaitForLaunch(); // Wait for League Client to Launch. Must be processed after LOGIN
 
         return true;
@@ -222,19 +225,15 @@ public class Runner
 
         _data = new(connection); // Sets Data object with LeagueClient's Connection
         
-        var account = new Account
-        {
-            Region = _region
-        };
-        FetchData(account); // Fetches Summoner Account data
-        _data.ExportAccount(account); // Export account
+        FetchData(_account); // Fetches Summoner Account data
+        _data.ExportAccount(_account); // Export account
 
         return true;
     }
 
     private void FetchData(Account account)
     {
-
+        
         _data.GetSkins(account);
         _data.GetChampions(account);
         _data.GetSummonerData(account);
