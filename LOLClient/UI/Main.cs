@@ -129,6 +129,7 @@ public partial class Main : Form
             }
             else
             {
+
                 actualThreadCount = int.Parse(ThreadCountTextBox.Text);
             }
 
@@ -144,6 +145,7 @@ public partial class Main : Form
 
                 ConsoleTextBox.Clear();
                 Console.WriteLine("Tasks Completed.");
+                ProgressBar.Value = 0;
             }
             catch
             {
@@ -164,8 +166,11 @@ public partial class Main : Form
 
         runner.AccountsLeftUpdated += Runner_AccountsLeftUpdated;
         var totalAccounts = runner.ReadComboList(ComboListText.Text, delimiter).Count;
-        ProgressBar.Minimum = 0;
-        ProgressBar.Maximum = totalAccounts;
+        try
+        {
+            ProgressBar.Minimum = 0;
+            ProgressBar.Maximum = totalAccounts + 1;
+        }catch { }
 
         runner.RunOperation(actualThreadCount,
             Convert.ToChar(delimiter));
@@ -174,8 +179,17 @@ public partial class Main : Form
 
     private void Runner_AccountsLeftUpdated(object sender, int accountsLeft)
     {
-        accountsLeftLabel.Text = $"{accountsLeft}";
-        ProgressBar.Value += 1;
+
+        if (accountsLeftLabel.InvokeRequired || ProgressBar.InvokeRequired)
+        {
+            accountsLeftLabel.Invoke(new Action(() => Runner_AccountsLeftUpdated(sender, accountsLeft)));
+        }
+        else
+        {
+            accountsLeftLabel.Text = $"{accountsLeft}";
+            ProgressBar.Value += 1;
+        }
+
     }
 
     private void CloseButton_Click(object sender, EventArgs e)

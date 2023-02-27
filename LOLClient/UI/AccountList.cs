@@ -1,4 +1,5 @@
-﻿using LOLClient.UI;
+﻿using LOLClient.Models;
+using LOLClient.UI;
 using LOLClient.Utility;
 using Newtonsoft.Json.Linq;
 using System;
@@ -67,7 +68,14 @@ public partial class AccountList : Form
 
     private void accountsGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
     {
+        if (e.RowIndex >= 0) // Check if the clicked row is valid
+        {
+            DataGridViewRow row = accountsGridView.Rows[e.RowIndex];
 
+            var account = _uiUtility.MapDataRowToModel<Account>(row);
+
+
+        }
     }
 
     private void CloseButton_Click(object sender, EventArgs e)

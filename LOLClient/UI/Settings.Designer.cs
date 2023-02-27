@@ -37,6 +37,7 @@
             this.LeaguePathLabel = new System.Windows.Forms.TextBox();
             this.RiotPathLabel = new System.Windows.Forms.TextBox();
             this.StatusLabel = new System.Windows.Forms.Label();
+            this.updateButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label2
@@ -131,13 +132,25 @@
             this.StatusLabel.TabIndex = 15;
             this.StatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // InitialLoad
+            // updateButton
+            // 
+            this.updateButton.BackColor = System.Drawing.Color.LightCyan;
+            this.updateButton.Location = new System.Drawing.Point(380, 413);
+            this.updateButton.Name = "updateButton";
+            this.updateButton.Size = new System.Drawing.Size(92, 56);
+            this.updateButton.TabIndex = 16;
+            this.updateButton.Text = "Update Skins/Champs";
+            this.updateButton.UseVisualStyleBackColor = false;
+            this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
+            // 
+            // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(484, 481);
+            this.Controls.Add(this.updateButton);
             this.Controls.Add(this.StatusLabel);
             this.Controls.Add(this.RiotPathLabel);
             this.Controls.Add(this.LeaguePathLabel);
@@ -146,7 +159,7 @@
             this.Controls.Add(this.RiotBrowseButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
-            this.Name = "InitialLoad";
+            this.Name = "Settings";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Settings";
             this.ResumeLayout(false);
@@ -164,5 +177,6 @@
         private System.Windows.Forms.TextBox LeaguePathLabel;
         private System.Windows.Forms.TextBox RiotPathLabel;
         private System.Windows.Forms.Label StatusLabel;
+        private System.Windows.Forms.Button updateButton;
     }
 }

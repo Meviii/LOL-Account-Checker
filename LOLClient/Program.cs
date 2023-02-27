@@ -1,4 +1,5 @@
-﻿using LOLClient.UI;
+﻿using LOLClient.DataFiles;
+using LOLClient.UI;
 using LOLClient.Utility;
 using Newtonsoft.Json.Linq;
 using System;
@@ -6,6 +7,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
+
+
 
 namespace LOLClient;
 
@@ -16,11 +19,8 @@ class Program
     public static void Main(string[] args)
     {
 
-        //Runner runner = new();
-        //var settings = new UIUtility().LoadFromSettingsFile();
-        //runner.Work("mevismurf2", "", settings);
-
         ApplicationConfiguration.Initialize();
+
 
         if (IsSettingsFileEmpty())
         {
@@ -29,14 +29,14 @@ class Program
         else
         {
             Application.Run(new Main());
-
+            //Application.Run(new AccountList());
         }
 
     }
 
     static bool IsSettingsFileEmpty()
     {
-        string filePath = @"..\..\..\Data\settings.json";
+        string filePath = $"{Config.SettingsFile}";
 
         JObject settings;
 

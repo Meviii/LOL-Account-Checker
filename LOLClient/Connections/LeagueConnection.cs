@@ -61,7 +61,7 @@ public class LeagueConnection
                 if (response.IsSuccessStatusCode)
                 {
                     var result = JToken.Parse(response.Content.ReadAsStringAsync().Result);
-                    Console.WriteLine(result["state"]);
+
                     if (result["state"].ToString().ToLower() == "SUCCEEDED".ToLower())
                     {
                         Console.WriteLine("Session succeeded.");

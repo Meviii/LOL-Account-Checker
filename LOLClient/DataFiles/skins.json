@@ -2422,7 +2422,7 @@
         "id": 72
       }
     ],
-    "description": null
+    "description": "Twisted Fate was never supposed to be among the Order of the Musketeers, especially coming from a lowborn family. But his charm and quick wit—along with his skill in combat—helped him save the monarchy from a dastardly plot, earning him a place among the elite. Unfortunately for them, he prefers swashbuckling adventures to his actual duty."
   },
   "4007": {
     "id": 4007,
@@ -13573,7 +13573,7 @@
         "id": 37
       }
     ],
-    "description": null
+    "description": "Despite the RPD's best efforts to curb Tristana's enthusiasm for vigilante justice, they haven't been successful. Then again, with a combination of determination, moxy, and explosives, she's more than capable of evading The Man. Whenever Tristana is \"off-duty,\" she can be found at a punk show or passing out the newest edition of her zine, \"Riot Riot!"
   },
   "18002": {
     "id": 18002,
@@ -17132,7 +17132,25 @@
     "splashVideoPath": null,
     "collectionSplashVideoPath": null,
     "featuresText": null,
-    "chromaPath": null,
+    "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/22/22008.png",
+    "chromas": [
+      {
+        "id": 22062,
+        "name": "PROJECT: Ashe",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/22/22062.png",
+        "colors": [
+          "#DF9117",
+          "#821133"
+        ],
+        "descriptions": [],
+        "rarities": [
+          {
+            "region": "riot",
+            "rarity": 4
+          }
+        ]
+      }
+    ],
     "emblems": null,
     "regionRarityId": 0,
     "rarityGemPath": null,
@@ -20978,6 +20996,136 @@
       }
     ],
     "description": "Though many in the Resistance find Singed unsettling, few can deny his efficacy in pushing back the machine threat. For Singed, the only thing that matters is driving back Viktor's creations, whatever the means."
+  },
+  "27019": {
+    "id": 27019,
+    "isBase": false,
+    "name": "Astronaut Singed",
+    "splashPath": "/lol-game-data/assets/v1/champion-splashes/27/27019.jpg",
+    "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/27/27019.jpg",
+    "tilePath": "/lol-game-data/assets/v1/champion-tiles/27/27019.jpg",
+    "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Singed/Skins/Skin19/SingedLoadScreen_19.PIE_C_13_4.jpg",
+    "skinType": "",
+    "rarity": "kEpic",
+    "isLegacy": false,
+    "splashVideoPath": null,
+    "collectionSplashVideoPath": null,
+    "featuresText": null,
+    "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/27/27019.png",
+    "chromas": [
+      {
+        "id": 27020,
+        "name": "Astronaut Singed",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/27/27020.png",
+        "colors": [
+          "#D33528",
+          "#D33528"
+        ],
+        "descriptions": [
+          {
+            "region": "riot",
+            "description": "This chroma was released as a bundle exclusive in 2023."
+          }
+        ],
+        "rarities": [
+          {
+            "region": "riot",
+            "rarity": 1
+          }
+        ]
+      },
+      {
+        "id": 27021,
+        "name": "Astronaut Singed",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/27/27021.png",
+        "colors": [
+          "#DF9117",
+          "#DF9117"
+        ],
+        "descriptions": [],
+        "rarities": []
+      },
+      {
+        "id": 27022,
+        "name": "Astronaut Singed",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/27/27022.png",
+        "colors": [
+          "#2756CE",
+          "#2756CE"
+        ],
+        "descriptions": [],
+        "rarities": []
+      },
+      {
+        "id": 27023,
+        "name": "Astronaut Singed",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/27/27023.png",
+        "colors": [
+          "#2DA130",
+          "#2DA130"
+        ],
+        "descriptions": [],
+        "rarities": []
+      },
+      {
+        "id": 27024,
+        "name": "Astronaut Singed",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/27/27024.png",
+        "colors": [
+          "#27211C",
+          "#27211C"
+        ],
+        "descriptions": [],
+        "rarities": []
+      },
+      {
+        "id": 27025,
+        "name": "Astronaut Singed",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/27/27025.png",
+        "colors": [
+          "#9C68D7",
+          "#9C68D7"
+        ],
+        "descriptions": [],
+        "rarities": []
+      },
+      {
+        "id": 27026,
+        "name": "Astronaut Singed",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/27/27026.png",
+        "colors": [
+          "#E58BA5",
+          "#E58BA5"
+        ],
+        "descriptions": [],
+        "rarities": [
+          {
+            "region": "TENCENT",
+            "rarity": 1
+          }
+        ]
+      },
+      {
+        "id": 27027,
+        "name": "Astronaut Singed",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/27/27027.png",
+        "colors": [
+          "#73BFBE",
+          "#73BFBE"
+        ],
+        "descriptions": [],
+        "rarities": []
+      }
+    ],
+    "emblems": null,
+    "regionRarityId": 0,
+    "rarityGemPath": null,
+    "skinLines": [
+      {
+        "id": 94
+      }
+    ],
+    "description": "No space adventure would be complete without a navigator. When Singed isn't creating special concoctions to keep his team safe, he's steering the crew's ship through the galaxy, masterfully guiding them to wherever his captain's whimsical orders lead them (and collecting any adorable meeps along the way)."
   },
   "28000": {
     "id": 28000,
@@ -44407,7 +44555,7 @@
         "id": 72
       }
     ],
-    "description": null
+    "description": "On a cliff overlooking the sea, the lonely gorgon Cassiopeia has made her home among a garden of statues of her own making. Memories of friends, enemies, and lovers passed, immortalized in stone, many eternally screaming in agony. Whispers from the local villages warn not to enter her domain, but still, visitors keep coming, all to meet the same fate."
   },
   "69004": {
     "id": 69004,
@@ -52766,6 +52914,136 @@
     ],
     "description": "Honoring Nuguri's winning performance as Kennen during the 2020 World Championship."
   },
+  "85025": {
+    "id": 85025,
+    "isBase": false,
+    "name": "Astronaut Kennen",
+    "splashPath": "/lol-game-data/assets/v1/champion-splashes/85/85025.jpg",
+    "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/85/85025.jpg",
+    "tilePath": "/lol-game-data/assets/v1/champion-tiles/85/85025.jpg",
+    "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Kennen/Skins/Skin25/KennenLoadScreen_25.PIE_C_13_4.jpg",
+    "skinType": "",
+    "rarity": "kEpic",
+    "isLegacy": false,
+    "splashVideoPath": null,
+    "collectionSplashVideoPath": null,
+    "featuresText": null,
+    "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/85/85025.png",
+    "chromas": [
+      {
+        "id": 85026,
+        "name": "Astronaut Kennen",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/85/85026.png",
+        "colors": [
+          "#D33528",
+          "#D33528"
+        ],
+        "descriptions": [
+          {
+            "region": "riot",
+            "description": "This chroma was released as a bundle exclusive in 2023."
+          }
+        ],
+        "rarities": [
+          {
+            "region": "riot",
+            "rarity": 1
+          }
+        ]
+      },
+      {
+        "id": 85027,
+        "name": "Astronaut Kennen",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/85/85027.png",
+        "colors": [
+          "#DF9117",
+          "#DF9117"
+        ],
+        "descriptions": [],
+        "rarities": []
+      },
+      {
+        "id": 85028,
+        "name": "Astronaut Kennen",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/85/85028.png",
+        "colors": [
+          "#6ABBEE",
+          "#6ABBEE"
+        ],
+        "descriptions": [],
+        "rarities": []
+      },
+      {
+        "id": 85029,
+        "name": "Astronaut Kennen",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/85/85029.png",
+        "colors": [
+          "#2DA130",
+          "#2DA130"
+        ],
+        "descriptions": [],
+        "rarities": []
+      },
+      {
+        "id": 85030,
+        "name": "Astronaut Kennen",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/85/85030.png",
+        "colors": [
+          "#27211C",
+          "#27211C"
+        ],
+        "descriptions": [],
+        "rarities": []
+      },
+      {
+        "id": 85031,
+        "name": "Astronaut Kennen",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/85/85031.png",
+        "colors": [
+          "#9C68D7",
+          "#9C68D7"
+        ],
+        "descriptions": [],
+        "rarities": []
+      },
+      {
+        "id": 85032,
+        "name": "Astronaut Kennen",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/85/85032.png",
+        "colors": [
+          "#E58BA5",
+          "#E58BA5"
+        ],
+        "descriptions": [],
+        "rarities": [
+          {
+            "region": "TENCENT",
+            "rarity": 1
+          }
+        ]
+      },
+      {
+        "id": 85033,
+        "name": "Astronaut Kennen",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/85/85033.png",
+        "colors": [
+          "#73BFBE",
+          "#73BFBE"
+        ],
+        "descriptions": [],
+        "rarities": []
+      }
+    ],
+    "emblems": null,
+    "regionRarityId": 0,
+    "rarityGemPath": null,
+    "skinLines": [
+      {
+        "id": 94
+      }
+    ],
+    "description": "A master mechanic and genius in meep technology, Lieutenant Kennen always keeps the ship balanced. Although he's perpetually bothered by being second in command to Fizz, he never fails to design a plan to protect his team. His quick thinking and deadly precision are enough to keep any threats to planet M33P at bay."
+  },
   "86000": {
     "id": 86000,
     "isBase": true,
@@ -52944,7 +53222,7 @@
     "splashPath": "/lol-game-data/assets/v1/champion-splashes/86/86005.jpg",
     "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/86/86005.jpg",
     "tilePath": "/lol-game-data/assets/v1/champion-tiles/86/86005.jpg",
-    "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Garen/Skins/Skin05/GarenLoadScreen_5.jpg",
+    "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Garen/Skins/Skin05/GarenLoadscreen_5.PIE_C_13_4.jpg",
     "skinType": "",
     "rarity": "kNoRarity",
     "isLegacy": false,
@@ -54566,7 +54844,7 @@
         "id": 72
       }
     ],
-    "description": null
+    "description": "Little is known about the djinn, misinformation leading many to seek out the dark, desolate corners of the world in hopes of finding one to grant their wildest wishes. Instead, they find themselves at the mercy of a powerful spirit that is neither good nor evil and has a penchant for possession."
   },
   "90004": {
     "id": 90004,
@@ -59997,6 +60275,136 @@
     ],
     "description": "Ensnared by his own desires, Xerath leads citizens of Low Arcana to act on their basest urges. The more they are entranced by the forbidden, the more his power grows. But while Xerath believes their temptation will lead to his deliverance, he does not realize that the stronger he becomes, the more tightly his chains bind him. "
   },
+  "101021": {
+    "id": 101021,
+    "isBase": false,
+    "name": "Astronaut Xerath",
+    "splashPath": "/lol-game-data/assets/v1/champion-splashes/101/101021.jpg",
+    "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/101/101021.jpg",
+    "tilePath": "/lol-game-data/assets/v1/champion-tiles/101/101021.jpg",
+    "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Xerath/Skins/Skin21/XerathLoadScreen_21.PIE_C_13_4.jpg",
+    "skinType": "",
+    "rarity": "kEpic",
+    "isLegacy": false,
+    "splashVideoPath": null,
+    "collectionSplashVideoPath": null,
+    "featuresText": null,
+    "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/101/101021.png",
+    "chromas": [
+      {
+        "id": 101022,
+        "name": "Astronaut Xerath",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/101/101022.png",
+        "colors": [
+          "#D33528",
+          "#D33528"
+        ],
+        "descriptions": [
+          {
+            "region": "riot",
+            "description": "This chroma was released as a bundle exclusive in 2023."
+          }
+        ],
+        "rarities": [
+          {
+            "region": "riot",
+            "rarity": 1
+          }
+        ]
+      },
+      {
+        "id": 101023,
+        "name": "Astronaut Xerath",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/101/101023.png",
+        "colors": [
+          "#E58BA5",
+          "#E58BA5"
+        ],
+        "descriptions": [],
+        "rarities": [
+          {
+            "region": "TENCENT",
+            "rarity": 1
+          }
+        ]
+      },
+      {
+        "id": 101024,
+        "name": "Astronaut Xerath",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/101/101024.png",
+        "colors": [
+          "#FFEE59",
+          "#FFEE59"
+        ],
+        "descriptions": [],
+        "rarities": []
+      },
+      {
+        "id": 101025,
+        "name": "Astronaut Xerath",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/101/101025.png",
+        "colors": [
+          "#73BFBE",
+          "#73BFBE"
+        ],
+        "descriptions": [],
+        "rarities": []
+      },
+      {
+        "id": 101026,
+        "name": "Astronaut Xerath",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/101/101026.png",
+        "colors": [
+          "#2756CE",
+          "#2756CE"
+        ],
+        "descriptions": [],
+        "rarities": []
+      },
+      {
+        "id": 101027,
+        "name": "Astronaut Xerath",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/101/101027.png",
+        "colors": [
+          "#27211C",
+          "#27211C"
+        ],
+        "descriptions": [],
+        "rarities": []
+      },
+      {
+        "id": 101028,
+        "name": "Astronaut Xerath",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/101/101028.png",
+        "colors": [
+          "#9C68D7",
+          "#9C68D7"
+        ],
+        "descriptions": [],
+        "rarities": []
+      },
+      {
+        "id": 101029,
+        "name": "Astronaut Xerath",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/101/101029.png",
+        "colors": [
+          "#DED6B0",
+          "#DED6B0"
+        ],
+        "descriptions": [],
+        "rarities": []
+      }
+    ],
+    "emblems": null,
+    "regionRarityId": 0,
+    "rarityGemPath": null,
+    "skinLines": [
+      {
+        "id": 94
+      }
+    ],
+    "description": "An obsessive chemist driven by power, Xerath discovered the invader meeps and devoted his life to researching how to harness their energy. After an explosion during one of his experiments, his body was permanently mutated. Now, fully consumed by the corrupted meeps, Xerath traverses the galaxy, seeking to spread his malice across the cosmos."
+  },
   "102000": {
     "id": 102000,
     "isBase": true,
@@ -61598,8 +62006,8 @@
     "splashPath": "/lol-game-data/assets/v1/champion-splashes/103/103065.jpg",
     "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/103/103065.jpg",
     "tilePath": "/lol-game-data/assets/v1/champion-tiles/103/103065.jpg",
-    "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin65/AhriLoadScreen_65.jpg",
-    "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin16/AhriLoadscreen_16_LE.SKINS_Ahri_ASU_PrePro.jpg",
+    "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin65/AhriLoadscreen_65.SKINS_Ahri_ASU_PrePro.jpg",
+    "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/Ahri/Skins/Skin65/AhriLoadscreen_65_LE.SKINS_Ahri_ASU_PrePro.jpg",
     "skinType": "",
     "rarity": "kMythic",
     "isLegacy": true,
@@ -63091,6 +63499,136 @@
       }
     ],
     "description": "There's something deeply unnerving about a bipedal Cocker Spaniel mix running around society unchecked, stabbing pedestrians with a tennis ball grabber, and summoning other, bigger dogs out of the ground. And yet, here we all are. Together."
+  },
+  "105026": {
+    "id": 105026,
+    "isBase": false,
+    "name": "Astronaut Fizz",
+    "splashPath": "/lol-game-data/assets/v1/champion-splashes/105/105026.jpg",
+    "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/105/105026.jpg",
+    "tilePath": "/lol-game-data/assets/v1/champion-tiles/105/105026.jpg",
+    "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Fizz/Skins/Skin26/FizzLoadScreen_26.PIE_C_13_4.jpg",
+    "skinType": "",
+    "rarity": "kEpic",
+    "isLegacy": false,
+    "splashVideoPath": null,
+    "collectionSplashVideoPath": null,
+    "featuresText": null,
+    "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/105/105026.png",
+    "chromas": [
+      {
+        "id": 105027,
+        "name": "Astronaut Fizz",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/105/105027.png",
+        "colors": [
+          "#D33528",
+          "#D33528"
+        ],
+        "descriptions": [
+          {
+            "region": "riot",
+            "description": "This chroma was released as a bundle exclusive in 2023."
+          }
+        ],
+        "rarities": [
+          {
+            "region": "riot",
+            "rarity": 1
+          }
+        ]
+      },
+      {
+        "id": 105028,
+        "name": "Astronaut Fizz",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/105/105028.png",
+        "colors": [
+          "#FFEE59",
+          "#FFEE59"
+        ],
+        "descriptions": [],
+        "rarities": []
+      },
+      {
+        "id": 105029,
+        "name": "Astronaut Fizz",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/105/105029.png",
+        "colors": [
+          "#6ABBEE",
+          "#6ABBEE"
+        ],
+        "descriptions": [],
+        "rarities": []
+      },
+      {
+        "id": 105030,
+        "name": "Astronaut Fizz",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/105/105030.png",
+        "colors": [
+          "#2DA130",
+          "#2DA130"
+        ],
+        "descriptions": [],
+        "rarities": []
+      },
+      {
+        "id": 105031,
+        "name": "Astronaut Fizz",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/105/105031.png",
+        "colors": [
+          "#27211C",
+          "#27211C"
+        ],
+        "descriptions": [],
+        "rarities": []
+      },
+      {
+        "id": 105032,
+        "name": "Astronaut Fizz",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/105/105032.png",
+        "colors": [
+          "#E58BA5",
+          "#E58BA5"
+        ],
+        "descriptions": [],
+        "rarities": [
+          {
+            "region": "TENCENT",
+            "rarity": 1
+          }
+        ]
+      },
+      {
+        "id": 105033,
+        "name": "Astronaut Fizz",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/105/105033.png",
+        "colors": [
+          "#73BFBE",
+          "#73BFBE"
+        ],
+        "descriptions": [],
+        "rarities": []
+      },
+      {
+        "id": 105034,
+        "name": "Astronaut Fizz",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/105/105034.png",
+        "colors": [
+          "#9C68D7",
+          "#9C68D7"
+        ],
+        "descriptions": [],
+        "rarities": []
+      }
+    ],
+    "emblems": null,
+    "regionRarityId": 0,
+    "rarityGemPath": null,
+    "skinLines": [
+      {
+        "id": 94
+      }
+    ],
+    "description": "Fizz defied all expectations when he successfully tamed an invader meep and resisted its corruption through their link. His unique connection promoted him to captain, a status he uses to pull mischievous pranks on his team. But when he's not tormenting his favorite lieutenant, he's unleashing his tricks on corrupted evildoers to keep planet M33P safe."
   },
   "106000": {
     "id": 106000,
@@ -66743,7 +67281,7 @@
         "id": 72
       }
     ],
-    "description": null
+    "description": "If one dares to gaze upon the crown, they'll immediately catch the careful eye of Fiora, the captain of the Royal Guard. Cunning, keen, and shrewd, she's written her own legend at the tip of her rapier, a legend so large that it's said, as a child, she could slice a falling leaf perfectly in half. Whether or not it's true... Fiora has never told."
   },
   "114002": {
     "id": 114002,
@@ -76334,7 +76872,7 @@
     "splashPath": "/lol-game-data/assets/v1/champion-splashes/136/136002.jpg",
     "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/136/136002.jpg",
     "tilePath": "/lol-game-data/assets/v1/champion-tiles/136/136002.jpg",
-    "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/AurelionSol/Skins/Skin02/AurelionSolLoadScreen_2.jpg",
+    "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/AurelionSol/Skins/Skin02/AurelionSolLoadscreen_2.ASolGU.jpg",
     "skinType": "",
     "rarity": "kEpic",
     "isLegacy": false,
@@ -91390,7 +91928,7 @@
         "id": 121
       }
     ],
-    "description": null
+    "description": "After cycling through too many partners to count, the entire department had a bet going about \"lone wolf\" Officer Vi. But this tempestuous, impetuous officer has finally found her match in Caitlyn, a sharpshooter with a quick wit and soft spot for pink-haired wrecking balls."
   },
   "254003": {
     "id": 254003,
@@ -96936,6 +97474,146 @@
       }
     ],
     "description": "A nightmarish totem forged of witchcraft and forbidden incantations, Ivern stood among the Old Gods in the days before their destruction. Left inert for hundreds of years, he has risen along with his brethren to annihilate the paltry works of man."
+  },
+  "427020": {
+    "id": 427020,
+    "isBase": false,
+    "name": "Astronaut Ivern",
+    "splashPath": "/lol-game-data/assets/v1/champion-splashes/427/427020.jpg",
+    "uncenteredSplashPath": "/lol-game-data/assets/v1/champion-splashes/uncentered/427/427020.jpg",
+    "tilePath": "/lol-game-data/assets/v1/champion-tiles/427/427020.jpg",
+    "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Ivern/Skins/Skin20/IvernLoadScreen_20.PIE_C_13_4.jpg",
+    "skinType": "",
+    "rarity": "kEpic",
+    "isLegacy": false,
+    "splashVideoPath": null,
+    "collectionSplashVideoPath": null,
+    "featuresText": null,
+    "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/427/427020.png",
+    "chromas": [
+      {
+        "id": 427021,
+        "name": "Astronaut Ivern",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/427/427021.png",
+        "colors": [
+          "#D33528",
+          "#D33528"
+        ],
+        "descriptions": [
+          {
+            "region": "riot",
+            "description": "This chroma was released as a bundle exclusive in 2023."
+          }
+        ],
+        "rarities": [
+          {
+            "region": "riot",
+            "rarity": 1
+          }
+        ]
+      },
+      {
+        "id": 427022,
+        "name": "Astronaut Ivern",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/427/427022.png",
+        "colors": [
+          "#DF9117",
+          "#DF9117"
+        ],
+        "descriptions": [],
+        "rarities": []
+      },
+      {
+        "id": 427023,
+        "name": "Astronaut Ivern",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/427/427023.png",
+        "colors": [
+          "#6ABBEE",
+          "#6ABBEE"
+        ],
+        "descriptions": [],
+        "rarities": []
+      },
+      {
+        "id": 427024,
+        "name": "Astronaut Ivern",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/427/427024.png",
+        "colors": [
+          "#E58BA5",
+          "#E58BA5"
+        ],
+        "descriptions": [],
+        "rarities": [
+          {
+            "region": "TENCENT",
+            "rarity": 1
+          }
+        ]
+      },
+      {
+        "id": 427025,
+        "name": "Astronaut Ivern",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/427/427025.png",
+        "colors": [
+          "#2DA130",
+          "#2DA130"
+        ],
+        "descriptions": [
+          {
+            "region": "riot",
+            "description": "Obtained through Influencer audience giveaways."
+          }
+        ],
+        "rarities": [
+          {
+            "region": "riot",
+            "rarity": 1
+          }
+        ]
+      },
+      {
+        "id": 427026,
+        "name": "Astronaut Ivern",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/427/427026.png",
+        "colors": [
+          "#73BFBE",
+          "#73BFBE"
+        ],
+        "descriptions": [],
+        "rarities": []
+      },
+      {
+        "id": 427027,
+        "name": "Astronaut Ivern",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/427/427027.png",
+        "colors": [
+          "#9C68D7",
+          "#9C68D7"
+        ],
+        "descriptions": [],
+        "rarities": []
+      },
+      {
+        "id": 427028,
+        "name": "Astronaut Ivern",
+        "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/427/427028.png",
+        "colors": [
+          "#27211C",
+          "#27211C"
+        ],
+        "descriptions": [],
+        "rarities": []
+      }
+    ],
+    "emblems": null,
+    "regionRarityId": 0,
+    "rarityGemPath": null,
+    "skinLines": [
+      {
+        "id": 94
+      }
+    ],
+    "description": "Ivern's nurturing nature created a safe haven for the meeps under his care. However, an explosion caused by Xerath destroyed his ship and left him aimlessly floating in space. After a chance encounter with Fizz, who saved him by accidentally crashing into him, Ivern joined their ranks to search for any wanderers in need of his protection."
   },
   "429000": {
     "id": 429000,
