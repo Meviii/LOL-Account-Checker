@@ -1,0 +1,240 @@
+{
+  "SummonerName": "lFnRuFerdinand",
+  "UserName": "fprnl7197",
+  "Password": "ssaluk1967",
+  "Level": "46",
+  "Region": "OC1",
+  "BE": "805",
+  "RP": "4",
+  "OE": "2478",
+  "IsEmailVerified": true,
+  "Champions": [
+    {
+      "ID": "1",
+      "Name": "Annie",
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2020-07-09T11:09:35+10:00",
+      "MasteryPoints": null
+    },
+    {
+      "ID": "7",
+      "Name": "LeBlanc",
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2022-04-01T14:18:44+11:00",
+      "MasteryPoints": null
+    },
+    {
+      "ID": "10",
+      "Name": "Kayle",
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2020-07-09T11:10:44+10:00",
+      "MasteryPoints": null
+    },
+    {
+      "ID": "13",
+      "Name": "Ryze",
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2020-07-09T11:09:43+10:00",
+      "MasteryPoints": null
+    },
+    {
+      "ID": "14",
+      "Name": "Sion",
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2022-04-03T12:42:29+10:00",
+      "MasteryPoints": null
+    },
+    {
+      "ID": "15",
+      "Name": "Sivir",
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2020-07-09T11:09:40+10:00",
+      "MasteryPoints": null
+    },
+    {
+      "ID": "16",
+      "Name": "Soraka",
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2020-07-09T11:10:47+10:00",
+      "MasteryPoints": null
+    },
+    {
+      "ID": "20",
+      "Name": "Nunu & Willump",
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2020-07-09T11:09:46+10:00",
+      "MasteryPoints": null
+    },
+    {
+      "ID": "22",
+      "Name": "Ashe",
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2020-07-09T11:09:38+10:00",
+      "MasteryPoints": null
+    },
+    {
+      "ID": "27",
+      "Name": "Singed",
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2020-07-09T11:10:56+10:00",
+      "MasteryPoints": null
+    },
+    {
+      "ID": "29",
+      "Name": "Twitch",
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2020-07-09T11:09:55+10:00",
+      "MasteryPoints": null
+    },
+    {
+      "ID": "32",
+      "Name": "Amumu",
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2020-07-09T11:10:54+10:00",
+      "MasteryPoints": null
+    },
+    {
+      "ID": "39",
+      "Name": "Irelia",
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2022-03-25T23:11:05+11:00",
+      "MasteryPoints": null
+    },
+    {
+      "ID": "45",
+      "Name": "Veigar",
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2020-07-30T18:58:31+10:00",
+      "MasteryPoints": null
+    },
+    {
+      "ID": "51",
+      "Name": "Caitlyn",
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2020-07-09T11:10:04+10:00",
+      "MasteryPoints": null
+    },
+    {
+      "ID": "61",
+      "Name": "Orianna",
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2022-04-01T14:18:42+11:00",
+      "MasteryPoints": null
+    },
+    {
+      "ID": "67",
+      "Name": "Vayne",
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2020-07-09T11:10:10+10:00",
+      "MasteryPoints": null
+    },
+    {
+      "ID": "76",
+      "Name": "Nidalee",
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2022-07-24T04:50:27+10:00",
+      "MasteryPoints": null
+    },
+    {
+      "ID": "78",
+      "Name": "Poppy",
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2020-07-09T11:10:49+10:00",
+      "MasteryPoints": null
+    },
+    {
+      "ID": "84",
+      "Name": "Akali",
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2022-07-25T12:13:17+10:00",
+      "MasteryPoints": null
+    },
+    {
+      "ID": "86",
+      "Name": "Garen",
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2020-07-09T11:11:02+10:00",
+      "MasteryPoints": null
+    },
+    {
+      "ID": "96",
+      "Name": "Kog'Maw",
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2020-07-09T11:10:01+10:00",
+      "MasteryPoints": null
+    },
+    {
+      "ID": "99",
+      "Name": "Lux",
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2020-05-24T05:12:51+10:00",
+      "MasteryPoints": null
+    },
+    {
+      "ID": "101",
+      "Name": "Xerath",
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2021-04-28T06:07:12+10:00",
+      "MasteryPoints": null
+    },
+    {
+      "ID": "113",
+      "Name": "Sejuani",
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2022-12-01T08:31:43+11:00",
+      "MasteryPoints": null
+    },
+    {
+      "ID": "202",
+      "Name": "Jhin",
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2020-07-09T11:10:22+10:00",
+      "MasteryPoints": null
+    },
+    {
+      "ID": "222",
+      "Name": "Jinx",
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2020-07-09T11:11:10+10:00",
+      "MasteryPoints": null
+    },
+    {
+      "ID": "236",
+      "Name": "Lucian",
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2020-07-09T11:10:13+10:00",
+      "MasteryPoints": null
+    },
+    {
+      "ID": "267",
+      "Name": "Nami",
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2022-04-03T12:42:06+10:00",
+      "MasteryPoints": null
+    },
+    {
+      "ID": "429",
+      "Name": "Kalista",
+      "SquarePortraitPath": null,
+      "PurchaseDate": "2020-07-09T11:09:03+10:00",
+      "MasteryPoints": null
+    }
+  ],
+  "Skins": [
+    {
+      "ID": "67011",
+      "Name": "PROJECT: Vayne",
+      "PurchaseDate": "2022-03-24T05:16:55+11:00"
+    },
+    {
+      "ID": "67025",
+      "Name": "Sentinel Vayne",
+      "PurchaseDate": "2022-03-31T19:19:42+11:00"
+    },
+    {
+      "ID": "113036",
+      "Name": "Victorious Sejuani",
+      "PurchaseDate": "2022-11-30T21:31:43+11:00"
+    }
+  ]
+}
