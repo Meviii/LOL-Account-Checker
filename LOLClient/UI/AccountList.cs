@@ -16,6 +16,8 @@ namespace LOLClient;
 public partial class AccountList : Form
 {
     private readonly UIUtility _uiUtility;
+    private List<Account> _accounts;
+
     public AccountList()
     {
         _uiUtility = new UIUtility();
@@ -26,7 +28,7 @@ public partial class AccountList : Form
     private void FillAccountsDataTable()
     {
         var accounts = _uiUtility.LoadAccountsFromExportsFolder();
-
+        _accounts = accounts;
         if (accounts == null )
         {
             return;
@@ -72,9 +74,15 @@ public partial class AccountList : Form
         {
             DataGridViewRow row = accountsGridView.Rows[e.RowIndex];
 
-            var account = _uiUtility.MapDataRowToModel<Account>(row);
-
-
+            foreach (var account in _accounts)
+            {
+                if (row.Cells["Summoner"].Value.ToString() == account.SummonerName)
+                {
+                    this.Hide();
+                    _uiUtility.LoadSingleAccountView(account);
+                }
+            }
+            
         }
     }
 

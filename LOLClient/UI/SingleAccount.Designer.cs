@@ -35,15 +35,15 @@ namespace LOLClient
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Overview = new System.Windows.Forms.TabPage();
             this.Champions = new System.Windows.Forms.TabPage();
+            this.championGridView = new System.Windows.Forms.DataGridView();
             this.Skins = new System.Windows.Forms.TabPage();
+            this.skinsGridView = new System.Windows.Forms.DataGridView();
             this.accountNameTitle = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.tabControl1.SuspendLayout();
             this.Champions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.championGridView)).BeginInit();
             this.Skins.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.skinsGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // SummonerName
@@ -73,7 +73,7 @@ namespace LOLClient
             // 
             // Champions
             // 
-            this.Champions.Controls.Add(this.dataGridView1);
+            this.Champions.Controls.Add(this.championGridView);
             this.Champions.Location = new System.Drawing.Point(4, 24);
             this.Champions.Name = "Champions";
             this.Champions.Padding = new System.Windows.Forms.Padding(3);
@@ -82,15 +82,43 @@ namespace LOLClient
             this.Champions.Text = "Champions";
             this.Champions.UseVisualStyleBackColor = true;
             // 
+            // championGridView
+            // 
+            this.championGridView.AllowUserToAddRows = false;
+            this.championGridView.AllowUserToDeleteRows = false;
+            this.championGridView.AllowUserToOrderColumns = true;
+            this.championGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.championGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.championGridView.Location = new System.Drawing.Point(29, 24);
+            this.championGridView.Name = "championGridView";
+            this.championGridView.ReadOnly = true;
+            this.championGridView.RowTemplate.Height = 25;
+            this.championGridView.Size = new System.Drawing.Size(804, 426);
+            this.championGridView.TabIndex = 2;
+            // 
             // Skins
             // 
-            this.Skins.Controls.Add(this.dataGridView2);
+            this.Skins.Controls.Add(this.skinsGridView);
             this.Skins.Location = new System.Drawing.Point(4, 24);
             this.Skins.Name = "Skins";
             this.Skins.Size = new System.Drawing.Size(863, 475);
             this.Skins.TabIndex = 2;
             this.Skins.Text = "Skins";
             this.Skins.UseVisualStyleBackColor = true;
+            // 
+            // skinsGridView
+            // 
+            this.skinsGridView.AllowUserToAddRows = false;
+            this.skinsGridView.AllowUserToDeleteRows = false;
+            this.skinsGridView.AllowUserToOrderColumns = true;
+            this.skinsGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.skinsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.skinsGridView.Location = new System.Drawing.Point(29, 25);
+            this.skinsGridView.Name = "skinsGridView";
+            this.skinsGridView.ReadOnly = true;
+            this.skinsGridView.RowTemplate.Height = 25;
+            this.skinsGridView.Size = new System.Drawing.Size(804, 426);
+            this.skinsGridView.TabIndex = 1;
             // 
             // accountNameTitle
             // 
@@ -104,24 +132,6 @@ namespace LOLClient
             this.accountNameTitle.Size = new System.Drawing.Size(188, 61);
             this.accountNameTitle.TabIndex = 2;
             this.accountNameTitle.Text = "Template";
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(29, 25);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(804, 426);
-            this.dataGridView1.TabIndex = 0;
-            // 
-            // dataGridView2
-            // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(29, 25);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowTemplate.Height = 25;
-            this.dataGridView2.Size = new System.Drawing.Size(804, 426);
-            this.dataGridView2.TabIndex = 1;
             // 
             // SingleAccount
             // 
@@ -140,9 +150,9 @@ namespace LOLClient
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CloseButton_Click);
             this.tabControl1.ResumeLayout(false);
             this.Champions.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.championGridView)).EndInit();
             this.Skins.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.skinsGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -155,7 +165,7 @@ namespace LOLClient
         private TabPage Champions;
         private TabPage Skins;
         private Label accountNameTitle;
-        private DataGridView dataGridView1;
-        private DataGridView dataGridView2;
+        private DataGridView skinsGridView;
+        private DataGridView championGridView;
     }
 }

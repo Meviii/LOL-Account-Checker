@@ -25,23 +25,6 @@ public class UIUtility
         return content;
     }
 
-    public T MapDataRowToModel<T>(DataGridViewRow row) where T : new()
-    {
-        var model = new T();
-
-        foreach (DataGridViewCell cell in row.Cells)
-        {
-            var property = model.GetType().GetProperty(cell.OwningColumn.Name);
-
-            if (property != null && property.CanWrite)
-            {
-                object value = Convert.ChangeType(cell.Value, property.PropertyType);
-                property.SetValue(model, value);
-            }
-        }
-
-        return model;
-    }
 
     public void SaveToSettingsFile(string key, object value)
     {
@@ -146,6 +129,19 @@ public class UIUtility
         new Main().Show();
     }
 
+
+    public void LoadSingleAccountView(Account account)
+    {
+        foreach (Form form in Application.OpenForms)
+        {
+            if (form.GetType() == typeof(SingleAccount))
+            {
+                form.Close();
+            }
+        }
+
+        new SingleAccount(account).Show();
+    }
     public void LoadAccountsListView()
     {
 

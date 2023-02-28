@@ -84,6 +84,7 @@ public class Data
                     {
                         Name = (string)ownedChamp["name"],
                         ID = (string)ownedChamp["id"],
+                        SquarePortraitPath = (string)localChamp["squarePortraitPath"],
                         PurchaseDate = DateTimeOffset.FromUnixTimeMilliseconds(Convert.ToInt64(ownedChamp["purchased"])).LocalDateTime,
 
                     };
