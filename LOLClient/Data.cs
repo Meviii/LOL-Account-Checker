@@ -9,7 +9,7 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
-
+using System.Windows.Forms;
 
 namespace LOLClient;
 
@@ -174,6 +174,9 @@ public class Data
     {
 
         string filePath = $@"{Config.ExportsFolder}{account.SummonerName.Trim()}.json";
+
+        if (!Directory.Exists(Config.ExportsFolder))
+            Directory.CreateDirectory(Config.ExportsFolder);
 
         if (!File.Exists(filePath))
             File.Create(filePath).Dispose();
