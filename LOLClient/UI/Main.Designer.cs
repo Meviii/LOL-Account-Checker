@@ -152,7 +152,6 @@ namespace LOLClient
             // 
             // label4
             // 
-            this.label4.Visible = false; // TEMP
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -167,7 +166,6 @@ namespace LOLClient
             // 
             // ThreadCountTextBox
             // 
-            this.ThreadCountTextBox.Visible = false; // TEMP
             this.ThreadCountTextBox.BackColor = System.Drawing.Color.LightCyan;
             this.ThreadCountTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ThreadCountTextBox.ForeColor = System.Drawing.SystemColors.MenuText;

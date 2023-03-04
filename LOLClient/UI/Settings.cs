@@ -5,10 +5,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LOLClient.UI;
@@ -16,19 +12,21 @@ namespace LOLClient.UI;
 public partial class Settings : Form
 {
 
-    private readonly UIUtility _utility;
+    private readonly UIUtility _uiUtility;
+    private readonly CoreUtility _coreUtility;
     private readonly Update _update;
     public Settings()
     {
         _update = new Update();
-        _utility = new UIUtility();
+        _uiUtility = new UIUtility();
+        _coreUtility = new CoreUtility();
         InitializeComponent();
         LoadLabels();
     }
 
     private async void LoadLabels()
     {
-        var settings = await _utility.LoadFromSettingsFileAsync();
+        var settings = await _coreUtility.LoadFromSettingsFileAsync();
 
         if (settings == null)
             return;
@@ -52,17 +50,18 @@ public partial class Settings : Form
 
     private void BrowseRiotButton_Click(object sender, EventArgs e)
     {
-        
-        OpenFileDialog openFile = new();
 
-        openFile.Filter = "Executable Files (*.exe)|*.exe";
-        openFile.Title = "Select an Exe File.";
+        OpenFileDialog openFile = new()
+        {
+            Filter = "Executable Files (*.exe)|*.exe",
+            Title = "Select the RiotClientServices.exe File."
+        };
 
         if (openFile.ShowDialog() == DialogResult.OK)
         {
             string filePath = openFile.FileName;
             RiotPathLabel.Text = filePath;
-            _utility.SaveToSettingsFileAsync("RiotClientPath", filePath);
+            _coreUtility.SaveToSettingsFileAsync("RiotClientPath", filePath);
         }
 
     }
@@ -79,7 +78,7 @@ public partial class Settings : Form
         else
         {
             this.Hide();
-            _utility.LoadMainView();
+            _uiUtility.LoadMainView();
         }
     }
 
@@ -89,13 +88,13 @@ public partial class Settings : Form
         OpenFileDialog openFile = new();
 
         openFile.Filter = "Executable Files (*.exe)|*.exe";
-        openFile.Title = "Select an Exe File.";
+        openFile.Title = "Select an LeagueClient.exe File.";
 
         if (openFile.ShowDialog() == DialogResult.OK)
         {
             string filePath = openFile.FileName;
             LeaguePathLabel.Text = filePath;
-            _utility.SaveToSettingsFileAsync("LeagueClientPath",  filePath);
+            _coreUtility.SaveToSettingsFileAsync("LeagueClientPath",  filePath);
         }
     }
 
@@ -105,5 +104,15 @@ public partial class Settings : Form
         _update.UpdateChampions();
         _update.UpdateSkins();
         updateButton.Enabled = true;
+    }
+
+    private void Settings_Load(object sender, EventArgs e)
+    {
+
+    }
+
+    private void CloseButton_Click(object sender, EventArgs e)
+    {
+        this.Hide();
     }
 }

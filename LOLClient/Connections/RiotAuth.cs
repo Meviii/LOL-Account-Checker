@@ -1,5 +1,4 @@
-﻿using LOLClient.Connections;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -8,20 +7,16 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace LOLClient;
+namespace LOLClient.Connections;
 
 public class RiotAuth
 {
     private readonly Connection _connection;
     private readonly RiotConnection _riotConnection;
-    private readonly ILogger _logger;
 
-    private readonly Mutex _riotAuthMutex = new();
-    private readonly object _lock = new();
-    public RiotAuth(Connection connection, RiotConnection riotConnection, ILogger logger)
+    public RiotAuth(Connection connection, RiotConnection riotConnection)
     {
 
-        _logger = logger;
         _connection = connection;
         _riotConnection = riotConnection;
 
