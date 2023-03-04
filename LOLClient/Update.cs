@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Windows.Forms;
 
 namespace LOLClient;
 
@@ -19,7 +20,7 @@ public class Update
 
     public void UpdateChampions()
     {
-        string filePath = $"{Config.ExportsFolder}";
+        string filePath = $"{Config.ChampionsFile}";
         try
         {
             var response = _httpClient.GetAsync("https://raw.communitydragon.org/pbe/plugins/rcp-be-lol-game-data/global/default/v1/champion-summary.json").Result;
@@ -28,9 +29,12 @@ public class Update
 
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                Console.WriteLine("error getting data");
+                Console.WriteLine("Error getting data");
                 return;
             }
+
+            if (!Directory.Exists(Config.DataFolder))
+                Directory.CreateDirectory(Config.DataFolder);
 
             if (!File.Exists(filePath))
             {
@@ -43,7 +47,7 @@ public class Update
                 streamWriter.Write(JsonConvert.SerializeObject(json, Formatting.Indented));
             }
 
-            Console.WriteLine($"Creating and saving to {filePath}");
+            Console.WriteLine($"Creating and saving to {Directory.GetCurrentDirectory()}");
 
         }
         catch (Exception ex)

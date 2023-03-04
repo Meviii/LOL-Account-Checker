@@ -27,7 +27,6 @@ class Program
         else
         {
             Application.Run(new Main());
-            //Application.Run(new AccountList());
         }
 
     }

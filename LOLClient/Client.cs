@@ -1,57 +1,49 @@
-﻿using Microsoft.Extensions.Logging;
-using Microsoft.VisualBasic.Devices;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
+using System;
 
 namespace LOLClient;
 
 public class Client
 {
     private readonly List<Process> _processes;
-    private readonly ILogger _logger;
-    private readonly object _lock = new object();
 
-    public Client(ILogger logger)
+    public Client()
     {
-        _logger = logger;
         _processes = new();
     }
 
     public int CreateClient(List<string> processArgs, string path)
     {
-        lock (_lock)
+
+        Process process = new();
+        while (true)
         {
-
-
-            Process process = new();
-            while (true)
+            try
             {
-                try
+                ProcessStartInfo processInfo = new()
                 {
-                    ProcessStartInfo processInfo = new()
-                    {
 
-                        FileName = path,
-                        Arguments = string.Join(" ", processArgs),
-                        UseShellExecute = false
-                    };
+                    FileName = path,
+                    Arguments = string.Join(" ", processArgs),
+                    UseShellExecute = false
+                };
 
-                    process.StartInfo = processInfo;
+                process.StartInfo = processInfo;
 
-                    process.Start();
+                process.Start();
 
-                    _processes.Add(process);
+                _processes.Add(process);
 
-                    Thread.Sleep(2000);
+                Thread.Sleep(2000);
 
-                    return process.Id;
-                }
-                catch
-                {
-                    Thread.Sleep(1000);
-                }
-
+                return process.Id;
+            }
+            catch
+            {
+                CloseClients();
+                throw new Exception("Wrong client path.");
             }
         }
     }

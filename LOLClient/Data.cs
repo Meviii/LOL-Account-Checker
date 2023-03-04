@@ -10,7 +10,6 @@ using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace LOLClient;
 
@@ -119,9 +118,13 @@ public class Data
 
     private void LogToFile(string message)
     {
-        string logFilePath = @"..\..\..\log.txt";
+        lock (_lock)
+        {
+            string logFilePath = @"..\..\..\log.txt";
 
-        File.AppendAllTextAsync(logFilePath, $"{DateTime.Now} - {message}\n\n\n\n\n").Wait();
+            File.AppendAllTextAsync(logFilePath, $"{DateTime.Now} - {message}\n\n\n\n\n").Wait();
+
+        }
     }
 
     // Method that asynchronously retrieves the summoner data for the account and assigns it to the account object.
@@ -138,7 +141,7 @@ public class Data
         account.IsEmailVerified = await RequestEmailVerificationAsync();
 
         // Retrieve the loot data using the RequestLootAsync method and assign it to the account object.
-        RequestLootAsync(account);
+        await RequestLootAsync(account);
     }
 
     // Method that asynchronously requests the account loot.

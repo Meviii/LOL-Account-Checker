@@ -1,9 +1,10 @@
 # LoL Account Checker
 
-This program is a League of Legends account checker with multiple features including the ability to run checks on multiple accounts, export all account information to a folder, and display comprehensive details about each account, including purchase dates and more.
+This program is a League of Legends account checker supporting multi threading with multiple features including the ability to run checks on multiple accounts, export all account information to a folder, and display comprehensive details about each account, including purchase dates and more.
 
 ## Core Features
 
+- Multi-threading
 - Run checks on multiple accounts (from text file)  
 - Exports all accounts information to folder  
 - Comprehensive details on each successfully checked account, including purchase dates, owned champions and skins, and more.  
@@ -19,11 +20,8 @@ The program creates a Riot client to authenticate the user and a League client t
 - Opening and disenchanting of Hextech loot  
 - Claiming event rewards and spending event tokens  
 - Custom exports  
-- Multi-Threading
 
 ## Application & Usage
-
-*Note: Multi-threading currently not supported.*
 
 ### Main
 
@@ -40,3 +38,7 @@ Lists all the accounts in the Exports folder in a grid view that displays genera
 ### Single Account
 
 Lists the overview information of the specific account, including the purchase history, owned champions, and skins. This view also displays specific details about each owned champion and skin.
+
+## Inspiration
+
+This project was inspired by DeivatorZ's account checker which can be found at https://github.com/DeviatorZ/league-account-checker

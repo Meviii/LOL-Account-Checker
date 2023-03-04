@@ -6,9 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LOLClient;
@@ -16,18 +13,20 @@ namespace LOLClient;
 public partial class AccountList : Form
 {
     private readonly UIUtility _uiUtility;
+    private readonly CoreUtility _coreUtility;
     private List<Account> _accounts;
 
     public AccountList()
     {
         _uiUtility = new UIUtility();
+        _coreUtility = new CoreUtility();
         InitializeComponent();
         FillAccountsDataTableAsync();
     }
 
     private async void FillAccountsDataTableAsync()
     {
-        var accounts = await _uiUtility.LoadAccountsFromExportsFolderAsync();
+        var accounts = await _coreUtility.LoadAccountsFromExportsFolderAsync();
         _accounts = accounts;
         if (accounts == null )
         {

@@ -19,18 +19,13 @@ public class Connection
     public readonly string Port;
     public readonly string AuthToken;
     public readonly HttpClient _httpClient;
-    private readonly ILogger _logger;
+    private static object _lock = new();
+    private static HashSet<string> _usedPorts = new();
 
-    private static HashSet<string> _usedPorts = new HashSet<string>();
-    private static object _lock = new object(); // mutex object
-   
-    public Connection(ILogger logger)
+    public Connection()
     {
-
-        _logger = logger;
-
         AuthToken = GenerateAuthToken();
-        Port = Convert.ToString(GetFreePort());
+        Port = GetFreePort();
 
         _httpClient = new HttpClient(GetHandlerSettings());
         _httpClient.BaseAddress = new Uri("https://127.0.0.1:" + Port);
@@ -42,6 +37,7 @@ public class Connection
     // Finds a free port.
     private string GetFreePort(int minPort = 50000, int maxPort = 65000)
     {
+
         lock (_lock)
         {
             var sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -59,13 +55,13 @@ public class Connection
                     _usedPorts.Add(port.ToString());
                     return port.ToString();
                 }
-                catch (SocketException)
+                catch (SocketException e)
                 {
-                    // Port taken.
+                    throw new Exception(e.Message);
                 }
             }
 
-            throw new IOException("No available port");
+            throw new Exception("No port available.");
         }
     }
     private string GenerateAuthToken(int length = 22)

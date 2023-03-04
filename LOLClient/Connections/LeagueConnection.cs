@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using System.Net.Http;
 using System.Threading;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace LOLClient.Connections;
 
@@ -15,21 +14,17 @@ public class LeagueConnection
     private readonly Connection _connection;
     public Dictionary<string, object> RiotCredentials = null;
     private readonly string _region;
-    private readonly ILogger _logger;
     private readonly Client _client;
-    private int _processId;
+    public int ProcessID { get; private set; }
     private readonly object _lock = new object();
 
-    public LeagueConnection(Connection connection, Client client, ILogger logger, string path, string region)
+    public LeagueConnection(Connection connection, Client client, string path, string region)
     {
-        lock (_lock)
-        {
-            _logger = logger;
+
             _path = path;
             _client = client;
             _connection = connection;
             _region = region;
-        }
 
     }
 
@@ -82,17 +77,11 @@ public class LeagueConnection
                         }
                     }
                 }
-                //Console.WriteLine($"Current counter: {counter}");
+
                 if (counter == timeout)
                 {
                     return false;
                 }
-                    //    Console.WriteLine("League Client Failed. Restarting...");
-                    //    _client.CloseClient(_processId);
-                    //    CreateLeagueClient();
-                    //    WaitForSession();
-                    //    return;
-                    //}
 
                 counter++;
                 Thread.Sleep(3000);
@@ -119,7 +108,7 @@ public class LeagueConnection
             "--headless"
         };
 
-        _processId = _client.CreateClient(processArgs, _path);
+        ProcessID = _client.CreateClient(processArgs, _path);
     }
 
 }

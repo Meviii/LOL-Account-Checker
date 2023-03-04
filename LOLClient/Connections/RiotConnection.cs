@@ -17,9 +17,8 @@ public class RiotConnection
     private readonly ILogger _logger;
     private readonly object _lock = new object();
     public int ProcessID { get; private set; }
-    public RiotConnection(Client client, Connection connection, ILogger logger, string riotClientPath = "H:\\Riot Games\\Riot Client\\RiotClientServices.exe")
+    public RiotConnection(Client client, Connection connection, string riotClientPath)
     {
-        _logger = logger;
         _client = client;
         _connection = connection;
         _riotClientPath = riotClientPath;
@@ -28,11 +27,10 @@ public class RiotConnection
 
     public void Run()
     {
-        lock (_lock)
-        {
-            CreateRiotClient();
-            WaitForConnection();
-        }
+        
+        CreateRiotClient();
+        WaitForConnection();
+        
     }
 
     public Dictionary<string, object> GetRiotCredentials()
@@ -59,7 +57,7 @@ public class RiotConnection
 
     }
 
-    public void WaitForLaunch(int timeout = 30)
+    public bool WaitForLaunch(int timeout = 60)
     {
         var startTime = DateTime.Now;
 
@@ -71,11 +69,11 @@ public class RiotConnection
             if (result.ToString().ToLower() == "WaitForLaunch".ToLower())
             {
                 Thread.Sleep(1000);
-                return;
+                return true;
             }
 
             if ((DateTime.Now - startTime).TotalSeconds >= timeout)
-                throw new Exception("Timed out.");
+                return false;
 
             Thread.Sleep(1000);
         }
