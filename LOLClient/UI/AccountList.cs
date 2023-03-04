@@ -22,12 +22,12 @@ public partial class AccountList : Form
     {
         _uiUtility = new UIUtility();
         InitializeComponent();
-        FillAccountsDataTable();
+        FillAccountsDataTableAsync();
     }
 
-    private void FillAccountsDataTable()
+    private async void FillAccountsDataTableAsync()
     {
-        var accounts = _uiUtility.LoadAccountsFromExportsFolder();
+        var accounts = await _uiUtility.LoadAccountsFromExportsFolderAsync();
         _accounts = accounts;
         if (accounts == null )
         {

@@ -47,4 +47,8 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Exports\" />
+  </ItemGroup>
+
 </Project>

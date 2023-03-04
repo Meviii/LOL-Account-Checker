@@ -34,6 +34,11 @@ public partial class SingleAccount : Form
         FillSkinsTable();
     }
 
+    private void FillOverviewTable()
+    {
+
+    }
+
     private void FillChampionsTable()
     {
         var dataTable = new DataTable();

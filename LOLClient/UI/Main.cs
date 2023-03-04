@@ -15,31 +15,24 @@ public partial class Main : Form
 {
 
     private readonly UIUtility _uIUtility;
-    public event AccountsLeftUpdatedEventHandler AccountsLeftUpdated;
-
     public Main()
     {
         _uIUtility = new UIUtility();
 
         InitializeComponent();
-        LoadConfig();
+        LoadConfigAsync();
 
     }
 
 
-    private void LoadConfig()
+    private async void LoadConfigAsync()
     {
-        var settings = _uIUtility.LoadFromSettingsFile();
+        var settings = await _uIUtility.LoadFromSettingsFileAsync();
 
         if (settings.ContainsKey("ComboListPath"))
             ComboListText.Text = settings["ComboListPath"].ToString();
 
         Console.SetOut(new ConsoleWriter(ConsoleTextBox));
-    }
-
-    private void openFile_FileOk(object sender, CancelEventArgs e)
-    {
-        
     }
 
     private void richTextBox1_TextChanged(object sender, EventArgs e)
@@ -86,7 +79,7 @@ public partial class Main : Form
             string filePath = openFile.FileName;
 
             ComboListText.Text = filePath;
-            _uIUtility.SaveToSettingsFile("ComboListPath", filePath);
+            _uIUtility.SaveToSettingsFileAsync("ComboListPath", filePath);
         }
 
     }
@@ -137,9 +130,9 @@ public partial class Main : Form
 
             try
             {
-                await Task.Run(() =>
+                await Task.Run(async () =>
                 {
-                    InitRunner(actualThreadCount, delimiter);
+                    await InitRunnerAsync(actualThreadCount, delimiter);
 
                 });
 
@@ -160,9 +153,9 @@ public partial class Main : Form
 
     }
 
-    private void InitRunner(int actualThreadCount, char delimiter)
+    private async Task InitRunnerAsync(int actualThreadCount, char delimiter)
     {
-        var runner = new Runner(this);
+        var runner = new Runner();
 
         runner.AccountsLeftUpdated += Runner_AccountsLeftUpdated;
         var totalAccounts = runner.ReadComboList(ComboListText.Text, delimiter).Count;
@@ -172,7 +165,7 @@ public partial class Main : Form
             ProgressBar.Maximum = totalAccounts + 1;
         }catch { }
 
-        runner.RunOperation(actualThreadCount,
+        await runner.RunOperationAsync(actualThreadCount,
             Convert.ToChar(delimiter));
 
     }
