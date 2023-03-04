@@ -16,9 +16,10 @@ public class Account
     public string BE { get; set; }
     public string RP { get; set; }
     public string OE { get; set; }
+    public List<Skin> HextechSkins { get; set; } = new List<Skin>();
     public bool IsEmailVerified { get; set; }
-    public List<Champion> Champions { get; set; }
-    public List<Skin> Skins { get; set; }
+    public List<Champion> Champions { get; set; } = new List<Champion>();
+    public List<Skin> Skins { get; set; } = new List<Skin>();
 
     public Account() { }
 

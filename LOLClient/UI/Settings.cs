@@ -26,9 +26,9 @@ public partial class Settings : Form
         LoadLabels();
     }
 
-    private void LoadLabels()
+    private async void LoadLabels()
     {
-        var settings = _utility.LoadFromSettingsFile();
+        var settings = await _utility.LoadFromSettingsFileAsync();
 
         if (settings == null)
             return;
@@ -62,7 +62,7 @@ public partial class Settings : Form
         {
             string filePath = openFile.FileName;
             RiotPathLabel.Text = filePath;
-            _utility.SaveToSettingsFile("RiotClientPath", filePath);
+            _utility.SaveToSettingsFileAsync("RiotClientPath", filePath);
         }
 
     }
@@ -95,7 +95,7 @@ public partial class Settings : Form
         {
             string filePath = openFile.FileName;
             LeaguePathLabel.Text = filePath;
-            _utility.SaveToSettingsFile("LeagueClientPath",  filePath);
+            _utility.SaveToSettingsFileAsync("LeagueClientPath",  filePath);
         }
     }
 

@@ -57,6 +57,7 @@ namespace LOLClient
             this.accountsGridView.AllowUserToDeleteRows = false;
             this.accountsGridView.AllowUserToOrderColumns = true;
             this.accountsGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.accountsGridView.BackgroundColor = System.Drawing.Color.LightSkyBlue;
             this.accountsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.accountsGridView.Location = new System.Drawing.Point(110, 142);
             this.accountsGridView.Name = "accountsGridView";

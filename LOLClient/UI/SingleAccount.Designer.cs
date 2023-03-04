@@ -88,6 +88,7 @@ namespace LOLClient
             this.championGridView.AllowUserToDeleteRows = false;
             this.championGridView.AllowUserToOrderColumns = true;
             this.championGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.championGridView.BackgroundColor = System.Drawing.Color.LightSkyBlue;
             this.championGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.championGridView.Location = new System.Drawing.Point(29, 24);
             this.championGridView.Name = "championGridView";
@@ -112,6 +113,7 @@ namespace LOLClient
             this.skinsGridView.AllowUserToDeleteRows = false;
             this.skinsGridView.AllowUserToOrderColumns = true;
             this.skinsGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.skinsGridView.BackgroundColor = System.Drawing.Color.LightSkyBlue;
             this.skinsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.skinsGridView.Location = new System.Drawing.Point(29, 25);
             this.skinsGridView.Name = "skinsGridView";

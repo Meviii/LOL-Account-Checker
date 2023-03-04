@@ -20,6 +20,7 @@ namespace LOLClient;
  * the league and riot client services.
  */
 
+// AccountsLeft Event Handler for Main UI - Runner signaling
 public delegate void AccountsLeftUpdatedEventHandler(object sender, int accountsLeft);
 
 public class Runner
@@ -37,7 +38,7 @@ public class Runner
     public event AccountsLeftUpdatedEventHandler AccountsLeftUpdated;
     private int _accountsLeft;
 
-    public Runner(Main main)
+    public Runner()
     {
         _utility = new UIUtility();
         _account = new(); // Create a new Account object to store account related information
@@ -46,35 +47,41 @@ public class Runner
         
     }
 
+    // Signals account left text box in UI.
     private void OnAccountsLeftUpdated(int accountsLeft)
     {
         AccountsLeftUpdated?.Invoke(this, accountsLeft);
     }
 
-    public void RunOperation(int threadCount, char delimiter)
+    // This method runs the whole operation called by Main UI
+    public async Task RunOperationAsync(int threadCount, char delimiter)
     {
 
-        var settings = _utility.LoadFromSettingsFile();
-        var path = settings.GetValue("ComboListPath").ToString();
-        var comboList = ReadComboList(path, delimiter);
-        _ = RunThreadsAsync(threadCount, comboList, settings);
-        CleanUp();
+        var settings = await _utility.LoadFromSettingsFileAsync(); // Gets Settings file
+        var path = settings.GetValue("ComboListPath").ToString(); // Gets the current combolist path
+        var comboList = ReadComboList(path, delimiter); // Reads the combolist(accounts) path 
+        await RunTasksAsync(threadCount, comboList, settings); // Runs threads on combolist
+        CleanUp(); // Force closes all clients
     }
 
-    public bool RunThreadsAsync(int threadCount, List<Tuple<string, string>> comboList, JObject settings)
+    // This method asynchronously runs tasks to process a list of combos
+    public async Task<bool> RunTasksAsync(int threadCount, List<Tuple<string, string>> comboList, JObject settings)
     {
-
+        // Initialize variables
         var remainingCombos = comboList.Count;
         _accountsLeft = remainingCombos;
 
+        // Limit thread count to remaining combos
         if (threadCount > remainingCombos)
             threadCount = remainingCombos;
 
+        // Loop through combos until all have been processed
         while (remainingCombos > 0)
         {
             Console.WriteLine($"Remaining Combos: {remainingCombos}");
-            var tasks = new List<Thread>();
-            
+            var tasks = new List<Task>();
+
+            // Start a new task for each thread
             for (int i = 0; i < threadCount; i++)
             {
                 if (remainingCombos <= 0)
@@ -84,71 +91,88 @@ public class Runner
                     return true;
                 }
 
+                // Get the first combo from the list
                 var combo = comboList[0];
 
-                Console.WriteLine($"Starting thread for {combo.Item1}");
-                var task = new Thread(() => Work(combo.Item1, combo.Item2, settings));
+                Console.WriteLine($"Starting task for {combo.Item1}");
+
+                // Run the Work method as a Task
+                var task = Task.Run(() => Work(combo.Item1, combo.Item2, settings));
+
+                // Remove the combo from the list and add the task to the tasks list
                 comboList.RemoveAt(0);
                 tasks.Add(task);
+
+                // Update counters
                 remainingCombos--;
                 OnAccountsLeftUpdated(_accountsLeft);
                 _accountsLeft--;
             }
-            foreach (var task in tasks)
-            {
-                task.Start();
-            }
-            
-            foreach (var task in tasks)
-            {
-                task.Join();
-            }
+
+            // Wait for all tasks to complete before proceeding
+            await Task.WhenAll(tasks);
+
+            // Clear the tasks list and perform cleanup
             tasks.Clear();
             CleanUp();
         }
-        
+
+        // Return false if the method did not complete successfully
         return false;
-        
     }
 
-    public void Work(string username, string password, JObject settings)
+    // This method takes in the username, password, and settings JObject as parameters and runs the RiotClientRunner and LeagueClientRunner methods.
+    public async Task Work(string username, string password, JObject settings)
     {
-        lock (_lock)
+        // Run RiotClientRunner with the given username, password, and RiotClientPath
+        bool didRiotSucceed = RiotClientRunner(username, password, settings["RiotClientPath"].ToString());
+
+        // If RiotClientRunner did not succeed, return from the method
+        if (!didRiotSucceed)
         {
-            bool didRiotSucceed = RiotClientRunner(username, password, settings["RiotClientPath"].ToString());
-
-            if (!didRiotSucceed)
-                return;
-
-            bool didLeagueSucceed = LeagueClientRunner(settings["LeagueClientPath"].ToString());
-
-            if (!didLeagueSucceed)
-                return;
-            
-            Console.WriteLine($"Completed {username}");
+            return;
         }
+
+        // Run LeagueClientRunner with the given LeagueClientPath
+        bool didLeagueSucceed = await LeagueClientRunner(settings["LeagueClientPath"].ToString());
+
+        // If LeagueClientRunner did not succeed, return from the method
+        if (!didLeagueSucceed)
+            return;
+
+        // If both RiotClientRunner and LeagueClientRunner succeed, print the completed username to the console
+        Console.WriteLine($"Completed {username}");
     }
 
-    public List<Tuple<string,string>> ReadComboList(string comboListPath, char delimiter)
+    // This method returns a List holding tuples of each account extracted from the combolist. In <User,Pass> format
+    public List<Tuple<string, string>> ReadComboList(string comboListPath, char delimiter)
     {
+        // Check if the file exists, if not, return null
         if (!File.Exists(comboListPath))
             return null;
 
+        // Read the content of the file and store it in the "content" variable
         string content = File.ReadAllTextAsync(comboListPath).Result;
 
+        // Create a new list to store the account tuples
         var accounts = new List<Tuple<string, string>>();
 
+        // Loop through each line in the content
         foreach (string line in content.Split())
         {
+            // If the line is not empty
             if (line != "")
             {
+                // Split the line by the delimiter and add a new tuple to the "accounts" list
                 var accString = line.Split(delimiter);
                 accounts.Add(new Tuple<string, string>(accString[0], accString[1]));
             }
         }
 
+        // Return the list of account tuples
         return accounts;
     }
+
 
     private ILoggerFactory GetLoggerFactory()
     {
@@ -208,7 +232,7 @@ public class Runner
      * 
      * Requires path to the LeagueClient.exe
      */
-    private bool LeagueClientRunner(string leagueClientPath)
+    private async Task<bool> LeagueClientRunner(string leagueClientPath)
     {
 
         Connection connection = new(_logger); // Initialize a new connection for the LeagueClient.exe
@@ -225,18 +249,18 @@ public class Runner
 
         _data = new(connection); // Sets Data object with LeagueClient's Connection
         
-        FetchData(_account); // Fetches Summoner Account data
-        _data.ExportAccount(_account); // Export account
+        await FetchDataAsync(_account); // Fetches Summoner Account data
+        await _data.ExportAccount(_account); // Export account
 
         return true;
     }
 
-    private void FetchData(Account account)
+    // This method is responsible for fetching account data for the passed account asynchronously.
+    private async Task FetchDataAsync(Account account)
     {
-        
-        _data.GetSkins(account);
-        _data.GetChampions(account);
-        _data.GetSummonerData(account);
+        await _data.GetSkinsAsync(account);
+        await _data.GetChampionsAsync(account);
+        await _data.GetSummonerDataAsync(account);
     }
 
     public void CleanUp()
