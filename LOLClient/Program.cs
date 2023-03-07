@@ -26,15 +26,8 @@ class Program
         if (IsSettingsFileEmpty())
         {
             // Run updates if settings file is empty (first run).
-            var update = new Update();
-            var updateTask = Task.Run(async () =>
-            {
-                await update.UpdateSkins();
-                await update.UpdateChampions();
-            });
+            Application.Run(new Settings(true));
 
-            // Run Settings form.
-            Application.Run(new Settings());
         }
         else
         {

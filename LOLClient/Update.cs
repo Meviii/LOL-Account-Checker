@@ -21,7 +21,7 @@ public class Update
         };
     }
 
-    public async Task UpdateChampions()
+    public async Task UpdateChampionsAsync()
     {
         string filePath = $"{Config.ChampionsFile}";
         try
@@ -60,7 +60,7 @@ public class Update
         }
     }
 
-    public async Task UpdateSkins()
+    public async Task UpdateSkinsAsync()
     {
         string filePath = $"{Config.SkinsFile}";
         try
