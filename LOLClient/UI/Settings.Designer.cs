@@ -141,7 +141,7 @@
             updateButton.TabIndex = 16;
             updateButton.Text = "Update Skins/Champs";
             updateButton.UseVisualStyleBackColor = false;
-            updateButton.Click += updateButton_Click;
+            updateButton.Click += UpdateButton_Click;
             // 
             // Settings
             // 

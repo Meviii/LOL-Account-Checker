@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LOLClient.UI;
@@ -15,13 +16,17 @@ public partial class Settings : Form
     private readonly UIUtility _uiUtility;
     private readonly CoreUtility _coreUtility;
     private readonly Update _update;
-    public Settings()
+    public Settings(bool initialRun = false)
     {
         _update = new Update();
         _uiUtility = new UIUtility();
         _coreUtility = new CoreUtility();
         InitializeComponent();
         LoadLabels();
+
+        // Initialize Skins/Champs data on first run
+        if (initialRun)
+            UpdateButton_Click(updateButton, null);
     }
 
     private async void LoadLabels()
@@ -72,7 +77,7 @@ public partial class Settings : Form
         {
             StatusLabel.Text = "Please locate all paths.";
             StatusLabel.ForeColor = Color.MediumVioletRed;
-            StatusLabel.Font = new Font("Segoe UI Light", 14F, FontStyle.Bold);
+            StatusLabel.Font = new Font("Segoe UI Light", 14F, FontStyle.Regular);
             return;
         }
         else
@@ -98,11 +103,11 @@ public partial class Settings : Form
         }
     }
 
-    private void updateButton_Click(object sender, EventArgs e)
+    private async void UpdateButton_Click(object sender, EventArgs e)
     {
         updateButton.Enabled = false;
-        _update.UpdateChampions();
-        _update.UpdateSkins();
+        await _update.UpdateChampionsAsync();
+        await _update.UpdateSkinsAsync();
         updateButton.Enabled = true;
     }
 

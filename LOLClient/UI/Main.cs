@@ -270,7 +270,9 @@ public partial class Main : Form
         else
         {
             accountsLeftLabel.Text = $"{accountsLeft}";
-            ProgressBar.Value += 1;
+
+            if (ProgressBar.Maximum >= ProgressBar.Value + 1)
+                ProgressBar.Value += 1;
         }
 
     }
