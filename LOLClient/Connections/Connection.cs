@@ -49,7 +49,12 @@ public class Connection
                 try
                 {
                     // check if port is already in use
-                    if (_usedPorts.Contains(port.ToString())) continue;
+                    if (_usedPorts.Contains(port.ToString()))
+                        continue;
+
+                    // If in use
+                    if (sock.Poll(1000, SelectMode.SelectRead))
+                        continue;
 
                     sock.Bind(new IPEndPoint(IPAddress.Loopback, port));
                     sock.Close();
