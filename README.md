@@ -7,7 +7,7 @@ This program is a League of Legends account checker supporting multi threading w
 - Multi-threading
 - Run checks on multiple accounts (from text file)  
 - Exports all accounts information to folder  
-- Comprehensive details on each successfully checked account, including purchase dates, owned champions and skins, and more.  
+- Comprehensive details on each successfully checked account, including purchase dates, owned champions, owned skins, and more.  
 
 ## How to use
 
@@ -32,6 +32,7 @@ The program creates a Riot client to authenticate the user and a League client t
 - Opening and disenchanting of Hextech loot  
 - Claiming event rewards and spending event tokens  
 - Custom exports  
+- Reqeue system for failed accounts
 
 ## Application & Usage
 
