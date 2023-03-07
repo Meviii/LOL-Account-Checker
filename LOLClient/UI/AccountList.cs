@@ -1,4 +1,5 @@
-﻿using LOLClient.Models;
+﻿using LOLClient.DataFiles;
+using LOLClient.Models;
 using LOLClient.UI;
 using LOLClient.Utility;
 using Newtonsoft.Json.Linq;
@@ -6,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace LOLClient;
@@ -28,7 +30,7 @@ public partial class AccountList : Form
     {
         var accounts = await _coreUtility.LoadAccountsFromExportsFolderAsync();
         _accounts = accounts;
-        if (accounts == null )
+        if (accounts == null)
         {
             return;
         }
@@ -67,12 +69,14 @@ public partial class AccountList : Form
 
     }
 
-    private void accountsGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+    private void accountsGridView_CellContentDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
     {
-        if (e.RowIndex >= 0) // Check if the clicked row is valid
+        if (e.RowIndex >= 0)
         {
+            // Get the row that was clicked
             DataGridViewRow row = accountsGridView.Rows[e.RowIndex];
 
+            // Open the new form
             foreach (var account in _accounts)
             {
                 if (row.Cells["Summoner"].Value.ToString() == account.SummonerName)
@@ -81,7 +85,6 @@ public partial class AccountList : Form
                     _uiUtility.LoadSingleAccountView(account);
                 }
             }
-            
         }
     }
 
@@ -96,5 +99,10 @@ public partial class AccountList : Form
         this.Hide();
 
         _uiUtility.LoadMainView();
+    }
+
+    private void ExportsFolderButton_Click(object sender, EventArgs e)
+    {
+        Process.Start("explorer.exe", Config.ExportsFolder);
     }
 }

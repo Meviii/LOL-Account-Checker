@@ -14,8 +14,6 @@ public class RiotConnection
     public string _riotClientPath;
     private readonly Connection _connection;
     private readonly Client _client;
-    private readonly ILogger _logger;
-    private readonly object _lock = new object();
     public int ProcessID { get; private set; }
     public RiotConnection(Client client, Connection connection, string riotClientPath)
     {

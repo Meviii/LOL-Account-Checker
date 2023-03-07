@@ -29,144 +29,144 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Settings));
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.RiotBrowseButton = new System.Windows.Forms.Button();
-            this.LeagueBrowseButton = new System.Windows.Forms.Button();
-            this.SaveButton = new System.Windows.Forms.Button();
-            this.LeaguePathLabel = new System.Windows.Forms.TextBox();
-            this.RiotPathLabel = new System.Windows.Forms.TextBox();
-            this.StatusLabel = new System.Windows.Forms.Label();
-            this.updateButton = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            label2 = new System.Windows.Forms.Label();
+            label1 = new System.Windows.Forms.Label();
+            RiotBrowseButton = new System.Windows.Forms.Button();
+            LeagueBrowseButton = new System.Windows.Forms.Button();
+            SaveButton = new System.Windows.Forms.Button();
+            LeaguePathLabel = new System.Windows.Forms.TextBox();
+            RiotPathLabel = new System.Windows.Forms.TextBox();
+            StatusLabel = new System.Windows.Forms.Label();
+            updateButton = new System.Windows.Forms.Button();
+            SuspendLayout();
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label2.Font = new System.Drawing.Font("Segoe UI Light", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.ForeColor = System.Drawing.Color.LightYellow;
-            this.label2.Location = new System.Drawing.Point(100, 98);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(290, 25);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "RiotClientServices.exe Location";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            label2.AutoSize = true;
+            label2.BackColor = System.Drawing.Color.Transparent;
+            label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            label2.Font = new System.Drawing.Font("Segoe UI Light", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label2.ForeColor = System.Drawing.Color.LightYellow;
+            label2.Location = new System.Drawing.Point(100, 98);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(290, 25);
+            label2.TabIndex = 6;
+            label2.Text = "RiotClientServices.exe Location";
+            label2.Click += label2_Click;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Light", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.ForeColor = System.Drawing.Color.LightYellow;
-            this.label1.Location = new System.Drawing.Point(115, 215);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(247, 25);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "LeagueClient.exe Location";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            label1.AutoSize = true;
+            label1.BackColor = System.Drawing.Color.Transparent;
+            label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            label1.Font = new System.Drawing.Font("Segoe UI Light", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label1.ForeColor = System.Drawing.Color.LightYellow;
+            label1.Location = new System.Drawing.Point(115, 215);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(247, 25);
+            label1.TabIndex = 7;
+            label1.Text = "LeagueClient.exe Location";
+            label1.Click += label1_Click;
             // 
             // RiotBrowseButton
             // 
-            this.RiotBrowseButton.BackColor = System.Drawing.Color.LightCyan;
-            this.RiotBrowseButton.Location = new System.Drawing.Point(325, 140);
-            this.RiotBrowseButton.Name = "RiotBrowseButton";
-            this.RiotBrowseButton.Size = new System.Drawing.Size(74, 33);
-            this.RiotBrowseButton.TabIndex = 9;
-            this.RiotBrowseButton.Text = "Browse";
-            this.RiotBrowseButton.UseVisualStyleBackColor = false;
-            this.RiotBrowseButton.Click += new System.EventHandler(this.BrowseRiotButton_Click);
+            RiotBrowseButton.BackColor = System.Drawing.Color.LightCyan;
+            RiotBrowseButton.Location = new System.Drawing.Point(325, 140);
+            RiotBrowseButton.Name = "RiotBrowseButton";
+            RiotBrowseButton.Size = new System.Drawing.Size(74, 33);
+            RiotBrowseButton.TabIndex = 9;
+            RiotBrowseButton.Text = "Browse";
+            RiotBrowseButton.UseVisualStyleBackColor = false;
+            RiotBrowseButton.Click += BrowseRiotButton_Click;
             // 
             // LeagueBrowseButton
             // 
-            this.LeagueBrowseButton.BackColor = System.Drawing.Color.LightCyan;
-            this.LeagueBrowseButton.Location = new System.Drawing.Point(325, 257);
-            this.LeagueBrowseButton.Name = "LeagueBrowseButton";
-            this.LeagueBrowseButton.Size = new System.Drawing.Size(74, 33);
-            this.LeagueBrowseButton.TabIndex = 11;
-            this.LeagueBrowseButton.Text = "Browse";
-            this.LeagueBrowseButton.UseVisualStyleBackColor = false;
-            this.LeagueBrowseButton.Click += new System.EventHandler(this.LeagueBrowseButton_Click);
+            LeagueBrowseButton.BackColor = System.Drawing.Color.LightCyan;
+            LeagueBrowseButton.Location = new System.Drawing.Point(325, 257);
+            LeagueBrowseButton.Name = "LeagueBrowseButton";
+            LeagueBrowseButton.Size = new System.Drawing.Size(74, 33);
+            LeagueBrowseButton.TabIndex = 11;
+            LeagueBrowseButton.Text = "Browse";
+            LeagueBrowseButton.UseVisualStyleBackColor = false;
+            LeagueBrowseButton.Click += LeagueBrowseButton_Click;
             // 
             // SaveButton
             // 
-            this.SaveButton.BackColor = System.Drawing.Color.Aqua;
-            this.SaveButton.Location = new System.Drawing.Point(201, 316);
-            this.SaveButton.Name = "SaveButton";
-            this.SaveButton.Size = new System.Drawing.Size(74, 33);
-            this.SaveButton.TabIndex = 12;
-            this.SaveButton.Text = "Save";
-            this.SaveButton.UseVisualStyleBackColor = false;
-            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
+            SaveButton.BackColor = System.Drawing.Color.Aqua;
+            SaveButton.Location = new System.Drawing.Point(201, 316);
+            SaveButton.Name = "SaveButton";
+            SaveButton.Size = new System.Drawing.Size(74, 33);
+            SaveButton.TabIndex = 12;
+            SaveButton.Text = "Done";
+            SaveButton.UseVisualStyleBackColor = false;
+            SaveButton.Click += SaveButton_Click;
             // 
             // LeaguePathLabel
             // 
-            this.LeaguePathLabel.BackColor = System.Drawing.Color.LightCyan;
-            this.LeaguePathLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LeaguePathLabel.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.LeaguePathLabel.Location = new System.Drawing.Point(87, 259);
-            this.LeaguePathLabel.Name = "LeaguePathLabel";
-            this.LeaguePathLabel.ReadOnly = true;
-            this.LeaguePathLabel.Size = new System.Drawing.Size(232, 29);
-            this.LeaguePathLabel.TabIndex = 13;
+            LeaguePathLabel.BackColor = System.Drawing.Color.LightCyan;
+            LeaguePathLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            LeaguePathLabel.ForeColor = System.Drawing.SystemColors.MenuText;
+            LeaguePathLabel.Location = new System.Drawing.Point(87, 259);
+            LeaguePathLabel.Name = "LeaguePathLabel";
+            LeaguePathLabel.ReadOnly = true;
+            LeaguePathLabel.Size = new System.Drawing.Size(232, 29);
+            LeaguePathLabel.TabIndex = 13;
             // 
             // RiotPathLabel
             // 
-            this.RiotPathLabel.BackColor = System.Drawing.Color.LightCyan;
-            this.RiotPathLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.RiotPathLabel.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.RiotPathLabel.Location = new System.Drawing.Point(87, 141);
-            this.RiotPathLabel.Name = "RiotPathLabel";
-            this.RiotPathLabel.ReadOnly = true;
-            this.RiotPathLabel.Size = new System.Drawing.Size(232, 29);
-            this.RiotPathLabel.TabIndex = 14;
+            RiotPathLabel.BackColor = System.Drawing.Color.LightCyan;
+            RiotPathLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            RiotPathLabel.ForeColor = System.Drawing.SystemColors.MenuText;
+            RiotPathLabel.Location = new System.Drawing.Point(87, 141);
+            RiotPathLabel.Name = "RiotPathLabel";
+            RiotPathLabel.ReadOnly = true;
+            RiotPathLabel.Size = new System.Drawing.Size(232, 29);
+            RiotPathLabel.TabIndex = 14;
             // 
             // StatusLabel
             // 
-            this.StatusLabel.BackColor = System.Drawing.Color.Transparent;
-            this.StatusLabel.Location = new System.Drawing.Point(125, 363);
-            this.StatusLabel.Name = "StatusLabel";
-            this.StatusLabel.Size = new System.Drawing.Size(224, 30);
-            this.StatusLabel.TabIndex = 15;
-            this.StatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            StatusLabel.BackColor = System.Drawing.Color.Transparent;
+            StatusLabel.Location = new System.Drawing.Point(125, 363);
+            StatusLabel.Name = "StatusLabel";
+            StatusLabel.Size = new System.Drawing.Size(224, 30);
+            StatusLabel.TabIndex = 15;
+            StatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // updateButton
             // 
-            this.updateButton.BackColor = System.Drawing.Color.LightCyan;
-            this.updateButton.Location = new System.Drawing.Point(380, 413);
-            this.updateButton.Name = "updateButton";
-            this.updateButton.Size = new System.Drawing.Size(92, 56);
-            this.updateButton.TabIndex = 16;
-            this.updateButton.Text = "Update Skins/Champs";
-            this.updateButton.UseVisualStyleBackColor = false;
-            this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
+            updateButton.BackColor = System.Drawing.Color.LightCyan;
+            updateButton.Location = new System.Drawing.Point(380, 413);
+            updateButton.Name = "updateButton";
+            updateButton.Size = new System.Drawing.Size(92, 56);
+            updateButton.TabIndex = 16;
+            updateButton.Text = "Update Skins/Champs";
+            updateButton.UseVisualStyleBackColor = false;
+            updateButton.Click += updateButton_Click;
             // 
             // Settings
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(484, 481);
-            this.Controls.Add(this.updateButton);
-            this.Controls.Add(this.StatusLabel);
-            this.Controls.Add(this.RiotPathLabel);
-            this.Controls.Add(this.LeaguePathLabel);
-            this.Controls.Add(this.SaveButton);
-            this.Controls.Add(this.LeagueBrowseButton);
-            this.Controls.Add(this.RiotBrowseButton);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.label2);
-            this.Name = "Settings";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CloseButton_Click);
-            this.Text = "Settings";
-            this.Load += new System.EventHandler(this.Settings_Load);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            BackgroundImage = (System.Drawing.Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            ClientSize = new System.Drawing.Size(484, 481);
+            Controls.Add(updateButton);
+            Controls.Add(StatusLabel);
+            Controls.Add(RiotPathLabel);
+            Controls.Add(LeaguePathLabel);
+            Controls.Add(SaveButton);
+            Controls.Add(LeagueBrowseButton);
+            Controls.Add(RiotBrowseButton);
+            Controls.Add(label1);
+            Controls.Add(label2);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            Name = "Settings";
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "Settings";
+            FormClosing += CloseButton_Click;
+            Load += Settings_Load;
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

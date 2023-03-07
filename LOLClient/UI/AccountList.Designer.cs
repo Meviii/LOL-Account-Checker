@@ -31,79 +31,93 @@ namespace LOLClient
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AccountList));
-            this.label1 = new System.Windows.Forms.Label();
-            this.accountsGridView = new System.Windows.Forms.DataGridView();
-            this.SummonerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BackButton = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.accountsGridView)).BeginInit();
-            this.SuspendLayout();
+            label1 = new Label();
+            accountsGridView = new DataGridView();
+            SummonerName = new DataGridViewTextBoxColumn();
+            BackButton = new Button();
+            ExportsFolderButton = new Button();
+            ((System.ComponentModel.ISupportInitialize)accountsGridView).BeginInit();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label1.Font = new System.Drawing.Font("Segoe Print", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.ForeColor = System.Drawing.Color.LightYellow;
-            this.label1.Location = new System.Drawing.Point(321, 58);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(397, 61);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "LOL Account Checker";
+            label1.AutoSize = true;
+            label1.BackColor = System.Drawing.Color.Transparent;
+            label1.FlatStyle = FlatStyle.Flat;
+            label1.Font = new System.Drawing.Font("Segoe Print", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label1.ForeColor = System.Drawing.Color.LightYellow;
+            label1.Location = new System.Drawing.Point(321, 58);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(333, 61);
+            label1.TabIndex = 1;
+            label1.Text = "Checked Accounts";
             // 
             // accountsGridView
             // 
-            this.accountsGridView.AllowUserToAddRows = false;
-            this.accountsGridView.AllowUserToDeleteRows = false;
-            this.accountsGridView.AllowUserToOrderColumns = true;
-            this.accountsGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.accountsGridView.BackgroundColor = System.Drawing.Color.LightSkyBlue;
-            this.accountsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.accountsGridView.Location = new System.Drawing.Point(110, 142);
-            this.accountsGridView.Name = "accountsGridView";
-            this.accountsGridView.ReadOnly = true;
-            this.accountsGridView.RowTemplate.Height = 25;
-            this.accountsGridView.Size = new System.Drawing.Size(823, 447);
-            this.accountsGridView.TabIndex = 2;
-            this.accountsGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.accountsGridView_CellContentClick);
+            accountsGridView.AllowUserToAddRows = false;
+            accountsGridView.AllowUserToDeleteRows = false;
+            accountsGridView.AllowUserToOrderColumns = true;
+            accountsGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            accountsGridView.BackgroundColor = System.Drawing.Color.LightSkyBlue;
+            accountsGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            accountsGridView.GridColor = System.Drawing.Color.LightSkyBlue;
+            accountsGridView.Location = new System.Drawing.Point(110, 142);
+            accountsGridView.Name = "accountsGridView";
+            accountsGridView.ReadOnly = true;
+            accountsGridView.RowTemplate.Height = 25;
+            accountsGridView.Size = new System.Drawing.Size(823, 447);
+            accountsGridView.TabIndex = 2;
+            accountsGridView.CellMouseDoubleClick += accountsGridView_CellContentDoubleClick;
             // 
             // SummonerName
             // 
-            this.SummonerName.Name = "SummonerName";
+            SummonerName.Name = "SummonerName";
             // 
             // BackButton
             // 
-            this.BackButton.BackColor = System.Drawing.Color.LightCyan;
-            this.BackButton.FlatAppearance.BorderSize = 0;
-            this.BackButton.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.BackButton.Location = new System.Drawing.Point(2, 2);
-            this.BackButton.Name = "BackButton";
-            this.BackButton.Size = new System.Drawing.Size(79, 35);
-            this.BackButton.TabIndex = 7;
-            this.BackButton.Text = "Back";
-            this.BackButton.UseVisualStyleBackColor = false;
-            this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
+            BackButton.BackColor = System.Drawing.Color.LightCyan;
+            BackButton.FlatAppearance.BorderSize = 0;
+            BackButton.ForeColor = System.Drawing.SystemColors.Desktop;
+            BackButton.Location = new System.Drawing.Point(2, 2);
+            BackButton.Name = "BackButton";
+            BackButton.Size = new System.Drawing.Size(79, 35);
+            BackButton.TabIndex = 7;
+            BackButton.Text = "Back";
+            BackButton.UseVisualStyleBackColor = false;
+            BackButton.Click += BackButton_Click;
+            // 
+            // ExportsFolderButton
+            // 
+            ExportsFolderButton.BackColor = System.Drawing.Color.LightCyan;
+            ExportsFolderButton.Location = new System.Drawing.Point(804, 91);
+            ExportsFolderButton.Name = "ExportsFolderButton";
+            ExportsFolderButton.Size = new System.Drawing.Size(129, 45);
+            ExportsFolderButton.TabIndex = 22;
+            ExportsFolderButton.Text = "Open Exports Folder";
+            ExportsFolderButton.UseVisualStyleBackColor = false;
+            ExportsFolderButton.Click += ExportsFolderButton_Click;
             // 
             // AccountList
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Desktop;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1037, 627);
-            this.Controls.Add(this.BackButton);
-            this.Controls.Add(this.accountsGridView);
-            this.Controls.Add(this.label1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.Name = "AccountList";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Home - Account Checker";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CloseButton_Click);
-            ((System.ComponentModel.ISupportInitialize)(this.accountsGridView)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = System.Drawing.SystemColors.Desktop;
+            BackgroundImage = (System.Drawing.Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
+            ClientSize = new System.Drawing.Size(1037, 627);
+            Controls.Add(ExportsFolderButton);
+            Controls.Add(BackButton);
+            Controls.Add(accountsGridView);
+            Controls.Add(label1);
+            FormBorderStyle = FormBorderStyle.SizableToolWindow;
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            Name = "AccountList";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Accounts - Account Checker";
+            FormClosing += CloseButton_Click;
+            ((System.ComponentModel.ISupportInitialize)accountsGridView).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -111,5 +125,6 @@ namespace LOLClient
         private DataGridView accountsGridView;
         private DataGridViewTextBoxColumn SummonerName;
         private Button BackButton;
+        private Button ExportsFolderButton;
     }
 }

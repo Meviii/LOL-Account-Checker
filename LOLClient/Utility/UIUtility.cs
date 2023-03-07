@@ -45,7 +45,7 @@ public class UIUtility
         {
             if (form.GetType() == typeof(SingleAccount))
             {
-                form.Close();
+                form.Hide();
             }
         }
 

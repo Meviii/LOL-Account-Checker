@@ -27,11 +27,13 @@ public class Connection
         AuthToken = GenerateAuthToken();
         Port = GetFreePort();
 
-        _httpClient = new HttpClient(GetHandlerSettings());
-        _httpClient.BaseAddress = new Uri("https://127.0.0.1:" + Port);
+        _httpClient = new HttpClient(GetHandlerSettings())
+        {
+            BaseAddress = new Uri("https://127.0.0.1:" + Port)
+        };
         _httpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.ASCII.GetBytes($"riot:{AuthToken}")));
-        Console.WriteLine($"Initializing new Connection. Port: {Port}, Auth Token: {AuthToken}");
         
+        Console.WriteLine($"Initializing new Connection. Port: {Port}, Auth Token: {AuthToken}");
     }
 
     // Finds a free port.

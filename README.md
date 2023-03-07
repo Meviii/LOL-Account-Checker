@@ -9,6 +9,21 @@ This program is a League of Legends account checker supporting multi threading w
 - Exports all accounts information to folder  
 - Comprehensive details on each successfully checked account, including purchase dates, owned champions and skins, and more.  
 
+<<<<<<< HEAD
+## How to use
+
+### First Option
+
+The first way to run the application is by downloading the source code and running it in a coding environment like visual studio.
+
+### Second Option
+
+*Only works on Windows operating systems.*
+
+The other way which is easier is to download the **Account Checker Release** found in the root folder of the directory. Running the exe file should run the application.
+
+=======
+>>>>>>> 8231ae1734a35d0bb51bbb02df37a46e85b81119
 ## How it works
 The program creates a Riot client to authenticate the user and a League client to authorize requests. It then performs a series of requests to gather account-related data.
 

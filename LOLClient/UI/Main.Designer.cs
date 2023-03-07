@@ -31,240 +31,240 @@ namespace LOLClient
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            this.ConsoleTextBox = new System.Windows.Forms.RichTextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.SettingsButton = new System.Windows.Forms.Button();
-            this.LoadComboButton = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.DelimiterTextBox = new System.Windows.Forms.TextBox();
-            this.ComboListText = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.ThreadCountTextBox = new System.Windows.Forms.TextBox();
-            this.StartButton = new System.Windows.Forms.Button();
-            this.ProgressBar = new System.Windows.Forms.ProgressBar();
-            this.accountsListButton = new System.Windows.Forms.Button();
-            this.accountsLeftLabel = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.SuspendLayout();
+            ConsoleTextBox = new RichTextBox();
+            label1 = new Label();
+            SettingsButton = new Button();
+            LoadComboButton = new Button();
+            label2 = new Label();
+            label3 = new Label();
+            DelimiterTextBox = new TextBox();
+            ComboListText = new TextBox();
+            label4 = new Label();
+            ThreadCountTextBox = new TextBox();
+            StartButton = new Button();
+            ProgressBar = new ProgressBar();
+            accountsListButton = new Button();
+            accountsLeftLabel = new TextBox();
+            label5 = new Label();
+            SuspendLayout();
             // 
             // ConsoleTextBox
             // 
-            this.ConsoleTextBox.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.ConsoleTextBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.ConsoleTextBox.Location = new System.Drawing.Point(49, 133);
-            this.ConsoleTextBox.Name = "ConsoleTextBox";
-            this.ConsoleTextBox.ReadOnly = true;
-            this.ConsoleTextBox.Size = new System.Drawing.Size(742, 444);
-            this.ConsoleTextBox.TabIndex = 0;
-            this.ConsoleTextBox.Text = "";
-            this.ConsoleTextBox.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+            ConsoleTextBox.BackColor = System.Drawing.Color.LightSkyBlue;
+            ConsoleTextBox.ImeMode = ImeMode.NoControl;
+            ConsoleTextBox.Location = new System.Drawing.Point(49, 133);
+            ConsoleTextBox.Name = "ConsoleTextBox";
+            ConsoleTextBox.ReadOnly = true;
+            ConsoleTextBox.Size = new System.Drawing.Size(742, 444);
+            ConsoleTextBox.TabIndex = 0;
+            ConsoleTextBox.Text = "";
+            ConsoleTextBox.TextChanged += richTextBox1_TextChanged;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label1.Font = new System.Drawing.Font("Segoe Print", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.ForeColor = System.Drawing.Color.LightYellow;
-            this.label1.Location = new System.Drawing.Point(321, 58);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(397, 61);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "LOL Account Checker";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            label1.AutoSize = true;
+            label1.BackColor = System.Drawing.Color.Transparent;
+            label1.FlatStyle = FlatStyle.Flat;
+            label1.Font = new System.Drawing.Font("Segoe Print", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label1.ForeColor = System.Drawing.Color.LightYellow;
+            label1.Location = new System.Drawing.Point(321, 58);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(397, 61);
+            label1.TabIndex = 1;
+            label1.Text = "LOL Account Checker";
+            label1.Click += label1_Click;
             // 
             // SettingsButton
             // 
-            this.SettingsButton.BackColor = System.Drawing.Color.LightCyan;
-            this.SettingsButton.FlatAppearance.BorderSize = 0;
-            this.SettingsButton.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.SettingsButton.Location = new System.Drawing.Point(0, 0);
-            this.SettingsButton.Name = "SettingsButton";
-            this.SettingsButton.Size = new System.Drawing.Size(79, 35);
-            this.SettingsButton.TabIndex = 6;
-            this.SettingsButton.Text = "Settings";
-            this.SettingsButton.UseVisualStyleBackColor = false;
-            this.SettingsButton.Click += new System.EventHandler(this.SettingsButton_Click);
+            SettingsButton.BackColor = System.Drawing.Color.LightCyan;
+            SettingsButton.FlatAppearance.BorderSize = 0;
+            SettingsButton.ForeColor = System.Drawing.SystemColors.Desktop;
+            SettingsButton.Location = new System.Drawing.Point(0, 0);
+            SettingsButton.Name = "SettingsButton";
+            SettingsButton.Size = new System.Drawing.Size(79, 35);
+            SettingsButton.TabIndex = 6;
+            SettingsButton.Text = "Settings";
+            SettingsButton.UseVisualStyleBackColor = false;
+            SettingsButton.Click += SettingsButton_Click;
             // 
             // LoadComboButton
             // 
-            this.LoadComboButton.BackColor = System.Drawing.Color.LightCyan;
-            this.LoadComboButton.Location = new System.Drawing.Point(963, 186);
-            this.LoadComboButton.Name = "LoadComboButton";
-            this.LoadComboButton.Size = new System.Drawing.Size(67, 30);
-            this.LoadComboButton.TabIndex = 12;
-            this.LoadComboButton.Text = "Load";
-            this.LoadComboButton.UseVisualStyleBackColor = false;
-            this.LoadComboButton.Click += new System.EventHandler(this.ComboLoadButton_Click);
+            LoadComboButton.BackColor = System.Drawing.Color.LightCyan;
+            LoadComboButton.Location = new System.Drawing.Point(963, 186);
+            LoadComboButton.Name = "LoadComboButton";
+            LoadComboButton.Size = new System.Drawing.Size(67, 30);
+            LoadComboButton.TabIndex = 12;
+            LoadComboButton.Text = "Load";
+            LoadComboButton.UseVisualStyleBackColor = false;
+            LoadComboButton.Click += ComboLoadButton_Click;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label2.Font = new System.Drawing.Font("Segoe UI Light", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.ForeColor = System.Drawing.Color.LightYellow;
-            this.label2.Location = new System.Drawing.Point(872, 148);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(114, 25);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "Combo List";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            label2.AutoSize = true;
+            label2.BackColor = System.Drawing.Color.Transparent;
+            label2.FlatStyle = FlatStyle.Flat;
+            label2.Font = new System.Drawing.Font("Segoe UI Light", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label2.ForeColor = System.Drawing.Color.LightYellow;
+            label2.Location = new System.Drawing.Point(872, 148);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(114, 25);
+            label2.TabIndex = 13;
+            label2.Text = "Combo List";
+            label2.Click += label2_Click;
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label3.Font = new System.Drawing.Font("Segoe UI Light", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.ForeColor = System.Drawing.Color.LightYellow;
-            this.label3.Location = new System.Drawing.Point(847, 244);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(94, 25);
-            this.label3.TabIndex = 15;
-            this.label3.Text = "Delimiter";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
+            label3.AutoSize = true;
+            label3.BackColor = System.Drawing.Color.Transparent;
+            label3.FlatStyle = FlatStyle.Flat;
+            label3.Font = new System.Drawing.Font("Segoe UI Light", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label3.ForeColor = System.Drawing.Color.LightYellow;
+            label3.Location = new System.Drawing.Point(847, 244);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(94, 25);
+            label3.TabIndex = 15;
+            label3.Text = "Delimiter";
+            label3.Click += label3_Click;
             // 
             // DelimiterTextBox
             // 
-            this.DelimiterTextBox.BackColor = System.Drawing.Color.LightCyan;
-            this.DelimiterTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.DelimiterTextBox.Location = new System.Drawing.Point(967, 244);
-            this.DelimiterTextBox.MaxLength = 1;
-            this.DelimiterTextBox.Name = "DelimiterTextBox";
-            this.DelimiterTextBox.Size = new System.Drawing.Size(58, 29);
-            this.DelimiterTextBox.TabIndex = 17;
-            this.DelimiterTextBox.Text = ":";
-            this.DelimiterTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.DelimiterTextBox.Leave += new System.EventHandler(this.DelimiterTextBox_OnLeave);
+            DelimiterTextBox.BackColor = System.Drawing.Color.LightCyan;
+            DelimiterTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            DelimiterTextBox.Location = new System.Drawing.Point(967, 244);
+            DelimiterTextBox.MaxLength = 1;
+            DelimiterTextBox.Name = "DelimiterTextBox";
+            DelimiterTextBox.PlaceholderText = ":";
+            DelimiterTextBox.Size = new System.Drawing.Size(58, 29);
+            DelimiterTextBox.TabIndex = 17;
+            DelimiterTextBox.TextAlign = HorizontalAlignment.Center;
+            DelimiterTextBox.Leave += DelimiterTextBox_OnLeave;
             // 
             // ComboListText
             // 
-            this.ComboListText.BackColor = System.Drawing.Color.LightCyan;
-            this.ComboListText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ComboListText.Location = new System.Drawing.Point(826, 186);
-            this.ComboListText.Name = "ComboListText";
-            this.ComboListText.ReadOnly = true;
-            this.ComboListText.Size = new System.Drawing.Size(131, 29);
-            this.ComboListText.TabIndex = 18;
-            this.ComboListText.TextChanged += new System.EventHandler(this.ComboListText_TextChanged);
+            ComboListText.BackColor = System.Drawing.Color.LightCyan;
+            ComboListText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            ComboListText.Location = new System.Drawing.Point(826, 186);
+            ComboListText.Name = "ComboListText";
+            ComboListText.ReadOnly = true;
+            ComboListText.Size = new System.Drawing.Size(131, 29);
+            ComboListText.TabIndex = 18;
+            ComboListText.TextChanged += ComboListText_TextChanged;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label4.Font = new System.Drawing.Font("Segoe UI Light", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label4.ForeColor = System.Drawing.Color.LightYellow;
-            this.label4.Location = new System.Drawing.Point(826, 300);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(134, 25);
-            this.label4.TabIndex = 19;
-            this.label4.Text = "Thread Count";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
+            label4.AutoSize = true;
+            label4.BackColor = System.Drawing.Color.Transparent;
+            label4.FlatStyle = FlatStyle.Flat;
+            label4.Font = new System.Drawing.Font("Segoe UI Light", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label4.ForeColor = System.Drawing.Color.LightYellow;
+            label4.Location = new System.Drawing.Point(826, 300);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(134, 25);
+            label4.TabIndex = 19;
+            label4.Text = "Thread Count";
+            label4.Click += label4_Click;
             // 
             // ThreadCountTextBox
             // 
-            this.ThreadCountTextBox.BackColor = System.Drawing.Color.LightCyan;
-            this.ThreadCountTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ThreadCountTextBox.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.ThreadCountTextBox.Location = new System.Drawing.Point(968, 297);
-            this.ThreadCountTextBox.MaxLength = 3;
-            this.ThreadCountTextBox.Name = "ThreadCountTextBox";
-            this.ThreadCountTextBox.PlaceholderText = "1";
-            this.ThreadCountTextBox.Size = new System.Drawing.Size(58, 29);
-            this.ThreadCountTextBox.TabIndex = 20;
-            this.ThreadCountTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.ThreadCountTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ThreadCountTextBox_TextChanged);
+            ThreadCountTextBox.BackColor = System.Drawing.Color.LightCyan;
+            ThreadCountTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            ThreadCountTextBox.ForeColor = System.Drawing.SystemColors.MenuText;
+            ThreadCountTextBox.Location = new System.Drawing.Point(968, 297);
+            ThreadCountTextBox.MaxLength = 3;
+            ThreadCountTextBox.Name = "ThreadCountTextBox";
+            ThreadCountTextBox.PlaceholderText = "1";
+            ThreadCountTextBox.Size = new System.Drawing.Size(58, 29);
+            ThreadCountTextBox.TabIndex = 20;
+            ThreadCountTextBox.TextAlign = HorizontalAlignment.Center;
+            ThreadCountTextBox.KeyPress += ThreadCountTextBox_TextChanged;
             // 
             // StartButton
             // 
-            this.StartButton.BackColor = System.Drawing.Color.LightCyan;
-            this.StartButton.Location = new System.Drawing.Point(872, 487);
-            this.StartButton.Name = "StartButton";
-            this.StartButton.Size = new System.Drawing.Size(114, 54);
-            this.StartButton.TabIndex = 21;
-            this.StartButton.Text = "Start";
-            this.StartButton.UseVisualStyleBackColor = false;
-            this.StartButton.Click += new System.EventHandler(this.StartOrStopButton_Click);
+            StartButton.BackColor = System.Drawing.Color.LightCyan;
+            StartButton.Location = new System.Drawing.Point(872, 487);
+            StartButton.Name = "StartButton";
+            StartButton.Size = new System.Drawing.Size(114, 54);
+            StartButton.TabIndex = 21;
+            StartButton.Text = "Start";
+            StartButton.UseVisualStyleBackColor = false;
+            StartButton.Click += StartOrStopButton_Click;
             // 
             // ProgressBar
             // 
-            this.ProgressBar.Location = new System.Drawing.Point(847, 456);
-            this.ProgressBar.Name = "ProgressBar";
-            this.ProgressBar.Size = new System.Drawing.Size(170, 23);
-            this.ProgressBar.TabIndex = 22;
-            this.ProgressBar.Visible = false;
+            ProgressBar.Location = new System.Drawing.Point(847, 456);
+            ProgressBar.Name = "ProgressBar";
+            ProgressBar.Size = new System.Drawing.Size(170, 23);
+            ProgressBar.TabIndex = 22;
+            ProgressBar.Visible = false;
             // 
             // accountsListButton
             // 
-            this.accountsListButton.BackColor = System.Drawing.Color.LightCyan;
-            this.accountsListButton.FlatAppearance.BorderSize = 0;
-            this.accountsListButton.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.accountsListButton.Location = new System.Drawing.Point(83, 0);
-            this.accountsListButton.Name = "accountsListButton";
-            this.accountsListButton.Size = new System.Drawing.Size(79, 35);
-            this.accountsListButton.TabIndex = 23;
-            this.accountsListButton.Text = "Accounts";
-            this.accountsListButton.UseVisualStyleBackColor = false;
-            this.accountsListButton.Click += new System.EventHandler(this.accountsListButton_Click);
+            accountsListButton.BackColor = System.Drawing.Color.LightCyan;
+            accountsListButton.FlatAppearance.BorderSize = 0;
+            accountsListButton.ForeColor = System.Drawing.SystemColors.Desktop;
+            accountsListButton.Location = new System.Drawing.Point(83, 0);
+            accountsListButton.Name = "accountsListButton";
+            accountsListButton.Size = new System.Drawing.Size(79, 35);
+            accountsListButton.TabIndex = 23;
+            accountsListButton.Text = "Accounts";
+            accountsListButton.UseVisualStyleBackColor = false;
+            accountsListButton.Click += accountsListButton_Click;
             // 
             // accountsLeftLabel
             // 
-            this.accountsLeftLabel.BackColor = System.Drawing.Color.LightCyan;
-            this.accountsLeftLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.accountsLeftLabel.Location = new System.Drawing.Point(884, 399);
-            this.accountsLeftLabel.Name = "accountsLeftLabel";
-            this.accountsLeftLabel.ReadOnly = true;
-            this.accountsLeftLabel.Size = new System.Drawing.Size(89, 29);
-            this.accountsLeftLabel.TabIndex = 24;
+            accountsLeftLabel.BackColor = System.Drawing.Color.LightCyan;
+            accountsLeftLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            accountsLeftLabel.Location = new System.Drawing.Point(884, 399);
+            accountsLeftLabel.Name = "accountsLeftLabel";
+            accountsLeftLabel.ReadOnly = true;
+            accountsLeftLabel.Size = new System.Drawing.Size(89, 29);
+            accountsLeftLabel.TabIndex = 24;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label5.Font = new System.Drawing.Font("Segoe UI Light", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label5.ForeColor = System.Drawing.Color.LightYellow;
-            this.label5.Location = new System.Drawing.Point(863, 359);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(133, 25);
-            this.label5.TabIndex = 25;
-            this.label5.Text = "Accounts Left";
+            label5.AutoSize = true;
+            label5.BackColor = System.Drawing.Color.Transparent;
+            label5.FlatStyle = FlatStyle.Flat;
+            label5.Font = new System.Drawing.Font("Segoe UI Light", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label5.ForeColor = System.Drawing.Color.LightYellow;
+            label5.Location = new System.Drawing.Point(863, 359);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(133, 25);
+            label5.TabIndex = 25;
+            label5.Text = "Accounts Left";
             // 
             // Main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Desktop;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1037, 627);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.accountsLeftLabel);
-            this.Controls.Add(this.accountsListButton);
-            this.Controls.Add(this.ProgressBar);
-            this.Controls.Add(this.StartButton);
-            this.Controls.Add(this.ThreadCountTextBox);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.ComboListText);
-            this.Controls.Add(this.DelimiterTextBox);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.LoadComboButton);
-            this.Controls.Add(this.SettingsButton);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.ConsoleTextBox);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.Name = "Main";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Home - Account Checker";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CloseButton_Click);
-            this.Load += new System.EventHandler(this.Main_Load);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = System.Drawing.SystemColors.Desktop;
+            BackgroundImage = (System.Drawing.Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
+            ClientSize = new System.Drawing.Size(1037, 627);
+            Controls.Add(label5);
+            Controls.Add(accountsLeftLabel);
+            Controls.Add(accountsListButton);
+            Controls.Add(ProgressBar);
+            Controls.Add(StartButton);
+            Controls.Add(ThreadCountTextBox);
+            Controls.Add(label4);
+            Controls.Add(ComboListText);
+            Controls.Add(DelimiterTextBox);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(LoadComboButton);
+            Controls.Add(SettingsButton);
+            Controls.Add(label1);
+            Controls.Add(ConsoleTextBox);
+            FormBorderStyle = FormBorderStyle.SizableToolWindow;
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            Name = "Main";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Home - Account Checker";
+            FormClosing += CloseButton_Click;
+            Load += Main_Load;
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

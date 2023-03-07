@@ -94,7 +94,7 @@ public partial class Settings : Form
         {
             string filePath = openFile.FileName;
             LeaguePathLabel.Text = filePath;
-            _coreUtility.SaveToSettingsFileAsync("LeagueClientPath",  filePath);
+            _coreUtility.SaveToSettingsFileAsync("LeagueClientPath", filePath);
         }
     }
 
@@ -114,5 +114,7 @@ public partial class Settings : Form
     private void CloseButton_Click(object sender, EventArgs e)
     {
         this.Hide();
+
+        _uiUtility.LoadMainView();
     }
 }

@@ -1,16 +1,11 @@
-﻿using LOLClient.UI;
-using LOLClient.Utility;
-using Microsoft.IdentityModel.Tokens;
+﻿using LOLClient.Utility;
+using Microsoft.EntityFrameworkCore.Update;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static Azure.Core.HttpHeader;
 
 namespace LOLClient;
 
@@ -47,7 +42,7 @@ public partial class Main : Form
 
     private void SettingsButton_Click(object sender, EventArgs e)
     {
-        
+
         _uIUtility.LoadSettingsViewAsDialog();
     }
 
@@ -92,17 +87,23 @@ public partial class Main : Form
     {
         if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
         {
-            e.Handled = true; 
+            e.Handled = true;
         }
     }
 
     private void DelimiterTextBox_OnLeave(object sender, EventArgs e)
     {
-        TextBox textBox = (TextBox)sender;
-        if (textBox.Text == "")
+        
+    }
+
+    private char ValidateDelimiter()
+    {
+        if (DelimiterTextBox.Text != "")
         {
-            textBox.Text = ":";
+            return Convert.ToChar(DelimiterTextBox.Text);
         }
+
+        return ':';
     }
 
     private async void StartOrStopButton_Click(object sender, EventArgs e)
@@ -114,9 +115,9 @@ public partial class Main : Form
             // Started operation
             StartButtonOperation(button);
 
-            // handler if user doesnt enter a thread count
+            // handler if user doesnt enter a thread count or delimiter
             int threadCount = ValidateThreadCount();
-            char delimiter = Convert.ToChar(DelimiterTextBox.Text);
+            char delimiter = ValidateDelimiter();
 
             // Runs a new thread to start the operation to prevent Main form from freezing
             await Task.Run(async () =>
@@ -178,7 +179,7 @@ public partial class Main : Form
         InitializeProgressBar(comboList.Count + 1);
 
         await RunTasksAsync(actualThreadCount, comboList, settings);
-        
+
         return;
     }
 
@@ -219,7 +220,7 @@ public partial class Main : Form
                     var runner = new Runner();
 
                     // Job of thread
-                    await runner.Job(combo.Item1, combo.Item2, settings);
+                    await runner.Job_AccountFetchingWithoutTasks(combo.Item1, combo.Item2, settings);
 
                     // Update accounts left counter
                     UpdateProgress(Convert.ToString(Convert.ToInt32(comboList.Count)));

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LOLClient;
@@ -16,16 +17,28 @@ class Program
     [STAThread]
     public static void Main(string[] args)
     {
-
+        
         ApplicationConfiguration.Initialize();
+        Application.EnableVisualStyles();
+        Application.SetCompatibleTextRenderingDefault(false);
 
-
+        // Check if settings file exists.
         if (IsSettingsFileEmpty())
         {
+            // Run updates if settings file is empty (first run).
+            var update = new Update();
+            var updateTask = Task.Run(async () =>
+            {
+                await update.UpdateSkins();
+                await update.UpdateChampions();
+            });
+
+            // Run Settings form.
             Application.Run(new Settings());
         }
         else
         {
+            // Run main form if settings file is populated.
             Application.Run(new Main());
         }
 
