@@ -44,7 +44,7 @@ namespace LOLClient
             StartButton = new Button();
             ProgressBar = new ProgressBar();
             accountsListButton = new Button();
-            accountsLeftLabel = new TextBox();
+            accountsLeftLabel = new Label();
             label5 = new Label();
             SuspendLayout();
             // 
@@ -191,6 +191,7 @@ namespace LOLClient
             // 
             // ProgressBar
             // 
+            ProgressBar.BackColor = System.Drawing.Color.LightSkyBlue;
             ProgressBar.Location = new System.Drawing.Point(847, 456);
             ProgressBar.Name = "ProgressBar";
             ProgressBar.Size = new System.Drawing.Size(170, 23);
@@ -216,9 +217,9 @@ namespace LOLClient
             accountsLeftLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             accountsLeftLabel.Location = new System.Drawing.Point(884, 399);
             accountsLeftLabel.Name = "accountsLeftLabel";
-            accountsLeftLabel.ReadOnly = true;
             accountsLeftLabel.Size = new System.Drawing.Size(89, 29);
             accountsLeftLabel.TabIndex = 24;
+            accountsLeftLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label5
             // 
@@ -282,7 +283,7 @@ namespace LOLClient
         private System.Windows.Forms.Button StartButton;
         private System.Windows.Forms.ProgressBar ProgressBar;
         private Button accountsListButton;
-        private TextBox accountsLeftLabel;
+        private Label accountsLeftLabel;
         private Label label5;
     }
 }

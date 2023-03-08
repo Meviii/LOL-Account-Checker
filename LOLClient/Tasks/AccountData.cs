@@ -85,7 +85,7 @@ public class AccountData
         var champs = new List<Champion>();
 
         // Retrieve the local JSON data for champions and match them up with the owned champions.
-        string filePath = $"{Config.ChampionsFile}";
+        string filePath = $"{PathConfig.ChampionsFile}";
         string content = File.ReadAllText(filePath);
         var localChampJsonData = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(content);
         LogToFile($"Champions:\n {content}");
@@ -241,11 +241,11 @@ public class AccountData
     {
 
         // Build the file path for the JSON file based on the account's summoner name and the ExportsFolder directory.
-        string filePath = $@"{Config.ExportsFolder}{account.SummonerName.Trim()}.json";
+        string filePath = $@"{PathConfig.ExportsFolder}{account.SummonerName.Trim()}.json";
         Console.WriteLine($"Saved to {filePath}");
         // Create the ExportsFolder directory if it doesn't exist.
-        if (!Directory.Exists(Config.ExportsFolder))
-            Directory.CreateDirectory(Config.ExportsFolder);
+        if (!Directory.Exists(PathConfig.ExportsFolder))
+            Directory.CreateDirectory(PathConfig.ExportsFolder);
 
         // Create the JSON file if it doesn't exist and immediately dispose of the file stream to release the resources.
         if (!File.Exists(filePath))
@@ -324,7 +324,7 @@ public class AccountData
         var ownedSkins = await GetOwnedSkinsAsync();
 
         // Load the skin data from file
-        string filePath = $"{Config.SkinsFile}";
+        string filePath = $"{PathConfig.SkinsFile}";
         string content = File.ReadAllText(filePath);
         var skinJsonData = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, object>>>(content);
 

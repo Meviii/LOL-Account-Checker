@@ -39,7 +39,7 @@ class Program
 
     static bool IsSettingsFileEmpty()
     {
-        string filePath = $"{Config.SettingsFile}";
+        string filePath = $"{PathConfig.SettingsFile}";
 
         JObject settings;
 

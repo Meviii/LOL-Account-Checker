@@ -22,14 +22,14 @@ public class CoreUtility
     public async void SaveToSettingsFileAsync(string key, object value)
     {
         // Get the file path of the settings file
-        string filePath = $"{Config.SettingsFile}";
+        string filePath = $"{PathConfig.SettingsFile}";
 
         // Declare a JObject variable to hold the settings
         JObject settings;
 
         // Check if the data folder exists; if not, create it
-        if (!Directory.Exists($"{Config.DataFolder}"))
-            Directory.CreateDirectory($"{Config.DataFolder}");
+        if (!Directory.Exists($"{PathConfig.DataFolder}"))
+            Directory.CreateDirectory($"{PathConfig.DataFolder}");
 
         // If the settings file exists, load its contents, update the specified key-value pair, and save the updated settings
         if (File.Exists(filePath))
@@ -67,7 +67,7 @@ public class CoreUtility
         JObject settings;
 
         // Get the file path of the settings file
-        string filePath = $"{Config.SettingsFile}";
+        string filePath = $"{PathConfig.SettingsFile}";
 
         // If the settings file exists, load its contents and return them as a JObject
         if (File.Exists(filePath))
@@ -93,7 +93,7 @@ public class CoreUtility
         JArray accounts = new();
 
         // Get the path of the exports folder
-        string folderPath = $"{Config.ExportsFolder}";
+        string folderPath = $"{PathConfig.ExportsFolder}";
 
         // If the exports folder does not exist, return null
         if (!Directory.Exists(folderPath))

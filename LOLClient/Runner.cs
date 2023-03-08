@@ -7,6 +7,8 @@ using LOLClient.Connections;
 using LOLClient.Utility;
 using LOLClient.Tasks;
 using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
+using AccountChecker.Data;
+using System.Reflection.Metadata.Ecma335;
 
 namespace LOLClient;
 
@@ -96,7 +98,7 @@ public class Runner
     // This method takes in the username, password, and settings JObject as parameters
     // and runs the RiotClientRunner and LeagueClientRunner methods excluding fetching
     // account data but executing Tasks(hextech, event).
-    public async Task Job_ExecuteTasksWithoutAccountFetching(string username, string password, JObject settings)
+    public async Task Job_ExecuteTasksWithoutAccountFetching(string username, string password, JObject settings, Dictionary<string, bool> tasks)
     {
         // Run RiotClientRunner with the given username, password, and RiotClientPath
         bool didRiotSucceed = RiotClientRunner(username, password, settings["RiotClientPath"].ToString());
@@ -109,7 +111,7 @@ public class Runner
         }
 
         // Run LeagueClientRunner with the given LeagueClientPath. Execute Account fetching and Tasks.
-        bool didLeagueSucceed = await LeagueClientRunner(settings["LeagueClientPath"].ToString(), false, false);
+        bool didLeagueSucceed = await LeagueClientRunner(settings["LeagueClientPath"].ToString(), false, false, tasks);
 
         // If LeagueClientRunner did not succeed, return from the method
         if (!didLeagueSucceed)
@@ -181,7 +183,8 @@ public class Runner
      */
     private async Task<bool> LeagueClientRunner(string leagueClientPath,
                                                 bool skipAccountData = false,
-                                                bool skipAccountTasks = true)
+                                                bool skipAccountTasks = true,
+                                                Dictionary<string, bool> tasks = null)
     {
 
         Connection connection = new(); // Initialize a new connection for the LeagueClient.exe
@@ -206,8 +209,9 @@ public class Runner
 
         if (!skipAccountTasks)
         {
-            await ExecuteHextechTasks(); // Executes Hextech tasks on account
-            await ExecuteEventTasks(); // Executes Event tasks on account
+            
+            await ExecuteHextechTasks(tasks); // Executes Hextech tasks on account
+            await ExecuteEventTasks(tasks); // Executes Event tasks on account
         }
 
         return true;
@@ -222,16 +226,30 @@ public class Runner
     }
 
     // This method executes the wanted Hextech Tasks on an account asynchronously.
-    private async Task ExecuteHextechTasks()
+    private async Task ExecuteHextechTasks(Dictionary<string, bool> hextechTasks)
     {
-        // TODO
+        if (hextechTasks[TasksConfig.CraftKeys])
+            return;
+
+        if (hextechTasks[TasksConfig.OpenChests]) 
+            return;
+
+        if (hextechTasks[TasksConfig.DisenchantChampionShards])
+            return;
+
+        if (hextechTasks[TasksConfig.DisenchantEternalShards])
+            return;
+
+        if (hextechTasks[TasksConfig.OpenCapsulesOrbsShards])
+            return;
     }
 
     // This method executes the wanted Event Tasks on an account asynchronously.
-    private async Task ExecuteEventTasks()
+    private async Task ExecuteEventTasks(Dictionary<string, bool> eventTasks)
     {
-        // TODO
     }
+
+
     public void CleanUp()
     {
         _client.CloseClients();

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,9 +16,11 @@ public class HextechData
         _connection = connection;
     }
 
-    private void PostRecipe()
+    private async void PostRecipe(string recipeName, int repeat = 1)
     {
-        
+        await _connection.RequestAsync(HttpMethod.Post,
+                                       $"/lol-loot/v1/recipes/{recipeName}/craft?repeat={repeat},",
+                                       null);
     }
 
     public void OpenChests()
@@ -26,6 +29,11 @@ public class HextechData
     }
 
     public void OpenLoot()
+    {
+
+    }
+
+    public void DisenchantEternalShards()
     {
 
     }

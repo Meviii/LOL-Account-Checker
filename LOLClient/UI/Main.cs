@@ -94,7 +94,7 @@ public partial class Main : Form
 
     private void DelimiterTextBox_OnLeave(object sender, EventArgs e)
     {
-        
+
     }
 
     private char ValidateDelimiter()
@@ -177,7 +177,7 @@ public partial class Main : Form
         UpdateProgress(comboList.Count.ToString());
 
         // Initializes progress bar with min max
-        InitializeProgressBar(comboList.Count + 1);
+        _uIUtility.InitializeProgressBar(ProgressBar, comboList.Count + 1);
 
         await RunTasksAsync(actualThreadCount, comboList, settings);
 
@@ -247,35 +247,26 @@ public partial class Main : Form
         return false;
     }
 
-    // This method initializes the progress bar without allowing the form thread and account thread access the progress bar
-    private void InitializeProgressBar(int accountCount)
+    private void UpdateAccountsLeft(string accountsLeft)
     {
-        if (ProgressBar.InvokeRequired)
+        if (accountsLeftLabel.InvokeRequired)
         {
-            ProgressBar.Invoke(new Action(() => InitializeProgressBar(accountCount)));
+            accountsLeftLabel.Invoke(new Action(() => UpdateAccountsLeft(accountsLeft)));
         }
         else
         {
-            ProgressBar.Minimum = 0;
-            ProgressBar.Maximum = accountCount;
+            if (accountsLeft == "0")
+                accountsLeft = "";
+
+            accountsLeftLabel.Text = $"{accountsLeft}";
         }
     }
 
     // This method updates the account checking progress.
     private void UpdateProgress(string accountsLeft)
     {
-
-        if (accountsLeftLabel.InvokeRequired || ProgressBar.InvokeRequired)
-        {
-            accountsLeftLabel.Invoke(new Action(() => UpdateProgress(accountsLeft)));
-        }
-        else
-        {
-            accountsLeftLabel.Text = $"{accountsLeft}";
-
-            if (ProgressBar.Maximum >= ProgressBar.Value + 1)
-                ProgressBar.Value += 1;
-        }
+        UpdateAccountsLeft(accountsLeft);
+        _uIUtility.IncrementProgressBar(ProgressBar);
 
     }
 

@@ -103,6 +103,6 @@ public partial class AccountList : Form
 
     private void ExportsFolderButton_Click(object sender, EventArgs e)
     {
-        Process.Start("explorer.exe", Config.ExportsFolder);
+        Process.Start("explorer.exe", PathConfig.ExportsFolder);
     }
 }

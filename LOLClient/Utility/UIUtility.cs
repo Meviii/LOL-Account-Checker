@@ -86,4 +86,34 @@ public class UIUtility
 
         new Settings().ShowDialog();
     }
+
+    // This method initializes the provided progress bar.
+    public void InitializeProgressBar(ProgressBar progressBar, int accountCount)
+    {
+        if (progressBar.InvokeRequired)
+        {
+            progressBar.Invoke(new Action(() => InitializeProgressBar(progressBar, accountCount)));
+        }
+        else
+        {
+            progressBar.Minimum = 0;
+            progressBar.Maximum = accountCount;
+        }
+    }
+
+    // This method increments the provided progress bar.
+    public void IncrementProgressBar(ProgressBar progressBar)
+    {
+
+        if (progressBar.InvokeRequired)
+        {
+            progressBar.Invoke(new Action(() => IncrementProgressBar(progressBar)));
+        }
+        else
+        {
+
+            if (progressBar.Maximum >= progressBar.Value + 1)
+                progressBar.Value += 1;
+        }
+    }
 }
