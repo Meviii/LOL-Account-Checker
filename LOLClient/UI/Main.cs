@@ -1,4 +1,5 @@
-﻿using LOLClient.Utility;
+﻿using LOLClient.Connections;
+using LOLClient.Utility;
 using Microsoft.EntityFrameworkCore.Update;
 using Newtonsoft.Json.Linq;
 using System;
@@ -186,6 +187,7 @@ public partial class Main : Form
     // This method asynchronously runs tasks to process a list of combos
     public async Task<bool> RunTasksAsync(int threadCount, List<Tuple<string, string>> comboList, JObject settings)
     {
+
         // Initialize variables
         var remainingCombos = comboList.Count;
 
@@ -202,9 +204,9 @@ public partial class Main : Form
             // Start a new task for each thread
             for (int i = 0; i < threadCount; i++)
             {
-                var localIndex = i; // create local copy of i
                 if (remainingCombos == 0)
                 {
+                    await Task.WhenAll(tasks);
                     tasks.Clear();
                     return true;
                 }

@@ -31,7 +31,7 @@ public class Runner
         _coreUtility = new CoreUtility();
         _account = new();
         _client = new();
-        
+
     }
 
     // This method takes in the username, password, and settings JObject as parameters
@@ -156,7 +156,7 @@ public class Runner
         _account.Region = _region;
         _account.Username = username;
         _account.Password = password;
-        
+
         var didLaunch = riotConnection.WaitForLaunch(); // Wait for League Client to Launch. Must be processed after LOGIN
 
         if (!didLaunch)
@@ -166,7 +166,7 @@ public class Runner
         }
 
         return true;
-        
+
     }
 
     /* 
@@ -235,7 +235,7 @@ public class Runner
     public void CleanUp()
     {
         _client.CloseClients();
-        
+
     }
 
 }

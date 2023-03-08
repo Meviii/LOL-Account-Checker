@@ -16,15 +16,17 @@ public class LeagueConnection
     private readonly string _region;
     private readonly Client _client;
     public int ProcessID { get; private set; }
-    private readonly object _lock = new object();
+    private readonly object _lock = new();
 
     public LeagueConnection(Connection connection, Client client, string path, string region)
     {
-
+        lock (_lock)
+        {
             _path = path;
             _client = client;
             _connection = connection;
             _region = region;
+        }
 
     }
 
