@@ -3,14 +3,10 @@ using System.Net.Http;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.Text;
-using System.Diagnostics;
-using System.IO;
 using System.Net.Sockets;
 using System.Net;
 using System.Threading.Tasks;
 using System.Threading;
-using Microsoft.Extensions.Logging;
-using System.Diagnostics.Metrics;
 
 namespace LOLClient.Connections;
 
@@ -20,26 +16,27 @@ public class Connection
     public readonly string AuthToken;
     public readonly HttpClient _httpClient;
     private static object _lock = new();
-    private static HashSet<string> _usedPorts = new();
+    private static readonly HashSet<int> _usedPorts = new();
 
     public Connection()
     {
-        AuthToken = GenerateAuthToken();
-        Port = GetFreePort();
-
-        _httpClient = new HttpClient(GetHandlerSettings())
+        lock (_lock)
         {
-            BaseAddress = new Uri("https://127.0.0.1:" + Port)
-        };
-        _httpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.ASCII.GetBytes($"riot:{AuthToken}")));
-        
-        Console.WriteLine($"Initializing new Connection. Port: {Port}, Auth Token: {AuthToken}");
+            AuthToken = GenerateAuthToken();
+            Port = GetFreePort();
+
+            _httpClient = new HttpClient(GetHandlerSettings())
+            {
+                BaseAddress = new Uri("https://127.0.0.1:" + Port)
+            };
+            _httpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.ASCII.GetBytes($"riot:{AuthToken}")));
+
+            Console.WriteLine($"Initializing new Connection. Port: {Port}, Auth Token: {AuthToken}");
+        }
     }
 
-    // Finds a free port.
-    private string GetFreePort(int minPort = 50000, int maxPort = 65000)
+    public static string GetFreePort(int minPort = 50000, int maxPort = 65000)
     {
-
         lock (_lock)
         {
             var sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -48,22 +45,23 @@ public class Connection
             {
                 try
                 {
-                    // check if port is already in use
-                    if (_usedPorts.Contains(port.ToString()))
-                        continue;
-
-                    // If in use
-                    if (sock.Poll(1000, SelectMode.SelectRead))
+                    // check if port is already in dictionary
+                    if (_usedPorts.Contains(port))
                         continue;
 
                     sock.Bind(new IPEndPoint(IPAddress.Loopback, port));
+                    
                     sock.Close();
 
-                    _usedPorts.Add(port.ToString());
+                    _usedPorts.Add(port);
                     return port.ToString();
                 }
                 catch (SocketException e)
                 {
+                    // check if port is in use
+                    if (e.SocketErrorCode == SocketError.AddressAlreadyInUse)
+                        continue;
+
                     throw new Exception(e.Message);
                 }
             }
@@ -131,8 +129,10 @@ public class Connection
             default:
                 throw new Exception("Unsupported HTTP method.");
         }
+
         Console.WriteLine($"Response: {response.StatusCode}");
 
         return response;
     }
+
 }

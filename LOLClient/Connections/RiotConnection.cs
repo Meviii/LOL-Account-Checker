@@ -15,12 +15,16 @@ public class RiotConnection
     private readonly Connection _connection;
     private readonly Client _client;
     public int ProcessID { get; private set; }
+    private readonly object _lock = new();
+
     public RiotConnection(Client client, Connection connection, string riotClientPath)
     {
-        _client = client;
-        _connection = connection;
-        _riotClientPath = riotClientPath;
-
+        lock (_lock)
+        {
+            _client = client;
+            _connection = connection;
+            _riotClientPath = riotClientPath;
+        }
     }
 
     public void Run()
