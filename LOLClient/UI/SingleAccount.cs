@@ -11,6 +11,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Azure.Core.HttpHeader;
 
 namespace LOLClient;
 
@@ -18,11 +19,13 @@ public partial class SingleAccount : Form
 {
     private readonly UIUtility _uiUtility;
     private readonly Account _account;
+    private readonly CoreUtility _coreUtility;
 
     public SingleAccount(Account account)
     {
         _account = account;
         _uiUtility = new UIUtility();
+        _coreUtility = new CoreUtility();
         InitializeComponent();
         InitializeView();
     }
@@ -33,6 +36,18 @@ public partial class SingleAccount : Form
         FillChampionsTable();
         FillSkinsTable();
         FillOverviewTable();
+    }
+
+    private Dictionary<string, bool> GetTaskCheckBoxes()
+    {
+        return new Dictionary<string, bool>()
+        {
+            {CraftKeysCheckBox.Name, CraftKeysCheckBox.Checked},
+            {OpenChestsCheckBox.Name, OpenChestsCheckBox.Checked},
+            {DisenchantChampionShardsCheckBox.Name, DisenchantChampionShardsCheckBox.Checked},
+            {DisenchantEternalShardsCheckBox.Name, DisenchantEternalShardsCheckBox.Checked},
+            {OpenCapsulesOrbsShardsCheckBox.Name, OpenCapsulesOrbsShardsCheckBox.Checked}
+        };
     }
 
     private void FillOverviewTable()
@@ -132,5 +147,41 @@ public partial class SingleAccount : Form
     private void Overview_Click(object sender, EventArgs e)
     {
 
+    }
+
+    private async void ExecuteButton_Click(object sender, EventArgs e)
+    {
+        return;// TODO
+
+        if (!AreTasksSelected())
+            return;
+
+        ProgressBar.Visible = true;
+        _uiUtility.InitializeProgressBar(ProgressBar, 1 + 1); // 1 account + 1 for functional progress bar
+
+        var settings = await _coreUtility.LoadFromSettingsFileAsync(); // Gets Settings file
+
+        // Run the Work method as a Task
+        var task = Task.Run(async () =>
+        {
+            var runner = new Runner();
+
+            // Job of thread
+            await runner.Job_ExecuteTasksWithoutAccountFetching(_account.Username, _account.Password, settings, GetTaskCheckBoxes());
+
+        });
+
+        _uiUtility.IncrementProgressBar(ProgressBar);
+        ProgressBar.Visible = false;
+    }
+
+    private bool AreTasksSelected()
+    {
+        foreach (var task in GetTaskCheckBoxes())
+        {
+            if (task.Value == true) return true;
+        }
+
+        return false;
     }
 }

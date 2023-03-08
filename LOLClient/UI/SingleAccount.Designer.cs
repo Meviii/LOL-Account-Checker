@@ -34,15 +34,16 @@ namespace LOLClient
             SummonerName = new DataGridViewTextBoxColumn();
             tabControl1 = new TabControl();
             Overview = new TabPage();
+            ProgressBar = new ProgressBar();
             label8 = new Label();
             label7 = new Label();
             executeButton = new Button();
             flowLayoutPanel1 = new FlowLayoutPanel();
             panel3 = new Panel();
-            checkBox3 = new CheckBox();
+            CraftKeysCheckBox = new CheckBox();
             label4 = new Label();
             panel4 = new Panel();
-            checkBox4 = new CheckBox();
+            OpenChestsCheckBox = new CheckBox();
             label5 = new Label();
             panel15 = new Panel();
             panel16 = new Panel();
@@ -66,7 +67,7 @@ namespace LOLClient
             panel22 = new Panel();
             checkBox21 = new CheckBox();
             label24 = new Label();
-            checkBox22 = new CheckBox();
+            DisenchantChampionShardsCheckBox = new CheckBox();
             label25 = new Label();
             panel7 = new Panel();
             panel11 = new Panel();
@@ -90,14 +91,14 @@ namespace LOLClient
             panel8 = new Panel();
             checkBox8 = new CheckBox();
             label11 = new Label();
-            checkBox7 = new CheckBox();
+            DisenchantEternalShardsCheckBox = new CheckBox();
             label10 = new Label();
             panel6 = new Panel();
-            checkBox6 = new CheckBox();
+            OpenCapsulesOrbsShardsCheckBox = new CheckBox();
             label6 = new Label();
             eventTaskPanel = new FlowLayoutPanel();
             panel5 = new Panel();
-            checkBox5 = new CheckBox();
+            claimEvent = new CheckBox();
             label3 = new Label();
             panel1 = new Panel();
             checkBox1 = new CheckBox();
@@ -163,6 +164,7 @@ namespace LOLClient
             // 
             // Overview
             // 
+            Overview.Controls.Add(ProgressBar);
             Overview.Controls.Add(label8);
             Overview.Controls.Add(label7);
             Overview.Controls.Add(executeButton);
@@ -178,6 +180,15 @@ namespace LOLClient
             Overview.Text = "Overview";
             Overview.UseVisualStyleBackColor = true;
             Overview.Click += Overview_Click;
+            // 
+            // ProgressBar
+            // 
+            ProgressBar.BackColor = System.Drawing.Color.LightSkyBlue;
+            ProgressBar.Location = new System.Drawing.Point(518, 433);
+            ProgressBar.Name = "ProgressBar";
+            ProgressBar.Size = new System.Drawing.Size(113, 23);
+            ProgressBar.TabIndex = 16;
+            ProgressBar.Visible = false;
             // 
             // label8
             // 
@@ -210,12 +221,13 @@ namespace LOLClient
             executeButton.BackColor = System.Drawing.Color.LightCyan;
             executeButton.FlatAppearance.BorderSize = 0;
             executeButton.ForeColor = System.Drawing.SystemColors.Desktop;
-            executeButton.Location = new System.Drawing.Point(644, 429);
+            executeButton.Location = new System.Drawing.Point(644, 427);
             executeButton.Name = "executeButton";
             executeButton.Size = new System.Drawing.Size(79, 32);
             executeButton.TabIndex = 9;
             executeButton.Text = "Execute";
             executeButton.UseVisualStyleBackColor = false;
+            executeButton.Click += ExecuteButton_Click;
             // 
             // flowLayoutPanel1
             // 
@@ -231,21 +243,21 @@ namespace LOLClient
             // 
             // panel3
             // 
-            panel3.Controls.Add(checkBox3);
+            panel3.Controls.Add(CraftKeysCheckBox);
             panel3.Controls.Add(label4);
             panel3.Location = new System.Drawing.Point(3, 3);
             panel3.Name = "panel3";
             panel3.Size = new System.Drawing.Size(160, 38);
             panel3.TabIndex = 13;
             // 
-            // checkBox3
+            // CraftKeysCheckBox
             // 
-            checkBox3.AutoSize = true;
-            checkBox3.Location = new System.Drawing.Point(134, 13);
-            checkBox3.Name = "checkBox3";
-            checkBox3.Size = new System.Drawing.Size(15, 14);
-            checkBox3.TabIndex = 1;
-            checkBox3.UseVisualStyleBackColor = true;
+            CraftKeysCheckBox.AutoSize = true;
+            CraftKeysCheckBox.Location = new System.Drawing.Point(134, 13);
+            CraftKeysCheckBox.Name = "CraftKeysCheckBox";
+            CraftKeysCheckBox.Size = new System.Drawing.Size(15, 14);
+            CraftKeysCheckBox.TabIndex = 1;
+            CraftKeysCheckBox.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
@@ -258,21 +270,21 @@ namespace LOLClient
             // 
             // panel4
             // 
-            panel4.Controls.Add(checkBox4);
+            panel4.Controls.Add(OpenChestsCheckBox);
             panel4.Controls.Add(label5);
             panel4.Location = new System.Drawing.Point(169, 3);
             panel4.Name = "panel4";
             panel4.Size = new System.Drawing.Size(160, 38);
             panel4.TabIndex = 14;
             // 
-            // checkBox4
+            // OpenChestsCheckBox
             // 
-            checkBox4.AutoSize = true;
-            checkBox4.Location = new System.Drawing.Point(134, 13);
-            checkBox4.Name = "checkBox4";
-            checkBox4.Size = new System.Drawing.Size(15, 14);
-            checkBox4.TabIndex = 1;
-            checkBox4.UseVisualStyleBackColor = true;
+            OpenChestsCheckBox.AutoSize = true;
+            OpenChestsCheckBox.Location = new System.Drawing.Point(134, 13);
+            OpenChestsCheckBox.Name = "OpenChestsCheckBox";
+            OpenChestsCheckBox.Size = new System.Drawing.Size(15, 14);
+            OpenChestsCheckBox.TabIndex = 1;
+            OpenChestsCheckBox.UseVisualStyleBackColor = true;
             // 
             // label5
             // 
@@ -288,7 +300,7 @@ namespace LOLClient
             panel15.Controls.Add(panel16);
             panel15.Controls.Add(panel20);
             panel15.Controls.Add(panel22);
-            panel15.Controls.Add(checkBox22);
+            panel15.Controls.Add(DisenchantChampionShardsCheckBox);
             panel15.Controls.Add(label25);
             panel15.Location = new System.Drawing.Point(3, 47);
             panel15.Name = "panel15";
@@ -488,14 +500,14 @@ namespace LOLClient
             label24.TabIndex = 0;
             label24.Text = "Craft Keys";
             // 
-            // checkBox22
+            // DisenchantChampionShardsCheckBox
             // 
-            checkBox22.AutoSize = true;
-            checkBox22.Location = new System.Drawing.Point(300, 13);
-            checkBox22.Name = "checkBox22";
-            checkBox22.Size = new System.Drawing.Size(15, 14);
-            checkBox22.TabIndex = 1;
-            checkBox22.UseVisualStyleBackColor = true;
+            DisenchantChampionShardsCheckBox.AutoSize = true;
+            DisenchantChampionShardsCheckBox.Location = new System.Drawing.Point(300, 13);
+            DisenchantChampionShardsCheckBox.Name = "DisenchantChampionShardsCheckBox";
+            DisenchantChampionShardsCheckBox.Size = new System.Drawing.Size(15, 14);
+            DisenchantChampionShardsCheckBox.TabIndex = 1;
+            DisenchantChampionShardsCheckBox.UseVisualStyleBackColor = true;
             // 
             // label25
             // 
@@ -511,7 +523,7 @@ namespace LOLClient
             panel7.Controls.Add(panel11);
             panel7.Controls.Add(panel9);
             panel7.Controls.Add(panel8);
-            panel7.Controls.Add(checkBox7);
+            panel7.Controls.Add(DisenchantEternalShardsCheckBox);
             panel7.Controls.Add(label10);
             panel7.Location = new System.Drawing.Point(3, 91);
             panel7.Name = "panel7";
@@ -711,14 +723,14 @@ namespace LOLClient
             label11.TabIndex = 0;
             label11.Text = "Craft Keys";
             // 
-            // checkBox7
+            // DisenchantEternalShardsCheckBox
             // 
-            checkBox7.AutoSize = true;
-            checkBox7.Location = new System.Drawing.Point(300, 13);
-            checkBox7.Name = "checkBox7";
-            checkBox7.Size = new System.Drawing.Size(15, 14);
-            checkBox7.TabIndex = 1;
-            checkBox7.UseVisualStyleBackColor = true;
+            DisenchantEternalShardsCheckBox.AutoSize = true;
+            DisenchantEternalShardsCheckBox.Location = new System.Drawing.Point(300, 13);
+            DisenchantEternalShardsCheckBox.Name = "DisenchantEternalShardsCheckBox";
+            DisenchantEternalShardsCheckBox.Size = new System.Drawing.Size(15, 14);
+            DisenchantEternalShardsCheckBox.TabIndex = 1;
+            DisenchantEternalShardsCheckBox.UseVisualStyleBackColor = true;
             // 
             // label10
             // 
@@ -731,21 +743,21 @@ namespace LOLClient
             // 
             // panel6
             // 
-            panel6.Controls.Add(checkBox6);
+            panel6.Controls.Add(OpenCapsulesOrbsShardsCheckBox);
             panel6.Controls.Add(label6);
             panel6.Location = new System.Drawing.Point(3, 135);
             panel6.Name = "panel6";
             panel6.Size = new System.Drawing.Size(330, 38);
             panel6.TabIndex = 14;
             // 
-            // checkBox6
+            // OpenCapsulesOrbsShardsCheckBox
             // 
-            checkBox6.AutoSize = true;
-            checkBox6.Location = new System.Drawing.Point(300, 13);
-            checkBox6.Name = "checkBox6";
-            checkBox6.Size = new System.Drawing.Size(15, 14);
-            checkBox6.TabIndex = 1;
-            checkBox6.UseVisualStyleBackColor = true;
+            OpenCapsulesOrbsShardsCheckBox.AutoSize = true;
+            OpenCapsulesOrbsShardsCheckBox.Location = new System.Drawing.Point(300, 13);
+            OpenCapsulesOrbsShardsCheckBox.Name = "OpenCapsulesOrbsShardsCheckBox";
+            OpenCapsulesOrbsShardsCheckBox.Size = new System.Drawing.Size(15, 14);
+            OpenCapsulesOrbsShardsCheckBox.TabIndex = 1;
+            OpenCapsulesOrbsShardsCheckBox.UseVisualStyleBackColor = true;
             // 
             // label6
             // 
@@ -768,21 +780,21 @@ namespace LOLClient
             // 
             // panel5
             // 
-            panel5.Controls.Add(checkBox5);
+            panel5.Controls.Add(claimEvent);
             panel5.Controls.Add(label3);
             panel5.Location = new System.Drawing.Point(3, 3);
             panel5.Name = "panel5";
             panel5.Size = new System.Drawing.Size(160, 38);
             panel5.TabIndex = 13;
             // 
-            // checkBox5
+            // claimEvent
             // 
-            checkBox5.AutoSize = true;
-            checkBox5.Location = new System.Drawing.Point(134, 13);
-            checkBox5.Name = "checkBox5";
-            checkBox5.Size = new System.Drawing.Size(15, 14);
-            checkBox5.TabIndex = 1;
-            checkBox5.UseVisualStyleBackColor = true;
+            claimEvent.AutoSize = true;
+            claimEvent.Location = new System.Drawing.Point(134, 13);
+            claimEvent.Name = "claimEvent";
+            claimEvent.Size = new System.Drawing.Size(15, 14);
+            claimEvent.TabIndex = 1;
+            claimEvent.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -1045,7 +1057,7 @@ namespace LOLClient
         private FlowLayoutPanel eventTaskPanel;
         private Button executeButton;
         private Panel panel5;
-        private CheckBox checkBox5;
+        private CheckBox claimEvent;
         private Label label3;
         private Label label8;
         private Label label7;
@@ -1057,13 +1069,13 @@ namespace LOLClient
         private Label label2;
         private FlowLayoutPanel flowLayoutPanel1;
         private Panel panel3;
-        private CheckBox checkBox3;
+        private CheckBox CraftKeysCheckBox;
         private Label label4;
         private Panel panel4;
-        private CheckBox checkBox4;
+        private CheckBox OpenChestsCheckBox;
         private Label label5;
         private Panel panel6;
-        private CheckBox checkBox6;
+        private CheckBox OpenCapsulesOrbsShardsCheckBox;
         private Label label6;
         private Panel panel7;
         private Panel panel9;
@@ -1075,7 +1087,7 @@ namespace LOLClient
         private Panel panel8;
         private CheckBox checkBox8;
         private Label label11;
-        private CheckBox checkBox7;
+        private CheckBox DisenchantEternalShardsCheckBox;
         private Label label10;
         private Panel panel15;
         private Panel panel16;
@@ -1099,7 +1111,7 @@ namespace LOLClient
         private Panel panel22;
         private CheckBox checkBox21;
         private Label label24;
-        private CheckBox checkBox22;
+        private CheckBox DisenchantChampionShardsCheckBox;
         private Label label25;
         private Panel panel11;
         private Panel panel12;
@@ -1113,5 +1125,6 @@ namespace LOLClient
         private Label label16;
         private CheckBox checkBox14;
         private Label label17;
+        private ProgressBar ProgressBar;
     }
 }
