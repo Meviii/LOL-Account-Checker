@@ -50,6 +50,8 @@ Lists all the accounts in the Exports folder in a grid view that displays genera
 
 ### Single Account
 
+*Currently working on Tasks.*
+
 Lists the overview information of the specific account, including the purchase history, owned champions, and skins. This view also displays specific details about each owned champion and skin.
 
 ## Inspiration
