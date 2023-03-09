@@ -40,13 +40,19 @@ The program creates a Riot client to authenticate the user and a League client t
 
 The main process that runs the whole account checking operation. It includes an option to choose the combo list which is the account text file (typically looks like {username}{delimiter}{password} eg. user:pass). The delimiter is the character that splits the username and password. 
 
+![main](images/main.png)
+
 ### Settings
 
 Must be set up before being granted access to the main view. It includes the "RiotClientServices.exe location" and "LeagueClient.exe location" paths, as well as an option to update skins and champions to keep the checker up-to-date with new releases.
 
+![main](images/settings.png)
+
 ### Accounts
 
 Lists all the accounts in the Exports folder in a grid view that displays general information about each account. Clicking on a specific row will open a view with more details about the account.
+
+![main](images/accounts.png)
 
 ### Single Account
 
@@ -54,6 +60,11 @@ Lists all the accounts in the Exports folder in a grid view that displays genera
 
 Lists the overview information of the specific account, including the purchase history, owned champions, and skins. This view also displays specific details about each owned champion and skin.
 
+![main](images/single_account.png)
+
+![main](images/single_account_champions.png)
+
+![main](images/single_account_skins.png)
 ## Inspiration
 
 This project was inspired by DeivatorZ's account checker which can be found at https://github.com/DeviatorZ/league-account-checker
