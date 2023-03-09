@@ -40,7 +40,7 @@ The program creates a Riot client to authenticate the user and a League client t
 
 The main process that runs the whole account checking operation. It includes an option to choose the combo list which is the account text file (typically looks like {username}{delimiter}{password} eg. user:pass). The delimiter is the character that splits the username and password. 
 
-![main](images/main.png)
+![main](images/main.PNG)
 
 ### Settings
 
