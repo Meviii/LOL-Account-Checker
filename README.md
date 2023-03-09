@@ -32,7 +32,7 @@ The program creates a Riot client to authenticate the user and a League client t
 - Opening and disenchanting of Hextech loot  
 - Claiming event rewards and spending event tokens  
 - Custom exports  
-- Reqeue system for failed accounts
+- Re-queue system for failed accounts
 
 ## Application & Usage
 
