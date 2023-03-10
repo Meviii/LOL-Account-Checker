@@ -144,12 +144,18 @@ public class CoreUtility
         // Loop through each line in the content
         foreach (string line in content.Split())
         {
-            // If the line is not empty
-            if (line != "")
+            try
             {
-                // Split the line by the delimiter and add a new tuple to the "accounts" list
-                var accString = line.Split(delimiter);
-                accounts.Add(new Tuple<string, string>(accString[0], accString[1]));
+                // If the line is not empty
+                if (line != "")
+                {
+                    // Split the line by the delimiter and add a new tuple to the "accounts" list
+                    var accString = line.Split(delimiter);
+                    accounts.Add(new Tuple<string, string>(accString[0], accString[1]));
+                }
+            }catch
+            {
+                Console.WriteLine($"Couldn't read account at {line}");
             }
         }
 
