@@ -165,8 +165,10 @@ public class AccountData
     }
 
     // This method gets the loot data from the Loot instance
-    public void GetLoot()
+    public async Task GetLootAsync()
     {
+        await _loot.RefreshLoot();
+
         // Loop through each item in the loot data.
         foreach (var item in _loot.Data)
         {

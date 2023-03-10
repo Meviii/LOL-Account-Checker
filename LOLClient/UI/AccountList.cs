@@ -55,7 +55,7 @@ public partial class AccountList : Form
                 account.BE,
                 account.RP,
                 account.OE,
-                $"{account.CurrentRank.Tier} {account.CurrentRank.Division}",
+                $"{account.CurrentRank}",
                 account.Skins.Count,
                 account.Champions.Count,
                 account.IsEmailVerified

@@ -1,4 +1,5 @@
 ﻿using LOLClient.Connections;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -18,9 +19,7 @@ public class Loot
     public Loot(Connection connection)
     {
         _leagueConnection = connection;
-        RefreshLoot().Wait();
     }
-
 
     public List<JToken> GetLootByDisplayCategory(string category)
     {

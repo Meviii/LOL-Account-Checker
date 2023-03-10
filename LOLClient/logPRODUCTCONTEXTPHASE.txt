@@ -1,14 +1,49 @@
-11/03/2023 4:40:31 AM - Eula
+11/03/2023 8:56:16 AM - Eula
 
 
 
 
-11/03/2023 4:40:32 AM - VngAccountRequired
+11/03/2023 8:56:17 AM - WaitForLaunch
 
 
 
 
-11/03/2023 4:40:33 AM - WaitForLaunch
+11/03/2023 8:58:36 AM - LifecycleSync
+
+
+
+
+11/03/2023 8:58:37 AM - WaitForLaunch
+
+
+
+
+11/03/2023 9:00:06 AM - LifecycleSync
+
+
+
+
+11/03/2023 9:00:07 AM - WaitForLaunch
+
+
+
+
+11/03/2023 9:01:26 AM - Eula
+
+
+
+
+11/03/2023 9:01:27 AM - WaitForLaunch
+
+
+
+
+11/03/2023 9:02:27 AM - LifecycleSync
+
+
+
+
+11/03/2023 9:02:28 AM - WaitForLaunch
 
 
 
