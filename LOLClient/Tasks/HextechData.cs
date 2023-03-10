@@ -16,7 +16,7 @@ public class HextechData
         _connection = connection;
     }
 
-    private async void PostRecipe(string recipeName, int repeat = 1)
+    private async Task PostRecipe(string recipeName, int repeat = 1)
     {
         await _connection.RequestAsync(HttpMethod.Post,
                                        $"/lol-loot/v1/recipes/{recipeName}/craft?repeat={repeat},",

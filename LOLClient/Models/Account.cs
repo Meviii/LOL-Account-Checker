@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AccountChecker.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -51,5 +52,7 @@ public class Account
     public bool LowPriorityQueue { get; set; }
     public List<Skin> HextechSkins { get; set; } = new List<Skin>();
     public bool IsEmailVerified { get; set; }
+    public Rank CurrentRank { get; set; }
+    public Rank HighestRank { get; set; }
     public Account() { }
 }

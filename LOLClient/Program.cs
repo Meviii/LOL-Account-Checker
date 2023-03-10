@@ -1,4 +1,5 @@
-﻿using LOLClient.DataFiles;
+﻿using AccountChecker.Tests;
+using LOLClient.DataFiles;
 using LOLClient.UI;
 using LOLClient.Utility;
 using Newtonsoft.Json.Linq;
@@ -17,27 +18,31 @@ class Program
     [STAThread]
     public static void Main(string[] args)
     {
-        
+        // test
+        //var test = new MainTest();
+        //test.TestRequest().Wait();
+        //return;
+
         ApplicationConfiguration.Initialize();
         Application.EnableVisualStyles();
         Application.SetCompatibleTextRenderingDefault(false);
 
         // Check if settings file exists.
-        if (IsSettingsFileEmpty())
+        if (IsSettingsFileEmpty().Result)
         {
             // Run updates if settings file is empty (first run).
             Application.Run(new Settings(true));
-
         }
         else
         {
+
             // Run main form if settings file is populated.
             Application.Run(new Main());
         }
 
     }
 
-    static bool IsSettingsFileEmpty()
+    static async Task<bool> IsSettingsFileEmpty()
     {
         string filePath = $"{PathConfig.SettingsFile}";
 
@@ -45,7 +50,7 @@ class Program
 
         if (File.Exists(filePath))
         {
-            string content = File.ReadAllTextAsync(filePath).Result;
+            string content = await File.ReadAllTextAsync(filePath);
             settings = JObject.Parse(content);
 
             if (settings.ContainsKey("RiotClientPath") &&

@@ -15,8 +15,8 @@ public class Connection
     public readonly string Port;
     public readonly string AuthToken;
     public readonly HttpClient _httpClient;
-    private static object _lock = new();
     private static readonly HashSet<int> _usedPorts = new();
+    private static readonly object _lock = new();
 
     public Connection()
     {
@@ -35,40 +35,39 @@ public class Connection
         }
     }
 
-    public static string GetFreePort(int minPort = 50000, int maxPort = 65000)
+    public string GetFreePort(int minPort = 50000, int maxPort = 65000)
     {
-        lock (_lock)
+        var sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
+        for (var port = minPort; port < maxPort; port++)
         {
-            var sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-
-            for (var port = minPort; port < maxPort; port++)
+            try
             {
-                try
-                {
-                    // check if port is already in dictionary
-                    if (_usedPorts.Contains(port))
-                        continue;
+                // check if port is already in dictionary
+                if (_usedPorts.Contains(port))
+                    continue;
 
-                    sock.Bind(new IPEndPoint(IPAddress.Loopback, port));
-                    
-                    sock.Close();
+                sock.Bind(new IPEndPoint(IPAddress.Loopback, port));
 
-                    _usedPorts.Add(port);
-                    return port.ToString();
-                }
-                catch (SocketException e)
-                {
-                    // check if port is in use
-                    if (e.SocketErrorCode == SocketError.AddressAlreadyInUse)
-                        continue;
+                sock.Close();
 
-                    throw new Exception(e.Message);
-                }
+                _usedPorts.Add(port);
+                return port.ToString();
             }
+            catch (SocketException e)
+            {
+                // check if port is in use
+                if (e.SocketErrorCode == SocketError.AddressAlreadyInUse)
+                    continue;
 
-            throw new Exception("No port available.");
+                throw new Exception(e.Message);
+            }
         }
+
+        throw new Exception("No port available.");
+
     }
+
     private string GenerateAuthToken(int length = 22)
     {
         var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -101,38 +100,42 @@ public class Connection
 
     public async Task<HttpResponseMessage> RequestAsync(HttpMethod method, string url, Dictionary<string, object> requestData)
     {
-        URLFixer(ref url);
-
-        var requestAddress = _httpClient.BaseAddress + url;
-        Console.WriteLine($"Sending {method} request. URL: {url}");
-
-        HttpResponseMessage response;
-
-        switch (method.Method)
+        lock (_lock)
         {
-            case "GET":
-                response = _httpClient.GetAsync(requestAddress).Result;
-                break;
-            case "POST":
-                var json = JsonConvert.SerializeObject(requestData);
-                var content = new StringContent(json, Encoding.UTF8, "application/json");
-                response = await _httpClient.PostAsync(requestAddress, content);
-                break;
-            case "PUT":
-                json = JsonConvert.SerializeObject(requestData);
-                content = new StringContent(json, Encoding.UTF8, "application/json");
-                response = await _httpClient.PutAsync(requestAddress, content);
-                break;
-            case "DELETE":
-                response = _httpClient.DeleteAsync(requestAddress).Result;
-                break;
-            default:
-                throw new Exception("Unsupported HTTP method.");
+            URLFixer(ref url);
+
+            var requestAddress = _httpClient.BaseAddress + url;
+            Console.WriteLine($"Sending {method} request. URL: {url}");
+
+            HttpResponseMessage response;
+
+            switch (method.Method)
+            {
+                case "GET":
+                    response = _httpClient.GetAsync(requestAddress).Result;
+                    break;
+                case "POST":
+                    var json = JsonConvert.SerializeObject(requestData);
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+                    response = _httpClient.PostAsync(requestAddress, content).Result;
+                    break;
+                case "PUT":
+                    json = JsonConvert.SerializeObject(requestData);
+                    content = new StringContent(json, Encoding.UTF8, "application/json");
+                    response = _httpClient.PutAsync(requestAddress, content).Result;
+                    break;
+                case "DELETE":
+                    response = _httpClient.DeleteAsync(requestAddress).Result;
+                    break;
+                default:
+                    throw new Exception("Unsupported HTTP method.");
+            }
+
+            Console.WriteLine($"Response: {response.StatusCode}");
+            return response;
         }
 
-        Console.WriteLine($"Response: {response.StatusCode}");
-
-        return response;
     }
+
 
 }

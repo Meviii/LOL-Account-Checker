@@ -3,8 +3,11 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
+using System.IO;
 using System.Net.Http;
+using System.Reflection.Metadata;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace LOLClient.Connections;
 
@@ -16,7 +19,7 @@ public class LeagueConnection
     private readonly string _region;
     private readonly Client _client;
     public int ProcessID { get; private set; }
-    private readonly object _lock = new();
+    private static readonly object _lock = new();
 
     public LeagueConnection(Connection connection, Client client, string path, string region)
     {
@@ -27,14 +30,13 @@ public class LeagueConnection
             _connection = connection;
             _region = region;
         }
-
     }
 
-    public bool Run()
+    public async Task<bool> Run()
     {
 
-        CreateLeagueClient(); // Create the client
-        var isCreated = WaitForSession(); // Wait for Session
+        await CreateLeagueClient(); // Create the client
+        var isCreated = await WaitForSession(); // Wait for Session
 
         if (!isCreated)
         {
@@ -45,7 +47,7 @@ public class LeagueConnection
         return true;
     }
 
-    private bool WaitForSession(int timeout = 12)
+    private async Task<bool> WaitForSession(int timeout = 12)
     {
         int counter = 0;
 
@@ -53,11 +55,11 @@ public class LeagueConnection
         {
             try
             {
-                var response = _connection.RequestAsync(HttpMethod.Get, "/lol-login/v1/session", null).Result;
+                var response = await _connection.RequestAsync(HttpMethod.Get, "/lol-login/v1/session", null);
 
                 if (response.IsSuccessStatusCode)
                 {
-                    var result = JToken.Parse(response.Content.ReadAsStringAsync().Result);
+                    var result = JToken.Parse(await response.Content.ReadAsStringAsync());
 
                     if (result["state"].ToString().ToLower() == "SUCCEEDED".ToLower())
                     {
@@ -86,7 +88,7 @@ public class LeagueConnection
                 }
 
                 counter++;
-                Thread.Sleep(3000);
+                await Task.Delay(3000);
             }
             catch
             {
@@ -95,7 +97,7 @@ public class LeagueConnection
         }
     }
 
-    private void CreateLeagueClient()
+    private async Task CreateLeagueClient()
     {
         var processArgs = new List<string> {
             _path,
@@ -110,7 +112,7 @@ public class LeagueConnection
             "--headless"
         };
 
-        ProcessID = _client.CreateClient(processArgs, _path);
+        ProcessID = await _client.CreateClient(processArgs, _path);
     }
 
 }

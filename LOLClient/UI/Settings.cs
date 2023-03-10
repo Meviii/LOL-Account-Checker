@@ -23,16 +23,16 @@ public partial class Settings : Form
         _uiUtility = new UIUtility();
         _coreUtility = new CoreUtility();
         InitializeComponent();
-        LoadLabels();
+        LoadLabelsAsync();
 
         // Initialize Skins/Champs data on first run
         if (initialRun)
             UpdateButton_Click(updateButton, null);
     }
 
-    private async void LoadLabels()
+    private void LoadLabelsAsync()
     {
-        var settings = await _coreUtility.LoadFromSettingsFileAsync();
+        var settings = _coreUtility.LoadFromSettingsFile();
 
         if (settings == null)
             return;
@@ -54,7 +54,7 @@ public partial class Settings : Form
 
     }
 
-    private void BrowseRiotButton_Click(object sender, EventArgs e)
+    private async void BrowseRiotButton_Click(object sender, EventArgs e)
     {
 
         OpenFileDialog openFile = new()
@@ -67,7 +67,7 @@ public partial class Settings : Form
         {
             string filePath = openFile.FileName;
             RiotPathLabel.Text = filePath;
-            _coreUtility.SaveToSettingsFileAsync("RiotClientPath", filePath);
+            await _coreUtility.SaveToSettingsFileAsync("RiotClientPath", filePath);
         }
 
     }
@@ -88,7 +88,7 @@ public partial class Settings : Form
         }
     }
 
-    private void LeagueBrowseButton_Click(object sender, EventArgs e)
+    private async void LeagueBrowseButton_Click(object sender, EventArgs e)
     {
 
         OpenFileDialog openFile = new();
@@ -100,7 +100,7 @@ public partial class Settings : Form
         {
             string filePath = openFile.FileName;
             LeaguePathLabel.Text = filePath;
-            _coreUtility.SaveToSettingsFileAsync("LeagueClientPath", filePath);
+            await _coreUtility.SaveToSettingsFileAsync("LeagueClientPath", filePath);
         }
     }
 
