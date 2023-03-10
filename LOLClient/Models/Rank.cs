@@ -36,6 +36,8 @@ public class Rank
 
     public override string ToString()
     {
+        if (Tier == "None")
+            return "Unranked"; 
         return $"{Tier} {Division}";
     }
 }

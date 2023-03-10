@@ -227,7 +227,7 @@ public class Runner
         await _data.GetSummonerDataAsync();
         await _data.GetRank();
         await _data.GetQueueStats();
-        _data.GetLoot();
+        await _data.GetLootAsync();
     }
 
     // This method executes the wanted Hextech Tasks on an account asynchronously.
