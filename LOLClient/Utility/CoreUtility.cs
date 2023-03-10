@@ -19,7 +19,7 @@ public class CoreUtility
     public CoreUtility() { }
 
     // This method saves a key-value pair to a JSON settings file
-    public async void SaveToSettingsFileAsync(string key, object value)
+    public async Task SaveToSettingsFileAsync(string key, object value)
     {
         // Get the file path of the settings file
         string filePath = $"{PathConfig.SettingsFile}";
@@ -61,7 +61,7 @@ public class CoreUtility
     }
 
     // This method loads the contents of a JSON settings file and returns them as a JObject
-    public async Task<JObject> LoadFromSettingsFileAsync()
+    public JObject LoadFromSettingsFile()
     {
         // Declare a JObject variable to hold the settings
         JObject settings;
@@ -73,7 +73,7 @@ public class CoreUtility
         if (File.Exists(filePath))
         {
             // Read the contents of the file asynchronously and store them in a string variable
-            string content = await File.ReadAllTextAsync(filePath);
+            string content = File.ReadAllTextAsync(filePath).Result;
 
             // Parse the string as a JObject and store it in the settings variable
             settings = JObject.Parse(content);
@@ -129,14 +129,14 @@ public class CoreUtility
     }
 
     // This method returns a List holding tuples of each account extracted from the combolist. In <User,Pass> format
-    public List<Tuple<string, string>> ReadComboList(string comboListPath, char delimiter)
+    public async Task<List<Tuple<string, string>>> ReadComboList(string comboListPath, char delimiter)
     {
         // Check if the file exists, if not, return null
         if (!File.Exists(comboListPath))
             return null;
 
         // Read the content of the file and store it in the "content" variable
-        string content = File.ReadAllTextAsync(comboListPath).Result;
+        string content = await File.ReadAllTextAsync(comboListPath);
 
         // Create a new list to store the account tuples
         var accounts = new List<Tuple<string, string>>();

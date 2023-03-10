@@ -1,10 +1,13 @@
-﻿using LOLClient.Connections;
+﻿using AccountChecker.Data;
+using AccountChecker.Models;
+using LOLClient.Connections;
 using LOLClient.DataFiles;
 using LOLClient.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -18,13 +21,28 @@ public class AccountData
     // The Connection instance used to make HTTP requests to the League API.
     private readonly Connection _leagueConnection;
 
+    // Object used to perform and persists the tasks on the specific account
+    private Account _account;
+
     // Object used as a lock for thread-safety.
     private readonly object _lock = new();
 
+    // The Loot instance to perform tasks on the loot data
+    private readonly Loot _loot;
+
+    private SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
+
     // Constructor that initializes the _leagueConnection field with the provided Connection instance.
-    public AccountData(Connection leagueConnection)
+    // Needs the Connection instance used for the LeagueConnection instance.
+    public AccountData(Connection leagueConnection, Account account)
     {
-        _leagueConnection = leagueConnection;
+        lock (_lock)
+        {
+            _loot = new Loot(leagueConnection);
+            _account = account;
+            _leagueConnection = leagueConnection;
+
+        }
     }
 
     // Method that asynchronously makes a GET request to the League API's "/lol-champions/v1/owned-champions-minimal" endpoint
@@ -41,7 +59,7 @@ public class AccountData
             if (response.IsSuccessStatusCode)
             {
                 var jsonResponse = JArray.Parse(await response.Content.ReadAsStringAsync());
-                LogToFile($"Champions from Request: \n{jsonResponse}");
+                await LogToFile($"Champions from Request: \n{jsonResponse}");
                 if (jsonResponse != null)
                 {
                     return jsonResponse;
@@ -49,7 +67,7 @@ public class AccountData
             }
 
             // Wait 5 seconds before retrying the request.
-            Thread.Sleep(5000);
+            await Task.Delay(5000);
         }
     }
 
@@ -76,7 +94,7 @@ public class AccountData
     }
 
     // Method that asynchronously retrieves the account's champions and assigns them to the account object.
-    public async Task GetChampionsAsync(Account account)
+    public async Task GetChampionsAsync()
     {
         // Retrieve the list of owned champions using the GetOwnedChampionsAsync method.
         var ownedChamps = await GetOwnedChampionsAsync();
@@ -88,7 +106,7 @@ public class AccountData
         string filePath = $"{PathConfig.ChampionsFile}";
         string content = File.ReadAllText(filePath);
         var localChampJsonData = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(content);
-        LogToFile($"Champions:\n {content}");
+        await LogToFile($"Champions:\n {content}");
 
 
         // Fix to avoid n*m 
@@ -113,63 +131,56 @@ public class AccountData
 
         // Assign the list of Champion objects to the account
 
-        account.Champions = champs;
+        _account.Champions = champs;
     }
 
-    private void LogToFile(string message)
+    private async Task LogToFile(string message)
     {
-        lock (_lock)
+        await _semaphore.WaitAsync();
+        try
         {
             string logFilePath = @"..\..\..\log.txt";
 
             File.AppendAllTextAsync(logFilePath, $"{DateTime.Now} - {message}\n\n\n\n\n").Wait();
 
         }
+        finally
+        {
+            _semaphore.Release();
+        }
     }
 
     // Method that asynchronously retrieves the summoner data for the account and assigns it to the account object.
-    public async Task GetSummonerDataAsync(Account account)
+    public async Task GetSummonerDataAsync()
     {
         // Retrieve the summoner name and level using the RequestSummonerNameAndLevelAsync method.
         var levelAndName = await RequestSummonerNameAndLevelAsync();
 
         // Assign the summoner level and name to the account object.
-        account.Level = levelAndName.Item1;
-        account.SummonerName = levelAndName.Item2;
+        _account.Level = levelAndName.Item1;
+        _account.SummonerName = levelAndName.Item2;
 
         // Retrieve the email verification status using the RequestEmailVerificationAsync method.
-        account.IsEmailVerified = await RequestEmailVerificationAsync();
-
-        // Retrieve the loot data using the RequestLootAsync method and assign it to the account object.
-        await RequestLootAsync(account);
+        _account.IsEmailVerified = await RequestEmailVerificationAsync();
     }
 
-    // Method that asynchronously requests the account loot.
-    private async Task RequestLootAsync(Account account)
+    // This method gets the loot data from the Loot instance
+    public void GetLoot()
     {
-        // Make a GET request to retrieve player loot data.
-        var response = await _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-loot/v1/player-loot", null);
-
-        // Parse the response content as a JSON array.
-        var data = JArray.Parse(await response.Content.ReadAsStringAsync());
-
-        // Log the retrieved loot data to a file.
-        LogToFile($"Loot:\n {data}");
-
         // Loop through each item in the loot data.
-        foreach (var item in data)
+        foreach (var item in _loot.Data)
         {
             // If the item is a currency for champions, update the BE count in the account object.
             if (item["lootId"].ToString() == "CURRENCY_champion")
-                account.BE = item["count"].ToString();
+                _account.BE = item["count"].ToString();
 
             // If the item is a currency for RP, update the RP count in the account object.
             if (item["lootId"].ToString() == "CURRENCY_RP")
-                account.RP = item["count"].ToString();
+                _account.RP = item["count"].ToString();
 
             // If the item is a currency for cosmetic items, update the OE count in the account object.
             if (item["lootId"].ToString() == "CURRENCY_cosmetic")
-                account.OE = item["count"].ToString();
+                _account.OE = item["count"].ToString();
 
             // If the item is a hextech skin rental, add the skin information to the HextechSkins list in the account object.
             if (item != null && item["lootId"].ToString().StartsWith("CHAMPION_SKIN_RENTAL_"))
@@ -177,7 +188,7 @@ public class AccountData
                 var champion = item["itemDesc"].ToString();
                 if (!string.IsNullOrEmpty(champion))
                 {
-                    account.HextechSkins.Add(new Skin()
+                    _account.HextechSkins.Add(new Skin()
                     {
                         Name = champion
                     });
@@ -196,7 +207,7 @@ public class AccountData
         var data = JToken.Parse(await response.Content.ReadAsStringAsync());
 
         // Log the current summoner data to a file using the LogToFile method.
-        LogToFile($"Current Summoner:\n {data}");
+        await LogToFile($"Current Summoner:\n {data}");
 
         // Create a new Tuple object containing the summoner's level and name as strings.
         return new Tuple<string, string>(data["summonerLevel"].ToString(), data["displayName"].ToString());
@@ -224,7 +235,7 @@ public class AccountData
                     return true;
             }
         }
-        catch (Exception e)
+        catch
         {
             // If an exception occurs, return null to indicate that the verification status is unknown.
             return false;
@@ -237,11 +248,11 @@ public class AccountData
 
     // This method exports an Account object to a JSON file.
     // The file is saved to the Exports folder with the file name "{summonerName}.json".
-    public async Task ExportAccount(Account account)
+    public async Task ExportAccount()
     {
 
         // Build the file path for the JSON file based on the account's summoner name and the ExportsFolder directory.
-        string filePath = $@"{PathConfig.ExportsFolder}{account.SummonerName.Trim()}.json";
+        string filePath = $@"{PathConfig.ExportsFolder}{_account.SummonerName.Trim()}.json";
         Console.WriteLine($"Saved to {filePath}");
         // Create the ExportsFolder directory if it doesn't exist.
         if (!Directory.Exists(PathConfig.ExportsFolder))
@@ -252,7 +263,7 @@ public class AccountData
             File.Create(filePath).Dispose();
 
         // Serialize the Account object to a formatted JSON string.
-        string json = JsonConvert.SerializeObject(account, Formatting.Indented);
+        string json = JsonConvert.SerializeObject(_account, Formatting.Indented);
 
         // Write the JSON string to the file.
         await File.WriteAllTextAsync(filePath, json);
@@ -280,13 +291,13 @@ public class AccountData
                 // If the parsed JSON array is not null, log it to a file and return it.
                 if (jsonSkins != null)
                 {
-                    LogToFile($"Skins:\n {jsonSkins}");
+                    await LogToFile($"Skins:\n {jsonSkins}");
                     return jsonSkins;
                 }
             }
 
             // If the request fails or returns an empty array, wait for 5 seconds and try again.
-            Thread.Sleep(5000);
+            await Task.Delay(5000);
         }
 
     }
@@ -317,8 +328,7 @@ public class AccountData
     }
 
     // This method gets the owned skins for a League of Legends account and populates the account object with the skin data.
-    // It takes the specific account as an argument
-    public async Task GetSkinsAsync(Account account)
+    public async Task GetSkinsAsync()
     {
         // Initialize a list to store the owned skins
         var ownedSkins = await GetOwnedSkinsAsync();
@@ -351,13 +361,38 @@ public class AccountData
         }
 
         // Set the skins list of the account
-        account.Skins = skins;
+        _account.Skins = skins;
     }
-    public void GetRank()
+    
+    // This method grabs the account rank data and populated the account object's ranked stats.
+    public async Task GetRank()
     {
+        var data = await RequestRankAsync();
 
+        if (data == null)
+            return;
+
+        _account.CurrentRank = new Rank()
+        {
+            Tier = data["queueMap"]["RANKED_SOLO_5x5"]["tier"].ToString(),
+            Division = data["queueMap"]["RANKED_SOLO_5x5"]["division"].ToString(),
+            Wins = Convert.ToInt32(data["queueMap"]["RANKED_SOLO_5x5"]["wins"]),
+            Losses = Convert.ToInt32(data["queueMap"]["RANKED_SOLO_5x5"]["losses"]),
+            LeaguePoints = Convert.ToInt32(data["queueMap"]["RANKED_SOLO_5x5"]["leaguePoints"].ToString())
+        };
+
+        _account.HighestRank = new Rank()
+        {
+            Tier = data["queueMap"]["RANKED_SOLO_5x5"]["highestTier"].ToString(),
+            Division = data["queueMap"]["RANKED_SOLO_5x5"]["highestDivision"].ToString(),
+            Wins = 0,
+            Losses = 0,
+            LeaguePoints = 0
+        };
     }
-    private async Task RequestRankAsync()
+
+    // This method makes a get reqeust to the league client to retrieve account stats
+    private async Task<JToken> RequestRankAsync()
     {
 
         var response = await _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-ranked/v1/current-ranked-stats", null);
@@ -366,9 +401,51 @@ public class AccountData
         {
             var data = JToken.Parse(await response.Content.ReadAsStringAsync());
 
-            var verified = data["emailVerified"].ToString();
+            await LogToFile($"\n\nRANKED DATA :  {data["queueMap"]["RANKED_SOLO_5x5"]}");
+            return data;
         }
 
+        return null;
+    }
+
+    // This method grabs the Queue Statistics and populates the account object's queue stats.
+    public async Task GetQueueStats()
+    {
+        var data = await RequestQueueStatsAsync();
+
+        if (data == null)
+            return;
+
+        if (data["lowPriorityData"]["penaltyTime"].ToString() != "0.0")
+            _account.LowPriorityQueue = true;
+    }
+
+    // Makes a request to retrieve queue statistics
+    private async Task<JToken> RequestQueueStatsAsync()
+    {
+        await _leagueConnection.RequestAsync(HttpMethod.Post,
+                                       "/lol-lobby/v2/lobby",
+                                       new Dictionary<string, object>
+                                       {
+                                           {"queueId", 430}
+                                       });
+        await Task.Delay(1000);
+
+        await _leagueConnection.RequestAsync(HttpMethod.Post, "/lol-lobby/v2/lobby/matchmaking/search", null);
+
+        await Task.Delay(2000);
+
+        var queueStatsResponse = await _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-lobby/v2/lobby/matchmaking/search-state", null);
+
+        if (queueStatsResponse.StatusCode == HttpStatusCode.OK)
+        {
+            var data = JToken.Parse(await queueStatsResponse.Content.ReadAsStringAsync());
+
+            await LogToFile($"\n\nQUEUE STATS:\n{data}");
+            return data;
+        }
+
+        return null;
     }
 
 }

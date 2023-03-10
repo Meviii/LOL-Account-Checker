@@ -1,4 +1,5 @@
-﻿using LOLClient.Models;
+﻿using AccountChecker.Models;
+using LOLClient.Models;
 using LOLClient.UI;
 using LOLClient.Utility;
 using Newtonsoft.Json.Linq;
@@ -67,6 +68,9 @@ public partial class SingleAccount : Form
 
                 if (propertyInfo.PropertyType == typeof(List<Champion>))
                     dataTable.Rows.Add(propertyInfo.Name, ((List<Champion>)propertyInfo.GetValue(_account, null)).Count);
+
+                if (propertyInfo.PropertyType == typeof(Rank))
+                    dataTable.Rows.Add(propertyInfo.Name, ((Rank)propertyInfo.GetValue(_account, null)).ToString());
             }
             else
             {
@@ -159,7 +163,7 @@ public partial class SingleAccount : Form
         ProgressBar.Visible = true;
         _uiUtility.InitializeProgressBar(ProgressBar, 1 + 1); // 1 account + 1 for functional progress bar
 
-        var settings = await _coreUtility.LoadFromSettingsFileAsync(); // Gets Settings file
+        var settings = _coreUtility.LoadFromSettingsFile(); // Gets Settings file
 
         // Run the Work method as a Task
         var task = Task.Run(async () =>

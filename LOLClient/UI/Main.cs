@@ -25,9 +25,9 @@ public partial class Main : Form
 
     }
 
-    private async void LoadConfigAsync()
+    private void LoadConfigAsync()
     {
-        var settings = await _coreUtility.LoadFromSettingsFileAsync();
+        var settings = _coreUtility.LoadFromSettingsFile();
 
         if (settings.ContainsKey("ComboListPath"))
             ComboListText.Text = settings["ComboListPath"].ToString();
@@ -67,7 +67,7 @@ public partial class Main : Form
 
     }
 
-    private void ComboLoadButton_Click(object sender, EventArgs e)
+    private async void ComboLoadButton_Click(object sender, EventArgs e)
     {
         OpenFileDialog openFile = new();
 
@@ -79,7 +79,7 @@ public partial class Main : Form
             string filePath = openFile.FileName;
 
             ComboListText.Text = filePath;
-            _coreUtility.SaveToSettingsFileAsync("ComboListPath", filePath);
+            await _coreUtility.SaveToSettingsFileAsync("ComboListPath", filePath);
         }
 
     }
@@ -169,9 +169,9 @@ public partial class Main : Form
     private async Task InitRunnerAsync(int actualThreadCount, char delimiter)
     {
 
-        var settings = await _coreUtility.LoadFromSettingsFileAsync(); // Gets Settings file
+        var settings = _coreUtility.LoadFromSettingsFile(); // Gets Settings file
 
-        var comboList = _coreUtility.ReadComboList(ComboListText.Text, delimiter); // Reads the combolist(accounts) path
+        var comboList = await _coreUtility.ReadComboList(ComboListText.Text, delimiter); // Reads the combolist(accounts) path
 
         // Update accounts left and progress bar 
         UpdateProgress(comboList.Count.ToString());

@@ -17,7 +17,6 @@ namespace LOLClient;
  * It is responsible for connecting, creating and retreiving data from
  * the league and riot client services.
  */
-
 public class Runner
 {
 
@@ -27,13 +26,16 @@ public class Runner
     private AccountData _data;
     private string _region;
     private readonly CoreUtility _coreUtility;
+    private static readonly object _lock = new();
 
     public Runner()
     {
-        _coreUtility = new CoreUtility();
-        _account = new();
-        _client = new();
-
+        lock (_lock)
+        {
+            _coreUtility = new CoreUtility();
+            _account = new();
+            _client = new();
+        }
     }
 
     // This method takes in the username, password, and settings JObject as parameters
@@ -41,7 +43,7 @@ public class Runner
     public async Task Job_AccountFetchingWithoutTasks(string username, string password, JObject settings)
     {
         // Run RiotClientRunner with the given username, password, and RiotClientPath
-        bool didRiotSucceed = RiotClientRunner(username, password, settings["RiotClientPath"].ToString());
+        bool didRiotSucceed = await RiotClientRunner(username, password, settings["RiotClientPath"].ToString());
 
         // If RiotClientRunner did not succeed, return from the method
         if (!didRiotSucceed)
@@ -71,7 +73,7 @@ public class Runner
     public async Task Job_AccountFetchingWithTasks(string username, string password, JObject settings)
     {
         // Run RiotClientRunner with the given username, password, and RiotClientPath
-        bool didRiotSucceed = RiotClientRunner(username, password, settings["RiotClientPath"].ToString());
+        bool didRiotSucceed = await RiotClientRunner(username, password, settings["RiotClientPath"].ToString());
 
         // If RiotClientRunner did not succeed, return from the method
         if (!didRiotSucceed)
@@ -101,7 +103,7 @@ public class Runner
     public async Task Job_ExecuteTasksWithoutAccountFetching(string username, string password, JObject settings, Dictionary<string, bool> tasks)
     {
         // Run RiotClientRunner with the given username, password, and RiotClientPath
-        bool didRiotSucceed = RiotClientRunner(username, password, settings["RiotClientPath"].ToString());
+        bool didRiotSucceed = await RiotClientRunner(username, password, settings["RiotClientPath"].ToString());
 
         // If RiotClientRunner did not succeed, return from the method
         if (!didRiotSucceed)
@@ -131,20 +133,20 @@ public class Runner
      * 
      * Requires account username, account password and the path to the RiotClientServices.exe
      */
-    private bool RiotClientRunner(string username, string password, string riotClientPath)
+    private async Task<bool> RiotClientRunner(string username, string password, string riotClientPath)
     {
 
         Connection connection = new(); // Initialize a new connection for the RiotClientServices.exe
 
         RiotConnection riotConnection = new(_client, connection, riotClientPath); // Creates client 
 
-        riotConnection.Run(); // Run steps
+        await riotConnection.RunAsync(); // Run steps
 
         _riotClientCredentials = riotConnection.GetRiotCredentials(); // Retrieves Riot Client Connection Credentials for the LeagueClient.
 
-        RiotAuth riotAuth = new(connection, riotConnection); // Initializes Auth session
+        RiotAuth riotAuth = new(connection); // Initializes Auth session
 
-        bool didLogin = riotAuth.Login(username, password, riotClientPath); // Attempts to login the Summoner
+        bool didLogin = await riotAuth.Login(username, password); // Attempts to login the Summoner
 
         if (!didLogin) // Check if login fails
         {
@@ -153,13 +155,13 @@ public class Runner
             return false;
         }
 
-        _region = riotConnection.RequestRegion(); // Gets the Region of the Summoner for the League Client.
+        _region = await riotConnection.RequestRegion(); // Gets the Region of the Summoner for the League Client.
 
         _account.Region = _region;
         _account.Username = username;
         _account.Password = password;
 
-        var didLaunch = riotConnection.WaitForLaunch(); // Wait for League Client to Launch. Must be processed after LOGIN
+        var didLaunch = await riotConnection.WaitForLaunchAsync(); // Wait for League Client to Launch. Must be processed after LOGIN
 
         if (!didLaunch)
         {
@@ -194,17 +196,17 @@ public class Runner
             RiotCredentials = _riotClientCredentials
         };
 
-        var isCreated = leagueConnection.Run(); // Run steps
+        var isCreated = await leagueConnection.Run(); // Run steps
 
         if (!isCreated)
             return false;
 
-        _data = new(connection); // Sets Data object with LeagueClient's Connection
+        _data = new(connection, _account); // Sets Data object with LeagueClient's Connection
 
         if (!skipAccountData)
         {
-            await FetchAccountDataAsync(_account); // Fetches Summoner Account data
-            await _data.ExportAccount(_account); // Export account
+            await FetchAccountDataAsync(); // Fetches Summoner Account data
+            await _data.ExportAccount(); // Export account
         }
 
         if (!skipAccountTasks)
@@ -218,11 +220,14 @@ public class Runner
     }
 
     // This method is responsible for fetching account data for the passed account asynchronously.
-    private async Task FetchAccountDataAsync(Account account)
+    private async Task FetchAccountDataAsync()
     {
-        await _data.GetSkinsAsync(account);
-        await _data.GetChampionsAsync(account);
-        await _data.GetSummonerDataAsync(account);
+        await _data.GetSkinsAsync();
+        await _data.GetChampionsAsync();
+        await _data.GetSummonerDataAsync();
+        await _data.GetRank();
+        await _data.GetQueueStats();
+        _data.GetLoot();
     }
 
     // This method executes the wanted Hextech Tasks on an account asynchronously.
@@ -249,7 +254,7 @@ public class Runner
     {
     }
 
-
+    // This method kills all existing clients
     public void CleanUp()
     {
         _client.CloseClients();

@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Threading;
 using System;
+using System.Threading.Tasks;
 
 namespace LOLClient;
 
@@ -14,7 +15,7 @@ public class Client
         _processes = new();
     }
 
-    public int CreateClient(List<string> processArgs, string path)
+    public async Task<int> CreateClient(List<string> processArgs, string path)
     {
 
         Process process = new();
@@ -36,7 +37,7 @@ public class Client
 
                 _processes.Add(process);
 
-                Thread.Sleep(2000);
+                await Task.Delay(2000);
 
                 return process.Id;
             }

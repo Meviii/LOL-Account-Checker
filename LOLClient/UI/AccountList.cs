@@ -41,6 +41,7 @@ public partial class AccountList : Form
         dataTable.Columns.Add("BE");
         dataTable.Columns.Add("RP");
         dataTable.Columns.Add("OE");
+        dataTable.Columns.Add("Rank");
         dataTable.Columns.Add("Skins");
         dataTable.Columns.Add("Champions");
         dataTable.Columns.Add("Verified");
@@ -54,6 +55,7 @@ public partial class AccountList : Form
                 account.BE,
                 account.RP,
                 account.OE,
+                $"{account.CurrentRank.Tier} {account.CurrentRank.Division}",
                 account.Skins.Count,
                 account.Champions.Count,
                 account.IsEmailVerified
