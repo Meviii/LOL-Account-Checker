@@ -11,7 +11,7 @@ This program is a League of Legends account checker supporting multi threading w
 
 ## How to use
 
-*Note: I recommend using at most 4 threads currently*
+*Note: I recommend using at most 4 threads currently*  
 *Note: Rarely, accounts can show as login failed when they are active. A new change that is being worked on will fix this soon.*
 
 ### First Way
