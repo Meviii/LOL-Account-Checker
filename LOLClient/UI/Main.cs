@@ -32,6 +32,9 @@ public partial class Main : Form
     {
         var settings = _coreUtility.LoadFromSettingsFile();
 
+        if (settings == null)
+            return;
+
         if (settings.ContainsKey("ComboListPath"))
             ComboListText.Text = settings["ComboListPath"].ToString();
 
@@ -292,7 +295,7 @@ public partial class Main : Form
     private void accountsListButton_Click(object sender, EventArgs e)
     {
         this.Hide();
-        _uIUtility.LoadAccountsListView();
+        _uIUtility.LoadAccountsListView(this);
     }
 
     private void Main_Load(object sender, EventArgs e)

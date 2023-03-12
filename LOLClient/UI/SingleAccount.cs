@@ -172,7 +172,7 @@ public partial class SingleAccount : Form
     {
         this.Hide();
 
-        _uiUtility.LoadAccountsListView();
+        _uiUtility.LoadAccountsListView(this);
     }
 
     private void label3_Click(object sender, EventArgs e)

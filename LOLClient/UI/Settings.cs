@@ -89,6 +89,7 @@ public partial class Settings : Form
         }
         else
         {
+            StatusLabel.Text = "";
             this.Hide();
             _uiUtility.LoadMainView();
         }
@@ -126,20 +127,18 @@ public partial class Settings : Form
     private void CloseButton_Click(object sender, EventArgs e)
     {
         this.Hide();
-        try
-        {
-            _uiUtility.LoadMainView();
-        }
-        catch
-        {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Main))
-                {
 
-                    form.Close();
-                }
+        // if main form exists, only hide settings dialog
+        foreach (Form form in Application.OpenForms)
+        {
+            if (form.GetType() == typeof(Main))
+            {
+                return;
             }
         }
+
+        // if main form doesnt exist, close app
+        Application.Exit();
+
     }
 }
