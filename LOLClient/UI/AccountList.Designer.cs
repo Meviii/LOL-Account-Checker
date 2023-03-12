@@ -36,6 +36,7 @@ namespace LOLClient
             SummonerName = new DataGridViewTextBoxColumn();
             BackButton = new Button();
             ExportsFolderButton = new Button();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)accountsGridView).BeginInit();
             SuspendLayout();
             // 
@@ -65,7 +66,7 @@ namespace LOLClient
             accountsGridView.Name = "accountsGridView";
             accountsGridView.ReadOnly = true;
             accountsGridView.RowTemplate.Height = 25;
-            accountsGridView.Size = new System.Drawing.Size(823, 447);
+            accountsGridView.Size = new System.Drawing.Size(823, 437);
             accountsGridView.TabIndex = 2;
             accountsGridView.CellMouseDoubleClick += accountsGridView_CellContentDoubleClick;
             // 
@@ -97,6 +98,17 @@ namespace LOLClient
             ExportsFolderButton.UseVisualStyleBackColor = false;
             ExportsFolderButton.Click += ExportsFolderButton_Click;
             // 
+            // button1
+            // 
+            button1.BackColor = System.Drawing.Color.LightCyan;
+            button1.Location = new System.Drawing.Point(847, 585);
+            button1.Name = "button1";
+            button1.Size = new System.Drawing.Size(86, 36);
+            button1.TabIndex = 23;
+            button1.Text = "Refresh";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
             // AccountList
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -105,6 +117,7 @@ namespace LOLClient
             BackgroundImage = (System.Drawing.Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new System.Drawing.Size(1037, 627);
+            Controls.Add(button1);
             Controls.Add(ExportsFolderButton);
             Controls.Add(BackButton);
             Controls.Add(accountsGridView);
@@ -126,5 +139,6 @@ namespace LOLClient
         private DataGridViewTextBoxColumn SummonerName;
         private Button BackButton;
         private Button ExportsFolderButton;
+        private Button button1;
     }
 }

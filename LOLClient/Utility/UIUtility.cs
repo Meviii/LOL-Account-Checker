@@ -18,7 +18,30 @@ public class UIUtility
 {
     public UIUtility() { }
 
-    // This method is in charge of switching to (or creating) the Main form.
+    // This method is in charge of switching to (or creating) the Main form while preserving the same location as passed Form.
+    public void LoadMainView(Form currentForm)
+    {
+        // Loops over each active form and makes it visible, else, creates new instance of the form
+        foreach (Form form in Application.OpenForms)
+        {
+            if (form.GetType() == typeof(Main))
+            {
+
+                form.Location = currentForm.Location;
+                form.Visible = true;
+                form.Focus();
+                return;
+            }
+        }
+
+        var newForm = new Main
+        {
+            Location = currentForm.Location
+        };
+        newForm.Show();
+    }
+
+    // This method is in charge of switching to (or creating) the Main form without preserving the location of the passed form.
     public void LoadMainView()
     {
         // Loops over each active form and makes it visible, else, creates new instance of the form
@@ -33,11 +56,12 @@ public class UIUtility
             }
         }
 
-        new Main().Show();
+        var newForm = new Main();
+        newForm.Show();
     }
 
     // This method is in charge of switching to the Single Account form.
-    public void LoadSingleAccountView(Account account)
+    public void LoadSingleAccountView(Account account, Form currentForm)
     {
         // Loops over each form and closes the existant Single Account form and creates a new instance.
         // This is to ensure that an updated account of the current application instance is also updated in this view.
@@ -49,11 +73,15 @@ public class UIUtility
             }
         }
 
-        new SingleAccount(account).Show();
+        var newForm = new SingleAccount(account)
+        {
+            Location = currentForm.Location
+        };
+        newForm.Show();
     }
 
     // This method is in charge of switching to the Accounts List form.
-    public void LoadAccountsListView()
+    public void LoadAccountsListView(Form currentForm)
     {
         // Loops over active forms and closes the instance of an AccountList if initiated.
         // This is to ensure that a new account that is checked is also visible in the view.
@@ -61,11 +89,18 @@ public class UIUtility
         {
             if (form.GetType() == typeof(AccountList))
             {
-                form.Hide();
+                form.Location = currentForm.Location;
+                form.Visible = true;
+                form.Focus();
+                return;
             }
         }
-        
-        new AccountList().Show();
+
+        var accountList = new AccountList
+        {
+            Location = currentForm.Location
+        };
+        accountList.Show();
 
     }
 
@@ -80,6 +115,7 @@ public class UIUtility
             {
                 form.Visible = true;
                 form.Show();
+                form.Focus();
                 return;
             }
         }

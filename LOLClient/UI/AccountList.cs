@@ -86,7 +86,7 @@ public partial class AccountList : Form
                 if (row.Cells["Summoner"].Value.ToString() == account.SummonerName)
                 {
                     this.Hide();
-                    _uiUtility.LoadSingleAccountView(account);
+                    _uiUtility.LoadSingleAccountView(account, this);
                 }
             }
         }
@@ -102,11 +102,16 @@ public partial class AccountList : Form
     {
         this.Hide();
 
-        _uiUtility.LoadMainView();
+        _uiUtility.LoadMainView(this);
     }
 
     private void ExportsFolderButton_Click(object sender, EventArgs e)
     {
         Process.Start("explorer.exe", PathConfig.ExportsFolder);
+    }
+
+    private void button1_Click(object sender, EventArgs e)
+    {
+        FillAccountsDataTableAsync();
     }
 }
