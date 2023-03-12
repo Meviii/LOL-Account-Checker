@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace LOLClient.Connections;
 
-public class LeagueConnection
+public class LeagueConnection : Connection
 {
     private readonly string _path;
-    private readonly Connection _connection;
+    //private readonly Connection _connection;
     public Dictionary<string, object> RiotCredentials = null;
     private readonly string _region;
     private readonly Client _client;
@@ -27,7 +27,7 @@ public class LeagueConnection
         {
             _path = path;
             _client = client;
-            _connection = connection;
+            //_connection = connection;
             _region = region;
         }
     }
@@ -55,7 +55,7 @@ public class LeagueConnection
         {
             try
             {
-                var response = await _connection.RequestAsync(HttpMethod.Get, "/lol-login/v1/session", null);
+                var response = await RequestAsync(HttpMethod.Get, "/lol-login/v1/session", null);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -63,6 +63,7 @@ public class LeagueConnection
 
                     if (result["state"].ToString().ToLower() == "SUCCEEDED".ToLower())
                     {
+                        Thread.Sleep(2000);
                         Console.WriteLine("Session succeeded.");
                         return true;
                     }
@@ -76,7 +77,8 @@ public class LeagueConnection
                             return false;
                         }else if (result["error"]["messageId"].ToString().ToLower() == "FAILED_TO_COMMUNICATE_WITH_LOGIN_QUEUE".ToLower())
                         {
-                            Console.WriteLine("Failed to communicate with login queue. Re-adding to queue");
+                            // re add to queue
+                            Console.WriteLine("Failed to communicate with login queue.");
                             return false;
                         }
                     }
@@ -88,7 +90,7 @@ public class LeagueConnection
                 }
 
                 counter++;
-                await Task.Delay(3000);
+                Thread.Sleep(1000);
             }
             catch
             {
@@ -99,12 +101,14 @@ public class LeagueConnection
 
     private async Task CreateLeagueClient()
     {
-        var processArgs = new List<string> {
+        lock (_lock)
+        {
+            var processArgs = new List<string> {
             _path,
             "--riotclient-app-port=" + RiotCredentials["riotPort"],
             "--riotclient-auth-token=" + RiotCredentials["riotAuthToken"],
-            "--app-port=" + _connection.Port,
-            "--remoting-auth-token=" + _connection.AuthToken,
+            "--app-port=" + Port,
+            "--remoting-auth-token=" + AuthToken,
             "--allow-multiple-clients",
             "--locale=en_GB",
             "--disable-self-update",
@@ -112,7 +116,8 @@ public class LeagueConnection
             "--headless"
         };
 
-        ProcessID = await _client.CreateClient(processArgs, _path);
+            ProcessID = _client.CreateClient(processArgs, _path).Result;
+        }
     }
 
 }

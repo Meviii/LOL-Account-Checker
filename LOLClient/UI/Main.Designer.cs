@@ -46,6 +46,10 @@ namespace LOLClient
             accountsListButton = new Button();
             accountsLeftLabel = new Label();
             label5 = new Label();
+            label6 = new Label();
+            UsernameTextBox = new TextBox();
+            PasswordTextBox = new TextBox();
+            QuickCheckButton = new Button();
             SuspendLayout();
             // 
             // ConsoleTextBox
@@ -90,7 +94,7 @@ namespace LOLClient
             // LoadComboButton
             // 
             LoadComboButton.BackColor = System.Drawing.Color.LightCyan;
-            LoadComboButton.Location = new System.Drawing.Point(963, 186);
+            LoadComboButton.Location = new System.Drawing.Point(960, 285);
             LoadComboButton.Name = "LoadComboButton";
             LoadComboButton.Size = new System.Drawing.Size(67, 30);
             LoadComboButton.TabIndex = 12;
@@ -105,7 +109,7 @@ namespace LOLClient
             label2.FlatStyle = FlatStyle.Flat;
             label2.Font = new System.Drawing.Font("Segoe UI Light", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label2.ForeColor = System.Drawing.Color.LightYellow;
-            label2.Location = new System.Drawing.Point(872, 148);
+            label2.Location = new System.Drawing.Point(869, 254);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(114, 25);
             label2.TabIndex = 13;
@@ -119,7 +123,7 @@ namespace LOLClient
             label3.FlatStyle = FlatStyle.Flat;
             label3.Font = new System.Drawing.Font("Segoe UI Light", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label3.ForeColor = System.Drawing.Color.LightYellow;
-            label3.Location = new System.Drawing.Point(847, 244);
+            label3.Location = new System.Drawing.Point(844, 329);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(94, 25);
             label3.TabIndex = 15;
@@ -130,7 +134,7 @@ namespace LOLClient
             // 
             DelimiterTextBox.BackColor = System.Drawing.Color.LightCyan;
             DelimiterTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            DelimiterTextBox.Location = new System.Drawing.Point(967, 244);
+            DelimiterTextBox.Location = new System.Drawing.Point(965, 328);
             DelimiterTextBox.MaxLength = 1;
             DelimiterTextBox.Name = "DelimiterTextBox";
             DelimiterTextBox.PlaceholderText = ":";
@@ -143,7 +147,7 @@ namespace LOLClient
             // 
             ComboListText.BackColor = System.Drawing.Color.LightCyan;
             ComboListText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            ComboListText.Location = new System.Drawing.Point(826, 186);
+            ComboListText.Location = new System.Drawing.Point(823, 286);
             ComboListText.Name = "ComboListText";
             ComboListText.ReadOnly = true;
             ComboListText.Size = new System.Drawing.Size(131, 29);
@@ -157,7 +161,7 @@ namespace LOLClient
             label4.FlatStyle = FlatStyle.Flat;
             label4.Font = new System.Drawing.Font("Segoe UI Light", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label4.ForeColor = System.Drawing.Color.LightYellow;
-            label4.Location = new System.Drawing.Point(826, 300);
+            label4.Location = new System.Drawing.Point(823, 368);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(134, 25);
             label4.TabIndex = 19;
@@ -169,7 +173,7 @@ namespace LOLClient
             ThreadCountTextBox.BackColor = System.Drawing.Color.LightCyan;
             ThreadCountTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             ThreadCountTextBox.ForeColor = System.Drawing.SystemColors.MenuText;
-            ThreadCountTextBox.Location = new System.Drawing.Point(968, 297);
+            ThreadCountTextBox.Location = new System.Drawing.Point(965, 365);
             ThreadCountTextBox.MaxLength = 3;
             ThreadCountTextBox.Name = "ThreadCountTextBox";
             ThreadCountTextBox.PlaceholderText = "1";
@@ -181,7 +185,7 @@ namespace LOLClient
             // StartButton
             // 
             StartButton.BackColor = System.Drawing.Color.LightCyan;
-            StartButton.Location = new System.Drawing.Point(872, 487);
+            StartButton.Location = new System.Drawing.Point(872, 518);
             StartButton.Name = "StartButton";
             StartButton.Size = new System.Drawing.Size(114, 54);
             StartButton.TabIndex = 21;
@@ -192,7 +196,7 @@ namespace LOLClient
             // ProgressBar
             // 
             ProgressBar.BackColor = System.Drawing.Color.LightSkyBlue;
-            ProgressBar.Location = new System.Drawing.Point(847, 456);
+            ProgressBar.Location = new System.Drawing.Point(845, 484);
             ProgressBar.Name = "ProgressBar";
             ProgressBar.Size = new System.Drawing.Size(170, 23);
             ProgressBar.TabIndex = 22;
@@ -215,7 +219,7 @@ namespace LOLClient
             // 
             accountsLeftLabel.BackColor = System.Drawing.Color.LightCyan;
             accountsLeftLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            accountsLeftLabel.Location = new System.Drawing.Point(884, 399);
+            accountsLeftLabel.Location = new System.Drawing.Point(884, 438);
             accountsLeftLabel.Name = "accountsLeftLabel";
             accountsLeftLabel.Size = new System.Drawing.Size(89, 29);
             accountsLeftLabel.TabIndex = 24;
@@ -228,11 +232,60 @@ namespace LOLClient
             label5.FlatStyle = FlatStyle.Flat;
             label5.Font = new System.Drawing.Font("Segoe UI Light", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label5.ForeColor = System.Drawing.Color.LightYellow;
-            label5.Location = new System.Drawing.Point(863, 359);
+            label5.Location = new System.Drawing.Point(863, 403);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(133, 25);
             label5.TabIndex = 25;
             label5.Text = "Accounts Left";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.BackColor = System.Drawing.Color.Transparent;
+            label6.FlatStyle = FlatStyle.Flat;
+            label6.Font = new System.Drawing.Font("Segoe UI Light", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label6.ForeColor = System.Drawing.Color.LightYellow;
+            label6.Location = new System.Drawing.Point(866, 136);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(120, 25);
+            label6.TabIndex = 26;
+            label6.Text = "Quick Check";
+            // 
+            // UsernameTextBox
+            // 
+            UsernameTextBox.BackColor = System.Drawing.Color.LightCyan;
+            UsernameTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            UsernameTextBox.Location = new System.Drawing.Point(825, 173);
+            UsernameTextBox.MaxLength = 32;
+            UsernameTextBox.Name = "UsernameTextBox";
+            UsernameTextBox.PlaceholderText = "Username";
+            UsernameTextBox.Size = new System.Drawing.Size(92, 29);
+            UsernameTextBox.TabIndex = 27;
+            UsernameTextBox.TextAlign = HorizontalAlignment.Center;
+            // 
+            // PasswordTextBox
+            // 
+            PasswordTextBox.BackColor = System.Drawing.Color.LightCyan;
+            PasswordTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            PasswordTextBox.Location = new System.Drawing.Point(927, 173);
+            PasswordTextBox.MaxLength = 99;
+            PasswordTextBox.Name = "PasswordTextBox";
+            PasswordTextBox.PlaceholderText = "Password";
+            PasswordTextBox.Size = new System.Drawing.Size(92, 29);
+            PasswordTextBox.TabIndex = 28;
+            PasswordTextBox.TextAlign = HorizontalAlignment.Center;
+            PasswordTextBox.UseSystemPasswordChar = true;
+            // 
+            // QuickCheckButton
+            // 
+            QuickCheckButton.BackColor = System.Drawing.Color.LightCyan;
+            QuickCheckButton.Location = new System.Drawing.Point(872, 208);
+            QuickCheckButton.Name = "QuickCheckButton";
+            QuickCheckButton.Size = new System.Drawing.Size(100, 31);
+            QuickCheckButton.TabIndex = 29;
+            QuickCheckButton.Text = "Check";
+            QuickCheckButton.UseVisualStyleBackColor = false;
+            QuickCheckButton.Click += QuickCheckButton_Click;
             // 
             // Main
             // 
@@ -242,6 +295,10 @@ namespace LOLClient
             BackgroundImage = (System.Drawing.Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new System.Drawing.Size(1037, 627);
+            Controls.Add(QuickCheckButton);
+            Controls.Add(PasswordTextBox);
+            Controls.Add(UsernameTextBox);
+            Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(accountsLeftLabel);
             Controls.Add(accountsListButton);
@@ -285,5 +342,9 @@ namespace LOLClient
         private Button accountsListButton;
         private Label accountsLeftLabel;
         private Label label5;
+        private Label label6;
+        private TextBox UsernameTextBox;
+        private TextBox PasswordTextBox;
+        private Button QuickCheckButton;
     }
 }

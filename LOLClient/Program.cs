@@ -29,13 +29,13 @@ class Program
 
         // Check if settings file exists.
         if (IsSettingsFileEmpty().Result)
-        {
+        { 
             // Run updates if settings file is empty (first run).
             Application.Run(new Settings(true));
+
         }
         else
         {
-
             // Run main form if settings file is populated.
             Application.Run(new Main());
         }

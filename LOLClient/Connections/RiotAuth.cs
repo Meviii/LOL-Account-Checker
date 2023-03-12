@@ -13,13 +13,15 @@ namespace LOLClient.Connections;
 
 public class RiotAuth
 {
-    private readonly Connection _connection;
+    private readonly RiotConnection _connection;
     private static readonly object _lock = new();
+    private readonly Client _client;
 
-    public RiotAuth(Connection connection)
+    public RiotAuth(RiotConnection connection, Client client)
     {
         lock (_lock)
         {
+            _client = client;
             _connection = connection;
         }
     }
@@ -35,16 +37,15 @@ public class RiotAuth
 
         while (true)
         {
-
-
             var response = await _connection.RequestAsync(HttpMethod.Put, "/rso-auth/v1/session/credentials", data);
             var content = JToken.Parse(await response.Content.ReadAsStringAsync());
-            lock (_lock)
-            {
-                string logFilePath = @"..\..\..\logCREDENTIALS.txt";
 
-                File.AppendAllTextAsync(logFilePath, $"{DateTime.Now} - {content}\n\n\n\n\n").Wait();
-            }
+            //lock (_lock)
+            //{
+            //    string logFilePath = @"..\..\..\logRSO_CREDENTIALS.txt";
+            //    File.AppendAllTextAsync(logFilePath, $"{DateTime.Now} - STATUS CODE: {response.StatusCode} - ACCOUNT: {username} {password}\n\n {response.Content.ReadAsStringAsync().Result}\n\n\n\n\n").Wait();
+            //}
+
             if (content.SelectToken("error") != null)
             {
                 if (content["error"].ToString() == "auth_failure")
@@ -57,8 +58,9 @@ public class RiotAuth
             {
                 if (content["errorCode"].ToString() == "RPC_ERROR")
                 {
-                    // re add to queue, false for now.
-                    return false;
+                    Console.WriteLine("Riot Session error. Try again later.");
+                    _client.CloseClients();
+                    throw new Exception("Riot API Error. Try again in 5 minutes");
                 }
             }
 
@@ -67,7 +69,7 @@ public class RiotAuth
                 return true;
             }
 
-            await Task.Delay(3000);
+            Thread.Sleep(3000);
 
             return false;
         }

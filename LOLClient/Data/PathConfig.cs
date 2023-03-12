@@ -9,4 +9,5 @@ public class PathConfig
     public static string SettingsFile = $@"{DataFolder}settings.json";
     public static string SkinsFile = @$"{DataFolder}skins.json";
     public static string ChampionsFile = @$"{DataFolder}champions.json";
+    public static string TasksFile = $@"{DataFolder}tasks.json";
 }

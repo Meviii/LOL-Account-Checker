@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Azure;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -8,14 +9,15 @@ using System.Net.Http;
 using System.Reflection.Metadata;
 using System.Threading;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace LOLClient.Connections;
 
-public class RiotConnection
+public class RiotConnection : Connection
 {
 
     public string _riotClientPath;
-    private readonly Connection _connection;
+    //private readonly Connection _connection;
     private readonly Client _client;
     public int ProcessID { get; private set; }
     private static readonly object _lock = new();
@@ -25,7 +27,7 @@ public class RiotConnection
         lock (_lock)
         {
             _client = client;
-            _connection = connection;
+            //_connection = connection;
             _riotClientPath = riotClientPath;
         }
     }
@@ -42,8 +44,8 @@ public class RiotConnection
 
         var creds = new Dictionary<string, object>
         {
-            { "riotPort", _connection.Port },
-            { "riotAuthToken", _connection.AuthToken }
+            { "riotPort", Port },
+            { "riotAuthToken", AuthToken }
         };
         return creds;
 
@@ -58,10 +60,9 @@ public class RiotConnection
             { "trustLevels", new List<string> { "always_trusted" } }
         };
 
-        await _connection.RequestAsync(HttpMethod.Post, "/rso-auth/v2/authorizations", data);
+        var response = await RequestAsync(HttpMethod.Post, "/rso-auth/v2/authorizations", data);
 
-        await Task.Delay(2000);
-
+        Thread.Sleep(1000);
     }
 
     public async Task<bool> WaitForLaunchAsync(int timeout = 60)
@@ -71,18 +72,25 @@ public class RiotConnection
 
         while (true)
         {
-            var phase = await _connection.RequestAsync(HttpMethod.Get, "/rnet-lifecycle/v1/product-context-phase", null);
+            var phase = await RequestAsync(HttpMethod.Get, "/rnet-lifecycle/v1/product-context-phase", null);
             var result = JToken.Parse(await phase.Content.ReadAsStringAsync());
 
-            lock (_lock)
-            {
-                string logFilePath = @"..\..\..\logPRODUCTCONTEXTPHASE.txt";
+            //lock (_lock)
+            //{
+            //    string logFilePath = @"..\..\..\logPRODUCTCONTEXTPHASE.txt";
 
-                File.AppendAllTextAsync(logFilePath, $"{DateTime.Now} - {result}\n\n\n\n\n").Wait();
+            //    File.AppendAllTextAsync(logFilePath, $"{DateTime.Now} - {result}\n\n\n\n\n").Wait();
+            //}
+
+            if (result.ToString().ToLower() == "VngAccountRequired".ToLower())
+            {
+                // retry
+                return false;
             }
+
             if (result.ToString().ToLower() == "WaitForLaunch".ToLower())
             {
-                await Task.Delay(1000);
+                Thread.Sleep(1000);
                 return true;
             }
 
@@ -95,7 +103,7 @@ public class RiotConnection
             if ((DateTime.Now - startTime).TotalSeconds >= timeout)
             return false;
 
-            await Task.Delay(1000);
+            Thread.Sleep(1000);
         }
             
     }
@@ -105,8 +113,8 @@ public class RiotConnection
         List<string> processArgs = new()
         {
             _riotClientPath,
-            "--app-port=" + _connection.Port,
-            "--remoting-auth-token=" + _connection.AuthToken,
+            "--app-port=" + Port,
+            "--remoting-auth-token=" + AuthToken,
             "--launch-product=league_of_legends",
             "--launch-patchline=live",
             "--allow-multiple-clients",
@@ -121,7 +129,7 @@ public class RiotConnection
 
     public async Task<string> RequestRegion()
     {
-        var response = await _connection.RequestAsync(HttpMethod.Get, "/riotclient/region-locale", null);
+        var response = await RequestAsync(HttpMethod.Get, "/riotclient/region-locale", null);
 
         var jsonResponse = JToken.Parse(await response.Content.ReadAsStringAsync());
 

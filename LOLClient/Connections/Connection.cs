@@ -17,13 +17,13 @@ public class Connection
     public readonly HttpClient _httpClient;
     private static readonly HashSet<int> _usedPorts = new();
     private static readonly object _lock = new();
-
     public Connection()
     {
+
         lock (_lock)
         {
             AuthToken = GenerateAuthToken();
-            Port = GetFreePort();
+            Port = GetFreePort().Result;
 
             _httpClient = new HttpClient(GetHandlerSettings())
             {
@@ -35,10 +35,11 @@ public class Connection
         }
     }
 
-    public string GetFreePort(int minPort = 50000, int maxPort = 65000)
+    public async Task<string> GetFreePort(int minPort = 50000, int maxPort = 65000)
     {
-        var sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
+        //var sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        var sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         for (var port = minPort; port < maxPort; port++)
         {
             try
@@ -60,12 +61,19 @@ public class Connection
                 if (e.SocketErrorCode == SocketError.AddressAlreadyInUse)
                     continue;
 
-                throw new Exception(e.Message);
+                // Retry with new Connection if socket refused
+                if (e.SocketErrorCode == SocketError.ConnectionRefused)
+                {
+                    // Retry
+                    Thread.Sleep(1000);
+                    continue;
+                }
+
             }
         }
 
         throw new Exception("No port available.");
-
+        
     }
 
     private string GenerateAuthToken(int length = 22)
@@ -130,12 +138,47 @@ public class Connection
                 default:
                     throw new Exception("Unsupported HTTP method.");
             }
+            Console.WriteLine($"Response: {response.StatusCode}");
+            return response;
+
+        }
+    }
+
+    public async Task<HttpResponseMessage> RequestAsync(HttpMethod method, string url, List<string> requestData, bool isList)
+    {
+        lock (_lock)
+        {
+            URLFixer(ref url);
+
+            var requestAddress = _httpClient.BaseAddress + url;
+            Console.WriteLine($"Sending {method} request. URL: {url}");
+
+            HttpResponseMessage response;
+
+            switch (method.Method)
+            {
+                case "GET":
+                    response = _httpClient.GetAsync(requestAddress).Result;
+                    break;
+                case "POST":
+                    var json = JsonConvert.SerializeObject(requestData);
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+                    response = _httpClient.PostAsync(requestAddress, content).Result;
+                    break;
+                case "PUT":
+                    json = JsonConvert.SerializeObject(requestData);
+                    content = new StringContent(json, Encoding.UTF8, "application/json");
+                    response = _httpClient.PutAsync(requestAddress, content).Result;
+                    break;
+                case "DELETE":
+                    response = _httpClient.DeleteAsync(requestAddress).Result;
+                    break;
+                default:
+                    throw new Exception("Unsupported HTTP method.");
+            }
 
             Console.WriteLine($"Response: {response.StatusCode}");
             return response;
         }
-
     }
-
-
 }

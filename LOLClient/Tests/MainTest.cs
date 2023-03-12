@@ -15,9 +15,9 @@ public class MainTest
     {
         var runner = new Runner();
         var utility = new CoreUtility();
-        await runner.Job_AccountFetchingWithoutTasks("mevismurf2",
-                                                     "ssaluk1967",
-                                                     utility.LoadFromSettingsFile());
+        //await runner.Job_ExecuteTasksWithoutAccountFetching("",
+        //                                             "",
+        //                                             utility.LoadFromSettingsFile());
         runner.CleanUp();
 
     }

@@ -3,58 +3,66 @@ using System.Diagnostics;
 using System.Threading;
 using System;
 using System.Threading.Tasks;
+using System.Collections.Concurrent;
 
 namespace LOLClient;
 
 public class Client
 {
-    private readonly List<Process> _processes;
-
+    private readonly ConcurrentBag<Process> _processes = new();
+    private static readonly object _lock = new();
     public Client()
     {
-        _processes = new();
     }
+
 
     public async Task<int> CreateClient(List<string> processArgs, string path)
     {
-
-        Process process = new();
-        while (true)
+        lock (_lock)
         {
-            try
+            Process process = new();
+            while (true)
             {
-                ProcessStartInfo processInfo = new()
+                try
                 {
+                    ProcessStartInfo processInfo = new()
+                    {
 
-                    FileName = path,
-                    Arguments = string.Join(" ", processArgs),
-                    UseShellExecute = false
-                };
+                        FileName = path,
+                        Arguments = string.Join(" ", processArgs),
+                        UseShellExecute = false
+                    };
 
-                process.StartInfo = processInfo;
+                    process.StartInfo = processInfo;
 
-                process.Start();
+                    process.Start();
 
-                _processes.Add(process);
+                    _processes.Add(process);
 
-                await Task.Delay(2000);
+                    Thread.Sleep(1000);
 
-                return process.Id;
-            }
-            catch
-            {
-                CloseClients();
-                throw new Exception("Wrong client path.");
+                    return process.Id;
+                }
+                catch
+                {
+                    CloseClients();
+                    throw new Exception("Wrong client path.");
+                }
             }
         }
     }
 
     public void CloseClient(int processId)
     {
-        foreach (Process process in _processes)
+        lock (_lock)
         {
-            if (process.Id == processId)
-                process.Kill();
+            foreach (Process process in _processes)
+            {
+                if (process.Id == processId)
+                {
+                    process.Kill();
+                }
+            }
         }
     }
     public void CloseClients()

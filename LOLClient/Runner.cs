@@ -26,6 +26,9 @@ public class Runner
     private AccountData _data;
     private string _region;
     private readonly CoreUtility _coreUtility;
+    private Loot _loot;
+    private HextechData _hextech;
+    private EventData _eventData;
     private static readonly object _lock = new();
 
     public Runner()
@@ -100,7 +103,7 @@ public class Runner
     // This method takes in the username, password, and settings JObject as parameters
     // and runs the RiotClientRunner and LeagueClientRunner methods excluding fetching
     // account data but executing Tasks(hextech, event).
-    public async Task Job_ExecuteTasksWithoutAccountFetching(string username, string password, JObject settings, Dictionary<string, bool> tasks)
+    public async Task Job_ExecuteTasksWithoutAccountFetching(string username, string password, JObject settings)
     {
         // Run RiotClientRunner with the given username, password, and RiotClientPath
         bool didRiotSucceed = await RiotClientRunner(username, password, settings["RiotClientPath"].ToString());
@@ -113,7 +116,7 @@ public class Runner
         }
 
         // Run LeagueClientRunner with the given LeagueClientPath. Execute Account fetching and Tasks.
-        bool didLeagueSucceed = await LeagueClientRunner(settings["LeagueClientPath"].ToString(), false, false, tasks);
+        bool didLeagueSucceed = await LeagueClientRunner(settings["LeagueClientPath"].ToString(), true, false);
 
         // If LeagueClientRunner did not succeed, return from the method
         if (!didLeagueSucceed)
@@ -136,15 +139,15 @@ public class Runner
     private async Task<bool> RiotClientRunner(string username, string password, string riotClientPath)
     {
 
-        Connection connection = new(); // Initialize a new connection for the RiotClientServices.exe
+        //Connection connection = new(); // Initialize a new connection for the RiotClientServices.exe
 
-        RiotConnection riotConnection = new(_client, connection, riotClientPath); // Creates client 
+        RiotConnection riotConnection = new(_client, null, riotClientPath); // Creates client 
 
         await riotConnection.RunAsync(); // Run steps
 
         _riotClientCredentials = riotConnection.GetRiotCredentials(); // Retrieves Riot Client Connection Credentials for the LeagueClient.
 
-        RiotAuth riotAuth = new(connection); // Initializes Auth session
+        RiotAuth riotAuth = new(riotConnection, _client); // Initializes Auth session
 
         bool didLogin = await riotAuth.Login(username, password); // Attempts to login the Summoner
 
@@ -185,13 +188,12 @@ public class Runner
      */
     private async Task<bool> LeagueClientRunner(string leagueClientPath,
                                                 bool skipAccountData = false,
-                                                bool skipAccountTasks = true,
-                                                Dictionary<string, bool> tasks = null)
+                                                bool skipAccountTasks = true)
     {
 
-        Connection connection = new(); // Initialize a new connection for the LeagueClient.exe
+        //Connection connection = new(); // Initialize a new connection for the LeagueClient.exe
 
-        LeagueConnection leagueConnection = new(connection, _client, leagueClientPath, _region) // Creates Client
+        LeagueConnection leagueConnection = new(null, _client, leagueClientPath, _region) // Creates Client
         {
             RiotCredentials = _riotClientCredentials
         };
@@ -199,59 +201,121 @@ public class Runner
         var isCreated = await leagueConnection.Run(); // Run steps
 
         if (!isCreated)
+        {
+            _client.CloseClient(leagueConnection.ProcessID);
             return false;
+        }
 
-        _data = new(connection, _account); // Sets Data object with LeagueClient's Connection
+        _data = new(leagueConnection, _account); // Sets Data object with LeagueClient's Connection
 
         if (!skipAccountData)
         {
             await FetchAccountDataAsync(); // Fetches Summoner Account data
-            await _data.ExportAccount(); // Export account
         }
 
         if (!skipAccountTasks)
         {
-            
-            await ExecuteHextechTasks(tasks); // Executes Hextech tasks on account
-            await ExecuteEventTasks(tasks); // Executes Event tasks on account
+            if (skipAccountData)
+            {
+                await FetchAccountLootAsync();
+            }
+            _hextech = new(leagueConnection, _loot);
+            await ExecuteHextechTasks(); // Executes Hextech tasks on account
+            await ExecuteEventTasks(); // Executes Event tasks on account
+
+            await _loot.RefreshLoot();
         }
 
+        await _data.ExportAccount(); // Export account
+
         return true;
+    }
+
+    private async Task FetchAccountLootAsync()
+    {
+
+        _loot = await _data.GetLootAsync();
+
     }
 
     // This method is responsible for fetching account data for the passed account asynchronously.
     private async Task FetchAccountDataAsync()
     {
+        
+        _loot = await _data.GetLootAsync();
+        
         await _data.GetSkinsAsync();
         await _data.GetChampionsAsync();
         await _data.GetSummonerDataAsync();
         await _data.GetRank();
         await _data.GetQueueStats();
-        await _data.GetLootAsync();
     }
 
     // This method executes the wanted Hextech Tasks on an account asynchronously.
-    private async Task ExecuteHextechTasks(Dictionary<string, bool> hextechTasks)
+    private async Task ExecuteHextechTasks()
     {
-        if (hextechTasks[TasksConfig.CraftKeys])
-            return;
+        var tasks = await _coreUtility.ReadFromTasksConfigFile();
 
-        if (hextechTasks[TasksConfig.OpenChests]) 
-            return;
+        foreach (var task in tasks)
+        {
+            //if (task.Key == TasksConfig.CraftKeys)
+            //{
 
-        if (hextechTasks[TasksConfig.DisenchantChampionShards])
-            return;
+            //}
 
-        if (hextechTasks[TasksConfig.DisenchantEternalShards])
-            return;
+            //if (tasks[TasksConfig.OpenChests])
+            //{
 
-        if (hextechTasks[TasksConfig.OpenCapsulesOrbsShards])
-            return;
+            //}
+            
+            if (task.Key == TasksConfig.DisenchantChampionShards && task.Value == true)
+            {
+                _hextech.DisenchantChampionShards();
+            }
+
+            if (task.Key == TasksConfig.DisenchantEternalShards && task.Value == true)
+            {
+                _hextech.DisenchantEternalShards();
+            }
+
+            if (task.Key == TasksConfig.DisenchantSkinShards && task.Value == true)
+            {
+                _hextech.DisenchantSkinShards();
+            }
+
+            if (task.Key == TasksConfig.DisenchantWardSkinShards && task.Value == true)
+            {
+                _hextech.DisenchantWardSkinShards();
+            }
+
+            //if (tasks[TasksConfig.OpenCapsulesOrbsShards])
+            //{
+
+            //}
+
+            //if (tasks[TasksConfig.BuyBlueEssence])
+            //{
+
+            //}
+
+            //if (tasks[TasksConfig.BuyChampionShards])
+            //{
+
+            //}
+        }
+        return;
     }
 
     // This method executes the wanted Event Tasks on an account asynchronously.
-    private async Task ExecuteEventTasks(Dictionary<string, bool> eventTasks)
+    private async Task ExecuteEventTasks()
     {
+        var tasks = await _coreUtility.ReadFromTasksConfigFile();
+
+        if (tasks[TasksConfig.ClaimEventRewards])
+            {
+            return;
+        }
+
     }
 
     // This method kills all existing clients
