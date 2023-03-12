@@ -19,7 +19,7 @@ namespace LOLClient.Tasks;
 public class AccountData
 {
     // The Connection instance used to make HTTP requests to the League API.
-    private readonly Connection _leagueConnection;
+    private readonly LeagueConnection _leagueConnection;
 
     // Object used to perform and persists the tasks on the specific account
     private Account _account;
@@ -34,7 +34,7 @@ public class AccountData
 
     // Constructor that initializes the _leagueConnection field with the provided Connection instance.
     // Needs the Connection instance used for the LeagueConnection instance.
-    public AccountData(Connection leagueConnection, Account account)
+    public AccountData(LeagueConnection leagueConnection, Account account)
     {
         lock (_lock)
         {
@@ -59,7 +59,7 @@ public class AccountData
             if (response.IsSuccessStatusCode)
             {
                 var jsonResponse = JArray.Parse(await response.Content.ReadAsStringAsync());
-                await LogToFile($"Champions from Request: \n{jsonResponse}");
+                //await LogToFile($"Champions from Request: \n{jsonResponse}");
                 if (jsonResponse != null)
                 {
                     return jsonResponse;
@@ -67,7 +67,7 @@ public class AccountData
             }
 
             // Wait 5 seconds before retrying the request.
-            await Task.Delay(5000);
+            Thread.Sleep(3000);
         }
     }
 
@@ -106,7 +106,7 @@ public class AccountData
         string filePath = $"{PathConfig.ChampionsFile}";
         string content = File.ReadAllText(filePath);
         var localChampJsonData = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(content);
-        await LogToFile($"Champions:\n {content}");
+        //await LogToFile($"Champions:\n {content}");
 
 
         // Fix to avoid n*m 
@@ -136,18 +136,14 @@ public class AccountData
 
     private async Task LogToFile(string message)
     {
-        await _semaphore.WaitAsync();
-        try
-        {
+        Task writeFileTask = null;
+        lock (_lock) { 
+
             string logFilePath = @"..\..\..\log.txt";
 
-            File.AppendAllTextAsync(logFilePath, $"{DateTime.Now} - {message}\n\n\n\n\n").Wait();
-
+            writeFileTask = File.AppendAllTextAsync(logFilePath, $"{DateTime.Now} - {message}\n\n\n\n\n");
         }
-        finally
-        {
-            _semaphore.Release();
-        }
+        await writeFileTask;
     }
 
     // Method that asynchronously retrieves the summoner data for the account and assigns it to the account object.
@@ -165,8 +161,9 @@ public class AccountData
     }
 
     // This method gets the loot data from the Loot instance
-    public async Task GetLootAsync()
+    public async Task<Loot> GetLootAsync()
     {
+
         await _loot.RefreshLoot();
 
         // Loop through each item in the loot data.
@@ -197,6 +194,13 @@ public class AccountData
                 }
             }
         }
+
+        if (_account.RP == null)
+        {
+            _account.RP = "0";
+        }
+
+        return _loot;
     }
 
     // Returns a tuple of the current summoner's name and level in the order <Level, Name>.
@@ -209,7 +213,7 @@ public class AccountData
         var data = JToken.Parse(await response.Content.ReadAsStringAsync());
 
         // Log the current summoner data to a file using the LogToFile method.
-        await LogToFile($"Current Summoner:\n {data}");
+        //await LogToFile($"Current Summoner:\n {data}");
 
         // Create a new Tuple object containing the summoner's level and name as strings.
         return new Tuple<string, string>(data["summonerLevel"].ToString(), data["displayName"].ToString());
@@ -293,13 +297,13 @@ public class AccountData
                 // If the parsed JSON array is not null, log it to a file and return it.
                 if (jsonSkins != null)
                 {
-                    await LogToFile($"Skins:\n {jsonSkins}");
+                    //await LogToFile($"Skins:\n {jsonSkins}");
                     return jsonSkins;
                 }
             }
 
             // If the request fails or returns an empty array, wait for 5 seconds and try again.
-            await Task.Delay(5000);
+            Thread.Sleep(5000);
         }
 
     }
@@ -403,7 +407,7 @@ public class AccountData
         {
             var data = JToken.Parse(await response.Content.ReadAsStringAsync());
 
-            await LogToFile($"\n\nRANKED DATA :  {data["queueMap"]["RANKED_SOLO_5x5"]}");
+            //await LogToFile($"\n\nRANKED DATA :  {data["queueMap"]["RANKED_SOLO_5x5"]}");
             return data;
         }
 
@@ -431,11 +435,11 @@ public class AccountData
                                        {
                                            {"queueId", 430}
                                        });
-        await Task.Delay(1000);
+        Thread.Sleep(1000);
 
         await _leagueConnection.RequestAsync(HttpMethod.Post, "/lol-lobby/v2/lobby/matchmaking/search", null);
 
-        await Task.Delay(2000);
+        Thread.Sleep(2000);
 
         var queueStatsResponse = await _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-lobby/v2/lobby/matchmaking/search-state", null);
 
@@ -443,7 +447,7 @@ public class AccountData
         {
             var data = JToken.Parse(await queueStatsResponse.Content.ReadAsStringAsync());
 
-            await LogToFile($"\n\nQUEUE STATS:\n{data}");
+            //await LogToFile($"\n\nQUEUE STATS:\n{data}");
             return data;
         }
 

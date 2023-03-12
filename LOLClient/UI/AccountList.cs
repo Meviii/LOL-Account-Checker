@@ -37,6 +37,7 @@ public partial class AccountList : Form
 
         var dataTable = new DataTable();
         dataTable.Columns.Add("Summoner");
+        dataTable.Columns.Add("Region");
         dataTable.Columns.Add("Level");
         dataTable.Columns.Add("BE");
         dataTable.Columns.Add("RP");
@@ -51,6 +52,7 @@ public partial class AccountList : Form
         {
             dataTable.Rows.Add(
                 account.SummonerName,
+                account.Region,
                 account.Level,
                 account.BE,
                 account.RP,

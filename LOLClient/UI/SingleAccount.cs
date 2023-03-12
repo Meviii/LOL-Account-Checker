@@ -1,4 +1,5 @@
-﻿using AccountChecker.Models;
+﻿using AccountChecker.Data;
+using AccountChecker.Models;
 using LOLClient.Models;
 using LOLClient.UI;
 using LOLClient.Utility;
@@ -7,12 +8,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Threading;
+using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static Azure.Core.HttpHeader;
 
 namespace LOLClient;
 
@@ -29,6 +28,19 @@ public partial class SingleAccount : Form
         _coreUtility = new CoreUtility();
         InitializeComponent();
         InitializeView();
+
+        // TEMP TILL IMPLEMENTED
+        ClaimEventRewardsCheckBox.Enabled = false;
+        BuyChampionShardsCheckBox.Enabled = false;
+        CraftKeysCheckBox.Enabled = false;
+        OpenChestsCheckBox.Enabled = false;
+        OpenCapsulesOrbsShardsCheckBox.Enabled = false;
+        BuyBlueEssenceCheckBox.Enabled = false;
+        //DisenchantSkinShardsCheckBox.Enabled = false;
+        //DisenchantEternalShardsCheckBox.Enabled = false;
+        //DisenchantChampionShardsCheckBox.Enabled = false;
+
+
     }
 
     private void InitializeView()
@@ -37,6 +49,30 @@ public partial class SingleAccount : Form
         FillChampionsTable();
         FillSkinsTable();
         FillOverviewTable();
+        LoadTaskConfigAsync();
+    }
+
+    private async void LoadTaskConfigAsync()
+    {
+        var tasks = await _coreUtility.ReadFromTasksConfigFile();
+
+        foreach (var field in typeof(TasksConfig).GetFields(BindingFlags.Public | BindingFlags.Static))
+        {
+            if (field.FieldType != typeof(string))
+            {
+                continue;
+            }
+
+            if (Controls.Find(field.GetValue(null).ToString(), true).FirstOrDefault() is not CheckBox checkBox)
+            {
+                continue;
+            }
+
+            if (tasks.TryGetValue(field.GetValue(null).ToString(), out bool value))
+            {
+                checkBox.Checked = value;
+            }
+        }
     }
 
     private Dictionary<string, bool> GetTaskCheckBoxes()
@@ -47,7 +83,13 @@ public partial class SingleAccount : Form
             {OpenChestsCheckBox.Name, OpenChestsCheckBox.Checked},
             {DisenchantChampionShardsCheckBox.Name, DisenchantChampionShardsCheckBox.Checked},
             {DisenchantEternalShardsCheckBox.Name, DisenchantEternalShardsCheckBox.Checked},
-            {OpenCapsulesOrbsShardsCheckBox.Name, OpenCapsulesOrbsShardsCheckBox.Checked}
+            {OpenCapsulesOrbsShardsCheckBox.Name, OpenCapsulesOrbsShardsCheckBox.Checked},
+            {DisenchantSkinShardsCheckBox.Name, DisenchantSkinShardsCheckBox.Checked},
+            {BuyChampionShardsCheckBox.Name, BuyChampionShardsCheckBox.Checked},
+            {ClaimEventRewardsCheckBox.Name, ClaimEventRewardsCheckBox.Checked},
+            {BuyBlueEssenceCheckBox.Name, BuyBlueEssenceCheckBox.Checked },
+            {DisenchantWardSkinShardsCheckBox.Name, DisenchantWardSkinShardsCheckBox.Checked}
+
         };
     }
 
@@ -155,13 +197,24 @@ public partial class SingleAccount : Form
 
     private async void ExecuteButton_Click(object sender, EventArgs e)
     {
-        return;// TODO
+        // Disable Execute button
+        executeButton.Enabled = false;
+        executeButton.Text = "Executing...";
+        BackButton.Enabled = false;
 
+        // Get Tasks
+        var tasks = GetTaskCheckBoxes();
+
+        // Update Task file
+        _coreUtility.OverwriteTaskConfigFile(tasks);
+
+        // Check if any tasks are selected
         if (!AreTasksSelected())
             return;
 
         ProgressBar.Visible = true;
-        _uiUtility.InitializeProgressBar(ProgressBar, 1 + 1); // 1 account + 1 for functional progress bar
+        ProgressBar.Minimum = 0;
+        ProgressBar.Maximum = 2;
 
         var settings = _coreUtility.LoadFromSettingsFile(); // Gets Settings file
 
@@ -170,13 +223,20 @@ public partial class SingleAccount : Form
         {
             var runner = new Runner();
 
+            _uiUtility.IncrementProgressBar(ProgressBar);
+
             // Job of thread
-            await runner.Job_ExecuteTasksWithoutAccountFetching(_account.Username, _account.Password, settings, GetTaskCheckBoxes());
+            await runner.Job_AccountFetchingWithTasks(_account.Username, _account.Password, settings);
 
         });
 
-        _uiUtility.IncrementProgressBar(ProgressBar);
+        await task;
+
+        //_uiUtility.IncrementProgressBar(ProgressBar);
+        executeButton.Enabled = true;
         ProgressBar.Visible = false;
+        executeButton.Text = "Execute";
+        BackButton.Enabled = true;
     }
 
     private bool AreTasksSelected()
@@ -188,4 +248,10 @@ public partial class SingleAccount : Form
 
         return false;
     }
+
+    private void TaskCheckedChanged(object sender, EventArgs e)
+    {
+
+    }
+
 }

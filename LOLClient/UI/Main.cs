@@ -3,10 +3,12 @@ using LOLClient.Utility;
 using Microsoft.EntityFrameworkCore.Update;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Azure.Core.HttpHeader;
 
 namespace LOLClient;
 
@@ -15,6 +17,7 @@ public partial class Main : Form
 
     private readonly CoreUtility _coreUtility;
     private readonly UIUtility _uIUtility;
+    private static readonly object comboListLock = new();
 
     public Main()
     {
@@ -211,8 +214,13 @@ public partial class Main : Form
                     return true;
                 }
 
-                // Get the first combo from the list
-                var combo = comboList[0];
+                Tuple<string, string> combo;
+                lock (comboListLock)
+                {
+                    // Get the first combo from the list
+                    combo = comboList[0];
+                    comboList.RemoveAt(0);
+                }
 
                 Console.WriteLine($"Starting task for {combo.Item1}");
 
@@ -226,14 +234,14 @@ public partial class Main : Form
 
                     // Update accounts left counter
                     UpdateProgress(Convert.ToString(Convert.ToInt32(comboList.Count)));
-
                 });
 
                 remainingCombos--;
 
                 // Remove the combo from the list and add the task to the tasks list
-                comboList.RemoveAt(0);
+                //comboList.RemoveAt(0);
                 tasks.Add(task);
+
             }
 
             // Wait for all tasks to complete before proceeding
@@ -289,6 +297,52 @@ public partial class Main : Form
 
     private void Main_Load(object sender, EventArgs e)
     {
+
+    }
+
+    private async void QuickCheckButton_Click(object sender, EventArgs e)
+    {
+        var username = UsernameTextBox.Text;
+        var password = PasswordTextBox.Text;
+        const int ACCOUNT_COUNT = 1;
+
+        // Validate start
+        if (username == "" || password == "")
+            return;
+
+        // Disable start/check buttons
+        StartButton.Enabled = false;
+        QuickCheckButton.Enabled = false;
+        ProgressBar.Visible = true;
+
+        var settings = _coreUtility.LoadFromSettingsFile(); // Gets Settings file
+
+        // Update accounts left and progress bar 
+        UpdateProgress(ACCOUNT_COUNT.ToString());
+
+        // Initializes progress bar with min max
+        _uIUtility.InitializeProgressBar(ProgressBar, ACCOUNT_COUNT + 1);
+
+        // Run Check
+        var task = Task.Run(async () =>
+        {
+            var runner = new Runner();
+
+            // Job of thread
+            await runner.Job_AccountFetchingWithoutTasks(username, password, settings);
+
+            // Update accounts left counter
+            UpdateProgress(Convert.ToString(ACCOUNT_COUNT - 1));
+
+        });
+        await task;
+
+        // Finalize
+        StartButton.Enabled = true;
+        QuickCheckButton.Enabled = true;
+        ProgressBar.Visible = false;
+        ConsoleTextBox.Clear(); // Clears Console
+        Console.WriteLine("Task Completed.");
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using LOLClient.DataFiles;
+﻿using AccountChecker.Data;
+using LOLClient.DataFiles;
 using LOLClient.Models;
 using LOLClient.UI;
 using Newtonsoft.Json;
@@ -6,6 +7,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -16,6 +18,8 @@ namespace LOLClient.Utility;
  */
 public class CoreUtility
 {
+    private static readonly object _lock = new();
+
     public CoreUtility() { }
 
     // This method saves a key-value pair to a JSON settings file
@@ -163,4 +167,61 @@ public class CoreUtility
         return accounts;
     }
 
+    // This method creates the initial tasks config for all tasks. Every task is defaulted to true (checked)
+    public async void InitializeTaskConfigFileAsync()
+    {
+        // better to not hard code
+        var tasksConfigDict = new Dictionary<string, bool>()
+        {
+            { TasksConfig.CraftKeys, false },
+            { TasksConfig.OpenChests, false },
+            { TasksConfig.DisenchantChampionShards, false },
+            { TasksConfig.DisenchantSkinShards, false },
+            { TasksConfig.DisenchantEternalShards, false },
+            { TasksConfig.OpenCapsulesOrbsShards, false },
+            { TasksConfig.BuyBlueEssence, false },
+            { TasksConfig.BuyChampionShards, false },
+            { TasksConfig.ClaimEventRewards, false },
+            { TasksConfig.DisenchantWardSkinShards, false }
+        };
+
+        if (!Directory.Exists(PathConfig.DataFolder))
+            Directory.CreateDirectory(PathConfig.DataFolder);
+
+        if (!File.Exists(PathConfig.TasksFile))
+            File.Create(PathConfig.TasksFile).Dispose();
+
+        using var streamWriter = new StreamWriter(PathConfig.TasksFile);
+        streamWriter.Write(JsonConvert.SerializeObject(tasksConfigDict, Formatting.Indented));
+
+        //var json = JsonConvert.SerializeObject(tasksConfigDict, Formatting.Indented);
+
+        ////await File.WriteAllTextAsync(PathConfig.TasksFile, json);
+        //using (var streamWriter = new StreamWriter(PathConfig.TasksFile))
+        //{
+        //    streamWriter.Write(json);
+        //}
+    }
+
+    public async Task<Dictionary<string,bool>> ReadFromTasksConfigFile()
+    {
+        using var file = new StreamReader(PathConfig.TasksFile);
+        var json = await file.ReadToEndAsync();
+        return JsonConvert.DeserializeObject<Dictionary<string, bool>>(json);
+    }
+
+    public void OverwriteTaskConfigFile(Dictionary<string, bool> tasksUpdated)
+    {
+
+        if (!Directory.Exists(PathConfig.DataFolder))
+            Directory.CreateDirectory(PathConfig.DataFolder);
+
+        if (!File.Exists(PathConfig.TasksFile))
+            File.Create(PathConfig.TasksFile);
+
+        var json = JsonConvert.SerializeObject(tasksUpdated, Formatting.Indented);
+
+        using var file = new StreamWriter(PathConfig.TasksFile);
+        file.Write(json);
+    }
 }

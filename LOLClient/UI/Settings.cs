@@ -22,12 +22,18 @@ public partial class Settings : Form
         _update = new Update();
         _uiUtility = new UIUtility();
         _coreUtility = new CoreUtility();
+
         InitializeComponent();
         LoadLabelsAsync();
 
-        // Initialize Skins/Champs data on first run
+        // Initialize config and skins/champs data on first run
         if (initialRun)
+        {
             UpdateButton_Click(updateButton, null);
+            
+            _coreUtility.InitializeTaskConfigFileAsync();
+        }
+
     }
 
     private void LoadLabelsAsync()
@@ -120,7 +126,20 @@ public partial class Settings : Form
     private void CloseButton_Click(object sender, EventArgs e)
     {
         this.Hide();
+        try
+        {
+            _uiUtility.LoadMainView();
+        }
+        catch
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == typeof(Main))
+                {
 
-        _uiUtility.LoadMainView();
+                    form.Close();
+                }
+            }
+        }
     }
 }
