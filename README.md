@@ -1,8 +1,10 @@
 # LoL Account Checker BETA
 
-***Thanks for checking out my repository! If you think it's helpful, please consider giving it a star. Your support helps me keep improving.***
+***Thanks for checking out my repository! If you think it's helpful, please consider giving it a star.***
 
 This program is a League of Legends account checker supporting multi threading with multiple features including the ability to run checks on multiple accounts, export all account information to a folder, and display comprehensive details about each account, including purchase dates and more.
+
+![main](images/main.PNG)
 
 *Please be aware that this program is not 100% stable and can sometimes catch unknown exceptions.*
 
