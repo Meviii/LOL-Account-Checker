@@ -32,7 +32,7 @@ The first way to run the application is by downloading the source code and runni
 The other way which is easier is to download the **Account Checker Release** found in the root folder of the directory. Running the exe file should run the application.
 
 ## How it works
-The program creates a Riot client to authenticate the user and a League client to authorize requests. It then performs a series of requests to gather account-related data.
+The program creates a Riot client to authenticate the user and a League client to execute authorized requests. It then performs a series of requests to gather account-related data and perform tasks.
 
 ## Requirements
 - An installation of Riot/League  
@@ -42,6 +42,7 @@ The program creates a Riot client to authenticate the user and a League client t
 - Claiming event rewards and spending event tokens  
 - Custom exports  
 - Re-queue system for failed accounts
+- Export banned or failed(with reason) accounts
 
 ## Application & Usage
 
