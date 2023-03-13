@@ -47,17 +47,22 @@ public class Loot
 
         // Parse the response content as a JSON array.
         Data = JArray.Parse(await response.Content.ReadAsStringAsync());
-
         
-        //lock (_lock)
-        //{
-            
-        //    string logFilePath = @"..\..\..\logDATALOOT.txt";
-
-        //    File.AppendAllTextAsync(logFilePath, $"{DateTime.Now} - STATUS CODE: {response.StatusCode} -\n\n {Data}\n\n\n\n\n").Wait();
-        //}
-        
-
         Thread.Sleep(1000);
+    }
+
+    public int GetLootCountByID(string lootId)
+    {
+        var lootCount = 0;
+
+        foreach (var item in Data)
+        {
+            if (item["lootId"].ToString() == lootId)
+            {
+                lootCount += Convert.ToInt32(item["count"].ToString());
+            }
+        }
+
+        return lootCount;
     }
 }

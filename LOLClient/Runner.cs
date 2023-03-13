@@ -258,16 +258,16 @@ public class Runner
 
         foreach (var task in tasks)
         {
-            //if (task.Key == TasksConfig.CraftKeys)
-            //{
+            if (task.Key == TasksConfig.CraftKeys && task.Value == true)
+            {
+                _hextech.CraftKeys();
+            }
 
-            //}
+            if (task.Key == TasksConfig.OpenChests && task.Value == true)
+            {
+                _hextech.OpenChests();
+            }
 
-            //if (tasks[TasksConfig.OpenChests])
-            //{
-
-            //}
-            
             if (task.Key == TasksConfig.DisenchantChampionShards && task.Value == true)
             {
                 _hextech.DisenchantChampionShards();
@@ -288,10 +288,10 @@ public class Runner
                 _hextech.DisenchantWardSkinShards();
             }
 
-            //if (tasks[TasksConfig.OpenCapsulesOrbsShards])
-            //{
-
-            //}
+            if (tasks[TasksConfig.OpenCapsulesOrbsShards])
+            {
+                _hextech.OpenLoot();
+            }
 
             //if (tasks[TasksConfig.BuyBlueEssence])
             //{
