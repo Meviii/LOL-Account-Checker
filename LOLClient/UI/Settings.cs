@@ -83,7 +83,7 @@ public partial class Settings : Form
         if (LeaguePathLabel.Text == "" || RiotPathLabel.Text == "")
         {
             StatusLabel.Text = "Please locate all paths.";
-            StatusLabel.ForeColor = Color.MediumVioletRed;
+            StatusLabel.ForeColor = Color.Black;
             StatusLabel.Font = new Font("Segoe UI Light", 14F, FontStyle.Regular);
             return;
         }
