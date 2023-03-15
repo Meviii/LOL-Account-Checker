@@ -5,7 +5,7 @@ using System;
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
 
-namespace LOLClient;
+namespace AccountChecker;
 
 public class Client
 {
@@ -16,7 +16,7 @@ public class Client
     }
 
 
-    public async Task<int> CreateClient(List<string> processArgs, string path)
+    public int CreateClient(List<string> processArgs, string path)
     {
         lock (_lock)
         {

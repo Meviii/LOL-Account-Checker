@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LOLClient.DataFiles;
+namespace AccountChecker.DataFiles;
 
 public class PathConfig
 {

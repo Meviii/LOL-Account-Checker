@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LOLClient.Models;
+namespace AccountChecker.Models;
 
 public class Account
 {
@@ -54,5 +54,6 @@ public class Account
     public bool IsEmailVerified { get; set; }
     public Rank CurrentRank { get; set; }
     public Rank HighestRank { get; set; }
+
     public Account() { }
 }

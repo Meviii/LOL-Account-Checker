@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using AccountChecker.Models;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LOLClient.Connections;
+namespace AccountChecker.Connections;
 
 public class RiotAuth
 {
@@ -25,26 +26,21 @@ public class RiotAuth
             _connection = connection;
         }
     }
-    private async Task<bool> CanAuthenticate(string username, string password)
+
+    private async Task<bool> CanAuthenticateAsync(AccountCombo combo)
     {
         
         var data = new Dictionary<string, object>()
         {
-            {"username", username},
-            {"password", password},
+            {"username", combo.Username},
+            {"password", combo.Password},
             {"persistLogin", false},
         };
 
         while (true)
         {
-            var response = await _connection.RequestAsync(HttpMethod.Put, "/rso-auth/v1/session/credentials", data);
+            var response = _connection.Request(HttpMethod.Put, "/rso-auth/v1/session/credentials", data);
             var content = JToken.Parse(await response.Content.ReadAsStringAsync());
-
-            //lock (_lock)
-            //{
-            //    string logFilePath = @"..\..\..\logRSO_CREDENTIALS.txt";
-            //    File.AppendAllTextAsync(logFilePath, $"{DateTime.Now} - STATUS CODE: {response.StatusCode} - ACCOUNT: {username} {password}\n\n {response.Content.ReadAsStringAsync().Result}\n\n\n\n\n").Wait();
-            //}
 
             if (content.SelectToken("error") != null)
             {
@@ -76,22 +72,22 @@ public class RiotAuth
 
     }
 
-    private async Task AcceptEULA()
+    private void AcceptEULA()
     {
 
-        await _connection.RequestAsync(HttpMethod.Put, "/eula/v1/agreement/acceptance", null);
+        _connection.Request(HttpMethod.Put, "/eula/v1/agreement/acceptance", null);
 
     }
 
-    public async Task<bool> Login(string username, string password)
+    public async Task<bool> Login(AccountCombo combo)
     {
 
-        bool canAuth = await CanAuthenticate(username, password);
+        bool canAuth = await CanAuthenticateAsync(combo);
 
         if (!canAuth)
             return false;
 
-        await AcceptEULA();
+        AcceptEULA();
 
         return true;
     }

@@ -1,8 +1,7 @@
 ﻿using AccountChecker.Data;
 using AccountChecker.Models;
-using LOLClient.Connections;
-using LOLClient.DataFiles;
-using LOLClient.Models;
+using AccountChecker.Connections;
+using AccountChecker.DataFiles;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -14,7 +13,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace LOLClient.Tasks;
+namespace AccountChecker.Tasks;
 
 public class AccountData
 {
@@ -53,7 +52,7 @@ public class AccountData
         while (true)
         {
             // Make the GET request to the API.
-            var response = await _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-champions/v1/owned-champions-minimal", null);
+            var response = _leagueConnection.Request(HttpMethod.Get, "/lol-champions/v1/owned-champions-minimal", null);
 
             // If the response is successful, parse the JSON content and return it as a JArray.
             if (response.IsSuccessStatusCode)
@@ -164,7 +163,7 @@ public class AccountData
     public async Task<Loot> GetLootAsync()
     {
 
-        await _loot.RefreshLoot();
+        await _loot.RefreshLootAsync();
 
         // Loop through each item in the loot data.
         foreach (var item in _loot.Data)
@@ -207,7 +206,7 @@ public class AccountData
     private async Task<Tuple<string, string>> RequestSummonerNameAndLevelAsync()
     {
         // Make an HTTP GET request to the "/lol-summoner/v1/current-summoner" endpoint using the _leagueConnection object.
-        var response = await _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-summoner/v1/current-summoner", null);
+        var response = _leagueConnection.Request(HttpMethod.Get, "/lol-summoner/v1/current-summoner", null);
 
         // Parse the response content as a JSON string and create a JToken object from it.
         var data = JToken.Parse(await response.Content.ReadAsStringAsync());
@@ -226,7 +225,7 @@ public class AccountData
         try
         {
             // Make an HTTP GET request to the "/lol-email-verification/v1/email" endpoint using the _leagueConnection object.
-            var response = await _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-email-verification/v1/email", null);
+            var response = _leagueConnection.Request(HttpMethod.Get, "/lol-email-verification/v1/email", null);
 
             // If the response status code is OK, parse the response content as a JSON string and create a JToken object from it.
             if (response.StatusCode == HttpStatusCode.OK)
@@ -284,7 +283,7 @@ public class AccountData
         while (true)
         {
             // Make an HTTP GET request to the "/lol-inventory/v2/inventory/CHAMPION_SKIN" endpoint using the _leagueConnection object.
-            var response = await _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-inventory/v2/inventory/CHAMPION_SKIN", null);
+            var response = _leagueConnection.Request(HttpMethod.Get, "/lol-inventory/v2/inventory/CHAMPION_SKIN", null);
 
             // Read the response content as a string.
             var skinsResult = await response.Content.ReadAsStringAsync();
@@ -401,7 +400,7 @@ public class AccountData
     private async Task<JToken> RequestRankAsync()
     {
 
-        var response = await _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-ranked/v1/current-ranked-stats", null);
+        var response = _leagueConnection.Request(HttpMethod.Get, "/lol-ranked/v1/current-ranked-stats", null);
 
         if (response.StatusCode == HttpStatusCode.OK)
         {
@@ -429,7 +428,7 @@ public class AccountData
     // Makes a request to retrieve queue statistics
     private async Task<JToken> RequestQueueStatsAsync()
     {
-        await _leagueConnection.RequestAsync(HttpMethod.Post,
+        _leagueConnection.Request(HttpMethod.Post,
                                        "/lol-lobby/v2/lobby",
                                        new Dictionary<string, object>
                                        {
@@ -437,17 +436,16 @@ public class AccountData
                                        });
         Thread.Sleep(1000);
 
-        await _leagueConnection.RequestAsync(HttpMethod.Post, "/lol-lobby/v2/lobby/matchmaking/search", null);
+        _leagueConnection.Request(HttpMethod.Post, "/lol-lobby/v2/lobby/matchmaking/search", null);
 
         Thread.Sleep(2000);
 
-        var queueStatsResponse = await _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-lobby/v2/lobby/matchmaking/search-state", null);
+        var queueStatsResponse = _leagueConnection.Request(HttpMethod.Get, "/lol-lobby/v2/lobby/matchmaking/search-state", null);
 
         if (queueStatsResponse.StatusCode == HttpStatusCode.OK)
         {
             var data = JToken.Parse(await queueStatsResponse.Content.ReadAsStringAsync());
 
-            //await LogToFile($"\n\nQUEUE STATS:\n{data}");
             return data;
         }
 

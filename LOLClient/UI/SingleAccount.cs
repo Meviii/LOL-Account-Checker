@@ -1,8 +1,8 @@
-﻿using AccountChecker.Data;
+﻿using AccountChecker;
+using AccountChecker.Data;
 using AccountChecker.Models;
-using LOLClient.Models;
-using LOLClient.UI;
-using LOLClient.Utility;
+using AccountChecker.UI;
+using AccountChecker.Utility;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -13,13 +13,15 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LOLClient;
+namespace AccountChecker;
 
 public partial class SingleAccount : Form
 {
     private readonly UIUtility _uiUtility;
     private readonly Account _account;
     private readonly CoreUtility _coreUtility;
+    private DataTable _originalChampionDataTable;
+    private DataTable _originalSkinsDataTable;
 
     public SingleAccount(Account account)
     {
@@ -138,6 +140,7 @@ public partial class SingleAccount : Form
         }
 
         championGridView.DataSource = dataTable;
+        _originalChampionDataTable = dataTable;
     }
 
     private void FillSkinsTable()
@@ -155,6 +158,7 @@ public partial class SingleAccount : Form
         }
 
         skinsGridView.DataSource = dataTable;
+        _originalSkinsDataTable = dataTable;
     }
 
     private void CloseButton_Click(object sender, EventArgs e)
@@ -170,9 +174,10 @@ public partial class SingleAccount : Form
 
     private void BackButton_Click_1(object sender, EventArgs e)
     {
-        this.Hide();
+        //this.Hide();
 
         _uiUtility.LoadAccountsListView(this);
+        this.Hide();
     }
 
     private void label3_Click(object sender, EventArgs e)
@@ -226,7 +231,11 @@ public partial class SingleAccount : Form
             _uiUtility.IncrementProgressBar(ProgressBar);
 
             // Job of thread
-            await runner.Job_AccountFetchingWithTasks(_account.Username, _account.Password, settings);
+            await runner.Job_AccountFetchingWithTasks(new AccountCombo()
+            {
+                Username = _account.Username,
+                Password = _account.Password,
+            }, settings);
 
         });
 
@@ -254,4 +263,71 @@ public partial class SingleAccount : Form
 
     }
 
+    private void ChampionsSearchTextBox_TextChanged(object sender, EventArgs e)
+    {
+
+        if (_originalChampionDataTable == null)
+            return;
+
+        // Get the text entered in the search box
+        string searchText = ChampionsSearchTextBox.Text;
+
+        championGridView.DataSource = _originalChampionDataTable;
+
+        DataTable dataTable = championGridView.DataSource as DataTable;
+
+        // Filter the DataGridView based on the search text
+        if (string.IsNullOrEmpty(searchText))
+        {
+            championGridView.DataSource = _originalChampionDataTable;
+        }
+        else
+        {
+
+            // Filter the data based on the search text
+            var rows = dataTable.Select($"Name LIKE '%{searchText}%'");
+            if (rows.Length > 0)
+            {
+                // Show the filtered data
+                championGridView.DataSource = rows.CopyToDataTable();
+            }
+            else
+            {
+            }
+        }
+    }
+
+    private void SkinsSearchTextBox_TextChanged(object sender, EventArgs e)
+    {
+
+        if (_originalSkinsDataTable == null)
+            return;
+
+        // Get the text entered in the search box
+        string searchText = SkinsSearchTextBox.Text;
+
+        skinsGridView.DataSource = _originalSkinsDataTable;
+
+        DataTable dataTable = skinsGridView.DataSource as DataTable;
+
+        // Filter the DataGridView based on the search text
+        if (string.IsNullOrEmpty(searchText))
+        {
+            skinsGridView.DataSource = _originalSkinsDataTable;
+        }
+        else
+        {
+
+            // Filter the data based on the search text
+            var rows = dataTable.Select($"Name LIKE '%{searchText}%'");
+            if (rows.Length > 0)
+            {
+                // Show the filtered data
+                skinsGridView.DataSource = rows.CopyToDataTable();
+            }
+            else
+            {
+            }
+        }
+    }
 }

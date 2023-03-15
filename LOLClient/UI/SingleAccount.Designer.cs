@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace LOLClient
+namespace AccountChecker
 {
     partial class SingleAccount
     {
@@ -120,24 +120,6 @@ namespace LOLClient
             panel6 = new Panel();
             OpenCapsulesOrbsShardsCheckBox = new CheckBox();
             label6 = new Label();
-            eventTaskPanel = new FlowLayoutPanel();
-            panel5 = new Panel();
-            ClaimEventRewardsCheckBox = new CheckBox();
-            label3 = new Label();
-            panel1 = new Panel();
-            BuyChampionShardsCheckBox = new CheckBox();
-            label1 = new Label();
-            panel2 = new Panel();
-            BuyBlueEssenceCheckBox = new CheckBox();
-            label2 = new Label();
-            label9 = new Label();
-            overviewGridView = new DataGridView();
-            Champions = new TabPage();
-            championGridView = new DataGridView();
-            Skins = new TabPage();
-            skinsGridView = new DataGridView();
-            accountNameTitle = new Label();
-            BackButton = new Button();
             panel31 = new Panel();
             panel32 = new Panel();
             panel33 = new Panel();
@@ -162,6 +144,26 @@ namespace LOLClient
             label40 = new Label();
             DisenchantWardSkinShardsCheckBox = new CheckBox();
             label41 = new Label();
+            eventTaskPanel = new FlowLayoutPanel();
+            panel5 = new Panel();
+            ClaimEventRewardsCheckBox = new CheckBox();
+            label3 = new Label();
+            panel1 = new Panel();
+            BuyChampionShardsCheckBox = new CheckBox();
+            label1 = new Label();
+            panel2 = new Panel();
+            BuyBlueEssenceCheckBox = new CheckBox();
+            label2 = new Label();
+            label9 = new Label();
+            overviewGridView = new DataGridView();
+            Champions = new TabPage();
+            ChampionsSearchTextBox = new TextBox();
+            championGridView = new DataGridView();
+            Skins = new TabPage();
+            skinsGridView = new DataGridView();
+            accountNameTitle = new Label();
+            BackButton = new Button();
+            SkinsSearchTextBox = new TextBox();
             tabControl1.SuspendLayout();
             Overview.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
@@ -192,6 +194,14 @@ namespace LOLClient
             panel10.SuspendLayout();
             panel8.SuspendLayout();
             panel6.SuspendLayout();
+            panel31.SuspendLayout();
+            panel32.SuspendLayout();
+            panel33.SuspendLayout();
+            panel34.SuspendLayout();
+            panel35.SuspendLayout();
+            panel36.SuspendLayout();
+            panel37.SuspendLayout();
+            panel38.SuspendLayout();
             eventTaskPanel.SuspendLayout();
             panel5.SuspendLayout();
             panel1.SuspendLayout();
@@ -201,14 +211,6 @@ namespace LOLClient
             ((System.ComponentModel.ISupportInitialize)championGridView).BeginInit();
             Skins.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)skinsGridView).BeginInit();
-            panel31.SuspendLayout();
-            panel32.SuspendLayout();
-            panel33.SuspendLayout();
-            panel34.SuspendLayout();
-            panel35.SuspendLayout();
-            panel36.SuspendLayout();
-            panel37.SuspendLayout();
-            panel38.SuspendLayout();
             SuspendLayout();
             // 
             // SummonerName
@@ -1063,208 +1065,6 @@ namespace LOLClient
             label6.TabIndex = 0;
             label6.Text = "Open Capsules, Orbs, Random Shards";
             // 
-            // eventTaskPanel
-            // 
-            eventTaskPanel.Controls.Add(panel5);
-            eventTaskPanel.Controls.Add(panel1);
-            eventTaskPanel.Controls.Add(panel2);
-            eventTaskPanel.Location = new System.Drawing.Point(508, 73);
-            eventTaskPanel.Name = "eventTaskPanel";
-            eventTaskPanel.Size = new System.Drawing.Size(338, 93);
-            eventTaskPanel.TabIndex = 10;
-            // 
-            // panel5
-            // 
-            panel5.Controls.Add(ClaimEventRewardsCheckBox);
-            panel5.Controls.Add(label3);
-            panel5.Location = new System.Drawing.Point(3, 3);
-            panel5.Name = "panel5";
-            panel5.Size = new System.Drawing.Size(160, 38);
-            panel5.TabIndex = 13;
-            // 
-            // ClaimEventRewardsCheckBox
-            // 
-            ClaimEventRewardsCheckBox.AutoSize = true;
-            ClaimEventRewardsCheckBox.Location = new System.Drawing.Point(134, 13);
-            ClaimEventRewardsCheckBox.Name = "ClaimEventRewardsCheckBox";
-            ClaimEventRewardsCheckBox.Size = new System.Drawing.Size(15, 14);
-            ClaimEventRewardsCheckBox.TabIndex = 1;
-            ClaimEventRewardsCheckBox.UseVisualStyleBackColor = true;
-            ClaimEventRewardsCheckBox.CheckedChanged += TaskCheckedChanged;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(3, 12);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(117, 15);
-            label3.TabIndex = 0;
-            label3.Text = "Claim Event Rewards";
-            // 
-            // panel1
-            // 
-            panel1.Controls.Add(BuyChampionShardsCheckBox);
-            panel1.Controls.Add(label1);
-            panel1.Location = new System.Drawing.Point(169, 3);
-            panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(160, 38);
-            panel1.TabIndex = 14;
-            // 
-            // BuyChampionShardsCheckBox
-            // 
-            BuyChampionShardsCheckBox.AutoSize = true;
-            BuyChampionShardsCheckBox.Location = new System.Drawing.Point(134, 13);
-            BuyChampionShardsCheckBox.Name = "BuyChampionShardsCheckBox";
-            BuyChampionShardsCheckBox.Size = new System.Drawing.Size(15, 14);
-            BuyChampionShardsCheckBox.TabIndex = 1;
-            BuyChampionShardsCheckBox.UseVisualStyleBackColor = true;
-            BuyChampionShardsCheckBox.CheckedChanged += TaskCheckedChanged;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(3, 12);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(124, 15);
-            label1.TabIndex = 0;
-            label1.Text = "Buy Champion Shards";
-            // 
-            // panel2
-            // 
-            panel2.Controls.Add(BuyBlueEssenceCheckBox);
-            panel2.Controls.Add(label2);
-            panel2.Location = new System.Drawing.Point(3, 47);
-            panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(160, 38);
-            panel2.TabIndex = 14;
-            // 
-            // BuyBlueEssenceCheckBox
-            // 
-            BuyBlueEssenceCheckBox.AutoSize = true;
-            BuyBlueEssenceCheckBox.Location = new System.Drawing.Point(134, 13);
-            BuyBlueEssenceCheckBox.Name = "BuyBlueEssenceCheckBox";
-            BuyBlueEssenceCheckBox.Size = new System.Drawing.Size(15, 14);
-            BuyBlueEssenceCheckBox.TabIndex = 1;
-            BuyBlueEssenceCheckBox.UseVisualStyleBackColor = true;
-            BuyBlueEssenceCheckBox.CheckedChanged += TaskCheckedChanged;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(3, 12);
-            label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(97, 15);
-            label2.TabIndex = 0;
-            label2.Text = "Buy Blue Essence";
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.BackColor = System.Drawing.Color.Transparent;
-            label9.FlatStyle = FlatStyle.Flat;
-            label9.Font = new System.Drawing.Font("Segoe Print", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            label9.ForeColor = System.Drawing.Color.Black;
-            label9.Location = new System.Drawing.Point(636, -5);
-            label9.Name = "label9";
-            label9.Size = new System.Drawing.Size(92, 47);
-            label9.TabIndex = 9;
-            label9.Text = "Tasks";
-            // 
-            // overviewGridView
-            // 
-            overviewGridView.AllowUserToAddRows = false;
-            overviewGridView.AllowUserToDeleteRows = false;
-            overviewGridView.AllowUserToOrderColumns = true;
-            overviewGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            overviewGridView.BackgroundColor = System.Drawing.Color.LightSkyBlue;
-            overviewGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            overviewGridView.GridColor = System.Drawing.Color.LightSkyBlue;
-            overviewGridView.Location = new System.Drawing.Point(15, 20);
-            overviewGridView.Name = "overviewGridView";
-            overviewGridView.ReadOnly = true;
-            overviewGridView.RowTemplate.Height = 25;
-            overviewGridView.Size = new System.Drawing.Size(477, 436);
-            overviewGridView.TabIndex = 9;
-            // 
-            // Champions
-            // 
-            Champions.Controls.Add(championGridView);
-            Champions.Location = new System.Drawing.Point(4, 24);
-            Champions.Name = "Champions";
-            Champions.Padding = new Padding(3);
-            Champions.Size = new System.Drawing.Size(863, 475);
-            Champions.TabIndex = 1;
-            Champions.Text = "Champions";
-            Champions.UseVisualStyleBackColor = true;
-            // 
-            // championGridView
-            // 
-            championGridView.AllowUserToAddRows = false;
-            championGridView.AllowUserToDeleteRows = false;
-            championGridView.AllowUserToOrderColumns = true;
-            championGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            championGridView.BackgroundColor = System.Drawing.Color.LightSkyBlue;
-            championGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            championGridView.GridColor = System.Drawing.Color.LightSkyBlue;
-            championGridView.Location = new System.Drawing.Point(29, 24);
-            championGridView.Name = "championGridView";
-            championGridView.ReadOnly = true;
-            championGridView.RowTemplate.Height = 25;
-            championGridView.Size = new System.Drawing.Size(804, 426);
-            championGridView.TabIndex = 2;
-            // 
-            // Skins
-            // 
-            Skins.Controls.Add(skinsGridView);
-            Skins.Location = new System.Drawing.Point(4, 24);
-            Skins.Name = "Skins";
-            Skins.Size = new System.Drawing.Size(863, 475);
-            Skins.TabIndex = 2;
-            Skins.Text = "Skins";
-            Skins.UseVisualStyleBackColor = true;
-            // 
-            // skinsGridView
-            // 
-            skinsGridView.AllowUserToAddRows = false;
-            skinsGridView.AllowUserToDeleteRows = false;
-            skinsGridView.AllowUserToOrderColumns = true;
-            skinsGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            skinsGridView.BackgroundColor = System.Drawing.Color.LightSkyBlue;
-            skinsGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            skinsGridView.GridColor = System.Drawing.Color.LightSkyBlue;
-            skinsGridView.Location = new System.Drawing.Point(29, 24);
-            skinsGridView.Name = "skinsGridView";
-            skinsGridView.ReadOnly = true;
-            skinsGridView.RowTemplate.Height = 25;
-            skinsGridView.Size = new System.Drawing.Size(804, 426);
-            skinsGridView.TabIndex = 1;
-            // 
-            // accountNameTitle
-            // 
-            accountNameTitle.AutoSize = true;
-            accountNameTitle.BackColor = System.Drawing.Color.Transparent;
-            accountNameTitle.FlatStyle = FlatStyle.Flat;
-            accountNameTitle.Font = new System.Drawing.Font("Segoe Print", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            accountNameTitle.ForeColor = System.Drawing.Color.LightYellow;
-            accountNameTitle.Location = new System.Drawing.Point(408, 34);
-            accountNameTitle.Name = "accountNameTitle";
-            accountNameTitle.Size = new System.Drawing.Size(188, 61);
-            accountNameTitle.TabIndex = 2;
-            accountNameTitle.Text = "Template";
-            // 
-            // BackButton
-            // 
-            BackButton.BackColor = System.Drawing.Color.LightCyan;
-            BackButton.FlatAppearance.BorderSize = 0;
-            BackButton.ForeColor = System.Drawing.SystemColors.Desktop;
-            BackButton.Location = new System.Drawing.Point(2, 3);
-            BackButton.Name = "BackButton";
-            BackButton.Size = new System.Drawing.Size(79, 35);
-            BackButton.TabIndex = 8;
-            BackButton.Text = "Back";
-            BackButton.UseVisualStyleBackColor = false;
-            BackButton.Click += BackButton_Click_1;
-            // 
             // panel31
             // 
             panel31.Controls.Add(panel32);
@@ -1488,6 +1288,230 @@ namespace LOLClient
             label41.TabIndex = 0;
             label41.Text = "Disenchant Ward Skin Shards";
             // 
+            // eventTaskPanel
+            // 
+            eventTaskPanel.Controls.Add(panel5);
+            eventTaskPanel.Controls.Add(panel1);
+            eventTaskPanel.Controls.Add(panel2);
+            eventTaskPanel.Location = new System.Drawing.Point(508, 73);
+            eventTaskPanel.Name = "eventTaskPanel";
+            eventTaskPanel.Size = new System.Drawing.Size(338, 93);
+            eventTaskPanel.TabIndex = 10;
+            // 
+            // panel5
+            // 
+            panel5.Controls.Add(ClaimEventRewardsCheckBox);
+            panel5.Controls.Add(label3);
+            panel5.Location = new System.Drawing.Point(3, 3);
+            panel5.Name = "panel5";
+            panel5.Size = new System.Drawing.Size(160, 38);
+            panel5.TabIndex = 13;
+            // 
+            // ClaimEventRewardsCheckBox
+            // 
+            ClaimEventRewardsCheckBox.AutoSize = true;
+            ClaimEventRewardsCheckBox.Location = new System.Drawing.Point(134, 13);
+            ClaimEventRewardsCheckBox.Name = "ClaimEventRewardsCheckBox";
+            ClaimEventRewardsCheckBox.Size = new System.Drawing.Size(15, 14);
+            ClaimEventRewardsCheckBox.TabIndex = 1;
+            ClaimEventRewardsCheckBox.UseVisualStyleBackColor = true;
+            ClaimEventRewardsCheckBox.CheckedChanged += TaskCheckedChanged;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(3, 12);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(117, 15);
+            label3.TabIndex = 0;
+            label3.Text = "Claim Event Rewards";
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(BuyChampionShardsCheckBox);
+            panel1.Controls.Add(label1);
+            panel1.Location = new System.Drawing.Point(169, 3);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(160, 38);
+            panel1.TabIndex = 14;
+            // 
+            // BuyChampionShardsCheckBox
+            // 
+            BuyChampionShardsCheckBox.AutoSize = true;
+            BuyChampionShardsCheckBox.Location = new System.Drawing.Point(134, 13);
+            BuyChampionShardsCheckBox.Name = "BuyChampionShardsCheckBox";
+            BuyChampionShardsCheckBox.Size = new System.Drawing.Size(15, 14);
+            BuyChampionShardsCheckBox.TabIndex = 1;
+            BuyChampionShardsCheckBox.UseVisualStyleBackColor = true;
+            BuyChampionShardsCheckBox.CheckedChanged += TaskCheckedChanged;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(3, 12);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(124, 15);
+            label1.TabIndex = 0;
+            label1.Text = "Buy Champion Shards";
+            // 
+            // panel2
+            // 
+            panel2.Controls.Add(BuyBlueEssenceCheckBox);
+            panel2.Controls.Add(label2);
+            panel2.Location = new System.Drawing.Point(3, 47);
+            panel2.Name = "panel2";
+            panel2.Size = new System.Drawing.Size(160, 38);
+            panel2.TabIndex = 14;
+            // 
+            // BuyBlueEssenceCheckBox
+            // 
+            BuyBlueEssenceCheckBox.AutoSize = true;
+            BuyBlueEssenceCheckBox.Location = new System.Drawing.Point(134, 13);
+            BuyBlueEssenceCheckBox.Name = "BuyBlueEssenceCheckBox";
+            BuyBlueEssenceCheckBox.Size = new System.Drawing.Size(15, 14);
+            BuyBlueEssenceCheckBox.TabIndex = 1;
+            BuyBlueEssenceCheckBox.UseVisualStyleBackColor = true;
+            BuyBlueEssenceCheckBox.CheckedChanged += TaskCheckedChanged;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(3, 12);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(97, 15);
+            label2.TabIndex = 0;
+            label2.Text = "Buy Blue Essence";
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.BackColor = System.Drawing.Color.Transparent;
+            label9.FlatStyle = FlatStyle.Flat;
+            label9.Font = new System.Drawing.Font("Segoe Print", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label9.ForeColor = System.Drawing.Color.Black;
+            label9.Location = new System.Drawing.Point(636, -5);
+            label9.Name = "label9";
+            label9.Size = new System.Drawing.Size(92, 47);
+            label9.TabIndex = 9;
+            label9.Text = "Tasks";
+            // 
+            // overviewGridView
+            // 
+            overviewGridView.AllowUserToAddRows = false;
+            overviewGridView.AllowUserToDeleteRows = false;
+            overviewGridView.AllowUserToOrderColumns = true;
+            overviewGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            overviewGridView.BackgroundColor = System.Drawing.Color.LightSkyBlue;
+            overviewGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            overviewGridView.GridColor = System.Drawing.Color.LightSkyBlue;
+            overviewGridView.Location = new System.Drawing.Point(15, 20);
+            overviewGridView.Name = "overviewGridView";
+            overviewGridView.ReadOnly = true;
+            overviewGridView.RowTemplate.Height = 25;
+            overviewGridView.Size = new System.Drawing.Size(477, 436);
+            overviewGridView.TabIndex = 9;
+            // 
+            // Champions
+            // 
+            Champions.Controls.Add(ChampionsSearchTextBox);
+            Champions.Controls.Add(championGridView);
+            Champions.Location = new System.Drawing.Point(4, 24);
+            Champions.Name = "Champions";
+            Champions.Padding = new Padding(3);
+            Champions.Size = new System.Drawing.Size(863, 475);
+            Champions.TabIndex = 1;
+            Champions.Text = "Champions";
+            Champions.UseVisualStyleBackColor = true;
+            // 
+            // ChampionsSearchTextBox
+            // 
+            ChampionsSearchTextBox.Location = new System.Drawing.Point(370, 6);
+            ChampionsSearchTextBox.Name = "ChampionsSearchTextBox";
+            ChampionsSearchTextBox.PlaceholderText = "Search";
+            ChampionsSearchTextBox.Size = new System.Drawing.Size(100, 23);
+            ChampionsSearchTextBox.TabIndex = 3;
+            ChampionsSearchTextBox.TextAlign = HorizontalAlignment.Center;
+            ChampionsSearchTextBox.TextChanged += ChampionsSearchTextBox_TextChanged;
+            // 
+            // championGridView
+            // 
+            championGridView.AllowUserToAddRows = false;
+            championGridView.AllowUserToDeleteRows = false;
+            championGridView.AllowUserToOrderColumns = true;
+            championGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            championGridView.BackgroundColor = System.Drawing.Color.LightSkyBlue;
+            championGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            championGridView.GridColor = System.Drawing.Color.LightSkyBlue;
+            championGridView.Location = new System.Drawing.Point(29, 33);
+            championGridView.Name = "championGridView";
+            championGridView.ReadOnly = true;
+            championGridView.RowTemplate.Height = 25;
+            championGridView.Size = new System.Drawing.Size(804, 426);
+            championGridView.TabIndex = 2;
+            // 
+            // Skins
+            // 
+            Skins.Controls.Add(SkinsSearchTextBox);
+            Skins.Controls.Add(skinsGridView);
+            Skins.Location = new System.Drawing.Point(4, 24);
+            Skins.Name = "Skins";
+            Skins.Size = new System.Drawing.Size(863, 475);
+            Skins.TabIndex = 2;
+            Skins.Text = "Skins";
+            Skins.UseVisualStyleBackColor = true;
+            // 
+            // skinsGridView
+            // 
+            skinsGridView.AllowUserToAddRows = false;
+            skinsGridView.AllowUserToDeleteRows = false;
+            skinsGridView.AllowUserToOrderColumns = true;
+            skinsGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            skinsGridView.BackgroundColor = System.Drawing.Color.LightSkyBlue;
+            skinsGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            skinsGridView.GridColor = System.Drawing.Color.LightSkyBlue;
+            skinsGridView.Location = new System.Drawing.Point(29, 33);
+            skinsGridView.Name = "skinsGridView";
+            skinsGridView.ReadOnly = true;
+            skinsGridView.RowTemplate.Height = 25;
+            skinsGridView.Size = new System.Drawing.Size(804, 426);
+            skinsGridView.TabIndex = 1;
+            // 
+            // accountNameTitle
+            // 
+            accountNameTitle.AutoSize = true;
+            accountNameTitle.BackColor = System.Drawing.Color.Transparent;
+            accountNameTitle.FlatStyle = FlatStyle.Flat;
+            accountNameTitle.Font = new System.Drawing.Font("Segoe Print", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            accountNameTitle.ForeColor = System.Drawing.Color.LightYellow;
+            accountNameTitle.Location = new System.Drawing.Point(408, 34);
+            accountNameTitle.Name = "accountNameTitle";
+            accountNameTitle.Size = new System.Drawing.Size(188, 61);
+            accountNameTitle.TabIndex = 2;
+            accountNameTitle.Text = "Template";
+            // 
+            // BackButton
+            // 
+            BackButton.BackColor = System.Drawing.Color.LightCyan;
+            BackButton.FlatAppearance.BorderSize = 0;
+            BackButton.ForeColor = System.Drawing.SystemColors.Desktop;
+            BackButton.Location = new System.Drawing.Point(2, 3);
+            BackButton.Name = "BackButton";
+            BackButton.Size = new System.Drawing.Size(79, 35);
+            BackButton.TabIndex = 8;
+            BackButton.Text = "Back";
+            BackButton.UseVisualStyleBackColor = false;
+            BackButton.Click += BackButton_Click_1;
+            // 
+            // SkinsSearchTextBox
+            // 
+            SkinsSearchTextBox.Location = new System.Drawing.Point(370, 6);
+            SkinsSearchTextBox.Name = "SkinsSearchTextBox";
+            SkinsSearchTextBox.PlaceholderText = "Search";
+            SkinsSearchTextBox.Size = new System.Drawing.Size(100, 23);
+            SkinsSearchTextBox.TabIndex = 4;
+            SkinsSearchTextBox.TextAlign = HorizontalAlignment.Center;
+            SkinsSearchTextBox.TextChanged += SkinsSearchTextBox_TextChanged;
+            // 
             // SingleAccount
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1563,18 +1587,6 @@ namespace LOLClient
             panel8.PerformLayout();
             panel6.ResumeLayout(false);
             panel6.PerformLayout();
-            eventTaskPanel.ResumeLayout(false);
-            panel5.ResumeLayout(false);
-            panel5.PerformLayout();
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
-            panel2.ResumeLayout(false);
-            panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)overviewGridView).EndInit();
-            Champions.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)championGridView).EndInit();
-            Skins.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)skinsGridView).EndInit();
             panel31.ResumeLayout(false);
             panel31.PerformLayout();
             panel32.ResumeLayout(false);
@@ -1591,6 +1603,20 @@ namespace LOLClient
             panel37.PerformLayout();
             panel38.ResumeLayout(false);
             panel38.PerformLayout();
+            eventTaskPanel.ResumeLayout(false);
+            panel5.ResumeLayout(false);
+            panel5.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)overviewGridView).EndInit();
+            Champions.ResumeLayout(false);
+            Champions.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)championGridView).EndInit();
+            Skins.ResumeLayout(false);
+            Skins.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)skinsGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1727,5 +1753,7 @@ namespace LOLClient
         private Label label40;
         private CheckBox DisenchantWardSkinShardsCheckBox;
         private Label label41;
+        private TextBox ChampionsSearchTextBox;
+        private TextBox SkinsSearchTextBox;
     }
 }

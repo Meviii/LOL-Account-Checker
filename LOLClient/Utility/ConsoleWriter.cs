@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
-namespace LOLClient.Utility;
+namespace AccountChecker.Utility;
 
 public class ConsoleWriter : TextWriter
 {

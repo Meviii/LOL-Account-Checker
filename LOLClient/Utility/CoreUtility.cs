@@ -1,7 +1,8 @@
-﻿using AccountChecker.Data;
-using LOLClient.DataFiles;
-using LOLClient.Models;
-using LOLClient.UI;
+﻿using AccountChecker;
+using AccountChecker.Data;
+using AccountChecker.DataFiles;
+using AccountChecker.Models;
+using AccountChecker.UI;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -11,7 +12,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LOLClient.Utility;
+namespace AccountChecker.Utility;
 
 /*
  * This class provides utility methods for the core application.
@@ -133,11 +134,11 @@ public class CoreUtility
     }
 
     // This method returns a List holding tuples of each account extracted from the combolist. In <User,Pass> format
-    public async Task<List<Tuple<string, string>>> ReadComboList(string comboListPath, char delimiter)
+    public async Task ReadAndAddComboListToQueue(string comboListPath, char delimiter)
     {
         // Check if the file exists, if not, return null
         if (!File.Exists(comboListPath))
-            return null;
+            return;
 
         // Read the content of the file and store it in the "content" variable
         string content = await File.ReadAllTextAsync(comboListPath);
@@ -153,9 +154,13 @@ public class CoreUtility
                 // If the line is not empty
                 if (line != "")
                 {
-                    // Split the line by the delimiter and add a new tuple to the "accounts" list
+                    // Split the line by the delimiter and add to queue
                     var accString = line.Split(delimiter);
-                    accounts.Add(new Tuple<string, string>(accString[0], accString[1]));
+                    AccountQueue.Enqueue(new AccountCombo()
+                    {
+                        Username = accString[0],
+                        Password = accString[1]
+                    });
                 }
             }catch
             {
@@ -163,8 +168,7 @@ public class CoreUtility
             }
         }
 
-        // Return the list of account tuples
-        return accounts;
+        return;
     }
 
     // This method creates the initial tasks config for all tasks. Every task is defaulted to true (checked)

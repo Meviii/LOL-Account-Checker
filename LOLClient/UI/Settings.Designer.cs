@@ -1,4 +1,4 @@
-﻿namespace LOLClient.UI
+﻿namespace AccountChecker.UI
 {
     partial class Settings
     {

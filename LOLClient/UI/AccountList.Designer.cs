@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace LOLClient
+namespace AccountChecker
 {
     partial class AccountList
     {
@@ -37,6 +37,7 @@ namespace LOLClient
             BackButton = new Button();
             ExportsFolderButton = new Button();
             button1 = new Button();
+            SearchTextBox = new TextBox();
             ((System.ComponentModel.ISupportInitialize)accountsGridView).BeginInit();
             SuspendLayout();
             // 
@@ -47,7 +48,7 @@ namespace LOLClient
             label1.FlatStyle = FlatStyle.Flat;
             label1.Font = new System.Drawing.Font("Segoe Print", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             label1.ForeColor = System.Drawing.Color.LightYellow;
-            label1.Location = new System.Drawing.Point(321, 58);
+            label1.Location = new System.Drawing.Point(337, 58);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(333, 61);
             label1.TabIndex = 1;
@@ -109,6 +110,15 @@ namespace LOLClient
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
+            // SearchTextBox
+            // 
+            SearchTextBox.Location = new System.Drawing.Point(444, 114);
+            SearchTextBox.Name = "SearchTextBox";
+            SearchTextBox.PlaceholderText = "Search Summoner";
+            SearchTextBox.Size = new System.Drawing.Size(108, 23);
+            SearchTextBox.TabIndex = 24;
+            SearchTextBox.TextChanged += SearchTextBox_TextChanged;
+            // 
             // AccountList
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -117,6 +127,7 @@ namespace LOLClient
             BackgroundImage = (System.Drawing.Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new System.Drawing.Size(1037, 627);
+            Controls.Add(SearchTextBox);
             Controls.Add(button1);
             Controls.Add(ExportsFolderButton);
             Controls.Add(BackButton);
@@ -140,5 +151,6 @@ namespace LOLClient
         private Button BackButton;
         private Button ExportsFolderButton;
         private Button button1;
+        private TextBox SearchTextBox;
     }
 }
