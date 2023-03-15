@@ -15,6 +15,7 @@ This program is a League of Legends account checker supporting multi threading w
 - Exports all accounts information to folder  
 - Comprehensive details on each successfully checked account, including purchase dates, owned champions, owned skins, and more.  
 - Automatically execute Hextech Loot related tasks such as disenchanting, claiming etc.
+- Re-queue system for failed accounts
 
 ## How to use
 
@@ -29,7 +30,7 @@ The first way to run the application is by downloading the source code and runni
 
 *Only works on Windows operating systems.*
 
-The other way which is easier is to download the **Account Checker Release** found in the root folder of the directory. Running the exe file should run the application.
+The other way which is easier is to download the **Account Checker Release** found in the root folder of the directory. There will always be two zipped files of the program, the newest version, and the previous version. Running the exe file should run the application.
 
 ## How it works
 The program creates a Riot client to authenticate the user and a League client to execute authorized requests. It then performs a series of requests to gather account-related data and perform tasks.
@@ -41,8 +42,8 @@ The program creates a Riot client to authenticate the user and a League client t
 ## Not Yet Implemented
 - Claiming event rewards and spending event tokens  
 - Custom exports  
-- Re-queue system for failed accounts
 - Export banned or failed(with reason) accounts
+- Friends list modification
 
 ## Application & Usage
 
