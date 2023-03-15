@@ -1,6 +1,6 @@
-﻿using LOLClient.DataFiles;
-using LOLClient.Models;
-using LOLClient.UI;
+﻿using AccountChecker.DataFiles;
+using AccountChecker.Models;
+using AccountChecker.UI;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -9,7 +9,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LOLClient.Utility;
+namespace AccountChecker.Utility;
 
 /*
  * This class provides utility methods for the application UI.

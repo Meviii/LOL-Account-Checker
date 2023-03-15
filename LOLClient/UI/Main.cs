@@ -1,5 +1,7 @@
-﻿using LOLClient.Connections;
-using LOLClient.Utility;
+﻿using AccountChecker;
+using AccountChecker.Models;
+using AccountChecker.Connections;
+using AccountChecker.Utility;
 using Microsoft.EntityFrameworkCore.Update;
 using Newtonsoft.Json.Linq;
 using System;
@@ -10,7 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Azure.Core.HttpHeader;
 
-namespace LOLClient;
+namespace AccountChecker;
 
 public partial class Main : Form
 {
@@ -177,25 +179,25 @@ public partial class Main : Form
 
         var settings = _coreUtility.LoadFromSettingsFile(); // Gets Settings file
 
-        var comboList = await _coreUtility.ReadComboList(ComboListText.Text, delimiter); // Reads the combolist(accounts) path
+        await _coreUtility.ReadAndAddComboListToQueue(ComboListText.Text, delimiter); // Reads the combolist(accounts) path
 
         // Update accounts left and progress bar 
-        UpdateProgress(comboList.Count.ToString());
+        UpdateProgress(AccountQueue.Count().ToString());
 
         // Initializes progress bar with min max
-        _uIUtility.InitializeProgressBar(ProgressBar, comboList.Count + 1);
+        _uIUtility.InitializeProgressBar(ProgressBar, AccountQueue.Count() + 1);
 
-        await RunTasksAsync(actualThreadCount, comboList, settings);
+        await RunTasksAsync(actualThreadCount, settings);
 
         return;
     }
 
     // This method asynchronously runs tasks to process a list of combos
-    public async Task<bool> RunTasksAsync(int threadCount, List<Tuple<string, string>> comboList, JObject settings)
+    public async Task<bool> RunTasksAsync(int threadCount, JObject settings)
     {
 
         // Initialize variables
-        var remainingCombos = comboList.Count;
+        var remainingCombos = AccountQueue.Count();
 
         // Limit thread count to remaining combos
         if (threadCount > remainingCombos)
@@ -217,15 +219,14 @@ public partial class Main : Form
                     return true;
                 }
 
-                Tuple<string, string> combo;
+                AccountCombo combo;
                 lock (comboListLock)
                 {
-                    // Get the first combo from the list
-                    combo = comboList[0];
-                    comboList.RemoveAt(0);
+                    // Get the first combo from the queue
+                    combo = AccountQueue.Dequeue();
                 }
 
-                Console.WriteLine($"Starting task for {combo.Item1}");
+                Console.WriteLine($"Starting task for {combo.Username}");
 
                 // Run the Work method as a Task
                 var task = Task.Run(async () =>
@@ -233,10 +234,10 @@ public partial class Main : Form
                     var runner = new Runner();
 
                     // Job of thread
-                    await runner.Job_AccountFetchingWithoutTasks(combo.Item1, combo.Item2, settings);
+                    await runner.Job_AccountFetchingWithoutTasks(combo, settings);
 
                     // Update accounts left counter
-                    UpdateProgress(Convert.ToString(Convert.ToInt32(comboList.Count)));
+                    UpdateProgress(AccountQueue.Count().ToString());
                 });
 
                 remainingCombos--;
@@ -294,8 +295,9 @@ public partial class Main : Form
 
     private void accountsListButton_Click(object sender, EventArgs e)
     {
-        this.Hide();
+        //this.Hide();
         _uIUtility.LoadAccountsListView(this);
+        this.Hide();
     }
 
     private void Main_Load(object sender, EventArgs e)
@@ -332,7 +334,11 @@ public partial class Main : Form
             var runner = new Runner();
 
             // Job of thread
-            await runner.Job_AccountFetchingWithoutTasks(username, password, settings);
+            await runner.Job_AccountFetchingWithoutTasks(new AccountCombo()
+            {
+                Username = username,
+                Password = password,
+            }, settings);
 
             // Update accounts left counter
             UpdateProgress(Convert.ToString(ACCOUNT_COUNT - 1));

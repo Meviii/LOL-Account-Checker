@@ -1,23 +1,24 @@
-﻿using LOLClient.DataFiles;
-using LOLClient.Models;
-using LOLClient.UI;
-using LOLClient.Utility;
+﻿using AccountChecker.DataFiles;
+using AccountChecker.Models;
+using AccountChecker.UI;
+using AccountChecker.Utility;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
+using System.DirectoryServices;
 using System.Windows.Forms;
 
-namespace LOLClient;
+namespace AccountChecker;
 
 public partial class AccountList : Form
 {
     private readonly UIUtility _uiUtility;
     private readonly CoreUtility _coreUtility;
     private List<Account> _accounts;
-
+    private DataTable _originalAccountsDataTable;
     public AccountList()
     {
         _uiUtility = new UIUtility();
@@ -65,7 +66,7 @@ public partial class AccountList : Form
         }
 
         accountsGridView.DataSource = dataTable;
-
+        _originalAccountsDataTable = dataTable;
     }
 
     private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -85,8 +86,9 @@ public partial class AccountList : Form
             {
                 if (row.Cells["Summoner"].Value.ToString() == account.SummonerName)
                 {
-                    this.Hide();
+                    //this.Hide();
                     _uiUtility.LoadSingleAccountView(account, this);
+                    this.Hide();
                 }
             }
         }
@@ -100,9 +102,10 @@ public partial class AccountList : Form
 
     private void BackButton_Click(object sender, EventArgs e)
     {
-        this.Hide();
+        //this.Hide();
 
         _uiUtility.LoadMainView(this);
+        this.Hide();
     }
 
     private void ExportsFolderButton_Click(object sender, EventArgs e)
@@ -113,5 +116,38 @@ public partial class AccountList : Form
     private void button1_Click(object sender, EventArgs e)
     {
         FillAccountsDataTableAsync();
+    }
+
+    private void SearchTextBox_TextChanged(object sender, EventArgs e)
+    {
+        if (_originalAccountsDataTable == null)
+            return;
+
+        // Get the text entered in the search box
+        string searchText = SearchTextBox.Text;
+
+        accountsGridView.DataSource = _originalAccountsDataTable;
+
+        DataTable dataTable = accountsGridView.DataSource as DataTable;
+
+        // Filter the DataGridView based on the search text
+        if (string.IsNullOrEmpty(searchText))
+        {
+            accountsGridView.DataSource = _originalAccountsDataTable;
+        }
+        else
+        {
+
+            // Filter the data based on the search text
+            var rows = dataTable.Select($"Summoner LIKE '%{searchText}%'");
+            if (rows.Length > 0)
+            {
+                // Show the filtered data
+                accountsGridView.DataSource = rows.CopyToDataTable();
+            }
+            else
+            {
+            }
+        }
     }
 }

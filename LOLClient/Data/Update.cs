@@ -1,4 +1,4 @@
-﻿using LOLClient.DataFiles;
+﻿using AccountChecker.DataFiles;
 using Newtonsoft.Json;
 using System;
 using System.IO;

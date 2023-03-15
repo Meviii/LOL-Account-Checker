@@ -1,5 +1,5 @@
 ﻿
-namespace LOLClient.Tasks;
+namespace AccountChecker.Tasks;
 
 public class EventData
 {

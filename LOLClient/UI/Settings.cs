@@ -1,5 +1,5 @@
 ﻿using AccountChecker.Data;
-using LOLClient.Utility;
+using AccountChecker.Utility;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LOLClient.UI;
+namespace AccountChecker.UI;
 
 public partial class Settings : Form
 {
@@ -90,8 +90,8 @@ public partial class Settings : Form
         else
         {
             StatusLabel.Text = "";
-            this.Hide();
             _uiUtility.LoadMainView();
+            this.Hide();
         }
     }
 

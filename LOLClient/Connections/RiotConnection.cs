@@ -1,4 +1,5 @@
-﻿using Azure;
+﻿using AccountChecker.Models;
+using Azure;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using System;
@@ -9,33 +10,33 @@ using System.Net.Http;
 using System.Reflection.Metadata;
 using System.Threading;
 using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace LOLClient.Connections;
+
+namespace AccountChecker.Connections;
 
 public class RiotConnection : Connection
 {
 
     public string _riotClientPath;
-    //private readonly Connection _connection;
     private readonly Client _client;
     public int ProcessID { get; private set; }
     private static readonly object _lock = new();
+    private readonly AccountCombo _accountCombo;
 
-    public RiotConnection(Client client, Connection connection, string riotClientPath)
+    public RiotConnection(AccountCombo accountCombo, Client client, string riotClientPath)
     {
         lock (_lock)
         {
+            _accountCombo = accountCombo;
             _client = client;
-            //_connection = connection;
             _riotClientPath = riotClientPath;
         }
     }
 
-    public async Task RunAsync()
+    public void Run()
     {
-        await CreateRiotClient();
-        await WaitForConnectionAsync();
+        CreateRiotClient();
+        WaitForConnection();
     }
 
 
@@ -51,7 +52,7 @@ public class RiotConnection : Connection
 
     }
 
-    private async Task WaitForConnectionAsync()
+    private void WaitForConnection()
     {
 
         var data = new Dictionary<string, object>()
@@ -60,7 +61,7 @@ public class RiotConnection : Connection
             { "trustLevels", new List<string> { "always_trusted" } }
         };
 
-        var response = await RequestAsync(HttpMethod.Post, "/rso-auth/v2/authorizations", data);
+        var response = Request(HttpMethod.Post, "/rso-auth/v2/authorizations", data);
 
         Thread.Sleep(1000);
     }
@@ -72,19 +73,13 @@ public class RiotConnection : Connection
 
         while (true)
         {
-            var phase = await RequestAsync(HttpMethod.Get, "/rnet-lifecycle/v1/product-context-phase", null);
+            var phase = Request(HttpMethod.Get, "/rnet-lifecycle/v1/product-context-phase", null);
             var result = JToken.Parse(await phase.Content.ReadAsStringAsync());
-
-            //lock (_lock)
-            //{
-            //    string logFilePath = @"..\..\..\logPRODUCTCONTEXTPHASE.txt";
-
-            //    File.AppendAllTextAsync(logFilePath, $"{DateTime.Now} - {result}\n\n\n\n\n").Wait();
-            //}
 
             if (result.ToString().ToLower() == "VngAccountRequired".ToLower())
             {
-                // retry
+                Console.WriteLine("'VngAccountRequired' error. Re-adding to queue");
+                AccountQueue.Enqueue(_accountCombo);
                 return false;
             }
 
@@ -97,6 +92,8 @@ public class RiotConnection : Connection
             if (result.ToString().ToLower() == "Login".ToLower())
             {
                 // if account needs to be re authenticated
+                Console.WriteLine("'Login' error. Re-adding to queue");
+                AccountQueue.Enqueue(_accountCombo);
                 return false;
             }
 
@@ -108,7 +105,7 @@ public class RiotConnection : Connection
             
     }
 
-    private async Task CreateRiotClient()
+    private void CreateRiotClient()
     {
         List<string> processArgs = new()
         {
@@ -123,13 +120,13 @@ public class RiotConnection : Connection
             "--headless",
         };
 
-        ProcessID = await _client.CreateClient(processArgs, _riotClientPath);
+        ProcessID = _client.CreateClient(processArgs, _riotClientPath);
     }
 
 
-    public async Task<string> RequestRegion()
+    public async Task<string> RequestRegionAsync()
     {
-        var response = await RequestAsync(HttpMethod.Get, "/riotclient/region-locale", null);
+        var response = Request(HttpMethod.Get, "/riotclient/region-locale", null);
 
         var jsonResponse = JToken.Parse(await response.Content.ReadAsStringAsync());
 

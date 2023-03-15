@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using AccountChecker.Models;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -9,25 +10,25 @@ using System.Reflection.Metadata;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace LOLClient.Connections;
+namespace AccountChecker.Connections;
 
 public class LeagueConnection : Connection
 {
     private readonly string _path;
-    //private readonly Connection _connection;
     public Dictionary<string, object> RiotCredentials = null;
     private readonly string _region;
     private readonly Client _client;
+    private readonly AccountCombo _combo;
     public int ProcessID { get; private set; }
     private static readonly object _lock = new();
 
-    public LeagueConnection(Connection connection, Client client, string path, string region)
+    public LeagueConnection(AccountCombo combo, Client client, string path, string region)
     {
         lock (_lock)
         {
+            _combo = combo;
             _path = path;
             _client = client;
-            //_connection = connection;
             _region = region;
         }
     }
@@ -35,8 +36,8 @@ public class LeagueConnection : Connection
     public async Task<bool> Run()
     {
 
-        await CreateLeagueClient(); // Create the client
-        var isCreated = await WaitForSession(); // Wait for Session
+        CreateLeagueClient(); // Create the client
+        var isCreated = await WaitForSessionAsync(); // Wait for Session
 
         if (!isCreated)
         {
@@ -47,7 +48,7 @@ public class LeagueConnection : Connection
         return true;
     }
 
-    private async Task<bool> WaitForSession(int timeout = 12)
+    private async Task<bool> WaitForSessionAsync(int timeout = 12)
     {
         int counter = 0;
 
@@ -55,7 +56,7 @@ public class LeagueConnection : Connection
         {
             try
             {
-                var response = await RequestAsync(HttpMethod.Get, "/lol-login/v1/session", null);
+                var response = Request(HttpMethod.Get, "/lol-login/v1/session", null);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -77,8 +78,8 @@ public class LeagueConnection : Connection
                             return false;
                         }else if (result["error"]["messageId"].ToString().ToLower() == "FAILED_TO_COMMUNICATE_WITH_LOGIN_QUEUE".ToLower())
                         {
-                            // re add to queue
-                            Console.WriteLine("Failed to communicate with login queue.");
+                            AccountQueue.Enqueue(_combo);
+                            Console.WriteLine("Failed to communicate with login queue. Re-added to queue");
                             return false;
                         }
                     }
@@ -99,7 +100,7 @@ public class LeagueConnection : Connection
         }
     }
 
-    private async Task CreateLeagueClient()
+    private void CreateLeagueClient()
     {
         lock (_lock)
         {
@@ -116,7 +117,7 @@ public class LeagueConnection : Connection
             "--headless"
         };
 
-            ProcessID = _client.CreateClient(processArgs, _path).Result;
+            ProcessID = _client.CreateClient(processArgs, _path);
         }
     }
 

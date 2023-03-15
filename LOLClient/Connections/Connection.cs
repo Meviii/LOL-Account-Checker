@@ -8,7 +8,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Threading;
 
-namespace LOLClient.Connections;
+namespace AccountChecker.Connections;
 
 public class Connection
 {
@@ -17,13 +17,14 @@ public class Connection
     public readonly HttpClient _httpClient;
     private static readonly HashSet<int> _usedPorts = new();
     private static readonly object _lock = new();
+
     public Connection()
     {
 
         lock (_lock)
         {
             AuthToken = GenerateAuthToken();
-            Port = GetFreePort().Result;
+            Port = GetFreePort();
 
             _httpClient = new HttpClient(GetHandlerSettings())
             {
@@ -35,7 +36,7 @@ public class Connection
         }
     }
 
-    public async Task<string> GetFreePort(int minPort = 50000, int maxPort = 65000)
+    public string GetFreePort(int minPort = 50000, int maxPort = 65000)
     {
 
         //var sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -106,7 +107,7 @@ public class Connection
             url = url.Remove(0, 1);
     }
 
-    public async Task<HttpResponseMessage> RequestAsync(HttpMethod method, string url, Dictionary<string, object> requestData)
+    public HttpResponseMessage Request(HttpMethod method, string url, Dictionary<string, object> requestData)
     {
         lock (_lock)
         {
@@ -144,7 +145,7 @@ public class Connection
         }
     }
 
-    public async Task<HttpResponseMessage> RequestAsync(HttpMethod method, string url, List<string> requestData, bool isList)
+    public HttpResponseMessage Request(HttpMethod method, string url, List<string> requestData, bool isList)
     {
         lock (_lock)
         {

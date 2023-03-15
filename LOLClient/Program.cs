@@ -1,7 +1,7 @@
 ﻿using AccountChecker.Tests;
-using LOLClient.DataFiles;
-using LOLClient.UI;
-using LOLClient.Utility;
+using AccountChecker.DataFiles;
+using AccountChecker.UI;
+using AccountChecker.Utility;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LOLClient;
+namespace AccountChecker;
 
 class Program
 {

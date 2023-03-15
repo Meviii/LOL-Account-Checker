@@ -1,5 +1,5 @@
-﻿using LOLClient;
-using LOLClient.Utility;
+﻿using AccountChecker;
+using AccountChecker.Utility;
 using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;

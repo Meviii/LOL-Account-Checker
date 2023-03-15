@@ -1,5 +1,5 @@
-﻿using LOLClient.Connections;
-using LOLClient.Tasks;
+﻿using AccountChecker.Connections;
+using AccountChecker.Tasks;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Newtonsoft.Json.Linq;
 using System;
@@ -40,10 +40,10 @@ public class Loot
         return items;
     }
 
-    public async Task RefreshLoot()
+    public async Task RefreshLootAsync()
     {
         // Make a GET request to retrieve player loot data.
-        var response = await _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-loot/v1/player-loot", null);
+        var response = _leagueConnection.Request(HttpMethod.Get, "/lol-loot/v1/player-loot", null);
 
         // Parse the response content as a JSON array.
         Data = JArray.Parse(await response.Content.ReadAsStringAsync());
