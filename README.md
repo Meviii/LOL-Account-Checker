@@ -32,6 +32,8 @@ The first way to run the application is by downloading the source code and runni
 
 The other way which is easier is to download the **Account Checker Release** found in the root folder of the directory. There will always be two zipped files of the program, the newest version, and the previous version. Running the exe file should run the application.
 
+Alternatively, you can download the latest release.
+
 ## How it works
 The program creates a Riot client to authenticate the user and a League client to execute authorized requests. It then performs a series of requests to gather account-related data and perform tasks.
 
