@@ -8,8 +8,6 @@ using AccountChecker.Utility;
 using AccountChecker.Tasks;
 using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 using AccountChecker.Data;
-using System.Reflection.Metadata.Ecma335;
-using static Azure.Core.HttpHeader;
 
 namespace AccountChecker;
 
@@ -74,7 +72,7 @@ public class Runner
     // This method takes in the username, password, and settings JObject as parameters
     // and runs the RiotClientRunner and LeagueClientRunner methods including fetching
     // account data and executing Tasks(hextech, event).
-    public async Task Job_AccountFetchingWithTasks(AccountCombo combo, JObject settings)
+    public async Task<bool> Job_AccountFetchingWithTasks(AccountCombo combo, JObject settings)
     {
         // Run RiotClientRunner with the given username, password, and RiotClientPath
         bool didRiotSucceed = await RiotClientRunner(combo, settings["RiotClientPath"].ToString());
@@ -83,7 +81,7 @@ public class Runner
         if (!didRiotSucceed)
         {
             CleanUp();
-            return;
+            return false;
         }
 
         // Run LeagueClientRunner with the given LeagueClientPath. Execute Account fetching and Tasks.
@@ -93,12 +91,13 @@ public class Runner
         if (!didLeagueSucceed)
         {
             CleanUp();
-            return;
+            return false;
         }
 
         // If both RiotClientRunner and LeagueClientRunner succeed, print the completed username to the console
         Console.WriteLine($"Completed {combo.Username}");
         CleanUp();
+        return true;
     }
 
     // This method takes in the username, password, and settings JObject as parameters

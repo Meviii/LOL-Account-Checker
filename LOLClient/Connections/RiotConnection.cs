@@ -171,7 +171,7 @@ public class RiotConnection : Connection
         {
             var response = await RequestAsync(HttpMethod.Get, "/riotclient/region-locale", null);
 
-            _coreUtility.LogToFile("RegionLocale_LOG", $"{_accountCombo.Username} - {response.StatusCode} - \n{await response.Content.ReadAsStringAsync()}\n\n");
+            _coreUtility.LogToFile("RegionLocale_LOG.txt", $"{_accountCombo.Username} - {response.StatusCode} - \n{await response.Content.ReadAsStringAsync()}\n\n");
 
             if (response.IsSuccessStatusCode)
             {

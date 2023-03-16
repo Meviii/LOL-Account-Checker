@@ -42,6 +42,7 @@ class Program
 
     }
 
+    // Check if the settings.json file has any content.
     static async Task<bool> IsSettingsFileEmpty()
     {
         string filePath = $"{PathConfig.SettingsFile}";
