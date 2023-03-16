@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using System.Net;
 using System.Threading.Tasks;
 using System.Threading;
+using AccountChecker.Models;
 
 namespace AccountChecker.Connections;
 
@@ -39,7 +40,6 @@ public class Connection
     public string GetFreePort(int minPort = 50000, int maxPort = 65000)
     {
 
-        //var sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         var sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         for (var port = minPort; port < maxPort; port++)
         {
@@ -70,6 +70,20 @@ public class Connection
                     continue;
                 }
 
+            }catch (HttpRequestException e)
+            {
+                Console.WriteLine("HTTP Request exception at Socket Creation.");
+
+                //Retry
+                Thread.Sleep(1000);
+                continue;
+
+            }catch (AggregateException e)
+            {
+                Console.WriteLine("Aggregate exception at Socket Creation.");
+                //Retry
+                Thread.Sleep(1000);
+                continue;
             }
         }
 
@@ -107,10 +121,12 @@ public class Connection
             url = url.Remove(0, 1);
     }
 
-    public HttpResponseMessage Request(HttpMethod method, string url, Dictionary<string, object> requestData)
+    private static readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1); // Limit to 5 concurrent requests
+
+    public async Task<HttpResponseMessage> RequestAsync(HttpMethod method, string url, Dictionary<string, object> requestData)
     {
-        lock (_lock)
-        {
+
+        lock (_lock) { 
             URLFixer(ref url);
 
             var requestAddress = _httpClient.BaseAddress + url;
@@ -141,7 +157,6 @@ public class Connection
             }
             Console.WriteLine($"Response: {response.StatusCode}");
             return response;
-
         }
     }
 

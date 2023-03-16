@@ -52,7 +52,7 @@ public class AccountData
         while (true)
         {
             // Make the GET request to the API.
-            var response = _leagueConnection.Request(HttpMethod.Get, "/lol-champions/v1/owned-champions-minimal", null);
+            var response = await _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-champions/v1/owned-champions-minimal", null);
 
             // If the response is successful, parse the JSON content and return it as a JArray.
             if (response.IsSuccessStatusCode)
@@ -133,18 +133,6 @@ public class AccountData
         _account.Champions = champs;
     }
 
-    private async Task LogToFile(string message)
-    {
-        Task writeFileTask = null;
-        lock (_lock) { 
-
-            string logFilePath = @"..\..\..\log.txt";
-
-            writeFileTask = File.AppendAllTextAsync(logFilePath, $"{DateTime.Now} - {message}\n\n\n\n\n");
-        }
-        await writeFileTask;
-    }
-
     // Method that asynchronously retrieves the summoner data for the account and assigns it to the account object.
     public async Task GetSummonerDataAsync()
     {
@@ -194,11 +182,6 @@ public class AccountData
             }
         }
 
-        if (_account.RP == null)
-        {
-            _account.RP = "0";
-        }
-
         return _loot;
     }
 
@@ -206,16 +189,19 @@ public class AccountData
     private async Task<Tuple<string, string>> RequestSummonerNameAndLevelAsync()
     {
         // Make an HTTP GET request to the "/lol-summoner/v1/current-summoner" endpoint using the _leagueConnection object.
-        var response = _leagueConnection.Request(HttpMethod.Get, "/lol-summoner/v1/current-summoner", null);
+        var response = await _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-summoner/v1/current-summoner", null);
 
         // Parse the response content as a JSON string and create a JToken object from it.
         var data = JToken.Parse(await response.Content.ReadAsStringAsync());
 
-        // Log the current summoner data to a file using the LogToFile method.
-        //await LogToFile($"Current Summoner:\n {data}");
+        string sumName = "{Invalid Name}";
+        if (data["displayName"].ToString() != "")
+        {
+            sumName = data["displayName"].ToString();
+        }
 
         // Create a new Tuple object containing the summoner's level and name as strings.
-        return new Tuple<string, string>(data["summonerLevel"].ToString(), data["displayName"].ToString());
+        return new Tuple<string, string>(data["summonerLevel"].ToString(), sumName);
     }
 
 
@@ -225,7 +211,7 @@ public class AccountData
         try
         {
             // Make an HTTP GET request to the "/lol-email-verification/v1/email" endpoint using the _leagueConnection object.
-            var response = _leagueConnection.Request(HttpMethod.Get, "/lol-email-verification/v1/email", null);
+            var response = await _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-email-verification/v1/email", null);
 
             // If the response status code is OK, parse the response content as a JSON string and create a JToken object from it.
             if (response.StatusCode == HttpStatusCode.OK)
@@ -250,31 +236,6 @@ public class AccountData
         return false;
     }
 
-
-    // This method exports an Account object to a JSON file.
-    // The file is saved to the Exports folder with the file name "{summonerName}.json".
-    public async Task ExportAccount()
-    {
-
-        // Build the file path for the JSON file based on the account's summoner name and the ExportsFolder directory.
-        string filePath = $@"{PathConfig.ExportsFolder}{_account.SummonerName.Trim()}.json";
-        Console.WriteLine($"Saved to {filePath}");
-        // Create the ExportsFolder directory if it doesn't exist.
-        if (!Directory.Exists(PathConfig.ExportsFolder))
-            Directory.CreateDirectory(PathConfig.ExportsFolder);
-
-        // Create the JSON file if it doesn't exist and immediately dispose of the file stream to release the resources.
-        if (!File.Exists(filePath))
-            File.Create(filePath).Dispose();
-
-        // Serialize the Account object to a formatted JSON string.
-        string json = JsonConvert.SerializeObject(_account, Formatting.Indented);
-
-        // Write the JSON string to the file.
-        await File.WriteAllTextAsync(filePath, json);
-
-    }
-
     // This asynchronous method requests a list of all the skins owned by the current summoner.
     // If the request fails or returns an empty array, it will retry every 5 seconds until it succeeds.
     private async Task<JArray> RequestSkinsAsync()
@@ -283,7 +244,7 @@ public class AccountData
         while (true)
         {
             // Make an HTTP GET request to the "/lol-inventory/v2/inventory/CHAMPION_SKIN" endpoint using the _leagueConnection object.
-            var response = _leagueConnection.Request(HttpMethod.Get, "/lol-inventory/v2/inventory/CHAMPION_SKIN", null);
+            var response = await _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-inventory/v2/inventory/CHAMPION_SKIN", null);
 
             // Read the response content as a string.
             var skinsResult = await response.Content.ReadAsStringAsync();
@@ -400,7 +361,7 @@ public class AccountData
     private async Task<JToken> RequestRankAsync()
     {
 
-        var response = _leagueConnection.Request(HttpMethod.Get, "/lol-ranked/v1/current-ranked-stats", null);
+        var response = await _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-ranked/v1/current-ranked-stats", null);
 
         if (response.StatusCode == HttpStatusCode.OK)
         {
@@ -428,7 +389,7 @@ public class AccountData
     // Makes a request to retrieve queue statistics
     private async Task<JToken> RequestQueueStatsAsync()
     {
-        _leagueConnection.Request(HttpMethod.Post,
+        await _leagueConnection.RequestAsync(HttpMethod.Post,
                                        "/lol-lobby/v2/lobby",
                                        new Dictionary<string, object>
                                        {
@@ -436,11 +397,11 @@ public class AccountData
                                        });
         Thread.Sleep(1000);
 
-        _leagueConnection.Request(HttpMethod.Post, "/lol-lobby/v2/lobby/matchmaking/search", null);
+        await _leagueConnection.RequestAsync(HttpMethod.Post, "/lol-lobby/v2/lobby/matchmaking/search", null);
 
         Thread.Sleep(2000);
 
-        var queueStatsResponse = _leagueConnection.Request(HttpMethod.Get, "/lol-lobby/v2/lobby/matchmaking/search-state", null);
+        var queueStatsResponse = await _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-lobby/v2/lobby/matchmaking/search-state", null);
 
         if (queueStatsResponse.StatusCode == HttpStatusCode.OK)
         {

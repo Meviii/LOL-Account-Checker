@@ -23,7 +23,7 @@ public class Account
     };
     private string _region;
 
-    public string SummonerName { get; set; }
+    public string SummonerName { get; set; } = "{NEW ACCOUNT}";
     public string Username { get; set; }
     public string Password { get; set; }
     public string Level { get; set; }
@@ -43,9 +43,9 @@ public class Account
 
         }
     }
-    public string BE { get; set; }
-    public string RP { get; set; }
-    public string OE { get; set; }
+    public string BE { get; set; } = "0";
+    public string RP { get; set; } = "0";
+    public string OE { get; set; } = "0";
     public List<Champion> Champions { get; set; } = new List<Champion>();
     public List<Skin> Skins { get; set; } = new List<Skin>();
     public bool ChatRestricted { get; set; }

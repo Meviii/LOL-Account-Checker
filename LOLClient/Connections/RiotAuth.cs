@@ -39,7 +39,7 @@ public class RiotAuth
 
         while (true)
         {
-            var response = _connection.Request(HttpMethod.Put, "/rso-auth/v1/session/credentials", data);
+            var response = await _connection.RequestAsync(HttpMethod.Put, "/rso-auth/v1/session/credentials", data);
             var content = JToken.Parse(await response.Content.ReadAsStringAsync());
 
             if (content.SelectToken("error") != null)
@@ -72,11 +72,18 @@ public class RiotAuth
 
     }
 
-    private void AcceptEULA()
+    private async void AcceptEULA(int timeout = 10)
     {
+        while (timeout > 0)
+        {
+            var response = await _connection.RequestAsync(HttpMethod.Put, "/eula/v1/agreement/acceptance", null);
 
-        _connection.Request(HttpMethod.Put, "/eula/v1/agreement/acceptance", null);
+            if (response.IsSuccessStatusCode)
+                return;
 
+            Thread.Sleep(1500);
+            timeout--;
+        }
     }
 
     public async Task<bool> Login(AccountCombo combo)
