@@ -171,75 +171,90 @@ public class CoreUtility
         return;
     }
 
-    // This method creates the initial tasks config for all tasks. Every task is defaulted to true (checked)
+    // This method creates the initial tasks configuration file for all tasks. 
+    // Every task is defaulted to false (unchecked).
     public async void InitializeTaskConfigFileAsync()
     {
-        // better to not hard code
+        // Create a dictionary with all task names as keys and set the default value to false.
         var tasksConfigDict = new Dictionary<string, bool>()
-        {
-            { TasksConfig.CraftKeys, false },
-            { TasksConfig.OpenChests, false },
-            { TasksConfig.DisenchantChampionShards, false },
-            { TasksConfig.DisenchantSkinShards, false },
-            { TasksConfig.DisenchantEternalShards, false },
-            { TasksConfig.OpenCapsulesOrbsShards, false },
-            { TasksConfig.BuyBlueEssence, false },
-            { TasksConfig.BuyChampionShards, false },
-            { TasksConfig.ClaimEventRewards, false },
-            { TasksConfig.DisenchantWardSkinShards, false }
-        };
+    {
+        { TasksConfig.CraftKeys, false },
+        { TasksConfig.OpenChests, false },
+        { TasksConfig.DisenchantChampionShards, false },
+        { TasksConfig.DisenchantSkinShards, false },
+        { TasksConfig.DisenchantEternalShards, false },
+        { TasksConfig.OpenCapsulesOrbsShards, false },
+        { TasksConfig.BuyBlueEssence, false },
+        { TasksConfig.BuyChampionShards, false },
+        { TasksConfig.ClaimEventRewards, false },
+        { TasksConfig.DisenchantWardSkinShards, false }
+    };
 
+        // Create the data folder if it doesn't exist.
         if (!Directory.Exists(PathConfig.DataFolder))
             Directory.CreateDirectory(PathConfig.DataFolder);
 
+        // Create the tasks file if it doesn't exist.
         if (!File.Exists(PathConfig.TasksFile))
             File.Create(PathConfig.TasksFile).Dispose();
 
+        // Write the default task configuration to the tasks file.
         using var streamWriter = new StreamWriter(PathConfig.TasksFile);
         streamWriter.Write(JsonConvert.SerializeObject(tasksConfigDict, Formatting.Indented));
-
-        //var json = JsonConvert.SerializeObject(tasksConfigDict, Formatting.Indented);
-
-        ////await File.WriteAllTextAsync(PathConfig.TasksFile, json);
-        //using (var streamWriter = new StreamWriter(PathConfig.TasksFile))
-        //{
-        //    streamWriter.Write(json);
-        //}
     }
 
-    public async Task<Dictionary<string,bool>> ReadFromTasksConfigFile()
+    // This method reads the tasks configuration file and returns its content as a dictionary.
+    public async Task<Dictionary<string, bool>> ReadFromTasksConfigFile()
     {
+        // Open the tasks file and read its content.
         using var file = new StreamReader(PathConfig.TasksFile);
         var json = await file.ReadToEndAsync();
+
+        // Deserialize the JSON string into a dictionary and return it.
         return JsonConvert.DeserializeObject<Dictionary<string, bool>>(json);
     }
 
+    // This method overwrites the tasks configuration file with a new dictionary.
     public void OverwriteTaskConfigFile(Dictionary<string, bool> tasksUpdated)
     {
-
+        // Create the data folder if it doesn't exist.
         if (!Directory.Exists(PathConfig.DataFolder))
             Directory.CreateDirectory(PathConfig.DataFolder);
 
+        // Create the tasks file if it doesn't exist.
         if (!File.Exists(PathConfig.TasksFile))
             File.Create(PathConfig.TasksFile);
 
+        // Serialize the updated task dictionary into a JSON string.
         var json = JsonConvert.SerializeObject(tasksUpdated, Formatting.Indented);
 
+        // Overwrite the tasks file with the updated task dictionary.
         using var file = new StreamWriter(PathConfig.TasksFile);
         file.Write(json);
     }
 
+    // This method logs a message to a file.
     public void LogToFile(string filePath, string message)
     {
+        // Create the full path of the log file.
+        string fullPath = Path.Combine(PathConfig.LogsFolder, filePath);
+
+        // Use a lock object to avoid race conditions when multiple threads try to access the same log file.
         lock (_lock)
         {
+            // Create the logs folder if it doesn't exist.
+            if (!Directory.Exists(PathConfig.LogsFolder))
+                Directory.CreateDirectory(PathConfig.LogsFolder);
 
-            if (!File.Exists(filePath))
-                File.Create(filePath).Dispose();
-        
-            File.AppendAllText(filePath, message);
+            // Create the log file if it doesn't exist.
+            if (!File.Exists(fullPath))
+                File.Create(fullPath).Dispose();
+
+            // Append the message to the log file.
+            File.AppendAllText(fullPath, message);
         }
     }
+
 
     // This method exports an Account object to a JSON file.
     // The file is saved to the Exports folder with the file name "{summonerName}.json".

@@ -129,7 +129,7 @@ public partial class SingleAccount : Form
     {
         var dataTable = new DataTable();
         dataTable.Columns.Add("Name");
-        dataTable.Columns.Add("Purchase Date");
+        dataTable.Columns.Add("Purchase Date", typeof(DateTime));
 
         foreach (var champ in _account.Champions)
         {
@@ -147,7 +147,7 @@ public partial class SingleAccount : Form
     {
         var dataTable = new DataTable();
         dataTable.Columns.Add("Name");
-        dataTable.Columns.Add("Purchase Date");
+        dataTable.Columns.Add("Purchase Date", typeof(DateTime));
 
         foreach (var skin in _account.Skins)
         {
@@ -231,12 +231,20 @@ public partial class SingleAccount : Form
             _uiUtility.IncrementProgressBar(ProgressBar);
 
             // Job of thread
-            await runner.Job_AccountFetchingWithTasks(new AccountCombo()
+            var isSuccess = await runner.Job_AccountFetchingWithTasks(new AccountCombo()
             {
                 Username = _account.Username,
                 Password = _account.Password,
             }, settings);
 
+            if (isSuccess)
+            {
+                MessageBox.Show("Completed Successfully!");
+            }
+            else
+            {
+                MessageBox.Show("Failed. Please try again.");
+            }
         });
 
         await task;

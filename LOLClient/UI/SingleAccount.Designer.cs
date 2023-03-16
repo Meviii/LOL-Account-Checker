@@ -160,10 +160,10 @@ namespace AccountChecker
             ChampionsSearchTextBox = new TextBox();
             championGridView = new DataGridView();
             Skins = new TabPage();
+            SkinsSearchTextBox = new TextBox();
             skinsGridView = new DataGridView();
             accountNameTitle = new Label();
             BackButton = new Button();
-            SkinsSearchTextBox = new TextBox();
             tabControl1.SuspendLayout();
             Overview.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
@@ -1460,6 +1460,16 @@ namespace AccountChecker
             Skins.Text = "Skins";
             Skins.UseVisualStyleBackColor = true;
             // 
+            // SkinsSearchTextBox
+            // 
+            SkinsSearchTextBox.Location = new System.Drawing.Point(370, 6);
+            SkinsSearchTextBox.Name = "SkinsSearchTextBox";
+            SkinsSearchTextBox.PlaceholderText = "Search";
+            SkinsSearchTextBox.Size = new System.Drawing.Size(100, 23);
+            SkinsSearchTextBox.TabIndex = 4;
+            SkinsSearchTextBox.TextAlign = HorizontalAlignment.Center;
+            SkinsSearchTextBox.TextChanged += SkinsSearchTextBox_TextChanged;
+            // 
             // skinsGridView
             // 
             skinsGridView.AllowUserToAddRows = false;
@@ -1501,16 +1511,6 @@ namespace AccountChecker
             BackButton.Text = "Back";
             BackButton.UseVisualStyleBackColor = false;
             BackButton.Click += BackButton_Click_1;
-            // 
-            // SkinsSearchTextBox
-            // 
-            SkinsSearchTextBox.Location = new System.Drawing.Point(370, 6);
-            SkinsSearchTextBox.Name = "SkinsSearchTextBox";
-            SkinsSearchTextBox.PlaceholderText = "Search";
-            SkinsSearchTextBox.Size = new System.Drawing.Size(100, 23);
-            SkinsSearchTextBox.TabIndex = 4;
-            SkinsSearchTextBox.TextAlign = HorizontalAlignment.Center;
-            SkinsSearchTextBox.TextChanged += SkinsSearchTextBox_TextChanged;
             // 
             // SingleAccount
             // 

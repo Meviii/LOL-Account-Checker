@@ -39,13 +39,13 @@ public partial class AccountList : Form
         var dataTable = new DataTable();
         dataTable.Columns.Add("Summoner");
         dataTable.Columns.Add("Region");
-        dataTable.Columns.Add("Level");
-        dataTable.Columns.Add("BE");
-        dataTable.Columns.Add("RP");
-        dataTable.Columns.Add("OE");
+        dataTable.Columns.Add("Level", typeof(int));
+        dataTable.Columns.Add("BE", typeof(int));
+        dataTable.Columns.Add("RP", typeof(int));
+        dataTable.Columns.Add("OE", typeof(int));
         dataTable.Columns.Add("Rank");
-        dataTable.Columns.Add("Skins");
-        dataTable.Columns.Add("Champions");
+        dataTable.Columns.Add("Skins", typeof(int));
+        dataTable.Columns.Add("Champions", typeof(int));
         dataTable.Columns.Add("Verified");
 
 
@@ -86,7 +86,6 @@ public partial class AccountList : Form
             {
                 if (row.Cells["Summoner"].Value.ToString() == account.SummonerName)
                 {
-                    //this.Hide();
                     _uiUtility.LoadSingleAccountView(account, this);
                     this.Hide();
                 }
@@ -102,8 +101,6 @@ public partial class AccountList : Form
 
     private void BackButton_Click(object sender, EventArgs e)
     {
-        //this.Hide();
-
         _uiUtility.LoadMainView(this);
         this.Hide();
     }
@@ -150,4 +147,5 @@ public partial class AccountList : Form
             }
         }
     }
+
 }

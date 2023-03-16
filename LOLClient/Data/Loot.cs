@@ -14,11 +14,14 @@ using System.Windows.Forms;
 
 namespace AccountChecker.Data;
 
+// This class represents a player's loot collection in League of Legends.
 public class Loot
 {
     private readonly Connection _leagueConnection;
     public JArray Data;
     private static readonly object _lock = new();
+
+    // Constructor to initialize the connection and data.
     public Loot(Connection connection)
     {
         lock (_lock)
@@ -27,6 +30,7 @@ public class Loot
         }
     }
 
+    // Returns a list of loot items based on the given display category.
     public List<JToken> GetLootByDisplayCategory(string category)
     {
         List<JToken> items = new();
@@ -40,17 +44,17 @@ public class Loot
         return items;
     }
 
+    // Refreshes the player's loot data by making a GET request to the League of Legends API.
     public async Task RefreshLootAsync()
     {
-        // Make a GET request to retrieve player loot data.
         var response = await _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-loot/v1/player-loot", null);
-
-        // Parse the response content as a JSON array.
         Data = JArray.Parse(await response.Content.ReadAsStringAsync());
-        
+
+        // Sleeps for 1 second to avoid making too many requests to the API.
         Thread.Sleep(1000);
     }
 
+    // Returns the count of a particular loot item based on the given loot ID.
     public int GetLootCountByID(string lootId)
     {
         var lootCount = 0;

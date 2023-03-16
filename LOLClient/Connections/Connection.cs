@@ -121,8 +121,6 @@ public class Connection
             url = url.Remove(0, 1);
     }
 
-    private static readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1); // Limit to 5 concurrent requests
-
     public async Task<HttpResponseMessage> RequestAsync(HttpMethod method, string url, Dictionary<string, object> requestData)
     {
 
