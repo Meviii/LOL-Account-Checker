@@ -142,7 +142,10 @@ public class Runner
 
         RiotConnection riotConnection = new(combo, _client, riotClientPath); // Creates client 
 
-        riotConnection.Run(); // Run steps
+        var riotSucc = await riotConnection.RunAsync(); // Run steps
+
+        if (!riotSucc)
+            return false;
 
         _riotClientCredentials = riotConnection.GetRiotCredentials(); // Retrieves Riot Client Connection Credentials for the LeagueClient.
 
@@ -224,7 +227,7 @@ public class Runner
             await _loot.RefreshLootAsync();
         }
 
-        await _accountData.ExportAccount(); // Export account
+        await _coreUtility.ExportAccount(_account); // Export account
 
         return true;
     }

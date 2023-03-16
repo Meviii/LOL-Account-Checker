@@ -1,4 +1,6 @@
-﻿using AccountChecker.Models;
+﻿using AccountChecker.DataFiles;
+using AccountChecker.Models;
+using AccountChecker.Utility;
 using Azure;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
@@ -22,21 +24,26 @@ public class RiotConnection : Connection
     public int ProcessID { get; private set; }
     private static readonly object _lock = new();
     private readonly AccountCombo _accountCombo;
-
+    private readonly CoreUtility _coreUtility;
     public RiotConnection(AccountCombo accountCombo, Client client, string riotClientPath)
     {
         lock (_lock)
         {
+            _coreUtility = new();
             _accountCombo = accountCombo;
             _client = client;
             _riotClientPath = riotClientPath;
         }
     }
 
-    public void Run()
+    public async Task<bool> RunAsync()
     {
         CreateRiotClient();
-        WaitForConnection();
+        var connSucc = await WaitForConnectionAsync();
+        if (!connSucc)
+            return false;
+
+        return true;
     }
 
 
@@ -52,29 +59,59 @@ public class RiotConnection : Connection
 
     }
 
-    private void WaitForConnection()
+    private async Task<bool> WaitForConnectionAsync(int timeout = 10)
     {
 
-        var data = new Dictionary<string, object>()
+        while (timeout > 0)
         {
-            { "clientId", "riot-client"},
-            { "trustLevels", new List<string> { "always_trusted" } }
-        };
+            try {
+                var data = new Dictionary<string, object>()
+                {
+                    { "clientId", "riot-client"},
+                    { "trustLevels", new List<string> { "always_trusted" } }
+                };
 
-        var response = Request(HttpMethod.Post, "/rso-auth/v2/authorizations", data);
+                var response = await RequestAsync(HttpMethod.Post, "/rso-auth/v2/authorizations", data);
 
-        Thread.Sleep(1000);
+                // Log response, add while loop to catch intended response
+                _coreUtility.LogToFile("Auth_LOG.txt", $"{_accountCombo.Username} - {response.StatusCode} - \n{await response.Content.ReadAsStringAsync()}\n\n");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+
+                timeout--;
+                Thread.Sleep(1500);
+            }catch (HttpRequestException e)
+            {
+                Console.WriteLine("HTTP Request exception at Authorization. Re adding to queue");
+                AccountQueue.Enqueue(_accountCombo);
+                return false;
+            }catch (AggregateException e)
+            {
+                Console.WriteLine("Aggregate Exception at Authorization. Re adding to queue");
+                AccountQueue.Enqueue(_accountCombo);
+                return false;
+            }
+        }
+
+        return false;
     }
 
-    public async Task<bool> WaitForLaunchAsync(int timeout = 60)
+    public async Task<bool> WaitForLaunchAsync(int timeout = 30)
     {
  
         var startTime = DateTime.Now;
 
         while (true)
         {
-            var phase = Request(HttpMethod.Get, "/rnet-lifecycle/v1/product-context-phase", null);
-            var result = JToken.Parse(await phase.Content.ReadAsStringAsync());
+            var response = await RequestAsync(HttpMethod.Get, "/rnet-lifecycle/v1/product-context-phase", null);
+            var result = JToken.Parse(await response.Content.ReadAsStringAsync());
+
+            // Log result
+            _coreUtility.LogToFile("ContextPhase_LOG.txt", $"{_accountCombo.Username} - {response.StatusCode} - \n{await response.Content.ReadAsStringAsync()}\n\n");
+
 
             if (result.ToString().ToLower() == "VngAccountRequired".ToLower())
             {
@@ -98,9 +135,13 @@ public class RiotConnection : Connection
             }
 
             if ((DateTime.Now - startTime).TotalSeconds >= timeout)
-            return false;
+            {
+                Console.WriteLine("Failed to get product context phase. Re-added to queue.");
+                AccountQueue.Enqueue(_accountCombo);
+                return false;
+            }
 
-            Thread.Sleep(1000);
+            Thread.Sleep(3000);
         }
             
     }
@@ -124,13 +165,23 @@ public class RiotConnection : Connection
     }
 
 
-    public async Task<string> RequestRegionAsync()
+    public async Task<string> RequestRegionAsync(int timeout = 10)
     {
-        var response = Request(HttpMethod.Get, "/riotclient/region-locale", null);
+        while (timeout > 0)
+        {
+            var response = await RequestAsync(HttpMethod.Get, "/riotclient/region-locale", null);
 
-        var jsonResponse = JToken.Parse(await response.Content.ReadAsStringAsync());
+            _coreUtility.LogToFile("RegionLocale_LOG", $"{_accountCombo.Username} - {response.StatusCode} - \n{await response.Content.ReadAsStringAsync()}\n\n");
 
-        return jsonResponse["region"].ToString();
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonResponse = JToken.Parse(await response.Content.ReadAsStringAsync());
 
+                return jsonResponse["region"].ToString();
+            }
+            timeout--;
+        }
+
+        throw new Exception("Error requesting region locale.");
     }
 }

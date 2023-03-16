@@ -237,7 +237,7 @@ public partial class Main : Form
                     await runner.Job_AccountFetchingWithoutTasks(combo, settings);
 
                     // Update accounts left counter
-                    UpdateProgress(AccountQueue.Count().ToString());
+                    UpdateProgress(remainingCombos.ToString());
                 });
 
                 remainingCombos--;

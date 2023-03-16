@@ -1,4 +1,5 @@
 ﻿using AccountChecker.Models;
+using AccountChecker.Utility;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using System;
@@ -9,6 +10,7 @@ using System.Net.Http;
 using System.Reflection.Metadata;
 using System.Threading;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AccountChecker.Connections;
 
@@ -18,15 +20,17 @@ public class LeagueConnection : Connection
     public Dictionary<string, object> RiotCredentials = null;
     private readonly string _region;
     private readonly Client _client;
-    private readonly AccountCombo _combo;
+    private readonly AccountCombo _accountCombo;
     public int ProcessID { get; private set; }
     private static readonly object _lock = new();
+    private readonly CoreUtility _coreUtility;
 
     public LeagueConnection(AccountCombo combo, Client client, string path, string region)
     {
         lock (_lock)
         {
-            _combo = combo;
+            _coreUtility = new CoreUtility();
+            _accountCombo = combo;
             _path = path;
             _client = client;
             _region = region;
@@ -56,11 +60,16 @@ public class LeagueConnection : Connection
         {
             try
             {
-                var response = Request(HttpMethod.Get, "/lol-login/v1/session", null);
+                var response = await RequestAsync(HttpMethod.Get, "/lol-login/v1/session", null);
 
                 if (response.IsSuccessStatusCode)
                 {
                     var result = JToken.Parse(await response.Content.ReadAsStringAsync());
+
+                    // Log result
+
+                    _coreUtility.LogToFile("Session_LOG.txt", $"{_accountCombo.Username} - {response.StatusCode} - \n{await response.Content.ReadAsStringAsync()}\n\n");
+                    
 
                     if (result["state"].ToString().ToLower() == "SUCCEEDED".ToLower())
                     {
@@ -68,7 +77,6 @@ public class LeagueConnection : Connection
                         Console.WriteLine("Session succeeded.");
                         return true;
                     }
-                    
 
                     if (result["state"].ToString().ToLower() == "ERROR".ToLower())
                     {
@@ -78,7 +86,7 @@ public class LeagueConnection : Connection
                             return false;
                         }else if (result["error"]["messageId"].ToString().ToLower() == "FAILED_TO_COMMUNICATE_WITH_LOGIN_QUEUE".ToLower())
                         {
-                            AccountQueue.Enqueue(_combo);
+                            AccountQueue.Enqueue(_accountCombo);
                             Console.WriteLine("Failed to communicate with login queue. Re-added to queue");
                             return false;
                         }
@@ -87,14 +95,17 @@ public class LeagueConnection : Connection
 
                 if (counter == timeout)
                 {
+                    AccountQueue.Enqueue(_accountCombo);
+                    Console.WriteLine("Timed Out. Re-added to queue.");
                     return false;
                 }
 
                 counter++;
-                Thread.Sleep(1000);
+                Thread.Sleep(2000);
             }
             catch
             {
+                counter++;
                 // retry
             }
         }
