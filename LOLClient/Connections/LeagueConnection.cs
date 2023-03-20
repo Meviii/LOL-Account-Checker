@@ -10,7 +10,6 @@ using System.Net.Http;
 using System.Reflection.Metadata;
 using System.Threading;
 using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AccountChecker.Connections;
 
@@ -101,7 +100,7 @@ public class LeagueConnection : Connection
                 }
 
                 counter++;
-                Thread.Sleep(2000);
+                Thread.Sleep(1500);
             }
             catch
             {

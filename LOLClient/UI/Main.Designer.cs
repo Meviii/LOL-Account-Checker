@@ -180,6 +180,7 @@ namespace AccountChecker
             ThreadCountTextBox.Size = new System.Drawing.Size(58, 29);
             ThreadCountTextBox.TabIndex = 20;
             ThreadCountTextBox.TextAlign = HorizontalAlignment.Center;
+            ThreadCountTextBox.TextChanged += ThreadCountTextBox_TextChanged;
             ThreadCountTextBox.KeyPress += ThreadCountTextBox_TextChanged;
             // 
             // StartButton

@@ -56,6 +56,7 @@ public class RiotConnection : Connection
             { "riotAuthToken", AuthToken }
         };
         return creds;
+        
 
     }
 
@@ -82,7 +83,7 @@ public class RiotConnection : Connection
                 }
 
                 timeout--;
-                Thread.Sleep(1500);
+                Thread.Sleep(500);
             }catch (HttpRequestException e)
             {
                 Console.WriteLine("HTTP Request exception at Authorization. Re adding to queue");
@@ -141,27 +142,30 @@ public class RiotConnection : Connection
                 return false;
             }
 
-            Thread.Sleep(3000);
+            Thread.Sleep(500);
         }
             
     }
 
     private void CreateRiotClient()
     {
-        List<string> processArgs = new()
+        lock (_lock)
         {
-            _riotClientPath,
-            "--app-port=" + Port,
-            "--remoting-auth-token=" + AuthToken,
-            "--launch-product=league_of_legends",
-            "--launch-patchline=live",
-            "--allow-multiple-clients",
-            "--locale=en_GB",
-            "--disable-auto-launch",
-            "--headless",
-        };
+            List<string> processArgs = new()
+            {
+                _riotClientPath,
+                "--app-port=" + Port,
+                "--remoting-auth-token=" + AuthToken,
+                "--launch-product=league_of_legends",
+                "--launch-patchline=live",
+                "--allow-multiple-clients",
+                "--locale=en_GB",
+                "--disable-auto-launch",
+                "--headless",
+            };
 
-        ProcessID = _client.CreateClient(processArgs, _riotClientPath);
+            ProcessID = _client.CreateClient(processArgs, _riotClientPath);
+        }
     }
 
 

@@ -1,4 +1,5 @@
 ﻿using AccountChecker.Models;
+using AccountChecker.Utility;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using System;
@@ -17,11 +18,13 @@ public class RiotAuth
     private readonly RiotConnection _connection;
     private static readonly object _lock = new();
     private readonly Client _client;
+    private readonly CoreUtility _coreUtility;
 
     public RiotAuth(RiotConnection connection, Client client)
     {
         lock (_lock)
         {
+            _coreUtility = new();
             _client = client;
             _connection = connection;
         }
@@ -41,6 +44,9 @@ public class RiotAuth
         {
             var response = await _connection.RequestAsync(HttpMethod.Put, "/rso-auth/v1/session/credentials", data);
             var content = JToken.Parse(await response.Content.ReadAsStringAsync());
+
+            // Log response
+            _coreUtility.LogToFile("Credentials_LOG.txt", $"{combo.Username} - {response.StatusCode} - \n{await response.Content.ReadAsStringAsync()}\n\n");
 
             if (content.SelectToken("error") != null)
             {
@@ -65,7 +71,7 @@ public class RiotAuth
                 return true;
             }
 
-            Thread.Sleep(3000);
+            Thread.Sleep(1000);
 
             return false;
         }
@@ -81,7 +87,7 @@ public class RiotAuth
             if (response.IsSuccessStatusCode)
                 return;
 
-            Thread.Sleep(1500);
+            Thread.Sleep(1000);
             timeout--;
         }
     }

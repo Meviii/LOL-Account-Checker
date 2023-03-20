@@ -260,23 +260,25 @@ public class CoreUtility
     // The file is saved to the Exports folder with the file name "{summonerName}.json".
     public async Task ExportAccount(Account account)
     {
+        lock (_lock)
+        {
+            // Build the file path for the JSON file based on the account's summoner name and the ExportsFolder directory.
+            string filePath = $@"{PathConfig.ExportsFolder}{account.Username}.json";
+            Console.WriteLine($"Saved to {filePath}");
+            // Create the ExportsFolder directory if it doesn't exist.
+            if (!Directory.Exists(PathConfig.ExportsFolder))
+                Directory.CreateDirectory(PathConfig.ExportsFolder);
 
-        // Build the file path for the JSON file based on the account's summoner name and the ExportsFolder directory.
-        string filePath = $@"{PathConfig.ExportsFolder}{account.Username}.json";
-        Console.WriteLine($"Saved to {filePath}");
-        // Create the ExportsFolder directory if it doesn't exist.
-        if (!Directory.Exists(PathConfig.ExportsFolder))
-            Directory.CreateDirectory(PathConfig.ExportsFolder);
+            // Create the JSON file if it doesn't exist and immediately dispose of the file stream to release the resources.
+            if (!File.Exists(filePath))
+                File.Create(filePath).Dispose();
 
-        // Create the JSON file if it doesn't exist and immediately dispose of the file stream to release the resources.
-        if (!File.Exists(filePath))
-            File.Create(filePath).Dispose();
+            // Serialize the Account object to a formatted JSON string.
+            string json = JsonConvert.SerializeObject(account, Formatting.Indented);
 
-        // Serialize the Account object to a formatted JSON string.
-        string json = JsonConvert.SerializeObject(account, Formatting.Indented);
-
-        // Write the JSON string to the file.
-        await File.WriteAllTextAsync(filePath, json);
+            // Write the JSON string to the file.
+            File.WriteAllText(filePath, json);
+        }
 
     }
 }

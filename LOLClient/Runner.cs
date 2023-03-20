@@ -50,6 +50,7 @@ public class Runner
         // If RiotClientRunner did not succeed, return from the method
         if (!didRiotSucceed)
         {
+            
             CleanUp();
             return;
         }
@@ -144,7 +145,10 @@ public class Runner
         var riotSucc = await riotConnection.RunAsync(); // Run steps
 
         if (!riotSucc)
+        {
+            riotConnection.Dispose();
             return false;
+        }
 
         _riotClientCredentials = riotConnection.GetRiotCredentials(); // Retrieves Riot Client Connection Credentials for the LeagueClient.
 
@@ -155,6 +159,7 @@ public class Runner
         if (!didLogin) // Check if login fails
         {
             Console.WriteLine("Thread Stopped. Login incorrect.");
+            riotConnection.Dispose();
             _client.CloseClient(riotConnection.ProcessID);
             return false;
         }
@@ -169,6 +174,7 @@ public class Runner
 
         if (!didLaunch)
         {
+            riotConnection.Dispose();
             CleanUp();
             return false;
         }
@@ -202,6 +208,7 @@ public class Runner
 
         if (!isCreated)
         {
+            leagueConnection.Dispose();
             _client.CloseClient(leagueConnection.ProcessID);
             return false;
         }
@@ -249,6 +256,7 @@ public class Runner
         await _accountData.GetSummonerDataAsync();
         await _accountData.GetRank();
         await _accountData.GetQueueStats();
+        await _accountData.GetHonorStats();
     }
 
     // This method executes the wanted Hextech Tasks on an account asynchronously.
@@ -265,32 +273,32 @@ public class Runner
 
             if (task.Key == TasksConfig.OpenChests && task.Value == true)
             {
-                _hextech.OpenChestsAsync();
+                await _hextech.OpenChestsAsync();
             }
 
             if (task.Key == TasksConfig.DisenchantChampionShards && task.Value == true)
             {
-                _hextech.DisenchantChampionShards();
+                await _hextech.DisenchantChampionShards();
             }
 
             if (task.Key == TasksConfig.DisenchantEternalShards && task.Value == true)
             {
-                _hextech.DisenchantEternalShards();
+                await _hextech.DisenchantEternalShards();
             }
 
             if (task.Key == TasksConfig.DisenchantSkinShards && task.Value == true)
             {
-                _hextech.DisenchantSkinShards();
+                await _hextech.DisenchantSkinShards();
             }
 
             if (task.Key == TasksConfig.DisenchantWardSkinShards && task.Value == true)
             {
-                _hextech.DisenchantWardSkinShards();
+                await _hextech.DisenchantWardSkinShards();
             }
 
             if (tasks[TasksConfig.OpenCapsulesOrbsShards])
             {
-                _hextech.OpenLootAsync();
+                await _hextech.OpenLootAsync();
             }
 
             //if (tasks[TasksConfig.BuyBlueEssence])
