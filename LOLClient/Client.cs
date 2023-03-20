@@ -45,6 +45,8 @@ public class Client
 
                     process.StartInfo = processInfo;
 
+                    Thread.Sleep(1000);
+
                     process.Start();
 
                     _processes.Add(process);

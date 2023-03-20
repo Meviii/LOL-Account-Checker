@@ -46,4 +46,12 @@ public static class AccountQueue
             return _queue.Count;
         }
     }
+
+    public static void Clear()
+    {
+        lock (_queue)
+        {
+            _queue.Clear();
+        }
+    }
 }

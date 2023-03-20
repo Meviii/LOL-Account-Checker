@@ -15,11 +15,11 @@ This program is a League of Legends account checker supporting multi threading w
 - Exports all accounts information to folder  
 - Comprehensive details on each successfully checked account, including purchase dates, owned champions, owned skins, and more.  
 - Automatically execute Hextech Loot related tasks such as disenchanting, claiming etc.
-- Re-queue system for failed accounts
+- Re-queue system for failed accounts  
 
 ## How to use
 
-*Note: I recommend using at most 4 threads.*  
+*Note: I recommend using at most 8 threads.*  
 *Note: Rarely, accounts can show as login failed when they are active.*
 
 ### First Way

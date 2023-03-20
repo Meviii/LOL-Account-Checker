@@ -51,7 +51,7 @@ public class Loot
         Data = JArray.Parse(await response.Content.ReadAsStringAsync());
 
         // Sleeps for 1 second to avoid making too many requests to the API.
-        Thread.Sleep(1000);
+        Thread.Sleep(500);
     }
 
     // Returns the count of a particular loot item based on the given loot ID.

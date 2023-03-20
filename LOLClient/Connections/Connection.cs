@@ -8,10 +8,13 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Threading;
 using AccountChecker.Models;
+using Polly;
+using Polly.Extensions.Http;
+using Microsoft.VisualBasic.Devices;
+using Azure;
 
 namespace AccountChecker.Connections;
-
-public class Connection
+public class Connection : IDisposable
 {
     public readonly string Port;
     public readonly string AuthToken;
@@ -54,13 +57,18 @@ public class Connection
                 sock.Close();
 
                 _usedPorts.Add(port);
+
                 return port.ToString();
             }
             catch (SocketException e)
             {
                 // check if port is in use
                 if (e.SocketErrorCode == SocketError.AddressAlreadyInUse)
+                {
+                    // Retry
+                    Thread.Sleep(1000);
                     continue;
+                }
 
                 // Retry with new Connection if socket refused
                 if (e.SocketErrorCode == SocketError.ConnectionRefused)
@@ -70,7 +78,8 @@ public class Connection
                     continue;
                 }
 
-            }catch (HttpRequestException e)
+            }
+            catch (HttpRequestException e)
             {
                 Console.WriteLine("HTTP Request exception at Socket Creation.");
 
@@ -78,7 +87,8 @@ public class Connection
                 Thread.Sleep(1000);
                 continue;
 
-            }catch (AggregateException e)
+            }
+            catch (AggregateException e)
             {
                 Console.WriteLine("Aggregate exception at Socket Creation.");
                 //Retry
@@ -88,21 +98,24 @@ public class Connection
         }
 
         throw new Exception("No port available.");
-        
+
     }
 
     private string GenerateAuthToken(int length = 22)
     {
-        var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        var random = new Random();
-        var result = new StringBuilder(length);
-
-        for (var i = 0; i < length; i++)
+        lock (_lock)
         {
-            result.Append(chars[random.Next(chars.Length)]);
-        }
+            var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var random = new Random();
+            var result = new StringBuilder(length);
 
-        return result.ToString();
+            for (var i = 0; i < length; i++)
+            {
+                result.Append(chars[random.Next(chars.Length)]);
+            }
+
+            return result.ToString();
+        }
     }
 
     private HttpClientHandler GetHandlerSettings()
@@ -123,76 +136,145 @@ public class Connection
 
     public async Task<HttpResponseMessage> RequestAsync(HttpMethod method, string url, Dictionary<string, object> requestData)
     {
+        HttpResponseMessage response = null;
 
-        lock (_lock) { 
-            URLFixer(ref url);
+        //await Policy
+        //.Handle<HttpRequestException>()
+        //.OrResult<HttpResponseMessage>(r => r.StatusCode == HttpStatusCode.NotFound
+        //                                   || r.StatusCode == HttpStatusCode.InternalServerError
+        //                                   || (int)r.StatusCode == 429)
+        //.WaitAndRetryAsync(6, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)))
+        //.ExecuteAsync(async () =>
+        //{
+        //    await _semaphore.WaitAsync();
+        //    try
+        //    {
+        //        URLFixer(ref url);
 
-            var requestAddress = _httpClient.BaseAddress + url;
-            Console.WriteLine($"Sending {method} request. URL: {url}");
+        //        var requestAddress = _httpClient.BaseAddress + url;
+        //        Console.WriteLine($"Sending {method} request. URL: {url}");
 
-            HttpResponseMessage response;
-
-            switch (method.Method)
+        //        switch (method.Method)
+        //        {
+        //            case "GET":
+        //                response = await _httpClient.GetAsync(requestAddress);
+        //                break;
+        //            case "POST":
+        //                var json = JsonConvert.SerializeObject(requestData);
+        //                var content = new StringContent(json, Encoding.UTF8, "application/json");
+        //                response = await _httpClient.PostAsync(requestAddress, content);
+        //                break;
+        //            case "PUT":
+        //                json = JsonConvert.SerializeObject(requestData);
+        //                content = new StringContent(json, Encoding.UTF8, "application/json");
+        //                response = await _httpClient.PutAsync(requestAddress, content);
+        //                break;
+        //            case "DELETE":
+        //                response = await _httpClient.DeleteAsync(requestAddress);
+        //                break;
+        //            default:
+        //                throw new Exception("Unsupported HTTP method.");
+        //        }
+        //        Console.WriteLine($"Response: {response.StatusCode}");
+        //        return response;
+        //    }
+        //    finally
+        //    {
+        //        _semaphore.Release();
+        //    }
+        //});
+        await Policy
+            .Handle<HttpRequestException>()
+            .OrResult<HttpResponseMessage>(r => r.StatusCode == HttpStatusCode.NotFound
+                                               || r.StatusCode == HttpStatusCode.InternalServerError
+                                               || (int)r.StatusCode == 429)
+            .WaitAndRetryAsync(6, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)))
+            .ExecuteAsync(() =>
             {
-                case "GET":
-                    response = _httpClient.GetAsync(requestAddress).Result;
-                    break;
-                case "POST":
-                    var json = JsonConvert.SerializeObject(requestData);
-                    var content = new StringContent(json, Encoding.UTF8, "application/json");
-                    response = _httpClient.PostAsync(requestAddress, content).Result;
-                    break;
-                case "PUT":
-                    json = JsonConvert.SerializeObject(requestData);
-                    content = new StringContent(json, Encoding.UTF8, "application/json");
-                    response = _httpClient.PutAsync(requestAddress, content).Result;
-                    break;
-                case "DELETE":
-                    response = _httpClient.DeleteAsync(requestAddress).Result;
-                    break;
-                default:
-                    throw new Exception("Unsupported HTTP method.");
-            }
-            Console.WriteLine($"Response: {response.StatusCode}");
-            return response;
-        }
+                lock (_lock)
+                {
+                    URLFixer(ref url);
+
+                    var requestAddress = _httpClient.BaseAddress + url;
+                    Console.WriteLine($"Sending {method} request. URL: {url}");
+
+                    switch (method.Method)
+                    {
+                        case "GET":
+                            response = _httpClient.GetAsync(requestAddress).Result;
+                            break;
+                        case "POST":
+                            var json = JsonConvert.SerializeObject(requestData);
+                            var content = new StringContent(json, Encoding.UTF8, "application/json");
+                            response = _httpClient.PostAsync(requestAddress, content).Result;
+                            break;
+                        case "PUT":
+                            json = JsonConvert.SerializeObject(requestData);
+                            content = new StringContent(json, Encoding.UTF8, "application/json");
+                            response = _httpClient.PutAsync(requestAddress, content).Result;
+                            break;
+                        case "DELETE":
+                            response = _httpClient.DeleteAsync(requestAddress).Result;
+                            break;
+                        default:
+                            throw new Exception("Unsupported HTTP method.");
+                    }
+                    Console.WriteLine($"Response: {response.StatusCode}");
+                    return Task.FromResult(response);
+                }
+            });
+        return response;
     }
 
-    public HttpResponseMessage Request(HttpMethod method, string url, List<string> requestData, bool isList)
+    public async Task<HttpResponseMessage> RequestAsync(HttpMethod method, string url, List<string> requestData, bool isList)
     {
-        lock (_lock)
-        {
-            URLFixer(ref url);
+        HttpResponseMessage response = null;
 
-            var requestAddress = _httpClient.BaseAddress + url;
-            Console.WriteLine($"Sending {method} request. URL: {url}");
-
-            HttpResponseMessage response;
-
-            switch (method.Method)
+        await Policy
+            .Handle<HttpRequestException>()
+            .OrResult<HttpResponseMessage>(r => r.StatusCode == HttpStatusCode.NotFound
+                                               || r.StatusCode == HttpStatusCode.InternalServerError
+                                               || (int)r.StatusCode == 429)
+            .WaitAndRetryAsync(6, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)))
+            .ExecuteAsync(() =>
             {
-                case "GET":
-                    response = _httpClient.GetAsync(requestAddress).Result;
-                    break;
-                case "POST":
-                    var json = JsonConvert.SerializeObject(requestData);
-                    var content = new StringContent(json, Encoding.UTF8, "application/json");
-                    response = _httpClient.PostAsync(requestAddress, content).Result;
-                    break;
-                case "PUT":
-                    json = JsonConvert.SerializeObject(requestData);
-                    content = new StringContent(json, Encoding.UTF8, "application/json");
-                    response = _httpClient.PutAsync(requestAddress, content).Result;
-                    break;
-                case "DELETE":
-                    response = _httpClient.DeleteAsync(requestAddress).Result;
-                    break;
-                default:
-                    throw new Exception("Unsupported HTTP method.");
-            }
+                lock (_lock)
+                {
+                    URLFixer(ref url);
 
-            Console.WriteLine($"Response: {response.StatusCode}");
-            return response;
-        }
+                    var requestAddress = _httpClient.BaseAddress + url;
+                    Console.WriteLine($"Sending {method} request. URL: {url}");
+
+                    switch (method.Method)
+                    {
+                        case "GET":
+                            response = _httpClient.GetAsync(requestAddress).Result;
+                            break;
+                        case "POST":
+                            var json = JsonConvert.SerializeObject(requestData);
+                            var content = new StringContent(json, Encoding.UTF8, "application/json");
+                            response = _httpClient.PostAsync(requestAddress, content).Result;
+                            break;
+                        case "PUT":
+                            json = JsonConvert.SerializeObject(requestData);
+                            content = new StringContent(json, Encoding.UTF8, "application/json");
+                            response = _httpClient.PutAsync(requestAddress, content).Result;
+                            break;
+                        case "DELETE":
+                            response = _httpClient.DeleteAsync(requestAddress).Result;
+                            break;
+                        default:
+                            throw new Exception("Unsupported HTTP method.");
+                    }
+                    Console.WriteLine($"Response: {response.StatusCode}");
+                    return Task.FromResult(response);
+                }
+            });
+        return response;
+    }
+
+    public void Dispose()
+    {
+        _httpClient.Dispose();
     }
 }

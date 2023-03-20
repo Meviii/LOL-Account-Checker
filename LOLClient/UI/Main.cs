@@ -115,6 +115,15 @@ public partial class Main : Form
         return ':';
     }
 
+    private bool IsInaccurateThreadCount(int threadcount)
+    {
+        int MIN_WARNING_THREAD_COUNT = 11;
+        if (threadcount >= MIN_WARNING_THREAD_COUNT)
+            return true;
+
+        return false;
+    }
+
     private async void StartOrStopButton_Click(object sender, EventArgs e)
     {
         var button = (Button)sender;
@@ -126,8 +135,11 @@ public partial class Main : Form
 
             // handler if user doesnt enter a thread count or delimiter
             int threadCount = ValidateThreadCount();
+
             char delimiter = ValidateDelimiter();
 
+
+            AccountQueue.Clear();
             // Runs a new thread to start the operation to prevent Main form from freezing
             await Task.Run(async () =>
             {
@@ -155,6 +167,9 @@ public partial class Main : Form
         button.Enabled = false;
         button.ForeColor = System.Drawing.Color.Green;
         ProgressBar.Visible = true;
+        ProgressBar.Minimum = 0;
+        ProgressBar.Maximum = 0;
+        
     }
 
     // This method validates the entered (or default) thread count
@@ -186,9 +201,13 @@ public partial class Main : Form
 
         // Initializes progress bar with min max
         _uIUtility.InitializeProgressBar(ProgressBar, AccountQueue.Count() + 1);
-
-        await RunTasksAsync(actualThreadCount, settings);
-
+        try
+        {
+            await RunTasksAsync(actualThreadCount, settings);
+        }catch (Exception ex)
+        {
+            MessageBox.Show($"An error occured. {ex.Message}");
+        }
         return;
     }
 
@@ -237,7 +256,7 @@ public partial class Main : Form
                     await runner.Job_AccountFetchingWithoutTasks(combo, settings);
 
                     // Update accounts left counter
-                    UpdateProgress(remainingCombos.ToString());
+                    UpdateProgress(AccountQueue.Count().ToString());
                 });
 
                 remainingCombos--;
@@ -250,6 +269,9 @@ public partial class Main : Form
 
             // Wait for all tasks to complete before proceeding
             await Task.WhenAll(tasks);
+
+            // Get new queue count to care for retry accounts
+            remainingCombos = AccountQueue.Count();
 
             // Clear the tasks list and perform cleanup
             tasks.Clear();
@@ -347,11 +369,23 @@ public partial class Main : Form
         await task;
 
         // Finalize
+        UpdateProgress("0");
         StartButton.Enabled = true;
         QuickCheckButton.Enabled = true;
         ProgressBar.Visible = false;
         ConsoleTextBox.Clear(); // Clears Console
         Console.WriteLine("Task Completed.");
 
+    }
+
+    private void ThreadCountTextBox_TextChanged(object sender, EventArgs e)
+    {
+
+        int threadCount = ValidateThreadCount();
+
+        if (IsInaccurateThreadCount(threadCount))
+        {
+            MessageBox.Show("This many threads may rarely cause inaccurate checks. 1 thread per account.");
+        }
     }
 }

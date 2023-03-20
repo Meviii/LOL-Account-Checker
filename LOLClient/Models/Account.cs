@@ -54,6 +54,6 @@ public class Account
     public bool IsEmailVerified { get; set; }
     public Rank CurrentRank { get; set; }
     public Rank HighestRank { get; set; }
-
+    public HonorLevel HonorLevel { get; set; }
     public Account() { }
 }

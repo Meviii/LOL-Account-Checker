@@ -27,59 +27,59 @@ public class HextechData
         }
     }
 
-    public void PostRecipe(string recipeName,List<string> materials, int repeat = 1)
+    public async Task PostRecipeAsync(string recipeName,List<string> materials, int repeat = 1)
     {
-        _connection.Request(HttpMethod.Post,
+        await _connection.RequestAsync(HttpMethod.Post,
                                        $"/lol-loot/v1/recipes/{recipeName}/craft?repeat={Convert.ToInt32(repeat)}",
                                        materials, true);
     }
 
-    public void DisenchantEternalShards()
+    public async Task DisenchantEternalShards()
     {
         var eternals = _loot.GetLootByDisplayCategory("ETERNALS");
         foreach (var eternal in eternals)
         {
             var materials = new List<string>() { eternal["lootName"].ToString() };
 
-            PostRecipe($"{eternal["type"]}_DISENCHANT", materials, Convert.ToInt32(eternal["count"].ToString()));
+            await PostRecipeAsync($"{eternal["type"]}_DISENCHANT", materials, Convert.ToInt32(eternal["count"].ToString()));
 
             Thread.Sleep(1000);
         }
     }
 
-    public void DisenchantChampionShards()
+    public async Task DisenchantChampionShards()
     {
         var champions = _loot.GetLootByDisplayCategory("CHAMPION");
         foreach (var champ in champions)
         {
             var materials = new List<string>() { champ["lootName"].ToString() };
 
-            PostRecipe($"{champ["type"]}_disenchant", materials, Convert.ToInt32(champ["count"].ToString()));
+            await PostRecipeAsync($"{champ["type"]}_disenchant", materials, Convert.ToInt32(champ["count"].ToString()));
 
             Thread.Sleep(1000);
         }
     }
 
-    public void DisenchantWardSkinShards()
+    public async Task DisenchantWardSkinShards()
     {
         var champions = _loot.GetLootByDisplayCategory("WARDSKIN");
         foreach (var champ in champions)
         {
             var materials = new List<string>() { champ["lootName"].ToString() };
 
-            PostRecipe($"{champ["type"]}_disenchant", materials, Convert.ToInt32(champ["count"].ToString()));
+            await PostRecipeAsync($"{champ["type"]}_disenchant", materials, Convert.ToInt32(champ["count"].ToString()));
 
             Thread.Sleep(1000);
         }
     }
-    public void DisenchantSkinShards()
+    public async Task DisenchantSkinShards()
     {
         var skins = _loot.GetLootByDisplayCategory("SKIN");
-        foreach (var sk in skins)
+        foreach (var skin in skins)
         {
-            var materials = new List<string>() { sk["lootName"].ToString() };
+            var materials = new List<string>() { skin["lootName"].ToString() };
             
-            PostRecipe($"{sk["type"]}_disenchant", materials,Convert.ToInt32(sk["count"].ToString()));
+            await PostRecipeAsync($"{skin["type"]}_disenchant", materials, Convert.ToInt32(skin["count"].ToString()));
 
             Thread.Sleep(1000);
         }
@@ -93,10 +93,10 @@ public class HextechData
         {
             var craftableKeys = Math.Floor(Convert.ToDouble(keyFragmentCount / 3));
 
-            PostRecipe("MATERIAL_key_fragment_forge", new List<string> { "MATERIAL_key_fragment" }, Convert.ToInt32(craftableKeys));
+            await PostRecipeAsync("MATERIAL_key_fragment_forge", new List<string> { "MATERIAL_key_fragment" }, Convert.ToInt32(craftableKeys));
         }
     }
-    public async void OpenChestsAsync()
+    public async Task OpenChestsAsync()
     {
         await _loot.RefreshLootAsync();
 
@@ -114,7 +114,7 @@ public class HextechData
             if (masterWorkChestCount > 0)
             {
                 repeat = Math.Min(keyCount, masterWorkChestCount);
-                PostRecipe("CHEST_224_OPEN", new List<string> {"CHEST_224", "MATERIAL_key" }, repeat);
+                await PostRecipeAsync("CHEST_224_OPEN", new List<string> { "CHEST_224", "MATERIAL_key" }, repeat);
                 keyCount -= repeat;
                 continue;
             }
@@ -122,7 +122,7 @@ public class HextechData
             if (standardChestCount > 0)
             {
                 repeat = Math.Min(keyCount, standardChestCount);
-                PostRecipe("CHEST_generic_OPEN", new List<string> { "CHEST_generic", "MATERIAL_key" }, repeat);
+                await PostRecipeAsync("CHEST_generic_OPEN", new List<string> { "CHEST_generic", "MATERIAL_key" }, repeat);
                 keyCount -= standardChestCount;
                 continue;
             }
@@ -130,16 +130,16 @@ public class HextechData
             if (masteryChestCount > 0)
             {
                 repeat = Math.Min(keyCount, masteryChestCount);
-                PostRecipe("CHEST_champion_mastery_OPEN", new List<string> { "CHEST_champion_mastery", "MATERIAL_key" }, repeat);
+                await PostRecipeAsync("CHEST_champion_mastery_OPEN", new List<string> { "CHEST_champion_mastery", "MATERIAL_key" }, repeat);
                 keyCount -= masteryChestCount;
                 continue;
             }
         }
 
-        OpenChestsAsync();
+        await OpenChestsAsync();
     }
 
-    public async void OpenLootAsync()
+    public async Task OpenLootAsync()
     {
         await _loot.RefreshLootAsync();
         string notHextechChest = "CHEST_((?!(224|generic|champion_mastery)).)*";
@@ -153,7 +153,7 @@ public class HextechData
         {
             string name = currentLoot["lootName"].ToString();
             int count = Convert.ToInt32(currentLoot["count"]);
-            PostRecipe($"{name}_OPEN", new List<string> { name }, count);
+            await PostRecipeAsync($"{name}_OPEN", new List<string> { name }, count);
             Thread.Sleep(1000);
         }
     }

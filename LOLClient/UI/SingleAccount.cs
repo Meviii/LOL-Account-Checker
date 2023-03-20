@@ -115,6 +115,9 @@ public partial class SingleAccount : Form
 
                 if (propertyInfo.PropertyType == typeof(Rank))
                     dataTable.Rows.Add(propertyInfo.Name, ((Rank)propertyInfo.GetValue(_account, null)).ToString());
+
+                if (propertyInfo.PropertyType == typeof(HonorLevel))
+                    dataTable.Rows.Add(propertyInfo.Name, ((HonorLevel)propertyInfo.GetValue(_account, null)).ToString());
             }
             else
             {

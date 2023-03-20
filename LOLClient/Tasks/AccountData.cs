@@ -66,7 +66,7 @@ public class AccountData
             }
 
             // Wait 5 seconds before retrying the request.
-            Thread.Sleep(3000);
+            Thread.Sleep(1500);
         }
     }
 
@@ -263,7 +263,7 @@ public class AccountData
             }
 
             // If the request fails or returns an empty array, wait for 5 seconds and try again.
-            Thread.Sleep(5000);
+            Thread.Sleep(500);
         }
 
     }
@@ -413,4 +413,31 @@ public class AccountData
         return null;
     }
 
+    // Gets honor stats for local account
+    public async Task GetHonorStats()
+    {
+        var data = await RequestHonorStatsAsync();
+
+        _account.HonorLevel = new()
+        {
+            RewardsLocked = Convert.ToBoolean(data["rewardsLocked"].ToString()),
+            Checkpoint = data["checkpoint"].ToString(),
+            Level = data["honorLevel"].ToString(),
+        };
+    }
+
+    // Makes a request to retrieve Honor stats
+    private async Task<JToken> RequestHonorStatsAsync()
+    {
+        var response = await _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-honor-v2/v1/profile", null);
+
+        if (response.StatusCode == HttpStatusCode.OK)
+        {
+            var data = JToken.Parse(await response.Content.ReadAsStringAsync());
+
+            return data;
+        }
+
+        return null;
+    }
 }
