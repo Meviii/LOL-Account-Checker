@@ -402,7 +402,9 @@ public class AccountData
         Thread.Sleep(2000);
 
         var queueStatsResponse = await _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-lobby/v2/lobby/matchmaking/search-state", null);
-
+        
+        await _leagueConnection.RequestAsync(HttpMethod.Post, "/lol-lobby/v2/lobby", null);
+            
         if (queueStatsResponse.StatusCode == HttpStatusCode.OK)
         {
             var data = JToken.Parse(await queueStatsResponse.Content.ReadAsStringAsync());
