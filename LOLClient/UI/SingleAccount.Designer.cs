@@ -34,127 +34,6 @@ namespace AccountChecker
             SummonerName = new DataGridViewTextBoxColumn();
             tabControl1 = new TabControl();
             Overview = new TabPage();
-            ProgressBar = new ProgressBar();
-            label8 = new Label();
-            label7 = new Label();
-            executeButton = new Button();
-            flowLayoutPanel1 = new FlowLayoutPanel();
-            panel3 = new Panel();
-            CraftKeysCheckBox = new CheckBox();
-            label4 = new Label();
-            panel4 = new Panel();
-            OpenChestsCheckBox = new CheckBox();
-            label5 = new Label();
-            panel23 = new Panel();
-            panel24 = new Panel();
-            panel25 = new Panel();
-            panel26 = new Panel();
-            checkBox3 = new CheckBox();
-            label26 = new Label();
-            checkBox4 = new CheckBox();
-            label27 = new Label();
-            panel27 = new Panel();
-            checkBox5 = new CheckBox();
-            label28 = new Label();
-            checkBox6 = new CheckBox();
-            label29 = new Label();
-            panel28 = new Panel();
-            panel29 = new Panel();
-            checkBox7 = new CheckBox();
-            label30 = new Label();
-            checkBox22 = new CheckBox();
-            label31 = new Label();
-            panel30 = new Panel();
-            checkBox23 = new CheckBox();
-            label32 = new Label();
-            DisenchantSkinShardsCheckBox = new CheckBox();
-            label33 = new Label();
-            panel15 = new Panel();
-            panel16 = new Panel();
-            panel17 = new Panel();
-            panel18 = new Panel();
-            checkBox15 = new CheckBox();
-            label18 = new Label();
-            checkBox16 = new CheckBox();
-            label19 = new Label();
-            panel19 = new Panel();
-            checkBox17 = new CheckBox();
-            label20 = new Label();
-            checkBox18 = new CheckBox();
-            label21 = new Label();
-            panel20 = new Panel();
-            panel21 = new Panel();
-            checkBox19 = new CheckBox();
-            label22 = new Label();
-            checkBox20 = new CheckBox();
-            label23 = new Label();
-            panel22 = new Panel();
-            checkBox21 = new CheckBox();
-            label24 = new Label();
-            DisenchantChampionShardsCheckBox = new CheckBox();
-            label25 = new Label();
-            panel7 = new Panel();
-            panel11 = new Panel();
-            panel12 = new Panel();
-            panel13 = new Panel();
-            checkBox11 = new CheckBox();
-            label14 = new Label();
-            checkBox12 = new CheckBox();
-            label15 = new Label();
-            panel14 = new Panel();
-            checkBox13 = new CheckBox();
-            label16 = new Label();
-            checkBox14 = new CheckBox();
-            label17 = new Label();
-            panel9 = new Panel();
-            panel10 = new Panel();
-            checkBox9 = new CheckBox();
-            label12 = new Label();
-            checkBox10 = new CheckBox();
-            label13 = new Label();
-            panel8 = new Panel();
-            checkBox8 = new CheckBox();
-            label11 = new Label();
-            DisenchantEternalShardsCheckBox = new CheckBox();
-            label10 = new Label();
-            panel6 = new Panel();
-            OpenCapsulesOrbsShardsCheckBox = new CheckBox();
-            label6 = new Label();
-            panel31 = new Panel();
-            panel32 = new Panel();
-            panel33 = new Panel();
-            panel34 = new Panel();
-            checkBox1 = new CheckBox();
-            label34 = new Label();
-            checkBox2 = new CheckBox();
-            label35 = new Label();
-            panel35 = new Panel();
-            checkBox24 = new CheckBox();
-            label36 = new Label();
-            checkBox25 = new CheckBox();
-            label37 = new Label();
-            panel36 = new Panel();
-            panel37 = new Panel();
-            checkBox26 = new CheckBox();
-            label38 = new Label();
-            checkBox27 = new CheckBox();
-            label39 = new Label();
-            panel38 = new Panel();
-            checkBox28 = new CheckBox();
-            label40 = new Label();
-            DisenchantWardSkinShardsCheckBox = new CheckBox();
-            label41 = new Label();
-            eventTaskPanel = new FlowLayoutPanel();
-            panel5 = new Panel();
-            ClaimEventRewardsCheckBox = new CheckBox();
-            label3 = new Label();
-            panel1 = new Panel();
-            BuyChampionShardsCheckBox = new CheckBox();
-            label1 = new Label();
-            panel2 = new Panel();
-            BuyBlueEssenceCheckBox = new CheckBox();
-            label2 = new Label();
-            label9 = new Label();
             overviewGridView = new DataGridView();
             Champions = new TabPage();
             ChampionsSearchTextBox = new TextBox();
@@ -162,55 +41,188 @@ namespace AccountChecker
             Skins = new TabPage();
             SkinsSearchTextBox = new TextBox();
             skinsGridView = new DataGridView();
+            tabPage1 = new TabPage();
+            label83 = new Label();
+            ProgressBar = new ProgressBar();
+            flowLayoutPanel4 = new FlowLayoutPanel();
+            panel77 = new Panel();
+            RemoveFriendsCheckBox = new CheckBox();
+            label84 = new Label();
+            panel78 = new Panel();
+            RemoveFriendRequestsCheckBox = new CheckBox();
+            label82 = new Label();
+            label42 = new Label();
+            label43 = new Label();
+            executeButton = new Button();
+            flowLayoutPanel2 = new FlowLayoutPanel();
+            panel39 = new Panel();
+            CraftKeysCheckBox = new CheckBox();
+            label44 = new Label();
+            panel40 = new Panel();
+            OpenChestsCheckBox = new CheckBox();
+            label45 = new Label();
+            panel41 = new Panel();
+            panel42 = new Panel();
+            panel43 = new Panel();
+            panel44 = new Panel();
+            checkBox31 = new CheckBox();
+            label46 = new Label();
+            checkBox32 = new CheckBox();
+            label47 = new Label();
+            panel45 = new Panel();
+            checkBox33 = new CheckBox();
+            label48 = new Label();
+            checkBox34 = new CheckBox();
+            label49 = new Label();
+            panel46 = new Panel();
+            panel47 = new Panel();
+            checkBox35 = new CheckBox();
+            label50 = new Label();
+            checkBox36 = new CheckBox();
+            label51 = new Label();
+            panel48 = new Panel();
+            checkBox37 = new CheckBox();
+            label52 = new Label();
+            DisenchantSkinShardsCheckBox = new CheckBox();
+            label53 = new Label();
+            panel49 = new Panel();
+            panel50 = new Panel();
+            panel51 = new Panel();
+            panel52 = new Panel();
+            checkBox39 = new CheckBox();
+            label54 = new Label();
+            checkBox40 = new CheckBox();
+            label55 = new Label();
+            panel53 = new Panel();
+            checkBox41 = new CheckBox();
+            label56 = new Label();
+            checkBox42 = new CheckBox();
+            label57 = new Label();
+            panel54 = new Panel();
+            panel55 = new Panel();
+            checkBox43 = new CheckBox();
+            label58 = new Label();
+            checkBox44 = new CheckBox();
+            label59 = new Label();
+            panel56 = new Panel();
+            checkBox45 = new CheckBox();
+            label60 = new Label();
+            DisenchantChampionShardsCheckBox = new CheckBox();
+            label61 = new Label();
+            panel57 = new Panel();
+            panel58 = new Panel();
+            panel59 = new Panel();
+            panel60 = new Panel();
+            checkBox47 = new CheckBox();
+            label62 = new Label();
+            checkBox48 = new CheckBox();
+            label63 = new Label();
+            panel61 = new Panel();
+            checkBox49 = new CheckBox();
+            label64 = new Label();
+            checkBox50 = new CheckBox();
+            label65 = new Label();
+            panel62 = new Panel();
+            panel63 = new Panel();
+            checkBox51 = new CheckBox();
+            label66 = new Label();
+            checkBox52 = new CheckBox();
+            label67 = new Label();
+            panel64 = new Panel();
+            checkBox53 = new CheckBox();
+            label68 = new Label();
+            DisenchantEternalShardsCheckBox = new CheckBox();
+            label69 = new Label();
+            panel65 = new Panel();
+            OpenCapsulesOrbsShardsCheckBox = new CheckBox();
+            label70 = new Label();
+            panel66 = new Panel();
+            panel67 = new Panel();
+            panel68 = new Panel();
+            panel69 = new Panel();
+            checkBox56 = new CheckBox();
+            label71 = new Label();
+            checkBox57 = new CheckBox();
+            label72 = new Label();
+            panel70 = new Panel();
+            checkBox58 = new CheckBox();
+            label73 = new Label();
+            checkBox59 = new CheckBox();
+            label74 = new Label();
+            panel71 = new Panel();
+            panel72 = new Panel();
+            checkBox60 = new CheckBox();
+            label75 = new Label();
+            checkBox61 = new CheckBox();
+            label76 = new Label();
+            panel73 = new Panel();
+            checkBox62 = new CheckBox();
+            label77 = new Label();
+            DisenchantWardSkinShardsCheckBox = new CheckBox();
+            label78 = new Label();
+            flowLayoutPanel3 = new FlowLayoutPanel();
+            panel74 = new Panel();
+            ClaimEventRewardsCheckBox = new CheckBox();
+            label79 = new Label();
+            panel75 = new Panel();
+            BuyChampionShardsCheckBox = new CheckBox();
+            label80 = new Label();
+            panel76 = new Panel();
+            BuyBlueEssenceCheckBox = new CheckBox();
+            label81 = new Label();
             accountNameTitle = new Label();
             BackButton = new Button();
             tabControl1.SuspendLayout();
             Overview.SuspendLayout();
-            flowLayoutPanel1.SuspendLayout();
-            panel3.SuspendLayout();
-            panel4.SuspendLayout();
-            panel23.SuspendLayout();
-            panel24.SuspendLayout();
-            panel25.SuspendLayout();
-            panel26.SuspendLayout();
-            panel27.SuspendLayout();
-            panel28.SuspendLayout();
-            panel29.SuspendLayout();
-            panel30.SuspendLayout();
-            panel15.SuspendLayout();
-            panel16.SuspendLayout();
-            panel17.SuspendLayout();
-            panel18.SuspendLayout();
-            panel19.SuspendLayout();
-            panel20.SuspendLayout();
-            panel21.SuspendLayout();
-            panel22.SuspendLayout();
-            panel7.SuspendLayout();
-            panel11.SuspendLayout();
-            panel12.SuspendLayout();
-            panel13.SuspendLayout();
-            panel14.SuspendLayout();
-            panel9.SuspendLayout();
-            panel10.SuspendLayout();
-            panel8.SuspendLayout();
-            panel6.SuspendLayout();
-            panel31.SuspendLayout();
-            panel32.SuspendLayout();
-            panel33.SuspendLayout();
-            panel34.SuspendLayout();
-            panel35.SuspendLayout();
-            panel36.SuspendLayout();
-            panel37.SuspendLayout();
-            panel38.SuspendLayout();
-            eventTaskPanel.SuspendLayout();
-            panel5.SuspendLayout();
-            panel1.SuspendLayout();
-            panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)overviewGridView).BeginInit();
             Champions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)championGridView).BeginInit();
             Skins.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)skinsGridView).BeginInit();
+            tabPage1.SuspendLayout();
+            flowLayoutPanel4.SuspendLayout();
+            panel77.SuspendLayout();
+            panel78.SuspendLayout();
+            flowLayoutPanel2.SuspendLayout();
+            panel39.SuspendLayout();
+            panel40.SuspendLayout();
+            panel41.SuspendLayout();
+            panel42.SuspendLayout();
+            panel43.SuspendLayout();
+            panel44.SuspendLayout();
+            panel45.SuspendLayout();
+            panel46.SuspendLayout();
+            panel47.SuspendLayout();
+            panel48.SuspendLayout();
+            panel49.SuspendLayout();
+            panel50.SuspendLayout();
+            panel51.SuspendLayout();
+            panel52.SuspendLayout();
+            panel53.SuspendLayout();
+            panel54.SuspendLayout();
+            panel55.SuspendLayout();
+            panel56.SuspendLayout();
+            panel57.SuspendLayout();
+            panel58.SuspendLayout();
+            panel59.SuspendLayout();
+            panel60.SuspendLayout();
+            panel61.SuspendLayout();
+            panel62.SuspendLayout();
+            panel63.SuspendLayout();
+            panel64.SuspendLayout();
+            panel65.SuspendLayout();
+            panel66.SuspendLayout();
+            panel67.SuspendLayout();
+            panel68.SuspendLayout();
+            panel69.SuspendLayout();
+            panel70.SuspendLayout();
+            panel71.SuspendLayout();
+            panel72.SuspendLayout();
+            panel73.SuspendLayout();
+            flowLayoutPanel3.SuspendLayout();
+            panel74.SuspendLayout();
+            panel75.SuspendLayout();
+            panel76.SuspendLayout();
             SuspendLayout();
             // 
             // SummonerName
@@ -219,9 +231,11 @@ namespace AccountChecker
             // 
             // tabControl1
             // 
+            tabControl1.AccessibleName = "";
             tabControl1.Controls.Add(Overview);
             tabControl1.Controls.Add(Champions);
             tabControl1.Controls.Add(Skins);
+            tabControl1.Controls.Add(tabPage1);
             tabControl1.Location = new System.Drawing.Point(83, 98);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
@@ -230,13 +244,6 @@ namespace AccountChecker
             // 
             // Overview
             // 
-            Overview.Controls.Add(ProgressBar);
-            Overview.Controls.Add(label8);
-            Overview.Controls.Add(label7);
-            Overview.Controls.Add(executeButton);
-            Overview.Controls.Add(flowLayoutPanel1);
-            Overview.Controls.Add(eventTaskPanel);
-            Overview.Controls.Add(label9);
             Overview.Controls.Add(overviewGridView);
             Overview.Location = new System.Drawing.Point(4, 24);
             Overview.Name = "Overview";
@@ -246,1154 +253,6 @@ namespace AccountChecker
             Overview.Text = "Overview";
             Overview.UseVisualStyleBackColor = true;
             Overview.Click += Overview_Click;
-            // 
-            // ProgressBar
-            // 
-            ProgressBar.BackColor = System.Drawing.Color.LightSkyBlue;
-            ProgressBar.Location = new System.Drawing.Point(518, 433);
-            ProgressBar.Name = "ProgressBar";
-            ProgressBar.Size = new System.Drawing.Size(113, 23);
-            ProgressBar.TabIndex = 16;
-            ProgressBar.Visible = false;
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.BackColor = System.Drawing.Color.Transparent;
-            label8.FlatStyle = FlatStyle.Flat;
-            label8.Font = new System.Drawing.Font("Segoe Print", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            label8.ForeColor = System.Drawing.Color.Black;
-            label8.Location = new System.Drawing.Point(637, 169);
-            label8.Name = "label8";
-            label8.Size = new System.Drawing.Size(91, 33);
-            label8.TabIndex = 12;
-            label8.Text = "Hextech";
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.BackColor = System.Drawing.Color.Transparent;
-            label7.FlatStyle = FlatStyle.Flat;
-            label7.Font = new System.Drawing.Font("Segoe Print", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            label7.ForeColor = System.Drawing.Color.Black;
-            label7.Location = new System.Drawing.Point(622, 38);
-            label7.Name = "label7";
-            label7.Size = new System.Drawing.Size(125, 33);
-            label7.TabIndex = 11;
-            label7.Text = "Event Shop";
-            // 
-            // executeButton
-            // 
-            executeButton.BackColor = System.Drawing.Color.LightCyan;
-            executeButton.FlatAppearance.BorderSize = 0;
-            executeButton.ForeColor = System.Drawing.SystemColors.Desktop;
-            executeButton.Location = new System.Drawing.Point(644, 427);
-            executeButton.Name = "executeButton";
-            executeButton.Size = new System.Drawing.Size(79, 32);
-            executeButton.TabIndex = 9;
-            executeButton.Text = "Execute";
-            executeButton.UseVisualStyleBackColor = false;
-            executeButton.Click += ExecuteButton_Click;
-            // 
-            // flowLayoutPanel1
-            // 
-            flowLayoutPanel1.Controls.Add(panel3);
-            flowLayoutPanel1.Controls.Add(panel4);
-            flowLayoutPanel1.Controls.Add(panel23);
-            flowLayoutPanel1.Controls.Add(panel15);
-            flowLayoutPanel1.Controls.Add(panel7);
-            flowLayoutPanel1.Controls.Add(panel6);
-            flowLayoutPanel1.Controls.Add(panel31);
-            flowLayoutPanel1.Location = new System.Drawing.Point(508, 202);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new System.Drawing.Size(338, 225);
-            flowLayoutPanel1.TabIndex = 15;
-            // 
-            // panel3
-            // 
-            panel3.Controls.Add(CraftKeysCheckBox);
-            panel3.Controls.Add(label4);
-            panel3.Location = new System.Drawing.Point(3, 3);
-            panel3.Name = "panel3";
-            panel3.Size = new System.Drawing.Size(159, 28);
-            panel3.TabIndex = 13;
-            // 
-            // CraftKeysCheckBox
-            // 
-            CraftKeysCheckBox.AutoSize = true;
-            CraftKeysCheckBox.Location = new System.Drawing.Point(134, 8);
-            CraftKeysCheckBox.Name = "CraftKeysCheckBox";
-            CraftKeysCheckBox.Size = new System.Drawing.Size(15, 14);
-            CraftKeysCheckBox.TabIndex = 1;
-            CraftKeysCheckBox.UseVisualStyleBackColor = true;
-            CraftKeysCheckBox.CheckedChanged += TaskCheckedChanged;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(3, 6);
-            label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(60, 15);
-            label4.TabIndex = 0;
-            label4.Text = "Craft Keys";
-            // 
-            // panel4
-            // 
-            panel4.Controls.Add(OpenChestsCheckBox);
-            panel4.Controls.Add(label5);
-            panel4.Location = new System.Drawing.Point(168, 3);
-            panel4.Name = "panel4";
-            panel4.Size = new System.Drawing.Size(159, 28);
-            panel4.TabIndex = 14;
-            // 
-            // OpenChestsCheckBox
-            // 
-            OpenChestsCheckBox.AutoSize = true;
-            OpenChestsCheckBox.Location = new System.Drawing.Point(135, 8);
-            OpenChestsCheckBox.Name = "OpenChestsCheckBox";
-            OpenChestsCheckBox.Size = new System.Drawing.Size(15, 14);
-            OpenChestsCheckBox.TabIndex = 1;
-            OpenChestsCheckBox.UseVisualStyleBackColor = true;
-            OpenChestsCheckBox.CheckedChanged += TaskCheckedChanged;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(4, 7);
-            label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(74, 15);
-            label5.TabIndex = 0;
-            label5.Text = "Open Chests";
-            // 
-            // panel23
-            // 
-            panel23.Controls.Add(panel24);
-            panel23.Controls.Add(panel28);
-            panel23.Controls.Add(panel30);
-            panel23.Controls.Add(DisenchantSkinShardsCheckBox);
-            panel23.Controls.Add(label33);
-            panel23.Location = new System.Drawing.Point(3, 37);
-            panel23.Name = "panel23";
-            panel23.Size = new System.Drawing.Size(329, 28);
-            panel23.TabIndex = 18;
-            // 
-            // panel24
-            // 
-            panel24.Controls.Add(panel25);
-            panel24.Controls.Add(panel27);
-            panel24.Controls.Add(checkBox6);
-            panel24.Controls.Add(label29);
-            panel24.Location = new System.Drawing.Point(169, 91);
-            panel24.Name = "panel24";
-            panel24.Size = new System.Drawing.Size(160, 38);
-            panel24.TabIndex = 16;
-            // 
-            // panel25
-            // 
-            panel25.Controls.Add(panel26);
-            panel25.Controls.Add(checkBox4);
-            panel25.Controls.Add(label27);
-            panel25.Location = new System.Drawing.Point(169, 91);
-            panel25.Name = "panel25";
-            panel25.Size = new System.Drawing.Size(160, 38);
-            panel25.TabIndex = 15;
-            // 
-            // panel26
-            // 
-            panel26.Controls.Add(checkBox3);
-            panel26.Controls.Add(label26);
-            panel26.Location = new System.Drawing.Point(169, 91);
-            panel26.Name = "panel26";
-            panel26.Size = new System.Drawing.Size(160, 38);
-            panel26.TabIndex = 14;
-            // 
-            // checkBox3
-            // 
-            checkBox3.AutoSize = true;
-            checkBox3.Location = new System.Drawing.Point(134, 13);
-            checkBox3.Name = "checkBox3";
-            checkBox3.Size = new System.Drawing.Size(15, 14);
-            checkBox3.TabIndex = 1;
-            checkBox3.UseVisualStyleBackColor = true;
-            // 
-            // label26
-            // 
-            label26.AutoSize = true;
-            label26.Location = new System.Drawing.Point(3, 12);
-            label26.Name = "label26";
-            label26.Size = new System.Drawing.Size(60, 15);
-            label26.TabIndex = 0;
-            label26.Text = "Craft Keys";
-            // 
-            // checkBox4
-            // 
-            checkBox4.AutoSize = true;
-            checkBox4.Location = new System.Drawing.Point(134, 13);
-            checkBox4.Name = "checkBox4";
-            checkBox4.Size = new System.Drawing.Size(15, 14);
-            checkBox4.TabIndex = 1;
-            checkBox4.UseVisualStyleBackColor = true;
-            // 
-            // label27
-            // 
-            label27.AutoSize = true;
-            label27.Location = new System.Drawing.Point(3, 12);
-            label27.Name = "label27";
-            label27.Size = new System.Drawing.Size(60, 15);
-            label27.TabIndex = 0;
-            label27.Text = "Craft Keys";
-            // 
-            // panel27
-            // 
-            panel27.Controls.Add(checkBox5);
-            panel27.Controls.Add(label28);
-            panel27.Location = new System.Drawing.Point(169, 91);
-            panel27.Name = "panel27";
-            panel27.Size = new System.Drawing.Size(160, 38);
-            panel27.TabIndex = 14;
-            // 
-            // checkBox5
-            // 
-            checkBox5.AutoSize = true;
-            checkBox5.Location = new System.Drawing.Point(134, 13);
-            checkBox5.Name = "checkBox5";
-            checkBox5.Size = new System.Drawing.Size(15, 14);
-            checkBox5.TabIndex = 1;
-            checkBox5.UseVisualStyleBackColor = true;
-            // 
-            // label28
-            // 
-            label28.AutoSize = true;
-            label28.Location = new System.Drawing.Point(3, 12);
-            label28.Name = "label28";
-            label28.Size = new System.Drawing.Size(60, 15);
-            label28.TabIndex = 0;
-            label28.Text = "Craft Keys";
-            // 
-            // checkBox6
-            // 
-            checkBox6.AutoSize = true;
-            checkBox6.Location = new System.Drawing.Point(134, 13);
-            checkBox6.Name = "checkBox6";
-            checkBox6.Size = new System.Drawing.Size(15, 14);
-            checkBox6.TabIndex = 1;
-            checkBox6.UseVisualStyleBackColor = true;
-            // 
-            // label29
-            // 
-            label29.AutoSize = true;
-            label29.Location = new System.Drawing.Point(3, 12);
-            label29.Name = "label29";
-            label29.Size = new System.Drawing.Size(60, 15);
-            label29.TabIndex = 0;
-            label29.Text = "Craft Keys";
-            // 
-            // panel28
-            // 
-            panel28.Controls.Add(panel29);
-            panel28.Controls.Add(checkBox22);
-            panel28.Controls.Add(label31);
-            panel28.Location = new System.Drawing.Point(169, 91);
-            panel28.Name = "panel28";
-            panel28.Size = new System.Drawing.Size(160, 38);
-            panel28.TabIndex = 15;
-            // 
-            // panel29
-            // 
-            panel29.Controls.Add(checkBox7);
-            panel29.Controls.Add(label30);
-            panel29.Location = new System.Drawing.Point(169, 91);
-            panel29.Name = "panel29";
-            panel29.Size = new System.Drawing.Size(160, 38);
-            panel29.TabIndex = 14;
-            // 
-            // checkBox7
-            // 
-            checkBox7.AutoSize = true;
-            checkBox7.Location = new System.Drawing.Point(134, 13);
-            checkBox7.Name = "checkBox7";
-            checkBox7.Size = new System.Drawing.Size(15, 14);
-            checkBox7.TabIndex = 1;
-            checkBox7.UseVisualStyleBackColor = true;
-            // 
-            // label30
-            // 
-            label30.AutoSize = true;
-            label30.Location = new System.Drawing.Point(3, 12);
-            label30.Name = "label30";
-            label30.Size = new System.Drawing.Size(60, 15);
-            label30.TabIndex = 0;
-            label30.Text = "Craft Keys";
-            // 
-            // checkBox22
-            // 
-            checkBox22.AutoSize = true;
-            checkBox22.Location = new System.Drawing.Point(134, 13);
-            checkBox22.Name = "checkBox22";
-            checkBox22.Size = new System.Drawing.Size(15, 14);
-            checkBox22.TabIndex = 1;
-            checkBox22.UseVisualStyleBackColor = true;
-            // 
-            // label31
-            // 
-            label31.AutoSize = true;
-            label31.Location = new System.Drawing.Point(3, 12);
-            label31.Name = "label31";
-            label31.Size = new System.Drawing.Size(60, 15);
-            label31.TabIndex = 0;
-            label31.Text = "Craft Keys";
-            // 
-            // panel30
-            // 
-            panel30.Controls.Add(checkBox23);
-            panel30.Controls.Add(label32);
-            panel30.Location = new System.Drawing.Point(169, 91);
-            panel30.Name = "panel30";
-            panel30.Size = new System.Drawing.Size(160, 38);
-            panel30.TabIndex = 14;
-            // 
-            // checkBox23
-            // 
-            checkBox23.AutoSize = true;
-            checkBox23.Location = new System.Drawing.Point(134, 13);
-            checkBox23.Name = "checkBox23";
-            checkBox23.Size = new System.Drawing.Size(15, 14);
-            checkBox23.TabIndex = 1;
-            checkBox23.UseVisualStyleBackColor = true;
-            // 
-            // label32
-            // 
-            label32.AutoSize = true;
-            label32.Location = new System.Drawing.Point(3, 12);
-            label32.Name = "label32";
-            label32.Size = new System.Drawing.Size(60, 15);
-            label32.TabIndex = 0;
-            label32.Text = "Craft Keys";
-            // 
-            // DisenchantSkinShardsCheckBox
-            // 
-            DisenchantSkinShardsCheckBox.AutoSize = true;
-            DisenchantSkinShardsCheckBox.Location = new System.Drawing.Point(300, 9);
-            DisenchantSkinShardsCheckBox.Name = "DisenchantSkinShardsCheckBox";
-            DisenchantSkinShardsCheckBox.Size = new System.Drawing.Size(15, 14);
-            DisenchantSkinShardsCheckBox.TabIndex = 1;
-            DisenchantSkinShardsCheckBox.UseVisualStyleBackColor = true;
-            DisenchantSkinShardsCheckBox.CheckedChanged += TaskCheckedChanged;
-            // 
-            // label33
-            // 
-            label33.AutoSize = true;
-            label33.Location = new System.Drawing.Point(3, 6);
-            label33.Name = "label33";
-            label33.Size = new System.Drawing.Size(135, 15);
-            label33.TabIndex = 0;
-            label33.Text = "Disenchcant Skin Shards";
-            // 
-            // panel15
-            // 
-            panel15.Controls.Add(panel16);
-            panel15.Controls.Add(panel20);
-            panel15.Controls.Add(panel22);
-            panel15.Controls.Add(DisenchantChampionShardsCheckBox);
-            panel15.Controls.Add(label25);
-            panel15.Location = new System.Drawing.Point(3, 71);
-            panel15.Name = "panel15";
-            panel15.Size = new System.Drawing.Size(329, 28);
-            panel15.TabIndex = 17;
-            // 
-            // panel16
-            // 
-            panel16.Controls.Add(panel17);
-            panel16.Controls.Add(panel19);
-            panel16.Controls.Add(checkBox18);
-            panel16.Controls.Add(label21);
-            panel16.Location = new System.Drawing.Point(169, 91);
-            panel16.Name = "panel16";
-            panel16.Size = new System.Drawing.Size(160, 38);
-            panel16.TabIndex = 16;
-            // 
-            // panel17
-            // 
-            panel17.Controls.Add(panel18);
-            panel17.Controls.Add(checkBox16);
-            panel17.Controls.Add(label19);
-            panel17.Location = new System.Drawing.Point(169, 91);
-            panel17.Name = "panel17";
-            panel17.Size = new System.Drawing.Size(160, 38);
-            panel17.TabIndex = 15;
-            // 
-            // panel18
-            // 
-            panel18.Controls.Add(checkBox15);
-            panel18.Controls.Add(label18);
-            panel18.Location = new System.Drawing.Point(169, 91);
-            panel18.Name = "panel18";
-            panel18.Size = new System.Drawing.Size(160, 38);
-            panel18.TabIndex = 14;
-            // 
-            // checkBox15
-            // 
-            checkBox15.AutoSize = true;
-            checkBox15.Location = new System.Drawing.Point(134, 13);
-            checkBox15.Name = "checkBox15";
-            checkBox15.Size = new System.Drawing.Size(15, 14);
-            checkBox15.TabIndex = 1;
-            checkBox15.UseVisualStyleBackColor = true;
-            // 
-            // label18
-            // 
-            label18.AutoSize = true;
-            label18.Location = new System.Drawing.Point(3, 12);
-            label18.Name = "label18";
-            label18.Size = new System.Drawing.Size(60, 15);
-            label18.TabIndex = 0;
-            label18.Text = "Craft Keys";
-            // 
-            // checkBox16
-            // 
-            checkBox16.AutoSize = true;
-            checkBox16.Location = new System.Drawing.Point(134, 13);
-            checkBox16.Name = "checkBox16";
-            checkBox16.Size = new System.Drawing.Size(15, 14);
-            checkBox16.TabIndex = 1;
-            checkBox16.UseVisualStyleBackColor = true;
-            // 
-            // label19
-            // 
-            label19.AutoSize = true;
-            label19.Location = new System.Drawing.Point(3, 12);
-            label19.Name = "label19";
-            label19.Size = new System.Drawing.Size(60, 15);
-            label19.TabIndex = 0;
-            label19.Text = "Craft Keys";
-            // 
-            // panel19
-            // 
-            panel19.Controls.Add(checkBox17);
-            panel19.Controls.Add(label20);
-            panel19.Location = new System.Drawing.Point(169, 91);
-            panel19.Name = "panel19";
-            panel19.Size = new System.Drawing.Size(160, 38);
-            panel19.TabIndex = 14;
-            // 
-            // checkBox17
-            // 
-            checkBox17.AutoSize = true;
-            checkBox17.Location = new System.Drawing.Point(134, 13);
-            checkBox17.Name = "checkBox17";
-            checkBox17.Size = new System.Drawing.Size(15, 14);
-            checkBox17.TabIndex = 1;
-            checkBox17.UseVisualStyleBackColor = true;
-            // 
-            // label20
-            // 
-            label20.AutoSize = true;
-            label20.Location = new System.Drawing.Point(3, 12);
-            label20.Name = "label20";
-            label20.Size = new System.Drawing.Size(60, 15);
-            label20.TabIndex = 0;
-            label20.Text = "Craft Keys";
-            // 
-            // checkBox18
-            // 
-            checkBox18.AutoSize = true;
-            checkBox18.Location = new System.Drawing.Point(134, 13);
-            checkBox18.Name = "checkBox18";
-            checkBox18.Size = new System.Drawing.Size(15, 14);
-            checkBox18.TabIndex = 1;
-            checkBox18.UseVisualStyleBackColor = true;
-            // 
-            // label21
-            // 
-            label21.AutoSize = true;
-            label21.Location = new System.Drawing.Point(3, 12);
-            label21.Name = "label21";
-            label21.Size = new System.Drawing.Size(60, 15);
-            label21.TabIndex = 0;
-            label21.Text = "Craft Keys";
-            // 
-            // panel20
-            // 
-            panel20.Controls.Add(panel21);
-            panel20.Controls.Add(checkBox20);
-            panel20.Controls.Add(label23);
-            panel20.Location = new System.Drawing.Point(169, 91);
-            panel20.Name = "panel20";
-            panel20.Size = new System.Drawing.Size(160, 38);
-            panel20.TabIndex = 15;
-            // 
-            // panel21
-            // 
-            panel21.Controls.Add(checkBox19);
-            panel21.Controls.Add(label22);
-            panel21.Location = new System.Drawing.Point(169, 91);
-            panel21.Name = "panel21";
-            panel21.Size = new System.Drawing.Size(160, 38);
-            panel21.TabIndex = 14;
-            // 
-            // checkBox19
-            // 
-            checkBox19.AutoSize = true;
-            checkBox19.Location = new System.Drawing.Point(134, 13);
-            checkBox19.Name = "checkBox19";
-            checkBox19.Size = new System.Drawing.Size(15, 14);
-            checkBox19.TabIndex = 1;
-            checkBox19.UseVisualStyleBackColor = true;
-            // 
-            // label22
-            // 
-            label22.AutoSize = true;
-            label22.Location = new System.Drawing.Point(3, 12);
-            label22.Name = "label22";
-            label22.Size = new System.Drawing.Size(60, 15);
-            label22.TabIndex = 0;
-            label22.Text = "Craft Keys";
-            // 
-            // checkBox20
-            // 
-            checkBox20.AutoSize = true;
-            checkBox20.Location = new System.Drawing.Point(134, 13);
-            checkBox20.Name = "checkBox20";
-            checkBox20.Size = new System.Drawing.Size(15, 14);
-            checkBox20.TabIndex = 1;
-            checkBox20.UseVisualStyleBackColor = true;
-            // 
-            // label23
-            // 
-            label23.AutoSize = true;
-            label23.Location = new System.Drawing.Point(3, 12);
-            label23.Name = "label23";
-            label23.Size = new System.Drawing.Size(60, 15);
-            label23.TabIndex = 0;
-            label23.Text = "Craft Keys";
-            // 
-            // panel22
-            // 
-            panel22.Controls.Add(checkBox21);
-            panel22.Controls.Add(label24);
-            panel22.Location = new System.Drawing.Point(169, 91);
-            panel22.Name = "panel22";
-            panel22.Size = new System.Drawing.Size(160, 38);
-            panel22.TabIndex = 14;
-            // 
-            // checkBox21
-            // 
-            checkBox21.AutoSize = true;
-            checkBox21.Location = new System.Drawing.Point(134, 13);
-            checkBox21.Name = "checkBox21";
-            checkBox21.Size = new System.Drawing.Size(15, 14);
-            checkBox21.TabIndex = 1;
-            checkBox21.UseVisualStyleBackColor = true;
-            // 
-            // label24
-            // 
-            label24.AutoSize = true;
-            label24.Location = new System.Drawing.Point(3, 12);
-            label24.Name = "label24";
-            label24.Size = new System.Drawing.Size(60, 15);
-            label24.TabIndex = 0;
-            label24.Text = "Craft Keys";
-            // 
-            // DisenchantChampionShardsCheckBox
-            // 
-            DisenchantChampionShardsCheckBox.AutoSize = true;
-            DisenchantChampionShardsCheckBox.Location = new System.Drawing.Point(300, 9);
-            DisenchantChampionShardsCheckBox.Name = "DisenchantChampionShardsCheckBox";
-            DisenchantChampionShardsCheckBox.Size = new System.Drawing.Size(15, 14);
-            DisenchantChampionShardsCheckBox.TabIndex = 1;
-            DisenchantChampionShardsCheckBox.UseVisualStyleBackColor = true;
-            DisenchantChampionShardsCheckBox.CheckedChanged += TaskCheckedChanged;
-            // 
-            // label25
-            // 
-            label25.AutoSize = true;
-            label25.Location = new System.Drawing.Point(3, 8);
-            label25.Name = "label25";
-            label25.Size = new System.Drawing.Size(169, 15);
-            label25.TabIndex = 0;
-            label25.Text = "Disenchcant Champion Shards";
-            // 
-            // panel7
-            // 
-            panel7.Controls.Add(panel11);
-            panel7.Controls.Add(panel9);
-            panel7.Controls.Add(panel8);
-            panel7.Controls.Add(DisenchantEternalShardsCheckBox);
-            panel7.Controls.Add(label10);
-            panel7.Location = new System.Drawing.Point(3, 105);
-            panel7.Name = "panel7";
-            panel7.Size = new System.Drawing.Size(329, 28);
-            panel7.TabIndex = 14;
-            // 
-            // panel11
-            // 
-            panel11.Controls.Add(panel12);
-            panel11.Controls.Add(panel14);
-            panel11.Controls.Add(checkBox14);
-            panel11.Controls.Add(label17);
-            panel11.Location = new System.Drawing.Point(169, 91);
-            panel11.Name = "panel11";
-            panel11.Size = new System.Drawing.Size(160, 38);
-            panel11.TabIndex = 16;
-            // 
-            // panel12
-            // 
-            panel12.Controls.Add(panel13);
-            panel12.Controls.Add(checkBox12);
-            panel12.Controls.Add(label15);
-            panel12.Location = new System.Drawing.Point(169, 91);
-            panel12.Name = "panel12";
-            panel12.Size = new System.Drawing.Size(160, 38);
-            panel12.TabIndex = 15;
-            // 
-            // panel13
-            // 
-            panel13.Controls.Add(checkBox11);
-            panel13.Controls.Add(label14);
-            panel13.Location = new System.Drawing.Point(169, 91);
-            panel13.Name = "panel13";
-            panel13.Size = new System.Drawing.Size(160, 38);
-            panel13.TabIndex = 14;
-            // 
-            // checkBox11
-            // 
-            checkBox11.AutoSize = true;
-            checkBox11.Location = new System.Drawing.Point(134, 13);
-            checkBox11.Name = "checkBox11";
-            checkBox11.Size = new System.Drawing.Size(15, 14);
-            checkBox11.TabIndex = 1;
-            checkBox11.UseVisualStyleBackColor = true;
-            // 
-            // label14
-            // 
-            label14.AutoSize = true;
-            label14.Location = new System.Drawing.Point(3, 12);
-            label14.Name = "label14";
-            label14.Size = new System.Drawing.Size(60, 15);
-            label14.TabIndex = 0;
-            label14.Text = "Craft Keys";
-            // 
-            // checkBox12
-            // 
-            checkBox12.AutoSize = true;
-            checkBox12.Location = new System.Drawing.Point(134, 13);
-            checkBox12.Name = "checkBox12";
-            checkBox12.Size = new System.Drawing.Size(15, 14);
-            checkBox12.TabIndex = 1;
-            checkBox12.UseVisualStyleBackColor = true;
-            // 
-            // label15
-            // 
-            label15.AutoSize = true;
-            label15.Location = new System.Drawing.Point(3, 12);
-            label15.Name = "label15";
-            label15.Size = new System.Drawing.Size(60, 15);
-            label15.TabIndex = 0;
-            label15.Text = "Craft Keys";
-            // 
-            // panel14
-            // 
-            panel14.Controls.Add(checkBox13);
-            panel14.Controls.Add(label16);
-            panel14.Location = new System.Drawing.Point(169, 91);
-            panel14.Name = "panel14";
-            panel14.Size = new System.Drawing.Size(160, 38);
-            panel14.TabIndex = 14;
-            // 
-            // checkBox13
-            // 
-            checkBox13.AutoSize = true;
-            checkBox13.Location = new System.Drawing.Point(134, 13);
-            checkBox13.Name = "checkBox13";
-            checkBox13.Size = new System.Drawing.Size(15, 14);
-            checkBox13.TabIndex = 1;
-            checkBox13.UseVisualStyleBackColor = true;
-            // 
-            // label16
-            // 
-            label16.AutoSize = true;
-            label16.Location = new System.Drawing.Point(3, 12);
-            label16.Name = "label16";
-            label16.Size = new System.Drawing.Size(60, 15);
-            label16.TabIndex = 0;
-            label16.Text = "Craft Keys";
-            // 
-            // checkBox14
-            // 
-            checkBox14.AutoSize = true;
-            checkBox14.Location = new System.Drawing.Point(134, 13);
-            checkBox14.Name = "checkBox14";
-            checkBox14.Size = new System.Drawing.Size(15, 14);
-            checkBox14.TabIndex = 1;
-            checkBox14.UseVisualStyleBackColor = true;
-            // 
-            // label17
-            // 
-            label17.AutoSize = true;
-            label17.Location = new System.Drawing.Point(3, 12);
-            label17.Name = "label17";
-            label17.Size = new System.Drawing.Size(60, 15);
-            label17.TabIndex = 0;
-            label17.Text = "Craft Keys";
-            // 
-            // panel9
-            // 
-            panel9.Controls.Add(panel10);
-            panel9.Controls.Add(checkBox10);
-            panel9.Controls.Add(label13);
-            panel9.Location = new System.Drawing.Point(169, 91);
-            panel9.Name = "panel9";
-            panel9.Size = new System.Drawing.Size(160, 38);
-            panel9.TabIndex = 15;
-            // 
-            // panel10
-            // 
-            panel10.Controls.Add(checkBox9);
-            panel10.Controls.Add(label12);
-            panel10.Location = new System.Drawing.Point(169, 91);
-            panel10.Name = "panel10";
-            panel10.Size = new System.Drawing.Size(160, 38);
-            panel10.TabIndex = 14;
-            // 
-            // checkBox9
-            // 
-            checkBox9.AutoSize = true;
-            checkBox9.Location = new System.Drawing.Point(134, 13);
-            checkBox9.Name = "checkBox9";
-            checkBox9.Size = new System.Drawing.Size(15, 14);
-            checkBox9.TabIndex = 1;
-            checkBox9.UseVisualStyleBackColor = true;
-            // 
-            // label12
-            // 
-            label12.AutoSize = true;
-            label12.Location = new System.Drawing.Point(3, 12);
-            label12.Name = "label12";
-            label12.Size = new System.Drawing.Size(60, 15);
-            label12.TabIndex = 0;
-            label12.Text = "Craft Keys";
-            // 
-            // checkBox10
-            // 
-            checkBox10.AutoSize = true;
-            checkBox10.Location = new System.Drawing.Point(134, 13);
-            checkBox10.Name = "checkBox10";
-            checkBox10.Size = new System.Drawing.Size(15, 14);
-            checkBox10.TabIndex = 1;
-            checkBox10.UseVisualStyleBackColor = true;
-            // 
-            // label13
-            // 
-            label13.AutoSize = true;
-            label13.Location = new System.Drawing.Point(3, 12);
-            label13.Name = "label13";
-            label13.Size = new System.Drawing.Size(60, 15);
-            label13.TabIndex = 0;
-            label13.Text = "Craft Keys";
-            // 
-            // panel8
-            // 
-            panel8.Controls.Add(checkBox8);
-            panel8.Controls.Add(label11);
-            panel8.Location = new System.Drawing.Point(169, 91);
-            panel8.Name = "panel8";
-            panel8.Size = new System.Drawing.Size(160, 38);
-            panel8.TabIndex = 14;
-            // 
-            // checkBox8
-            // 
-            checkBox8.AutoSize = true;
-            checkBox8.Location = new System.Drawing.Point(134, 13);
-            checkBox8.Name = "checkBox8";
-            checkBox8.Size = new System.Drawing.Size(15, 14);
-            checkBox8.TabIndex = 1;
-            checkBox8.UseVisualStyleBackColor = true;
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Location = new System.Drawing.Point(3, 12);
-            label11.Name = "label11";
-            label11.Size = new System.Drawing.Size(60, 15);
-            label11.TabIndex = 0;
-            label11.Text = "Craft Keys";
-            // 
-            // DisenchantEternalShardsCheckBox
-            // 
-            DisenchantEternalShardsCheckBox.AutoSize = true;
-            DisenchantEternalShardsCheckBox.Location = new System.Drawing.Point(300, 9);
-            DisenchantEternalShardsCheckBox.Name = "DisenchantEternalShardsCheckBox";
-            DisenchantEternalShardsCheckBox.Size = new System.Drawing.Size(15, 14);
-            DisenchantEternalShardsCheckBox.TabIndex = 1;
-            DisenchantEternalShardsCheckBox.UseVisualStyleBackColor = true;
-            DisenchantEternalShardsCheckBox.CheckedChanged += TaskCheckedChanged;
-            // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.Location = new System.Drawing.Point(4, 8);
-            label10.Name = "label10";
-            label10.Size = new System.Drawing.Size(143, 15);
-            label10.TabIndex = 0;
-            label10.Text = "Disenchant Eternal Shards";
-            // 
-            // panel6
-            // 
-            panel6.Controls.Add(OpenCapsulesOrbsShardsCheckBox);
-            panel6.Controls.Add(label6);
-            panel6.Location = new System.Drawing.Point(3, 139);
-            panel6.Name = "panel6";
-            panel6.Size = new System.Drawing.Size(329, 28);
-            panel6.TabIndex = 14;
-            // 
-            // OpenCapsulesOrbsShardsCheckBox
-            // 
-            OpenCapsulesOrbsShardsCheckBox.AutoSize = true;
-            OpenCapsulesOrbsShardsCheckBox.Location = new System.Drawing.Point(300, 9);
-            OpenCapsulesOrbsShardsCheckBox.Name = "OpenCapsulesOrbsShardsCheckBox";
-            OpenCapsulesOrbsShardsCheckBox.Size = new System.Drawing.Size(15, 14);
-            OpenCapsulesOrbsShardsCheckBox.TabIndex = 1;
-            OpenCapsulesOrbsShardsCheckBox.UseVisualStyleBackColor = true;
-            OpenCapsulesOrbsShardsCheckBox.CheckedChanged += TaskCheckedChanged;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(3, 7);
-            label6.Name = "label6";
-            label6.Size = new System.Drawing.Size(206, 15);
-            label6.TabIndex = 0;
-            label6.Text = "Open Capsules, Orbs, Random Shards";
-            // 
-            // panel31
-            // 
-            panel31.Controls.Add(panel32);
-            panel31.Controls.Add(panel36);
-            panel31.Controls.Add(panel38);
-            panel31.Controls.Add(DisenchantWardSkinShardsCheckBox);
-            panel31.Controls.Add(label41);
-            panel31.Location = new System.Drawing.Point(3, 173);
-            panel31.Name = "panel31";
-            panel31.Size = new System.Drawing.Size(329, 28);
-            panel31.TabIndex = 17;
-            // 
-            // panel32
-            // 
-            panel32.Controls.Add(panel33);
-            panel32.Controls.Add(panel35);
-            panel32.Controls.Add(checkBox25);
-            panel32.Controls.Add(label37);
-            panel32.Location = new System.Drawing.Point(169, 91);
-            panel32.Name = "panel32";
-            panel32.Size = new System.Drawing.Size(160, 38);
-            panel32.TabIndex = 16;
-            // 
-            // panel33
-            // 
-            panel33.Controls.Add(panel34);
-            panel33.Controls.Add(checkBox2);
-            panel33.Controls.Add(label35);
-            panel33.Location = new System.Drawing.Point(169, 91);
-            panel33.Name = "panel33";
-            panel33.Size = new System.Drawing.Size(160, 38);
-            panel33.TabIndex = 15;
-            // 
-            // panel34
-            // 
-            panel34.Controls.Add(checkBox1);
-            panel34.Controls.Add(label34);
-            panel34.Location = new System.Drawing.Point(169, 91);
-            panel34.Name = "panel34";
-            panel34.Size = new System.Drawing.Size(160, 38);
-            panel34.TabIndex = 14;
-            // 
-            // checkBox1
-            // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new System.Drawing.Point(134, 13);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new System.Drawing.Size(15, 14);
-            checkBox1.TabIndex = 1;
-            checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // label34
-            // 
-            label34.AutoSize = true;
-            label34.Location = new System.Drawing.Point(3, 12);
-            label34.Name = "label34";
-            label34.Size = new System.Drawing.Size(60, 15);
-            label34.TabIndex = 0;
-            label34.Text = "Craft Keys";
-            // 
-            // checkBox2
-            // 
-            checkBox2.AutoSize = true;
-            checkBox2.Location = new System.Drawing.Point(134, 13);
-            checkBox2.Name = "checkBox2";
-            checkBox2.Size = new System.Drawing.Size(15, 14);
-            checkBox2.TabIndex = 1;
-            checkBox2.UseVisualStyleBackColor = true;
-            // 
-            // label35
-            // 
-            label35.AutoSize = true;
-            label35.Location = new System.Drawing.Point(3, 12);
-            label35.Name = "label35";
-            label35.Size = new System.Drawing.Size(60, 15);
-            label35.TabIndex = 0;
-            label35.Text = "Craft Keys";
-            // 
-            // panel35
-            // 
-            panel35.Controls.Add(checkBox24);
-            panel35.Controls.Add(label36);
-            panel35.Location = new System.Drawing.Point(169, 91);
-            panel35.Name = "panel35";
-            panel35.Size = new System.Drawing.Size(160, 38);
-            panel35.TabIndex = 14;
-            // 
-            // checkBox24
-            // 
-            checkBox24.AutoSize = true;
-            checkBox24.Location = new System.Drawing.Point(134, 13);
-            checkBox24.Name = "checkBox24";
-            checkBox24.Size = new System.Drawing.Size(15, 14);
-            checkBox24.TabIndex = 1;
-            checkBox24.UseVisualStyleBackColor = true;
-            // 
-            // label36
-            // 
-            label36.AutoSize = true;
-            label36.Location = new System.Drawing.Point(3, 12);
-            label36.Name = "label36";
-            label36.Size = new System.Drawing.Size(60, 15);
-            label36.TabIndex = 0;
-            label36.Text = "Craft Keys";
-            // 
-            // checkBox25
-            // 
-            checkBox25.AutoSize = true;
-            checkBox25.Location = new System.Drawing.Point(134, 13);
-            checkBox25.Name = "checkBox25";
-            checkBox25.Size = new System.Drawing.Size(15, 14);
-            checkBox25.TabIndex = 1;
-            checkBox25.UseVisualStyleBackColor = true;
-            // 
-            // label37
-            // 
-            label37.AutoSize = true;
-            label37.Location = new System.Drawing.Point(3, 12);
-            label37.Name = "label37";
-            label37.Size = new System.Drawing.Size(60, 15);
-            label37.TabIndex = 0;
-            label37.Text = "Craft Keys";
-            // 
-            // panel36
-            // 
-            panel36.Controls.Add(panel37);
-            panel36.Controls.Add(checkBox27);
-            panel36.Controls.Add(label39);
-            panel36.Location = new System.Drawing.Point(169, 91);
-            panel36.Name = "panel36";
-            panel36.Size = new System.Drawing.Size(160, 38);
-            panel36.TabIndex = 15;
-            // 
-            // panel37
-            // 
-            panel37.Controls.Add(checkBox26);
-            panel37.Controls.Add(label38);
-            panel37.Location = new System.Drawing.Point(169, 91);
-            panel37.Name = "panel37";
-            panel37.Size = new System.Drawing.Size(160, 38);
-            panel37.TabIndex = 14;
-            // 
-            // checkBox26
-            // 
-            checkBox26.AutoSize = true;
-            checkBox26.Location = new System.Drawing.Point(134, 13);
-            checkBox26.Name = "checkBox26";
-            checkBox26.Size = new System.Drawing.Size(15, 14);
-            checkBox26.TabIndex = 1;
-            checkBox26.UseVisualStyleBackColor = true;
-            // 
-            // label38
-            // 
-            label38.AutoSize = true;
-            label38.Location = new System.Drawing.Point(3, 12);
-            label38.Name = "label38";
-            label38.Size = new System.Drawing.Size(60, 15);
-            label38.TabIndex = 0;
-            label38.Text = "Craft Keys";
-            // 
-            // checkBox27
-            // 
-            checkBox27.AutoSize = true;
-            checkBox27.Location = new System.Drawing.Point(134, 13);
-            checkBox27.Name = "checkBox27";
-            checkBox27.Size = new System.Drawing.Size(15, 14);
-            checkBox27.TabIndex = 1;
-            checkBox27.UseVisualStyleBackColor = true;
-            // 
-            // label39
-            // 
-            label39.AutoSize = true;
-            label39.Location = new System.Drawing.Point(3, 12);
-            label39.Name = "label39";
-            label39.Size = new System.Drawing.Size(60, 15);
-            label39.TabIndex = 0;
-            label39.Text = "Craft Keys";
-            // 
-            // panel38
-            // 
-            panel38.Controls.Add(checkBox28);
-            panel38.Controls.Add(label40);
-            panel38.Location = new System.Drawing.Point(169, 91);
-            panel38.Name = "panel38";
-            panel38.Size = new System.Drawing.Size(160, 38);
-            panel38.TabIndex = 14;
-            // 
-            // checkBox28
-            // 
-            checkBox28.AutoSize = true;
-            checkBox28.Location = new System.Drawing.Point(134, 13);
-            checkBox28.Name = "checkBox28";
-            checkBox28.Size = new System.Drawing.Size(15, 14);
-            checkBox28.TabIndex = 1;
-            checkBox28.UseVisualStyleBackColor = true;
-            // 
-            // label40
-            // 
-            label40.AutoSize = true;
-            label40.Location = new System.Drawing.Point(3, 12);
-            label40.Name = "label40";
-            label40.Size = new System.Drawing.Size(60, 15);
-            label40.TabIndex = 0;
-            label40.Text = "Craft Keys";
-            // 
-            // DisenchantWardSkinShardsCheckBox
-            // 
-            DisenchantWardSkinShardsCheckBox.AutoSize = true;
-            DisenchantWardSkinShardsCheckBox.Location = new System.Drawing.Point(300, 9);
-            DisenchantWardSkinShardsCheckBox.Name = "DisenchantWardSkinShardsCheckBox";
-            DisenchantWardSkinShardsCheckBox.Size = new System.Drawing.Size(15, 14);
-            DisenchantWardSkinShardsCheckBox.TabIndex = 1;
-            DisenchantWardSkinShardsCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // label41
-            // 
-            label41.AutoSize = true;
-            label41.Location = new System.Drawing.Point(4, 7);
-            label41.Name = "label41";
-            label41.Size = new System.Drawing.Size(160, 15);
-            label41.TabIndex = 0;
-            label41.Text = "Disenchant Ward Skin Shards";
-            // 
-            // eventTaskPanel
-            // 
-            eventTaskPanel.Controls.Add(panel5);
-            eventTaskPanel.Controls.Add(panel1);
-            eventTaskPanel.Controls.Add(panel2);
-            eventTaskPanel.Location = new System.Drawing.Point(508, 73);
-            eventTaskPanel.Name = "eventTaskPanel";
-            eventTaskPanel.Size = new System.Drawing.Size(338, 93);
-            eventTaskPanel.TabIndex = 10;
-            // 
-            // panel5
-            // 
-            panel5.Controls.Add(ClaimEventRewardsCheckBox);
-            panel5.Controls.Add(label3);
-            panel5.Location = new System.Drawing.Point(3, 3);
-            panel5.Name = "panel5";
-            panel5.Size = new System.Drawing.Size(160, 38);
-            panel5.TabIndex = 13;
-            // 
-            // ClaimEventRewardsCheckBox
-            // 
-            ClaimEventRewardsCheckBox.AutoSize = true;
-            ClaimEventRewardsCheckBox.Location = new System.Drawing.Point(134, 13);
-            ClaimEventRewardsCheckBox.Name = "ClaimEventRewardsCheckBox";
-            ClaimEventRewardsCheckBox.Size = new System.Drawing.Size(15, 14);
-            ClaimEventRewardsCheckBox.TabIndex = 1;
-            ClaimEventRewardsCheckBox.UseVisualStyleBackColor = true;
-            ClaimEventRewardsCheckBox.CheckedChanged += TaskCheckedChanged;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(3, 12);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(117, 15);
-            label3.TabIndex = 0;
-            label3.Text = "Claim Event Rewards";
-            // 
-            // panel1
-            // 
-            panel1.Controls.Add(BuyChampionShardsCheckBox);
-            panel1.Controls.Add(label1);
-            panel1.Location = new System.Drawing.Point(169, 3);
-            panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(160, 38);
-            panel1.TabIndex = 14;
-            // 
-            // BuyChampionShardsCheckBox
-            // 
-            BuyChampionShardsCheckBox.AutoSize = true;
-            BuyChampionShardsCheckBox.Location = new System.Drawing.Point(134, 13);
-            BuyChampionShardsCheckBox.Name = "BuyChampionShardsCheckBox";
-            BuyChampionShardsCheckBox.Size = new System.Drawing.Size(15, 14);
-            BuyChampionShardsCheckBox.TabIndex = 1;
-            BuyChampionShardsCheckBox.UseVisualStyleBackColor = true;
-            BuyChampionShardsCheckBox.CheckedChanged += TaskCheckedChanged;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(3, 12);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(124, 15);
-            label1.TabIndex = 0;
-            label1.Text = "Buy Champion Shards";
-            // 
-            // panel2
-            // 
-            panel2.Controls.Add(BuyBlueEssenceCheckBox);
-            panel2.Controls.Add(label2);
-            panel2.Location = new System.Drawing.Point(3, 47);
-            panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(160, 38);
-            panel2.TabIndex = 14;
-            // 
-            // BuyBlueEssenceCheckBox
-            // 
-            BuyBlueEssenceCheckBox.AutoSize = true;
-            BuyBlueEssenceCheckBox.Location = new System.Drawing.Point(134, 13);
-            BuyBlueEssenceCheckBox.Name = "BuyBlueEssenceCheckBox";
-            BuyBlueEssenceCheckBox.Size = new System.Drawing.Size(15, 14);
-            BuyBlueEssenceCheckBox.TabIndex = 1;
-            BuyBlueEssenceCheckBox.UseVisualStyleBackColor = true;
-            BuyBlueEssenceCheckBox.CheckedChanged += TaskCheckedChanged;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(3, 12);
-            label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(97, 15);
-            label2.TabIndex = 0;
-            label2.Text = "Buy Blue Essence";
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.BackColor = System.Drawing.Color.Transparent;
-            label9.FlatStyle = FlatStyle.Flat;
-            label9.Font = new System.Drawing.Font("Segoe Print", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            label9.ForeColor = System.Drawing.Color.Black;
-            label9.Location = new System.Drawing.Point(636, -5);
-            label9.Name = "label9";
-            label9.Size = new System.Drawing.Size(92, 47);
-            label9.TabIndex = 9;
-            label9.Text = "Tasks";
             // 
             // overviewGridView
             // 
@@ -1408,7 +267,7 @@ namespace AccountChecker
             overviewGridView.Name = "overviewGridView";
             overviewGridView.ReadOnly = true;
             overviewGridView.RowTemplate.Height = 25;
-            overviewGridView.Size = new System.Drawing.Size(477, 436);
+            overviewGridView.Size = new System.Drawing.Size(826, 436);
             overviewGridView.TabIndex = 9;
             // 
             // Champions
@@ -1486,6 +345,1227 @@ namespace AccountChecker
             skinsGridView.Size = new System.Drawing.Size(804, 426);
             skinsGridView.TabIndex = 1;
             // 
+            // tabPage1
+            // 
+            tabPage1.BackColor = System.Drawing.Color.White;
+            tabPage1.Controls.Add(label83);
+            tabPage1.Controls.Add(ProgressBar);
+            tabPage1.Controls.Add(flowLayoutPanel4);
+            tabPage1.Controls.Add(label42);
+            tabPage1.Controls.Add(label43);
+            tabPage1.Controls.Add(executeButton);
+            tabPage1.Controls.Add(flowLayoutPanel2);
+            tabPage1.Controls.Add(flowLayoutPanel3);
+            tabPage1.Location = new System.Drawing.Point(4, 24);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new Padding(3);
+            tabPage1.Size = new System.Drawing.Size(863, 475);
+            tabPage1.TabIndex = 3;
+            tabPage1.Text = "Tasks";
+            // 
+            // label83
+            // 
+            label83.AutoSize = true;
+            label83.BackColor = System.Drawing.Color.Transparent;
+            label83.FlatStyle = FlatStyle.Flat;
+            label83.Font = new System.Drawing.Font("Segoe Print", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label83.ForeColor = System.Drawing.Color.Black;
+            label83.Location = new System.Drawing.Point(575, 18);
+            label83.Name = "label83";
+            label83.Size = new System.Drawing.Size(141, 33);
+            label83.TabIndex = 25;
+            label83.Text = "Miscellaneous";
+            // 
+            // ProgressBar
+            // 
+            ProgressBar.BackColor = System.Drawing.Color.LightSkyBlue;
+            ProgressBar.Location = new System.Drawing.Point(371, 448);
+            ProgressBar.Name = "ProgressBar";
+            ProgressBar.Size = new System.Drawing.Size(113, 23);
+            ProgressBar.TabIndex = 23;
+            ProgressBar.Visible = false;
+            ProgressBar.Click += progressBar1_Click;
+            // 
+            // flowLayoutPanel4
+            // 
+            flowLayoutPanel4.Controls.Add(panel77);
+            flowLayoutPanel4.Controls.Add(panel78);
+            flowLayoutPanel4.Location = new System.Drawing.Point(465, 54);
+            flowLayoutPanel4.Name = "flowLayoutPanel4";
+            flowLayoutPanel4.Size = new System.Drawing.Size(338, 93);
+            flowLayoutPanel4.TabIndex = 20;
+            // 
+            // panel77
+            // 
+            panel77.Controls.Add(RemoveFriendsCheckBox);
+            panel77.Controls.Add(label84);
+            panel77.Location = new System.Drawing.Point(3, 3);
+            panel77.Name = "panel77";
+            panel77.Size = new System.Drawing.Size(335, 38);
+            panel77.TabIndex = 13;
+            // 
+            // RemoveFriendsCheckBox
+            // 
+            RemoveFriendsCheckBox.AutoSize = true;
+            RemoveFriendsCheckBox.Location = new System.Drawing.Point(308, 13);
+            RemoveFriendsCheckBox.Name = "RemoveFriendsCheckBox";
+            RemoveFriendsCheckBox.Size = new System.Drawing.Size(15, 14);
+            RemoveFriendsCheckBox.TabIndex = 1;
+            RemoveFriendsCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // label84
+            // 
+            label84.AutoSize = true;
+            label84.Location = new System.Drawing.Point(3, 12);
+            label84.Name = "label84";
+            label84.Size = new System.Drawing.Size(91, 15);
+            label84.TabIndex = 0;
+            label84.Text = "Remove Friends";
+            // 
+            // panel78
+            // 
+            panel78.Controls.Add(RemoveFriendRequestsCheckBox);
+            panel78.Controls.Add(label82);
+            panel78.Location = new System.Drawing.Point(3, 47);
+            panel78.Name = "panel78";
+            panel78.Size = new System.Drawing.Size(335, 38);
+            panel78.TabIndex = 14;
+            // 
+            // RemoveFriendRequestsCheckBox
+            // 
+            RemoveFriendRequestsCheckBox.AutoSize = true;
+            RemoveFriendRequestsCheckBox.Location = new System.Drawing.Point(308, 13);
+            RemoveFriendRequestsCheckBox.Name = "RemoveFriendRequestsCheckBox";
+            RemoveFriendRequestsCheckBox.Size = new System.Drawing.Size(15, 14);
+            RemoveFriendRequestsCheckBox.TabIndex = 1;
+            RemoveFriendRequestsCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // label82
+            // 
+            label82.AutoSize = true;
+            label82.Location = new System.Drawing.Point(3, 12);
+            label82.Name = "label82";
+            label82.Size = new System.Drawing.Size(136, 15);
+            label82.TabIndex = 0;
+            label82.Text = "Remove Friend Requests";
+            // 
+            // label42
+            // 
+            label42.AutoSize = true;
+            label42.BackColor = System.Drawing.Color.Transparent;
+            label42.FlatStyle = FlatStyle.Flat;
+            label42.Font = new System.Drawing.Font("Segoe Print", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label42.ForeColor = System.Drawing.Color.Black;
+            label42.Location = new System.Drawing.Point(181, 150);
+            label42.Name = "label42";
+            label42.Size = new System.Drawing.Size(91, 33);
+            label42.TabIndex = 21;
+            label42.Text = "Hextech";
+            // 
+            // label43
+            // 
+            label43.AutoSize = true;
+            label43.BackColor = System.Drawing.Color.Transparent;
+            label43.FlatStyle = FlatStyle.Flat;
+            label43.Font = new System.Drawing.Font("Segoe Print", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label43.ForeColor = System.Drawing.Color.Black;
+            label43.Location = new System.Drawing.Point(166, 19);
+            label43.Name = "label43";
+            label43.Size = new System.Drawing.Size(125, 33);
+            label43.TabIndex = 20;
+            label43.Text = "Event Shop";
+            // 
+            // executeButton
+            // 
+            executeButton.BackColor = System.Drawing.Color.LightCyan;
+            executeButton.FlatAppearance.BorderSize = 0;
+            executeButton.ForeColor = System.Drawing.SystemColors.Desktop;
+            executeButton.Location = new System.Drawing.Point(390, 415);
+            executeButton.Name = "executeButton";
+            executeButton.Size = new System.Drawing.Size(79, 32);
+            executeButton.TabIndex = 17;
+            executeButton.Text = "Execute";
+            executeButton.UseVisualStyleBackColor = false;
+            executeButton.Click += ExecuteButton_Click;
+            // 
+            // flowLayoutPanel2
+            // 
+            flowLayoutPanel2.Controls.Add(panel39);
+            flowLayoutPanel2.Controls.Add(panel40);
+            flowLayoutPanel2.Controls.Add(panel41);
+            flowLayoutPanel2.Controls.Add(panel49);
+            flowLayoutPanel2.Controls.Add(panel57);
+            flowLayoutPanel2.Controls.Add(panel65);
+            flowLayoutPanel2.Controls.Add(panel66);
+            flowLayoutPanel2.Location = new System.Drawing.Point(52, 183);
+            flowLayoutPanel2.Name = "flowLayoutPanel2";
+            flowLayoutPanel2.Size = new System.Drawing.Size(338, 238);
+            flowLayoutPanel2.TabIndex = 22;
+            // 
+            // panel39
+            // 
+            panel39.Controls.Add(CraftKeysCheckBox);
+            panel39.Controls.Add(label44);
+            panel39.Location = new System.Drawing.Point(3, 3);
+            panel39.Name = "panel39";
+            panel39.Size = new System.Drawing.Size(159, 32);
+            panel39.TabIndex = 13;
+            // 
+            // CraftKeysCheckBox
+            // 
+            CraftKeysCheckBox.AutoSize = true;
+            CraftKeysCheckBox.Location = new System.Drawing.Point(134, 8);
+            CraftKeysCheckBox.Name = "CraftKeysCheckBox";
+            CraftKeysCheckBox.Size = new System.Drawing.Size(15, 14);
+            CraftKeysCheckBox.TabIndex = 1;
+            CraftKeysCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // label44
+            // 
+            label44.AutoSize = true;
+            label44.Location = new System.Drawing.Point(3, 6);
+            label44.Name = "label44";
+            label44.Size = new System.Drawing.Size(60, 15);
+            label44.TabIndex = 0;
+            label44.Text = "Craft Keys";
+            // 
+            // panel40
+            // 
+            panel40.Controls.Add(OpenChestsCheckBox);
+            panel40.Controls.Add(label45);
+            panel40.Location = new System.Drawing.Point(168, 3);
+            panel40.Name = "panel40";
+            panel40.Size = new System.Drawing.Size(159, 32);
+            panel40.TabIndex = 14;
+            // 
+            // OpenChestsCheckBox
+            // 
+            OpenChestsCheckBox.AutoSize = true;
+            OpenChestsCheckBox.Location = new System.Drawing.Point(135, 8);
+            OpenChestsCheckBox.Name = "OpenChestsCheckBox";
+            OpenChestsCheckBox.Size = new System.Drawing.Size(15, 14);
+            OpenChestsCheckBox.TabIndex = 1;
+            OpenChestsCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // label45
+            // 
+            label45.AutoSize = true;
+            label45.Location = new System.Drawing.Point(4, 7);
+            label45.Name = "label45";
+            label45.Size = new System.Drawing.Size(74, 15);
+            label45.TabIndex = 0;
+            label45.Text = "Open Chests";
+            // 
+            // panel41
+            // 
+            panel41.Controls.Add(panel42);
+            panel41.Controls.Add(panel46);
+            panel41.Controls.Add(panel48);
+            panel41.Controls.Add(DisenchantSkinShardsCheckBox);
+            panel41.Controls.Add(label53);
+            panel41.Location = new System.Drawing.Point(3, 41);
+            panel41.Name = "panel41";
+            panel41.Size = new System.Drawing.Size(329, 32);
+            panel41.TabIndex = 18;
+            // 
+            // panel42
+            // 
+            panel42.Controls.Add(panel43);
+            panel42.Controls.Add(panel45);
+            panel42.Controls.Add(checkBox34);
+            panel42.Controls.Add(label49);
+            panel42.Location = new System.Drawing.Point(169, 91);
+            panel42.Name = "panel42";
+            panel42.Size = new System.Drawing.Size(160, 38);
+            panel42.TabIndex = 16;
+            // 
+            // panel43
+            // 
+            panel43.Controls.Add(panel44);
+            panel43.Controls.Add(checkBox32);
+            panel43.Controls.Add(label47);
+            panel43.Location = new System.Drawing.Point(169, 91);
+            panel43.Name = "panel43";
+            panel43.Size = new System.Drawing.Size(160, 38);
+            panel43.TabIndex = 15;
+            // 
+            // panel44
+            // 
+            panel44.Controls.Add(checkBox31);
+            panel44.Controls.Add(label46);
+            panel44.Location = new System.Drawing.Point(169, 91);
+            panel44.Name = "panel44";
+            panel44.Size = new System.Drawing.Size(160, 38);
+            panel44.TabIndex = 14;
+            // 
+            // checkBox31
+            // 
+            checkBox31.AutoSize = true;
+            checkBox31.Location = new System.Drawing.Point(134, 13);
+            checkBox31.Name = "checkBox31";
+            checkBox31.Size = new System.Drawing.Size(15, 14);
+            checkBox31.TabIndex = 1;
+            checkBox31.UseVisualStyleBackColor = true;
+            // 
+            // label46
+            // 
+            label46.AutoSize = true;
+            label46.Location = new System.Drawing.Point(3, 12);
+            label46.Name = "label46";
+            label46.Size = new System.Drawing.Size(60, 15);
+            label46.TabIndex = 0;
+            label46.Text = "Craft Keys";
+            // 
+            // checkBox32
+            // 
+            checkBox32.AutoSize = true;
+            checkBox32.Location = new System.Drawing.Point(134, 13);
+            checkBox32.Name = "checkBox32";
+            checkBox32.Size = new System.Drawing.Size(15, 14);
+            checkBox32.TabIndex = 1;
+            checkBox32.UseVisualStyleBackColor = true;
+            // 
+            // label47
+            // 
+            label47.AutoSize = true;
+            label47.Location = new System.Drawing.Point(3, 12);
+            label47.Name = "label47";
+            label47.Size = new System.Drawing.Size(60, 15);
+            label47.TabIndex = 0;
+            label47.Text = "Craft Keys";
+            // 
+            // panel45
+            // 
+            panel45.Controls.Add(checkBox33);
+            panel45.Controls.Add(label48);
+            panel45.Location = new System.Drawing.Point(169, 91);
+            panel45.Name = "panel45";
+            panel45.Size = new System.Drawing.Size(160, 38);
+            panel45.TabIndex = 14;
+            // 
+            // checkBox33
+            // 
+            checkBox33.AutoSize = true;
+            checkBox33.Location = new System.Drawing.Point(134, 13);
+            checkBox33.Name = "checkBox33";
+            checkBox33.Size = new System.Drawing.Size(15, 14);
+            checkBox33.TabIndex = 1;
+            checkBox33.UseVisualStyleBackColor = true;
+            // 
+            // label48
+            // 
+            label48.AutoSize = true;
+            label48.Location = new System.Drawing.Point(3, 12);
+            label48.Name = "label48";
+            label48.Size = new System.Drawing.Size(60, 15);
+            label48.TabIndex = 0;
+            label48.Text = "Craft Keys";
+            // 
+            // checkBox34
+            // 
+            checkBox34.AutoSize = true;
+            checkBox34.Location = new System.Drawing.Point(134, 13);
+            checkBox34.Name = "checkBox34";
+            checkBox34.Size = new System.Drawing.Size(15, 14);
+            checkBox34.TabIndex = 1;
+            checkBox34.UseVisualStyleBackColor = true;
+            // 
+            // label49
+            // 
+            label49.AutoSize = true;
+            label49.Location = new System.Drawing.Point(3, 12);
+            label49.Name = "label49";
+            label49.Size = new System.Drawing.Size(60, 15);
+            label49.TabIndex = 0;
+            label49.Text = "Craft Keys";
+            // 
+            // panel46
+            // 
+            panel46.Controls.Add(panel47);
+            panel46.Controls.Add(checkBox36);
+            panel46.Controls.Add(label51);
+            panel46.Location = new System.Drawing.Point(169, 91);
+            panel46.Name = "panel46";
+            panel46.Size = new System.Drawing.Size(160, 38);
+            panel46.TabIndex = 15;
+            // 
+            // panel47
+            // 
+            panel47.Controls.Add(checkBox35);
+            panel47.Controls.Add(label50);
+            panel47.Location = new System.Drawing.Point(169, 91);
+            panel47.Name = "panel47";
+            panel47.Size = new System.Drawing.Size(160, 38);
+            panel47.TabIndex = 14;
+            // 
+            // checkBox35
+            // 
+            checkBox35.AutoSize = true;
+            checkBox35.Location = new System.Drawing.Point(134, 13);
+            checkBox35.Name = "checkBox35";
+            checkBox35.Size = new System.Drawing.Size(15, 14);
+            checkBox35.TabIndex = 1;
+            checkBox35.UseVisualStyleBackColor = true;
+            // 
+            // label50
+            // 
+            label50.AutoSize = true;
+            label50.Location = new System.Drawing.Point(3, 12);
+            label50.Name = "label50";
+            label50.Size = new System.Drawing.Size(60, 15);
+            label50.TabIndex = 0;
+            label50.Text = "Craft Keys";
+            // 
+            // checkBox36
+            // 
+            checkBox36.AutoSize = true;
+            checkBox36.Location = new System.Drawing.Point(134, 13);
+            checkBox36.Name = "checkBox36";
+            checkBox36.Size = new System.Drawing.Size(15, 14);
+            checkBox36.TabIndex = 1;
+            checkBox36.UseVisualStyleBackColor = true;
+            // 
+            // label51
+            // 
+            label51.AutoSize = true;
+            label51.Location = new System.Drawing.Point(3, 12);
+            label51.Name = "label51";
+            label51.Size = new System.Drawing.Size(60, 15);
+            label51.TabIndex = 0;
+            label51.Text = "Craft Keys";
+            // 
+            // panel48
+            // 
+            panel48.Controls.Add(checkBox37);
+            panel48.Controls.Add(label52);
+            panel48.Location = new System.Drawing.Point(169, 91);
+            panel48.Name = "panel48";
+            panel48.Size = new System.Drawing.Size(160, 38);
+            panel48.TabIndex = 14;
+            // 
+            // checkBox37
+            // 
+            checkBox37.AutoSize = true;
+            checkBox37.Location = new System.Drawing.Point(134, 13);
+            checkBox37.Name = "checkBox37";
+            checkBox37.Size = new System.Drawing.Size(15, 14);
+            checkBox37.TabIndex = 1;
+            checkBox37.UseVisualStyleBackColor = true;
+            // 
+            // label52
+            // 
+            label52.AutoSize = true;
+            label52.Location = new System.Drawing.Point(3, 12);
+            label52.Name = "label52";
+            label52.Size = new System.Drawing.Size(60, 15);
+            label52.TabIndex = 0;
+            label52.Text = "Craft Keys";
+            // 
+            // DisenchantSkinShardsCheckBox
+            // 
+            DisenchantSkinShardsCheckBox.AutoSize = true;
+            DisenchantSkinShardsCheckBox.Location = new System.Drawing.Point(300, 9);
+            DisenchantSkinShardsCheckBox.Name = "DisenchantSkinShardsCheckBox";
+            DisenchantSkinShardsCheckBox.Size = new System.Drawing.Size(15, 14);
+            DisenchantSkinShardsCheckBox.TabIndex = 1;
+            DisenchantSkinShardsCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // label53
+            // 
+            label53.AutoSize = true;
+            label53.Location = new System.Drawing.Point(3, 6);
+            label53.Name = "label53";
+            label53.Size = new System.Drawing.Size(135, 15);
+            label53.TabIndex = 0;
+            label53.Text = "Disenchcant Skin Shards";
+            // 
+            // panel49
+            // 
+            panel49.Controls.Add(panel50);
+            panel49.Controls.Add(panel54);
+            panel49.Controls.Add(panel56);
+            panel49.Controls.Add(DisenchantChampionShardsCheckBox);
+            panel49.Controls.Add(label61);
+            panel49.Location = new System.Drawing.Point(3, 79);
+            panel49.Name = "panel49";
+            panel49.Size = new System.Drawing.Size(329, 32);
+            panel49.TabIndex = 17;
+            // 
+            // panel50
+            // 
+            panel50.Controls.Add(panel51);
+            panel50.Controls.Add(panel53);
+            panel50.Controls.Add(checkBox42);
+            panel50.Controls.Add(label57);
+            panel50.Location = new System.Drawing.Point(169, 91);
+            panel50.Name = "panel50";
+            panel50.Size = new System.Drawing.Size(160, 38);
+            panel50.TabIndex = 16;
+            // 
+            // panel51
+            // 
+            panel51.Controls.Add(panel52);
+            panel51.Controls.Add(checkBox40);
+            panel51.Controls.Add(label55);
+            panel51.Location = new System.Drawing.Point(169, 91);
+            panel51.Name = "panel51";
+            panel51.Size = new System.Drawing.Size(160, 38);
+            panel51.TabIndex = 15;
+            // 
+            // panel52
+            // 
+            panel52.Controls.Add(checkBox39);
+            panel52.Controls.Add(label54);
+            panel52.Location = new System.Drawing.Point(169, 91);
+            panel52.Name = "panel52";
+            panel52.Size = new System.Drawing.Size(160, 38);
+            panel52.TabIndex = 14;
+            // 
+            // checkBox39
+            // 
+            checkBox39.AutoSize = true;
+            checkBox39.Location = new System.Drawing.Point(134, 13);
+            checkBox39.Name = "checkBox39";
+            checkBox39.Size = new System.Drawing.Size(15, 14);
+            checkBox39.TabIndex = 1;
+            checkBox39.UseVisualStyleBackColor = true;
+            // 
+            // label54
+            // 
+            label54.AutoSize = true;
+            label54.Location = new System.Drawing.Point(3, 12);
+            label54.Name = "label54";
+            label54.Size = new System.Drawing.Size(60, 15);
+            label54.TabIndex = 0;
+            label54.Text = "Craft Keys";
+            // 
+            // checkBox40
+            // 
+            checkBox40.AutoSize = true;
+            checkBox40.Location = new System.Drawing.Point(134, 13);
+            checkBox40.Name = "checkBox40";
+            checkBox40.Size = new System.Drawing.Size(15, 14);
+            checkBox40.TabIndex = 1;
+            checkBox40.UseVisualStyleBackColor = true;
+            // 
+            // label55
+            // 
+            label55.AutoSize = true;
+            label55.Location = new System.Drawing.Point(3, 12);
+            label55.Name = "label55";
+            label55.Size = new System.Drawing.Size(60, 15);
+            label55.TabIndex = 0;
+            label55.Text = "Craft Keys";
+            // 
+            // panel53
+            // 
+            panel53.Controls.Add(checkBox41);
+            panel53.Controls.Add(label56);
+            panel53.Location = new System.Drawing.Point(169, 91);
+            panel53.Name = "panel53";
+            panel53.Size = new System.Drawing.Size(160, 38);
+            panel53.TabIndex = 14;
+            // 
+            // checkBox41
+            // 
+            checkBox41.AutoSize = true;
+            checkBox41.Location = new System.Drawing.Point(134, 13);
+            checkBox41.Name = "checkBox41";
+            checkBox41.Size = new System.Drawing.Size(15, 14);
+            checkBox41.TabIndex = 1;
+            checkBox41.UseVisualStyleBackColor = true;
+            // 
+            // label56
+            // 
+            label56.AutoSize = true;
+            label56.Location = new System.Drawing.Point(3, 12);
+            label56.Name = "label56";
+            label56.Size = new System.Drawing.Size(60, 15);
+            label56.TabIndex = 0;
+            label56.Text = "Craft Keys";
+            // 
+            // checkBox42
+            // 
+            checkBox42.AutoSize = true;
+            checkBox42.Location = new System.Drawing.Point(134, 13);
+            checkBox42.Name = "checkBox42";
+            checkBox42.Size = new System.Drawing.Size(15, 14);
+            checkBox42.TabIndex = 1;
+            checkBox42.UseVisualStyleBackColor = true;
+            // 
+            // label57
+            // 
+            label57.AutoSize = true;
+            label57.Location = new System.Drawing.Point(3, 12);
+            label57.Name = "label57";
+            label57.Size = new System.Drawing.Size(60, 15);
+            label57.TabIndex = 0;
+            label57.Text = "Craft Keys";
+            // 
+            // panel54
+            // 
+            panel54.Controls.Add(panel55);
+            panel54.Controls.Add(checkBox44);
+            panel54.Controls.Add(label59);
+            panel54.Location = new System.Drawing.Point(169, 91);
+            panel54.Name = "panel54";
+            panel54.Size = new System.Drawing.Size(160, 38);
+            panel54.TabIndex = 15;
+            // 
+            // panel55
+            // 
+            panel55.Controls.Add(checkBox43);
+            panel55.Controls.Add(label58);
+            panel55.Location = new System.Drawing.Point(169, 91);
+            panel55.Name = "panel55";
+            panel55.Size = new System.Drawing.Size(160, 38);
+            panel55.TabIndex = 14;
+            // 
+            // checkBox43
+            // 
+            checkBox43.AutoSize = true;
+            checkBox43.Location = new System.Drawing.Point(134, 13);
+            checkBox43.Name = "checkBox43";
+            checkBox43.Size = new System.Drawing.Size(15, 14);
+            checkBox43.TabIndex = 1;
+            checkBox43.UseVisualStyleBackColor = true;
+            // 
+            // label58
+            // 
+            label58.AutoSize = true;
+            label58.Location = new System.Drawing.Point(3, 12);
+            label58.Name = "label58";
+            label58.Size = new System.Drawing.Size(60, 15);
+            label58.TabIndex = 0;
+            label58.Text = "Craft Keys";
+            // 
+            // checkBox44
+            // 
+            checkBox44.AutoSize = true;
+            checkBox44.Location = new System.Drawing.Point(134, 13);
+            checkBox44.Name = "checkBox44";
+            checkBox44.Size = new System.Drawing.Size(15, 14);
+            checkBox44.TabIndex = 1;
+            checkBox44.UseVisualStyleBackColor = true;
+            // 
+            // label59
+            // 
+            label59.AutoSize = true;
+            label59.Location = new System.Drawing.Point(3, 12);
+            label59.Name = "label59";
+            label59.Size = new System.Drawing.Size(60, 15);
+            label59.TabIndex = 0;
+            label59.Text = "Craft Keys";
+            // 
+            // panel56
+            // 
+            panel56.Controls.Add(checkBox45);
+            panel56.Controls.Add(label60);
+            panel56.Location = new System.Drawing.Point(169, 91);
+            panel56.Name = "panel56";
+            panel56.Size = new System.Drawing.Size(160, 38);
+            panel56.TabIndex = 14;
+            // 
+            // checkBox45
+            // 
+            checkBox45.AutoSize = true;
+            checkBox45.Location = new System.Drawing.Point(134, 13);
+            checkBox45.Name = "checkBox45";
+            checkBox45.Size = new System.Drawing.Size(15, 14);
+            checkBox45.TabIndex = 1;
+            checkBox45.UseVisualStyleBackColor = true;
+            // 
+            // label60
+            // 
+            label60.AutoSize = true;
+            label60.Location = new System.Drawing.Point(3, 12);
+            label60.Name = "label60";
+            label60.Size = new System.Drawing.Size(60, 15);
+            label60.TabIndex = 0;
+            label60.Text = "Craft Keys";
+            // 
+            // DisenchantChampionShardsCheckBox
+            // 
+            DisenchantChampionShardsCheckBox.AutoSize = true;
+            DisenchantChampionShardsCheckBox.Location = new System.Drawing.Point(300, 9);
+            DisenchantChampionShardsCheckBox.Name = "DisenchantChampionShardsCheckBox";
+            DisenchantChampionShardsCheckBox.Size = new System.Drawing.Size(15, 14);
+            DisenchantChampionShardsCheckBox.TabIndex = 1;
+            DisenchantChampionShardsCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // label61
+            // 
+            label61.AutoSize = true;
+            label61.Location = new System.Drawing.Point(3, 8);
+            label61.Name = "label61";
+            label61.Size = new System.Drawing.Size(169, 15);
+            label61.TabIndex = 0;
+            label61.Text = "Disenchcant Champion Shards";
+            // 
+            // panel57
+            // 
+            panel57.Controls.Add(panel58);
+            panel57.Controls.Add(panel62);
+            panel57.Controls.Add(panel64);
+            panel57.Controls.Add(DisenchantEternalShardsCheckBox);
+            panel57.Controls.Add(label69);
+            panel57.Location = new System.Drawing.Point(3, 117);
+            panel57.Name = "panel57";
+            panel57.Size = new System.Drawing.Size(329, 32);
+            panel57.TabIndex = 14;
+            // 
+            // panel58
+            // 
+            panel58.Controls.Add(panel59);
+            panel58.Controls.Add(panel61);
+            panel58.Controls.Add(checkBox50);
+            panel58.Controls.Add(label65);
+            panel58.Location = new System.Drawing.Point(169, 91);
+            panel58.Name = "panel58";
+            panel58.Size = new System.Drawing.Size(160, 38);
+            panel58.TabIndex = 16;
+            // 
+            // panel59
+            // 
+            panel59.Controls.Add(panel60);
+            panel59.Controls.Add(checkBox48);
+            panel59.Controls.Add(label63);
+            panel59.Location = new System.Drawing.Point(169, 91);
+            panel59.Name = "panel59";
+            panel59.Size = new System.Drawing.Size(160, 38);
+            panel59.TabIndex = 15;
+            // 
+            // panel60
+            // 
+            panel60.Controls.Add(checkBox47);
+            panel60.Controls.Add(label62);
+            panel60.Location = new System.Drawing.Point(169, 91);
+            panel60.Name = "panel60";
+            panel60.Size = new System.Drawing.Size(160, 38);
+            panel60.TabIndex = 14;
+            // 
+            // checkBox47
+            // 
+            checkBox47.AutoSize = true;
+            checkBox47.Location = new System.Drawing.Point(134, 13);
+            checkBox47.Name = "checkBox47";
+            checkBox47.Size = new System.Drawing.Size(15, 14);
+            checkBox47.TabIndex = 1;
+            checkBox47.UseVisualStyleBackColor = true;
+            // 
+            // label62
+            // 
+            label62.AutoSize = true;
+            label62.Location = new System.Drawing.Point(3, 12);
+            label62.Name = "label62";
+            label62.Size = new System.Drawing.Size(60, 15);
+            label62.TabIndex = 0;
+            label62.Text = "Craft Keys";
+            // 
+            // checkBox48
+            // 
+            checkBox48.AutoSize = true;
+            checkBox48.Location = new System.Drawing.Point(134, 13);
+            checkBox48.Name = "checkBox48";
+            checkBox48.Size = new System.Drawing.Size(15, 14);
+            checkBox48.TabIndex = 1;
+            checkBox48.UseVisualStyleBackColor = true;
+            // 
+            // label63
+            // 
+            label63.AutoSize = true;
+            label63.Location = new System.Drawing.Point(3, 12);
+            label63.Name = "label63";
+            label63.Size = new System.Drawing.Size(60, 15);
+            label63.TabIndex = 0;
+            label63.Text = "Craft Keys";
+            // 
+            // panel61
+            // 
+            panel61.Controls.Add(checkBox49);
+            panel61.Controls.Add(label64);
+            panel61.Location = new System.Drawing.Point(169, 91);
+            panel61.Name = "panel61";
+            panel61.Size = new System.Drawing.Size(160, 38);
+            panel61.TabIndex = 14;
+            // 
+            // checkBox49
+            // 
+            checkBox49.AutoSize = true;
+            checkBox49.Location = new System.Drawing.Point(134, 13);
+            checkBox49.Name = "checkBox49";
+            checkBox49.Size = new System.Drawing.Size(15, 14);
+            checkBox49.TabIndex = 1;
+            checkBox49.UseVisualStyleBackColor = true;
+            // 
+            // label64
+            // 
+            label64.AutoSize = true;
+            label64.Location = new System.Drawing.Point(3, 12);
+            label64.Name = "label64";
+            label64.Size = new System.Drawing.Size(60, 15);
+            label64.TabIndex = 0;
+            label64.Text = "Craft Keys";
+            // 
+            // checkBox50
+            // 
+            checkBox50.AutoSize = true;
+            checkBox50.Location = new System.Drawing.Point(134, 13);
+            checkBox50.Name = "checkBox50";
+            checkBox50.Size = new System.Drawing.Size(15, 14);
+            checkBox50.TabIndex = 1;
+            checkBox50.UseVisualStyleBackColor = true;
+            // 
+            // label65
+            // 
+            label65.AutoSize = true;
+            label65.Location = new System.Drawing.Point(3, 12);
+            label65.Name = "label65";
+            label65.Size = new System.Drawing.Size(60, 15);
+            label65.TabIndex = 0;
+            label65.Text = "Craft Keys";
+            // 
+            // panel62
+            // 
+            panel62.Controls.Add(panel63);
+            panel62.Controls.Add(checkBox52);
+            panel62.Controls.Add(label67);
+            panel62.Location = new System.Drawing.Point(169, 91);
+            panel62.Name = "panel62";
+            panel62.Size = new System.Drawing.Size(160, 38);
+            panel62.TabIndex = 15;
+            // 
+            // panel63
+            // 
+            panel63.Controls.Add(checkBox51);
+            panel63.Controls.Add(label66);
+            panel63.Location = new System.Drawing.Point(169, 91);
+            panel63.Name = "panel63";
+            panel63.Size = new System.Drawing.Size(160, 38);
+            panel63.TabIndex = 14;
+            // 
+            // checkBox51
+            // 
+            checkBox51.AutoSize = true;
+            checkBox51.Location = new System.Drawing.Point(134, 13);
+            checkBox51.Name = "checkBox51";
+            checkBox51.Size = new System.Drawing.Size(15, 14);
+            checkBox51.TabIndex = 1;
+            checkBox51.UseVisualStyleBackColor = true;
+            // 
+            // label66
+            // 
+            label66.AutoSize = true;
+            label66.Location = new System.Drawing.Point(3, 12);
+            label66.Name = "label66";
+            label66.Size = new System.Drawing.Size(60, 15);
+            label66.TabIndex = 0;
+            label66.Text = "Craft Keys";
+            // 
+            // checkBox52
+            // 
+            checkBox52.AutoSize = true;
+            checkBox52.Location = new System.Drawing.Point(134, 13);
+            checkBox52.Name = "checkBox52";
+            checkBox52.Size = new System.Drawing.Size(15, 14);
+            checkBox52.TabIndex = 1;
+            checkBox52.UseVisualStyleBackColor = true;
+            // 
+            // label67
+            // 
+            label67.AutoSize = true;
+            label67.Location = new System.Drawing.Point(3, 12);
+            label67.Name = "label67";
+            label67.Size = new System.Drawing.Size(60, 15);
+            label67.TabIndex = 0;
+            label67.Text = "Craft Keys";
+            // 
+            // panel64
+            // 
+            panel64.Controls.Add(checkBox53);
+            panel64.Controls.Add(label68);
+            panel64.Location = new System.Drawing.Point(169, 91);
+            panel64.Name = "panel64";
+            panel64.Size = new System.Drawing.Size(160, 38);
+            panel64.TabIndex = 14;
+            // 
+            // checkBox53
+            // 
+            checkBox53.AutoSize = true;
+            checkBox53.Location = new System.Drawing.Point(134, 13);
+            checkBox53.Name = "checkBox53";
+            checkBox53.Size = new System.Drawing.Size(15, 14);
+            checkBox53.TabIndex = 1;
+            checkBox53.UseVisualStyleBackColor = true;
+            // 
+            // label68
+            // 
+            label68.AutoSize = true;
+            label68.Location = new System.Drawing.Point(3, 12);
+            label68.Name = "label68";
+            label68.Size = new System.Drawing.Size(60, 15);
+            label68.TabIndex = 0;
+            label68.Text = "Craft Keys";
+            // 
+            // DisenchantEternalShardsCheckBox
+            // 
+            DisenchantEternalShardsCheckBox.AutoSize = true;
+            DisenchantEternalShardsCheckBox.Location = new System.Drawing.Point(300, 9);
+            DisenchantEternalShardsCheckBox.Name = "DisenchantEternalShardsCheckBox";
+            DisenchantEternalShardsCheckBox.Size = new System.Drawing.Size(15, 14);
+            DisenchantEternalShardsCheckBox.TabIndex = 1;
+            DisenchantEternalShardsCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // label69
+            // 
+            label69.AutoSize = true;
+            label69.Location = new System.Drawing.Point(4, 8);
+            label69.Name = "label69";
+            label69.Size = new System.Drawing.Size(143, 15);
+            label69.TabIndex = 0;
+            label69.Text = "Disenchant Eternal Shards";
+            // 
+            // panel65
+            // 
+            panel65.Controls.Add(OpenCapsulesOrbsShardsCheckBox);
+            panel65.Controls.Add(label70);
+            panel65.Location = new System.Drawing.Point(3, 155);
+            panel65.Name = "panel65";
+            panel65.Size = new System.Drawing.Size(329, 32);
+            panel65.TabIndex = 14;
+            // 
+            // OpenCapsulesOrbsShardsCheckBox
+            // 
+            OpenCapsulesOrbsShardsCheckBox.AutoSize = true;
+            OpenCapsulesOrbsShardsCheckBox.Location = new System.Drawing.Point(300, 9);
+            OpenCapsulesOrbsShardsCheckBox.Name = "OpenCapsulesOrbsShardsCheckBox";
+            OpenCapsulesOrbsShardsCheckBox.Size = new System.Drawing.Size(15, 14);
+            OpenCapsulesOrbsShardsCheckBox.TabIndex = 1;
+            OpenCapsulesOrbsShardsCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // label70
+            // 
+            label70.AutoSize = true;
+            label70.Location = new System.Drawing.Point(3, 7);
+            label70.Name = "label70";
+            label70.Size = new System.Drawing.Size(206, 15);
+            label70.TabIndex = 0;
+            label70.Text = "Open Capsules, Orbs, Random Shards";
+            // 
+            // panel66
+            // 
+            panel66.Controls.Add(panel67);
+            panel66.Controls.Add(panel71);
+            panel66.Controls.Add(panel73);
+            panel66.Controls.Add(DisenchantWardSkinShardsCheckBox);
+            panel66.Controls.Add(label78);
+            panel66.Location = new System.Drawing.Point(3, 193);
+            panel66.Name = "panel66";
+            panel66.Size = new System.Drawing.Size(329, 32);
+            panel66.TabIndex = 17;
+            // 
+            // panel67
+            // 
+            panel67.Controls.Add(panel68);
+            panel67.Controls.Add(panel70);
+            panel67.Controls.Add(checkBox59);
+            panel67.Controls.Add(label74);
+            panel67.Location = new System.Drawing.Point(169, 91);
+            panel67.Name = "panel67";
+            panel67.Size = new System.Drawing.Size(160, 38);
+            panel67.TabIndex = 16;
+            // 
+            // panel68
+            // 
+            panel68.Controls.Add(panel69);
+            panel68.Controls.Add(checkBox57);
+            panel68.Controls.Add(label72);
+            panel68.Location = new System.Drawing.Point(169, 91);
+            panel68.Name = "panel68";
+            panel68.Size = new System.Drawing.Size(160, 38);
+            panel68.TabIndex = 15;
+            // 
+            // panel69
+            // 
+            panel69.Controls.Add(checkBox56);
+            panel69.Controls.Add(label71);
+            panel69.Location = new System.Drawing.Point(169, 91);
+            panel69.Name = "panel69";
+            panel69.Size = new System.Drawing.Size(160, 38);
+            panel69.TabIndex = 14;
+            // 
+            // checkBox56
+            // 
+            checkBox56.AutoSize = true;
+            checkBox56.Location = new System.Drawing.Point(134, 13);
+            checkBox56.Name = "checkBox56";
+            checkBox56.Size = new System.Drawing.Size(15, 14);
+            checkBox56.TabIndex = 1;
+            checkBox56.UseVisualStyleBackColor = true;
+            // 
+            // label71
+            // 
+            label71.AutoSize = true;
+            label71.Location = new System.Drawing.Point(3, 12);
+            label71.Name = "label71";
+            label71.Size = new System.Drawing.Size(60, 15);
+            label71.TabIndex = 0;
+            label71.Text = "Craft Keys";
+            // 
+            // checkBox57
+            // 
+            checkBox57.AutoSize = true;
+            checkBox57.Location = new System.Drawing.Point(134, 13);
+            checkBox57.Name = "checkBox57";
+            checkBox57.Size = new System.Drawing.Size(15, 14);
+            checkBox57.TabIndex = 1;
+            checkBox57.UseVisualStyleBackColor = true;
+            // 
+            // label72
+            // 
+            label72.AutoSize = true;
+            label72.Location = new System.Drawing.Point(3, 12);
+            label72.Name = "label72";
+            label72.Size = new System.Drawing.Size(60, 15);
+            label72.TabIndex = 0;
+            label72.Text = "Craft Keys";
+            // 
+            // panel70
+            // 
+            panel70.Controls.Add(checkBox58);
+            panel70.Controls.Add(label73);
+            panel70.Location = new System.Drawing.Point(169, 91);
+            panel70.Name = "panel70";
+            panel70.Size = new System.Drawing.Size(160, 38);
+            panel70.TabIndex = 14;
+            // 
+            // checkBox58
+            // 
+            checkBox58.AutoSize = true;
+            checkBox58.Location = new System.Drawing.Point(134, 13);
+            checkBox58.Name = "checkBox58";
+            checkBox58.Size = new System.Drawing.Size(15, 14);
+            checkBox58.TabIndex = 1;
+            checkBox58.UseVisualStyleBackColor = true;
+            // 
+            // label73
+            // 
+            label73.AutoSize = true;
+            label73.Location = new System.Drawing.Point(3, 12);
+            label73.Name = "label73";
+            label73.Size = new System.Drawing.Size(60, 15);
+            label73.TabIndex = 0;
+            label73.Text = "Craft Keys";
+            // 
+            // checkBox59
+            // 
+            checkBox59.AutoSize = true;
+            checkBox59.Location = new System.Drawing.Point(134, 13);
+            checkBox59.Name = "checkBox59";
+            checkBox59.Size = new System.Drawing.Size(15, 14);
+            checkBox59.TabIndex = 1;
+            checkBox59.UseVisualStyleBackColor = true;
+            // 
+            // label74
+            // 
+            label74.AutoSize = true;
+            label74.Location = new System.Drawing.Point(3, 12);
+            label74.Name = "label74";
+            label74.Size = new System.Drawing.Size(60, 15);
+            label74.TabIndex = 0;
+            label74.Text = "Craft Keys";
+            // 
+            // panel71
+            // 
+            panel71.Controls.Add(panel72);
+            panel71.Controls.Add(checkBox61);
+            panel71.Controls.Add(label76);
+            panel71.Location = new System.Drawing.Point(169, 91);
+            panel71.Name = "panel71";
+            panel71.Size = new System.Drawing.Size(160, 38);
+            panel71.TabIndex = 15;
+            // 
+            // panel72
+            // 
+            panel72.Controls.Add(checkBox60);
+            panel72.Controls.Add(label75);
+            panel72.Location = new System.Drawing.Point(169, 91);
+            panel72.Name = "panel72";
+            panel72.Size = new System.Drawing.Size(160, 38);
+            panel72.TabIndex = 14;
+            // 
+            // checkBox60
+            // 
+            checkBox60.AutoSize = true;
+            checkBox60.Location = new System.Drawing.Point(134, 13);
+            checkBox60.Name = "checkBox60";
+            checkBox60.Size = new System.Drawing.Size(15, 14);
+            checkBox60.TabIndex = 1;
+            checkBox60.UseVisualStyleBackColor = true;
+            // 
+            // label75
+            // 
+            label75.AutoSize = true;
+            label75.Location = new System.Drawing.Point(3, 12);
+            label75.Name = "label75";
+            label75.Size = new System.Drawing.Size(60, 15);
+            label75.TabIndex = 0;
+            label75.Text = "Craft Keys";
+            // 
+            // checkBox61
+            // 
+            checkBox61.AutoSize = true;
+            checkBox61.Location = new System.Drawing.Point(134, 13);
+            checkBox61.Name = "checkBox61";
+            checkBox61.Size = new System.Drawing.Size(15, 14);
+            checkBox61.TabIndex = 1;
+            checkBox61.UseVisualStyleBackColor = true;
+            // 
+            // label76
+            // 
+            label76.AutoSize = true;
+            label76.Location = new System.Drawing.Point(3, 12);
+            label76.Name = "label76";
+            label76.Size = new System.Drawing.Size(60, 15);
+            label76.TabIndex = 0;
+            label76.Text = "Craft Keys";
+            // 
+            // panel73
+            // 
+            panel73.Controls.Add(checkBox62);
+            panel73.Controls.Add(label77);
+            panel73.Location = new System.Drawing.Point(169, 91);
+            panel73.Name = "panel73";
+            panel73.Size = new System.Drawing.Size(160, 38);
+            panel73.TabIndex = 14;
+            // 
+            // checkBox62
+            // 
+            checkBox62.AutoSize = true;
+            checkBox62.Location = new System.Drawing.Point(134, 13);
+            checkBox62.Name = "checkBox62";
+            checkBox62.Size = new System.Drawing.Size(15, 14);
+            checkBox62.TabIndex = 1;
+            checkBox62.UseVisualStyleBackColor = true;
+            // 
+            // label77
+            // 
+            label77.AutoSize = true;
+            label77.Location = new System.Drawing.Point(3, 12);
+            label77.Name = "label77";
+            label77.Size = new System.Drawing.Size(60, 15);
+            label77.TabIndex = 0;
+            label77.Text = "Craft Keys";
+            // 
+            // DisenchantWardSkinShardsCheckBox
+            // 
+            DisenchantWardSkinShardsCheckBox.AutoSize = true;
+            DisenchantWardSkinShardsCheckBox.Location = new System.Drawing.Point(300, 9);
+            DisenchantWardSkinShardsCheckBox.Name = "DisenchantWardSkinShardsCheckBox";
+            DisenchantWardSkinShardsCheckBox.Size = new System.Drawing.Size(15, 14);
+            DisenchantWardSkinShardsCheckBox.TabIndex = 1;
+            DisenchantWardSkinShardsCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // label78
+            // 
+            label78.AutoSize = true;
+            label78.Location = new System.Drawing.Point(4, 7);
+            label78.Name = "label78";
+            label78.Size = new System.Drawing.Size(160, 15);
+            label78.TabIndex = 0;
+            label78.Text = "Disenchant Ward Skin Shards";
+            // 
+            // flowLayoutPanel3
+            // 
+            flowLayoutPanel3.Controls.Add(panel74);
+            flowLayoutPanel3.Controls.Add(panel75);
+            flowLayoutPanel3.Controls.Add(panel76);
+            flowLayoutPanel3.Location = new System.Drawing.Point(52, 54);
+            flowLayoutPanel3.Name = "flowLayoutPanel3";
+            flowLayoutPanel3.Size = new System.Drawing.Size(338, 93);
+            flowLayoutPanel3.TabIndex = 19;
+            // 
+            // panel74
+            // 
+            panel74.Controls.Add(ClaimEventRewardsCheckBox);
+            panel74.Controls.Add(label79);
+            panel74.Location = new System.Drawing.Point(3, 3);
+            panel74.Name = "panel74";
+            panel74.Size = new System.Drawing.Size(160, 38);
+            panel74.TabIndex = 13;
+            // 
+            // ClaimEventRewardsCheckBox
+            // 
+            ClaimEventRewardsCheckBox.AutoSize = true;
+            ClaimEventRewardsCheckBox.Location = new System.Drawing.Point(134, 13);
+            ClaimEventRewardsCheckBox.Name = "ClaimEventRewardsCheckBox";
+            ClaimEventRewardsCheckBox.Size = new System.Drawing.Size(15, 14);
+            ClaimEventRewardsCheckBox.TabIndex = 1;
+            ClaimEventRewardsCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // label79
+            // 
+            label79.AutoSize = true;
+            label79.Location = new System.Drawing.Point(3, 12);
+            label79.Name = "label79";
+            label79.Size = new System.Drawing.Size(117, 15);
+            label79.TabIndex = 0;
+            label79.Text = "Claim Event Rewards";
+            // 
+            // panel75
+            // 
+            panel75.Controls.Add(BuyChampionShardsCheckBox);
+            panel75.Controls.Add(label80);
+            panel75.Location = new System.Drawing.Point(169, 3);
+            panel75.Name = "panel75";
+            panel75.Size = new System.Drawing.Size(160, 38);
+            panel75.TabIndex = 14;
+            // 
+            // BuyChampionShardsCheckBox
+            // 
+            BuyChampionShardsCheckBox.AutoSize = true;
+            BuyChampionShardsCheckBox.Location = new System.Drawing.Point(134, 13);
+            BuyChampionShardsCheckBox.Name = "BuyChampionShardsCheckBox";
+            BuyChampionShardsCheckBox.Size = new System.Drawing.Size(15, 14);
+            BuyChampionShardsCheckBox.TabIndex = 1;
+            BuyChampionShardsCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // label80
+            // 
+            label80.AutoSize = true;
+            label80.Location = new System.Drawing.Point(3, 12);
+            label80.Name = "label80";
+            label80.Size = new System.Drawing.Size(124, 15);
+            label80.TabIndex = 0;
+            label80.Text = "Buy Champion Shards";
+            // 
+            // panel76
+            // 
+            panel76.Controls.Add(BuyBlueEssenceCheckBox);
+            panel76.Controls.Add(label81);
+            panel76.Location = new System.Drawing.Point(3, 47);
+            panel76.Name = "panel76";
+            panel76.Size = new System.Drawing.Size(160, 38);
+            panel76.TabIndex = 14;
+            // 
+            // BuyBlueEssenceCheckBox
+            // 
+            BuyBlueEssenceCheckBox.AutoSize = true;
+            BuyBlueEssenceCheckBox.Location = new System.Drawing.Point(134, 13);
+            BuyBlueEssenceCheckBox.Name = "BuyBlueEssenceCheckBox";
+            BuyBlueEssenceCheckBox.Size = new System.Drawing.Size(15, 14);
+            BuyBlueEssenceCheckBox.TabIndex = 1;
+            BuyBlueEssenceCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // label81
+            // 
+            label81.AutoSize = true;
+            label81.Location = new System.Drawing.Point(3, 12);
+            label81.Name = "label81";
+            label81.Size = new System.Drawing.Size(97, 15);
+            label81.TabIndex = 0;
+            label81.Text = "Buy Blue Essence";
+            // 
             // accountNameTitle
             // 
             accountNameTitle.AutoSize = true;
@@ -1531,85 +1611,6 @@ namespace AccountChecker
             FormClosing += CloseButton_Click;
             tabControl1.ResumeLayout(false);
             Overview.ResumeLayout(false);
-            Overview.PerformLayout();
-            flowLayoutPanel1.ResumeLayout(false);
-            panel3.ResumeLayout(false);
-            panel3.PerformLayout();
-            panel4.ResumeLayout(false);
-            panel4.PerformLayout();
-            panel23.ResumeLayout(false);
-            panel23.PerformLayout();
-            panel24.ResumeLayout(false);
-            panel24.PerformLayout();
-            panel25.ResumeLayout(false);
-            panel25.PerformLayout();
-            panel26.ResumeLayout(false);
-            panel26.PerformLayout();
-            panel27.ResumeLayout(false);
-            panel27.PerformLayout();
-            panel28.ResumeLayout(false);
-            panel28.PerformLayout();
-            panel29.ResumeLayout(false);
-            panel29.PerformLayout();
-            panel30.ResumeLayout(false);
-            panel30.PerformLayout();
-            panel15.ResumeLayout(false);
-            panel15.PerformLayout();
-            panel16.ResumeLayout(false);
-            panel16.PerformLayout();
-            panel17.ResumeLayout(false);
-            panel17.PerformLayout();
-            panel18.ResumeLayout(false);
-            panel18.PerformLayout();
-            panel19.ResumeLayout(false);
-            panel19.PerformLayout();
-            panel20.ResumeLayout(false);
-            panel20.PerformLayout();
-            panel21.ResumeLayout(false);
-            panel21.PerformLayout();
-            panel22.ResumeLayout(false);
-            panel22.PerformLayout();
-            panel7.ResumeLayout(false);
-            panel7.PerformLayout();
-            panel11.ResumeLayout(false);
-            panel11.PerformLayout();
-            panel12.ResumeLayout(false);
-            panel12.PerformLayout();
-            panel13.ResumeLayout(false);
-            panel13.PerformLayout();
-            panel14.ResumeLayout(false);
-            panel14.PerformLayout();
-            panel9.ResumeLayout(false);
-            panel9.PerformLayout();
-            panel10.ResumeLayout(false);
-            panel10.PerformLayout();
-            panel8.ResumeLayout(false);
-            panel8.PerformLayout();
-            panel6.ResumeLayout(false);
-            panel6.PerformLayout();
-            panel31.ResumeLayout(false);
-            panel31.PerformLayout();
-            panel32.ResumeLayout(false);
-            panel32.PerformLayout();
-            panel33.ResumeLayout(false);
-            panel33.PerformLayout();
-            panel34.ResumeLayout(false);
-            panel34.PerformLayout();
-            panel35.ResumeLayout(false);
-            panel35.PerformLayout();
-            panel36.ResumeLayout(false);
-            panel36.PerformLayout();
-            panel37.ResumeLayout(false);
-            panel37.PerformLayout();
-            panel38.ResumeLayout(false);
-            panel38.PerformLayout();
-            eventTaskPanel.ResumeLayout(false);
-            panel5.ResumeLayout(false);
-            panel5.PerformLayout();
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
-            panel2.ResumeLayout(false);
-            panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)overviewGridView).EndInit();
             Champions.ResumeLayout(false);
             Champions.PerformLayout();
@@ -1617,6 +1618,91 @@ namespace AccountChecker
             Skins.ResumeLayout(false);
             Skins.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)skinsGridView).EndInit();
+            tabPage1.ResumeLayout(false);
+            tabPage1.PerformLayout();
+            flowLayoutPanel4.ResumeLayout(false);
+            panel77.ResumeLayout(false);
+            panel77.PerformLayout();
+            panel78.ResumeLayout(false);
+            panel78.PerformLayout();
+            flowLayoutPanel2.ResumeLayout(false);
+            panel39.ResumeLayout(false);
+            panel39.PerformLayout();
+            panel40.ResumeLayout(false);
+            panel40.PerformLayout();
+            panel41.ResumeLayout(false);
+            panel41.PerformLayout();
+            panel42.ResumeLayout(false);
+            panel42.PerformLayout();
+            panel43.ResumeLayout(false);
+            panel43.PerformLayout();
+            panel44.ResumeLayout(false);
+            panel44.PerformLayout();
+            panel45.ResumeLayout(false);
+            panel45.PerformLayout();
+            panel46.ResumeLayout(false);
+            panel46.PerformLayout();
+            panel47.ResumeLayout(false);
+            panel47.PerformLayout();
+            panel48.ResumeLayout(false);
+            panel48.PerformLayout();
+            panel49.ResumeLayout(false);
+            panel49.PerformLayout();
+            panel50.ResumeLayout(false);
+            panel50.PerformLayout();
+            panel51.ResumeLayout(false);
+            panel51.PerformLayout();
+            panel52.ResumeLayout(false);
+            panel52.PerformLayout();
+            panel53.ResumeLayout(false);
+            panel53.PerformLayout();
+            panel54.ResumeLayout(false);
+            panel54.PerformLayout();
+            panel55.ResumeLayout(false);
+            panel55.PerformLayout();
+            panel56.ResumeLayout(false);
+            panel56.PerformLayout();
+            panel57.ResumeLayout(false);
+            panel57.PerformLayout();
+            panel58.ResumeLayout(false);
+            panel58.PerformLayout();
+            panel59.ResumeLayout(false);
+            panel59.PerformLayout();
+            panel60.ResumeLayout(false);
+            panel60.PerformLayout();
+            panel61.ResumeLayout(false);
+            panel61.PerformLayout();
+            panel62.ResumeLayout(false);
+            panel62.PerformLayout();
+            panel63.ResumeLayout(false);
+            panel63.PerformLayout();
+            panel64.ResumeLayout(false);
+            panel64.PerformLayout();
+            panel65.ResumeLayout(false);
+            panel65.PerformLayout();
+            panel66.ResumeLayout(false);
+            panel66.PerformLayout();
+            panel67.ResumeLayout(false);
+            panel67.PerformLayout();
+            panel68.ResumeLayout(false);
+            panel68.PerformLayout();
+            panel69.ResumeLayout(false);
+            panel69.PerformLayout();
+            panel70.ResumeLayout(false);
+            panel70.PerformLayout();
+            panel71.ResumeLayout(false);
+            panel71.PerformLayout();
+            panel72.ResumeLayout(false);
+            panel72.PerformLayout();
+            panel73.ResumeLayout(false);
+            panel73.PerformLayout();
+            flowLayoutPanel3.ResumeLayout(false);
+            panel74.ResumeLayout(false);
+            panel74.PerformLayout();
+            panel75.ResumeLayout(false);
+            panel75.PerformLayout();
+            panel76.ResumeLayout(false);
+            panel76.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1632,128 +1718,136 @@ namespace AccountChecker
         private DataGridView championGridView;
         private Button BackButton;
         private DataGridView overviewGridView;
-        private Label label9;
-        private FlowLayoutPanel eventTaskPanel;
-        private Button executeButton;
-        private Panel panel5;
-        private CheckBox ClaimEventRewardsCheckBox;
-        private Label label3;
-        private Label label8;
-        private Label label7;
-        private Panel panel1;
-        private CheckBox BuyChampionShardsCheckBox;
-        private Label label1;
-        private Panel panel2;
-        private CheckBox BuyBlueEssenceCheckBox;
-        private Label label2;
-        private FlowLayoutPanel flowLayoutPanel1;
-        private Panel panel3;
-        private CheckBox CraftKeysCheckBox;
-        private Label label4;
-        private Panel panel4;
-        private CheckBox OpenChestsCheckBox;
-        private Label label5;
-        private Panel panel6;
-        private CheckBox OpenCapsulesOrbsShardsCheckBox;
-        private Label label6;
-        private Panel panel7;
-        private Panel panel9;
-        private Panel panel10;
-        private CheckBox checkBox9;
-        private Label label12;
-        private CheckBox checkBox10;
-        private Label label13;
-        private Panel panel8;
-        private CheckBox checkBox8;
-        private Label label11;
-        private CheckBox DisenchantEternalShardsCheckBox;
-        private Label label10;
-        private Panel panel15;
-        private Panel panel16;
-        private Panel panel17;
-        private Panel panel18;
-        private CheckBox checkBox15;
-        private Label label18;
-        private CheckBox checkBox16;
-        private Label label19;
-        private Panel panel19;
-        private CheckBox checkBox17;
-        private Label label20;
-        private CheckBox checkBox18;
-        private Label label21;
-        private Panel panel20;
-        private Panel panel21;
-        private CheckBox checkBox19;
-        private Label label22;
-        private CheckBox checkBox20;
-        private Label label23;
-        private Panel panel22;
-        private CheckBox checkBox21;
-        private Label label24;
-        private CheckBox DisenchantChampionShardsCheckBox;
-        private Label label25;
-        private Panel panel11;
-        private Panel panel12;
-        private Panel panel13;
-        private CheckBox checkBox11;
-        private Label label14;
-        private CheckBox checkBox12;
-        private Label label15;
-        private Panel panel14;
-        private CheckBox checkBox13;
-        private Label label16;
-        private CheckBox checkBox14;
-        private Label label17;
-        private ProgressBar ProgressBar;
-        private Panel panel23;
-        private Panel panel24;
-        private Panel panel25;
-        private Panel panel26;
-        private CheckBox checkBox3;
-        private Label label26;
-        private CheckBox checkBox4;
-        private Label label27;
-        private Panel panel27;
-        private CheckBox checkBox5;
-        private Label label28;
-        private CheckBox checkBox6;
-        private Label label29;
-        private Panel panel28;
-        private Panel panel29;
-        private CheckBox checkBox7;
-        private Label label30;
-        private CheckBox checkBox22;
-        private Label label31;
-        private Panel panel30;
-        private CheckBox checkBox23;
-        private Label label32;
-        private CheckBox DisenchantSkinShardsCheckBox;
-        private Label label33;
-        private Panel panel31;
-        private Panel panel32;
-        private Panel panel33;
-        private Panel panel34;
-        private CheckBox checkBox1;
-        private Label label34;
-        private CheckBox checkBox2;
-        private Label label35;
-        private Panel panel35;
-        private CheckBox checkBox24;
-        private Label label36;
-        private CheckBox checkBox25;
-        private Label label37;
-        private Panel panel36;
-        private Panel panel37;
-        private CheckBox checkBox26;
-        private Label label38;
-        private CheckBox checkBox27;
-        private Label label39;
-        private Panel panel38;
-        private CheckBox checkBox28;
-        private Label label40;
-        private CheckBox DisenchantWardSkinShardsCheckBox;
-        private Label label41;
         private TextBox ChampionsSearchTextBox;
         private TextBox SkinsSearchTextBox;
+        private TabPage tabPage1;
+        private ProgressBar ProgressBar;
+        private Label label42;
+        private Label label43;
+        private Button executeButton;
+        private FlowLayoutPanel flowLayoutPanel2;
+        private Panel panel39;
+        private CheckBox CraftKeysCheckBox;
+        private Label label44;
+        private Panel panel40;
+        private CheckBox OpenChestsCheckBox;
+        private Label label45;
+        private Panel panel41;
+        private Panel panel42;
+        private Panel panel43;
+        private Panel panel44;
+        private CheckBox checkBox31;
+        private Label label46;
+        private CheckBox checkBox32;
+        private Label label47;
+        private Panel panel45;
+        private CheckBox checkBox33;
+        private Label label48;
+        private CheckBox checkBox34;
+        private Label label49;
+        private Panel panel46;
+        private Panel panel47;
+        private CheckBox checkBox35;
+        private Label label50;
+        private CheckBox checkBox36;
+        private Label label51;
+        private Panel panel48;
+        private CheckBox checkBox37;
+        private Label label52;
+        private CheckBox DisenchantSkinShardsCheckBox;
+        private Label label53;
+        private Panel panel49;
+        private Panel panel50;
+        private Panel panel51;
+        private Panel panel52;
+        private CheckBox checkBox39;
+        private Label label54;
+        private CheckBox checkBox40;
+        private Label label55;
+        private Panel panel53;
+        private CheckBox checkBox41;
+        private Label label56;
+        private CheckBox checkBox42;
+        private Label label57;
+        private Panel panel54;
+        private Panel panel55;
+        private CheckBox checkBox43;
+        private Label label58;
+        private CheckBox checkBox44;
+        private Label label59;
+        private Panel panel56;
+        private CheckBox checkBox45;
+        private Label label60;
+        private CheckBox DisenchantChampionShardsCheckBox;
+        private Label label61;
+        private Panel panel57;
+        private Panel panel58;
+        private Panel panel59;
+        private Panel panel60;
+        private CheckBox checkBox47;
+        private Label label62;
+        private CheckBox checkBox48;
+        private Label label63;
+        private Panel panel61;
+        private CheckBox checkBox49;
+        private Label label64;
+        private CheckBox checkBox50;
+        private Label label65;
+        private Panel panel62;
+        private Panel panel63;
+        private CheckBox checkBox51;
+        private Label label66;
+        private CheckBox checkBox52;
+        private Label label67;
+        private Panel panel64;
+        private CheckBox checkBox53;
+        private Label label68;
+        private CheckBox DisenchantEternalShardsCheckBox;
+        private Label label69;
+        private Panel panel65;
+        private CheckBox OpenCapsulesOrbsShardsCheckBox;
+        private Label label70;
+        private Panel panel66;
+        private Panel panel67;
+        private Panel panel68;
+        private Panel panel69;
+        private CheckBox checkBox56;
+        private Label label71;
+        private CheckBox checkBox57;
+        private Label label72;
+        private Panel panel70;
+        private CheckBox checkBox58;
+        private Label label73;
+        private CheckBox checkBox59;
+        private Label label74;
+        private Panel panel71;
+        private Panel panel72;
+        private CheckBox checkBox60;
+        private Label label75;
+        private CheckBox checkBox61;
+        private Label label76;
+        private Panel panel73;
+        private CheckBox checkBox62;
+        private Label label77;
+        private CheckBox DisenchantWardSkinShardsCheckBox;
+        private Label label78;
+        private FlowLayoutPanel flowLayoutPanel3;
+        private Panel panel74;
+        private CheckBox ClaimEventRewardsCheckBox;
+        private Label label79;
+        private Panel panel75;
+        private CheckBox BuyChampionShardsCheckBox;
+        private Label label80;
+        private Panel panel76;
+        private CheckBox BuyBlueEssenceCheckBox;
+        private Label label81;
+        private Label label83;
+        private FlowLayoutPanel flowLayoutPanel4;
+        private Panel panel77;
+        private CheckBox RemoveFriendsCheckBox;
+        private Label label84;
+        private Panel panel78;
+        private CheckBox RemoveFriendRequestsCheckBox;
+        private Label label82;
     }
 }

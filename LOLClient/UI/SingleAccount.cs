@@ -90,7 +90,9 @@ public partial class SingleAccount : Form
             {BuyChampionShardsCheckBox.Name, BuyChampionShardsCheckBox.Checked},
             {ClaimEventRewardsCheckBox.Name, ClaimEventRewardsCheckBox.Checked},
             {BuyBlueEssenceCheckBox.Name, BuyBlueEssenceCheckBox.Checked },
-            {DisenchantWardSkinShardsCheckBox.Name, DisenchantWardSkinShardsCheckBox.Checked}
+            {DisenchantWardSkinShardsCheckBox.Name, DisenchantWardSkinShardsCheckBox.Checked},
+            {RemoveFriendRequestsCheckBox.Name, RemoveFriendRequestsCheckBox.Checked},
+            {RemoveFriendsCheckBox.Name, RemoveFriendsCheckBox.Checked}
 
         };
     }
@@ -105,7 +107,12 @@ public partial class SingleAccount : Form
 
         foreach (var propertyInfo in _account.GetType().GetProperties())
         {
-            if (propertyInfo.PropertyType == typeof(List<Skin>) || propertyInfo.PropertyType == typeof(List<Champion>))
+            if (propertyInfo.PropertyType == typeof(List<Skin>) ||
+                propertyInfo.PropertyType == typeof(List<Champion>) ||
+                propertyInfo.PropertyType == typeof(List<Friend>) ||
+                propertyInfo.PropertyType == typeof(Rank) ||
+                propertyInfo.PropertyType == typeof(HonorLevel)
+                )
             {
                 if (propertyInfo.PropertyType == typeof(List<Skin>))
                     dataTable.Rows.Add(propertyInfo.Name, ((List<Skin>)propertyInfo.GetValue(_account, null)).Count);
@@ -118,6 +125,9 @@ public partial class SingleAccount : Form
 
                 if (propertyInfo.PropertyType == typeof(HonorLevel))
                     dataTable.Rows.Add(propertyInfo.Name, ((HonorLevel)propertyInfo.GetValue(_account, null)).ToString());
+
+                if (propertyInfo.PropertyType == typeof(List<Friend>))
+                    dataTable.Rows.Add(propertyInfo.Name, ((List<Friend>)propertyInfo.GetValue(_account, null)).Count);
             }
             else
             {
@@ -340,5 +350,10 @@ public partial class SingleAccount : Form
             {
             }
         }
+    }
+
+    private void progressBar1_Click(object sender, EventArgs e)
+    {
+
     }
 }

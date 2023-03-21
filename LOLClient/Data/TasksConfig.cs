@@ -18,4 +18,8 @@ public class TasksConfig
     public static string BuyBlueEssence = "BuyBlueEssenceCheckBox";
     public static string ClaimEventRewards = "ClaimEventRewardsCheckBox";
     public static string BuyChampionShards = "BuyChampionShardsCheckBox";
+
+    // Constants for Misc tasks
+    public static string RemoveFriends = "RemoveFriendsCheckBox";
+    public static string RemoveFriendRequests = "RemoveFriendRequestsCheckBox";
 }

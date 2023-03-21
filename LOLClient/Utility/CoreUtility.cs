@@ -177,18 +177,20 @@ public class CoreUtility
     {
         // Create a dictionary with all task names as keys and set the default value to false.
         var tasksConfigDict = new Dictionary<string, bool>()
-    {
-        { TasksConfig.CraftKeys, false },
-        { TasksConfig.OpenChests, false },
-        { TasksConfig.DisenchantChampionShards, false },
-        { TasksConfig.DisenchantSkinShards, false },
-        { TasksConfig.DisenchantEternalShards, false },
-        { TasksConfig.OpenCapsulesOrbsShards, false },
-        { TasksConfig.BuyBlueEssence, false },
-        { TasksConfig.BuyChampionShards, false },
-        { TasksConfig.ClaimEventRewards, false },
-        { TasksConfig.DisenchantWardSkinShards, false }
-    };
+        {
+            { TasksConfig.CraftKeys, false },
+            { TasksConfig.OpenChests, false },
+            { TasksConfig.DisenchantChampionShards, false },
+            { TasksConfig.DisenchantSkinShards, false },
+            { TasksConfig.DisenchantEternalShards, false },
+            { TasksConfig.OpenCapsulesOrbsShards, false },
+            { TasksConfig.BuyBlueEssence, false },
+            { TasksConfig.BuyChampionShards, false },
+            { TasksConfig.ClaimEventRewards, false },
+            { TasksConfig.DisenchantWardSkinShards, false },
+            { TasksConfig.RemoveFriendRequests, false },
+            { TasksConfig.RemoveFriends, false }
+        };
 
         // Create the data folder if it doesn't exist.
         if (!Directory.Exists(PathConfig.DataFolder))

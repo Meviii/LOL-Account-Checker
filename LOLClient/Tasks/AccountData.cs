@@ -12,6 +12,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.IdentityModel.Tokens;
 
 namespace AccountChecker.Tasks;
 
@@ -29,7 +30,8 @@ public class AccountData
     // The Loot instance to perform tasks on the loot data
     private readonly Loot _loot;
 
-    private SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
+    // The Friend List of the _account
+    private List<Friend> _friends;
 
     // Constructor that initializes the _leagueConnection field with the provided Connection instance.
     // Needs the Connection instance used for the LeagueConnection instance.
@@ -37,6 +39,7 @@ public class AccountData
     {
         lock (_lock)
         {
+            _friends = new();
             _loot = new Loot(leagueConnection);
             _account = account;
             _leagueConnection = leagueConnection;
@@ -383,7 +386,13 @@ public class AccountData
             return;
 
         if (data["lowPriorityData"]["penaltyTime"].ToString() != "0.0")
+        {
             _account.LowPriorityQueue = true;
+        }
+        else
+        {
+            _account.LowPriorityQueue = false;
+        }
     }
 
     // Makes a request to retrieve queue statistics
@@ -403,8 +412,8 @@ public class AccountData
 
         var queueStatsResponse = await _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-lobby/v2/lobby/matchmaking/search-state", null);
         
-        await _leagueConnection.RequestAsync(HttpMethod.Post, "/lol-lobby/v2/lobby", null);
-            
+        await _leagueConnection.RequestAsync(HttpMethod.Delete, "/lol-lobby/v2/lobby", null);
+        
         if (queueStatsResponse.StatusCode == HttpStatusCode.OK)
         {
             var data = JToken.Parse(await queueStatsResponse.Content.ReadAsStringAsync());
@@ -416,7 +425,7 @@ public class AccountData
     }
 
     // Gets honor stats for local account
-    public async Task GetHonorStats()
+    public async Task GetHonorStatsAsync()
     {
         var data = await RequestHonorStatsAsync();
 
@@ -441,5 +450,86 @@ public class AccountData
         }
 
         return null;
+    }
+
+    private async Task<string> RequestFriendDataAsync()
+    {
+
+        var response = await _leagueConnection.RequestAsync(HttpMethod.Get, "lol-chat/v1/friends", null);
+
+        if (response.StatusCode == HttpStatusCode.OK)
+        {
+            var data = await response.Content.ReadAsStringAsync();
+
+            return data;
+        }
+        
+        return null;
+
+    }
+
+    public async Task RemoveFriendsAsync()
+    {
+        var data = await RequestFriendDataAsync();
+
+        if (data == null)
+            return;
+
+        _friends = JsonConvert.DeserializeObject<List<Friend>>(data);
+
+        if (_friends.IsNullOrEmpty())
+        {
+            return;
+        }
+
+
+        foreach (var friend in _friends)
+        {
+            await RequestRemoveFriendAsync(friend.ChatServiceID);
+        }
+    }
+
+    private async Task RequestRemoveFriendAsync(string chatServiceId)
+    {
+        await _leagueConnection.RequestAsync(HttpMethod.Delete, $"lol-chat/v1/friends/{chatServiceId}", null);
+    }
+
+    public async Task GetFriendsDataAsync()
+    {
+        var data = await RequestFriendDataAsync();
+
+        _friends = JsonConvert.DeserializeObject<List<Friend>>(data);
+
+        _account.Friends = _friends;
+    }
+
+    public async Task RemoveFriendRequestsAsync()
+    {
+        var data = await RequestFriendRequestDataAsync();
+
+        if (data == null)
+            return;
+
+        foreach (var invitation in data)
+        {
+            if (invitation == null) continue;
+
+            if (invitation["direction"].ToString() == "in")
+            {
+                await RequestRemoveFriendRequestAsync(invitation["id"].ToString());
+            }
+        }
+    }
+
+    private async Task RequestRemoveFriendRequestAsync(string chatServiceId)
+    {
+        await _leagueConnection.RequestAsync(HttpMethod.Delete, $"lol-chat/v1/friend-requests/{chatServiceId}", null);
+    }
+
+    private async Task<JToken> RequestFriendRequestDataAsync()
+    {
+        var response = await _leagueConnection.RequestAsync(HttpMethod.Get, "lol-chat/v1/friend-requests", null);
+
+        return JToken.Parse(await response.Content.ReadAsStringAsync());
     }
 }

@@ -55,5 +55,6 @@ public class Account
     public Rank CurrentRank { get; set; }
     public Rank HighestRank { get; set; }
     public HonorLevel HonorLevel { get; set; }
+    public List<Friend> Friends { get; set; } = new List<Friend>();
     public Account() { }
 }

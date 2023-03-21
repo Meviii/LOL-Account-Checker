@@ -256,7 +256,8 @@ public class Runner
         await _accountData.GetSummonerDataAsync();
         await _accountData.GetRank();
         await _accountData.GetQueueStats();
-        await _accountData.GetHonorStats();
+        await _accountData.GetHonorStatsAsync();
+        await _accountData.GetFriendsDataAsync();
     }
 
     // This method executes the wanted Hextech Tasks on an account asynchronously.
@@ -296,9 +297,20 @@ public class Runner
                 await _hextech.DisenchantWardSkinShards();
             }
 
-            if (tasks[TasksConfig.OpenCapsulesOrbsShards])
+            if (tasks[TasksConfig.OpenCapsulesOrbsShards] && task.Value == true)
             {
                 await _hextech.OpenLootAsync();
+            }
+
+            if (tasks[TasksConfig.RemoveFriends] && task.Value == true)
+            {
+                await _accountData.RemoveFriendsAsync();
+                await _accountData.GetFriendsDataAsync();
+            }
+
+            if (tasks[TasksConfig.RemoveFriendRequests] && task.Value == true)
+            {
+                await _accountData.RemoveFriendRequestsAsync();
             }
 
             //if (tasks[TasksConfig.BuyBlueEssence])
