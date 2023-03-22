@@ -74,7 +74,7 @@ Lists all the accounts in the Exports folder in a grid view that displays genera
 
 Lists the overview information of the specific account, including the purchase history, owned champions, and skins. This view also displays specific details about each owned champion and skin.
 
-![main](images/single_account.PNG)
+![main](images/single_account_update.PNG)
 
 ![main](images/single_account_champions.PNG)
 
