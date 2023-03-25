@@ -30,7 +30,7 @@ public partial class Settings : Form
         if (initialRun)
         {
             UpdateButton_Click(updateButton, null);
-            
+
             _coreUtility.InitializeTaskConfigFileAsync();
         }
 

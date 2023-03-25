@@ -44,8 +44,13 @@ public class Connection : IDisposable
     {
 
         var sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-        for (var port = minPort; port < maxPort; port++)
+        var random = new Random();
+        var attempts = maxPort - minPort;
+
+        while (attempts-- > 0)
         {
+            var port = random.Next(minPort, maxPort);
+
             try
             {
                 // check if port is already in dictionary
@@ -138,57 +143,12 @@ public class Connection : IDisposable
     {
         HttpResponseMessage response = null;
 
-        //await Policy
-        //.Handle<HttpRequestException>()
-        //.OrResult<HttpResponseMessage>(r => r.StatusCode == HttpStatusCode.NotFound
-        //                                   || r.StatusCode == HttpStatusCode.InternalServerError
-        //                                   || (int)r.StatusCode == 429)
-        //.WaitAndRetryAsync(6, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)))
-        //.ExecuteAsync(async () =>
-        //{
-        //    await _semaphore.WaitAsync();
-        //    try
-        //    {
-        //        URLFixer(ref url);
-
-        //        var requestAddress = _httpClient.BaseAddress + url;
-        //        Console.WriteLine($"Sending {method} request. URL: {url}");
-
-        //        switch (method.Method)
-        //        {
-        //            case "GET":
-        //                response = await _httpClient.GetAsync(requestAddress);
-        //                break;
-        //            case "POST":
-        //                var json = JsonConvert.SerializeObject(requestData);
-        //                var content = new StringContent(json, Encoding.UTF8, "application/json");
-        //                response = await _httpClient.PostAsync(requestAddress, content);
-        //                break;
-        //            case "PUT":
-        //                json = JsonConvert.SerializeObject(requestData);
-        //                content = new StringContent(json, Encoding.UTF8, "application/json");
-        //                response = await _httpClient.PutAsync(requestAddress, content);
-        //                break;
-        //            case "DELETE":
-        //                response = await _httpClient.DeleteAsync(requestAddress);
-        //                break;
-        //            default:
-        //                throw new Exception("Unsupported HTTP method.");
-        //        }
-        //        Console.WriteLine($"Response: {response.StatusCode}");
-        //        return response;
-        //    }
-        //    finally
-        //    {
-        //        _semaphore.Release();
-        //    }
-        //});
         await Policy
             .Handle<HttpRequestException>()
             .OrResult<HttpResponseMessage>(r => r.StatusCode == HttpStatusCode.NotFound
                                                || r.StatusCode == HttpStatusCode.InternalServerError
                                                || (int)r.StatusCode == 429)
-            .WaitAndRetryAsync(6, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)))
+            .WaitAndRetryAsync(2, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)))
             .ExecuteAsync(() =>
             {
                 lock (_lock)
@@ -235,7 +195,7 @@ public class Connection : IDisposable
             .OrResult<HttpResponseMessage>(r => r.StatusCode == HttpStatusCode.NotFound
                                                || r.StatusCode == HttpStatusCode.InternalServerError
                                                || (int)r.StatusCode == 429)
-            .WaitAndRetryAsync(6, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)))
+            .WaitAndRetryAsync(2, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)))
             .ExecuteAsync(() =>
             {
                 lock (_lock)

@@ -83,7 +83,7 @@ public class RiotConnection : Connection
                 }
 
                 timeout--;
-                Thread.Sleep(500);
+                Thread.Sleep(1000);
             }catch (HttpRequestException e)
             {
                 Console.WriteLine("HTTP Request exception at Authorization. Re adding to queue");
@@ -116,7 +116,14 @@ public class RiotConnection : Connection
 
             if (result.ToString().ToLower() == "VngAccountRequired".ToLower())
             {
-                Console.WriteLine("'VngAccountRequired' error. Re-adding to queue");
+                Console.WriteLine("\"VngAccountRequired\" error.");
+                Main.FailAccounts += 1;
+                return false;
+            }
+
+            if (result.ToString().ToLower() == "LeagueRegionElection".ToLower())
+            {
+                Thread.Sleep(2500);
                 AccountQueue.Enqueue(_accountCombo);
                 return false;
             }
@@ -130,7 +137,7 @@ public class RiotConnection : Connection
             if (result.ToString().ToLower() == "Login".ToLower())
             {
                 // if account needs to be re authenticated
-                Console.WriteLine("'Login' error. Re-adding to queue");
+                Console.WriteLine("\"Login\" error. Re-adding to queue");
                 AccountQueue.Enqueue(_accountCombo);
                 return false;
             }

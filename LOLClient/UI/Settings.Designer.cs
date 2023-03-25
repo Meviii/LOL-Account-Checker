@@ -161,7 +161,7 @@
             Controls.Add(label2);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "Settings";
-            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             Text = "Settings";
             FormClosing += CloseButton_Click;
             Load += Settings_Load;

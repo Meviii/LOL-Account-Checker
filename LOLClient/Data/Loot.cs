@@ -45,13 +45,20 @@ public class Loot
     }
 
     // Refreshes the player's loot data by making a GET request to the League of Legends API.
-    public async Task RefreshLootAsync()
+    public async Task RefreshLootAsync(int timeout = 4)
     {
-        var response = await _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-loot/v1/player-loot", null);
-        Data = JArray.Parse(await response.Content.ReadAsStringAsync());
+        while (timeout > 0)
+        {
+            var response = await _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-loot/v1/player-loot", null);
 
-        // Sleeps for 1 second to avoid making too many requests to the API.
-        Thread.Sleep(500);
+            if (response.IsSuccessStatusCode)
+            {
+                Data = JArray.Parse(await response.Content.ReadAsStringAsync());
+            }
+            // Sleeps for 1 second to avoid making too many requests to the API.
+            Thread.Sleep(500);
+            timeout--;
+        }
     }
 
     // Returns the count of a particular loot item based on the given loot ID.

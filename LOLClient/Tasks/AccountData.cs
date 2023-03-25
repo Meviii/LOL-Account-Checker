@@ -489,14 +489,27 @@ public class AccountData
         }
     }
 
-    private async Task RequestRemoveFriendAsync(string chatServiceId)
+    private async Task RequestRemoveFriendAsync(string chatServiceId, int timeout = 8)
     {
-        await _leagueConnection.RequestAsync(HttpMethod.Delete, $"lol-chat/v1/friends/{chatServiceId}", null);
+        while (timeout > 0)
+        {
+            var response = await _leagueConnection.RequestAsync(HttpMethod.Delete, $"lol-chat/v1/friends/{chatServiceId}", null);
+            
+            if (response.IsSuccessStatusCode)
+            {
+                return;
+            }
+            timeout--;
+        }
+
     }
 
     public async Task GetFriendsDataAsync()
     {
         var data = await RequestFriendDataAsync();
+
+        if (data == null)
+            return;
 
         _friends = JsonConvert.DeserializeObject<List<Friend>>(data);
 
@@ -521,15 +534,58 @@ public class AccountData
         }
     }
 
-    private async Task RequestRemoveFriendRequestAsync(string chatServiceId)
+    private async Task RequestRemoveFriendRequestAsync(string chatServiceId, int timeout = 8)
     {
-        await _leagueConnection.RequestAsync(HttpMethod.Delete, $"lol-chat/v1/friend-requests/{chatServiceId}", null);
+        while (timeout > 0) {
+            var response = await _leagueConnection.RequestAsync(HttpMethod.Delete, $"lol-chat/v1/friend-requests/{chatServiceId}", null);
+
+            if (response.IsSuccessStatusCode)
+                return;
+
+            timeout--;
+        }
     }
 
-    private async Task<JToken> RequestFriendRequestDataAsync()
+    private async Task<JToken> RequestFriendRequestDataAsync(int timeout = 8)
     {
-        var response = await _leagueConnection.RequestAsync(HttpMethod.Get, "lol-chat/v1/friend-requests", null);
+        while (timeout > 0)
+        {
+            var response = await _leagueConnection.RequestAsync(HttpMethod.Get, "lol-chat/v1/friend-requests", null);
+
+            if (response.IsSuccessStatusCode)
+                return JToken.Parse(await response.Content.ReadAsStringAsync());
+            
+            timeout--;
+        }
+
+        return null;
+    }
+
+    private async Task<JToken> RequestMatchHistoryAsync()
+    {
+        var response = await _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-match-history/v1/products/lol/current-summoner/matches", null);
 
         return JToken.Parse(await response.Content.ReadAsStringAsync());
+    }
+
+    public async Task GetLastPlayDateAsync()
+    {
+        var matchData = await RequestMatchHistoryAsync();
+
+        if (matchData == null) return;
+
+        if (matchData["games"]["games"].ToString() == "[]")
+        {
+            _account.LastPlayDate = "longer than 1 year";
+            return;
+        }
+
+        var gameCreationDateJToken = matchData["games"]["games"][0]["gameCreationDate"];
+        DateTime gameCreationDateTime = gameCreationDateJToken.ToObject<DateTime>();
+
+        // Convert to local time
+        DateTime localDateTime = gameCreationDateTime.ToLocalTime();
+
+        _account.LastPlayDate = localDateTime.ToString();
     }
 }

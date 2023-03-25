@@ -10,28 +10,130 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static Azure.Core.HttpHeader;
+using System.Drawing;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using System.Diagnostics;
+using System.Configuration;
 
 namespace AccountChecker;
 
 public partial class Main : Form
 {
-
+    private static readonly object _lock = new();
+    private static int _successfulAccounts;
+    private static int _failedAccounts;
+    public static int SuccessfulAccounts
+    {
+        get
+        {
+            lock (_lock)
+            {
+                return _successfulAccounts;
+            }
+        }
+        set
+        {
+            lock (_lock)
+            {
+                _successfulAccounts = value;
+            }
+        }
+    }
+    public static int FailAccounts
+    {
+        get
+        {
+            lock (_lock)
+            {
+                return _failedAccounts;
+            }
+        }
+        set
+        {
+            lock (_lock)
+            {
+                _failedAccounts = value;
+            }
+        }
+    }
     private readonly CoreUtility _coreUtility;
     private readonly UIUtility _uIUtility;
     private static readonly object comboListLock = new();
 
-    public Main()
+    public Main(bool isNewestVersion = true)
     {
         _uIUtility = new UIUtility();
         _coreUtility = new CoreUtility();
         InitializeComponent();
         LoadConfigAsync();
 
+        if (!isNewestVersion)
+            DisplayNewVersion();
+    }
+
+    private void UpdateSuccessAccounts()
+    {
+        if (HitAccounts.InvokeRequired)
+        {
+            HitAccounts.Invoke(new Action(() => UpdateSuccessAccounts()));
+        }
+        else
+        {
+            HitAccounts.Text = $"{_successfulAccounts}";
+        }
+    }
+
+    private void UpdateFailAccounts()
+    {
+        if (FailedAccounts.InvokeRequired)
+        {
+            FailedAccounts.Invoke(new Action(() => UpdateFailAccounts()));
+        }
+        else
+        {
+            FailedAccounts.Text = $"{_failedAccounts}";
+        }
+    }
+
+    private void DisplayNewVersion()
+    {
+        string message = "An update is available. Would you like to update now?";
+        string caption = "Update Available";
+        MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
+        DialogResult result;
+
+        // Show the MessageBox
+        result = MessageBox.Show(message, caption, buttons);
+
+        // Check the user's choice and take action accordingly
+        if (result == DialogResult.OK)
+        {
+            // Navigate to the GitHub repository to update
+            Process.Start(new ProcessStartInfo("https://github.com/Meviii/LOL-Account-Checker") { UseShellExecute = true });
+
+        }
+        else
+        {
+            // Do nothing, the user has chosen to cancel
+        }
     }
 
     private void LoadConfigAsync()
     {
+        // Release
+        ReleaseLabel.Text = "Release v" + ConfigurationManager.AppSettings["Version"];
+
+        // Account Checking Stats
+        SuccessLabel.Visible = false;
+        FailLabel.Visible = false;
+        HitAccounts.Visible = false;
+        FailedAccounts.Visible = false;
+
+        // Account Stats Initialization
+        SuccessfulAccounts = 0;
+        FailAccounts = 0;
+
+        // Get Settings
         var settings = _coreUtility.LoadFromSettingsFile();
 
         if (settings == null)
@@ -40,6 +142,10 @@ public partial class Main : Form
         if (settings.ContainsKey("ComboListPath"))
             ComboListText.Text = settings["ComboListPath"].ToString();
 
+        // Disable Tasks Button as default
+        TasksButton.Enabled = false;
+
+        // Set Console output to TextBox
         Console.SetOut(new ConsoleWriter(ConsoleTextBox));
     }
 
@@ -155,7 +261,7 @@ public partial class Main : Form
             button.Text = "Start";
             button.Enabled = true;
             ProgressBar.Visible = false;
-            button.ForeColor = System.Drawing.Color.Black;
+            button.ForeColor = Color.Black;
         }
 
     }
@@ -165,11 +271,19 @@ public partial class Main : Form
     {
         button.Text = "Started";
         button.Enabled = false;
-        button.ForeColor = System.Drawing.Color.Green;
+        button.ForeColor = Color.Green;
         ProgressBar.Visible = true;
         ProgressBar.Minimum = 0;
         ProgressBar.Maximum = 0;
-        
+        QuickCheckButton.Enabled = false;
+
+        SuccessfulAccounts = 0;
+        FailAccounts = 0;
+        SuccessLabel.Visible = true;
+        FailLabel.Visible = true;
+        HitAccounts.Visible = true;
+        FailedAccounts.Visible = true;
+
     }
 
     // This method validates the entered (or default) thread count
@@ -204,7 +318,8 @@ public partial class Main : Form
         try
         {
             await RunTasksAsync(actualThreadCount, settings);
-        }catch (Exception ex)
+        }
+        catch (Exception ex)
         {
             MessageBox.Show($"An error occured. {ex.Message}");
         }
@@ -228,11 +343,17 @@ public partial class Main : Form
             Console.WriteLine($"Remaining Combos: {remainingCombos}");
             var tasks = new List<Task>();
 
+            UpdateSuccessAccounts();
+            UpdateFailAccounts();
+
             // Start a new task for each thread
             for (int i = 0; i < threadCount; i++)
             {
                 if (remainingCombos == 0)
                 {
+                    UpdateSuccessAccounts();
+                    UpdateFailAccounts();
+
                     await Task.WhenAll(tasks);
                     tasks.Clear();
                     return true;
@@ -242,22 +363,42 @@ public partial class Main : Form
                 lock (comboListLock)
                 {
                     // Get the first combo from the queue
-                    combo = AccountQueue.Dequeue();
+                    
+                    AccountQueue.Dequeue(out combo);
                 }
 
                 Console.WriteLine($"Starting task for {combo.Username}");
 
-                // Run the Work method as a Task
-                var task = Task.Run(async () =>
+                Task task = null;
+                if (ExecuteTasksOnAllCombosCheckBox.Checked)
                 {
-                    var runner = new Runner();
+                    // Run Check
+                    task = Task.Run(async () =>
+                    {
+                        var runner = new Runner();
 
-                    // Job of thread
-                    await runner.Job_AccountFetchingWithoutTasks(combo, settings);
+                        // Job of thread
+                        await runner.Job_AccountFetchingWithTasks(combo, settings);
 
-                    // Update accounts left counter
-                    UpdateProgress(AccountQueue.Count().ToString());
-                });
+                        // Update accounts left counter
+                        UpdateProgress(AccountQueue.Count().ToString());
+
+                    });
+                }
+                else
+                {
+                    // Run the Work method as a Task
+                    task = Task.Run(async () =>
+                    {
+                        var runner = new Runner();
+
+                        // Job of thread
+                        await runner.Job_AccountFetchingWithoutTasks(combo, settings);
+
+                        // Update accounts left counter
+                        UpdateProgress(AccountQueue.Count().ToString());
+                    });
+                }
 
                 remainingCombos--;
 
@@ -266,7 +407,7 @@ public partial class Main : Form
                 tasks.Add(task);
 
             }
-
+            
             // Wait for all tasks to complete before proceeding
             await Task.WhenAll(tasks);
 
@@ -340,6 +481,7 @@ public partial class Main : Form
         // Disable start/check buttons
         StartButton.Enabled = false;
         QuickCheckButton.Enabled = false;
+        QuickCheckButton.Text = "Checking";
         ProgressBar.Visible = true;
 
         var settings = _coreUtility.LoadFromSettingsFile(); // Gets Settings file
@@ -350,28 +492,52 @@ public partial class Main : Form
         // Initializes progress bar with min max
         _uIUtility.InitializeProgressBar(ProgressBar, ACCOUNT_COUNT + 1);
 
-        // Run Check
-        var task = Task.Run(async () =>
+        if (ExecuteTasksOnAllCombosCheckBox.Checked)
         {
-            var runner = new Runner();
-
-            // Job of thread
-            await runner.Job_AccountFetchingWithoutTasks(new AccountCombo()
+            // Run Check
+            var task = Task.Run(async () =>
             {
-                Username = username,
-                Password = password,
-            }, settings);
+                var runner = new Runner();
 
-            // Update accounts left counter
-            UpdateProgress(Convert.ToString(ACCOUNT_COUNT - 1));
+                // Job of thread
+                await runner.Job_AccountFetchingWithTasks(new AccountCombo()
+                {
+                    Username = username,
+                    Password = password,
+                }, settings);
 
-        });
-        await task;
+                // Update accounts left counter
+                UpdateProgress(Convert.ToString(ACCOUNT_COUNT - 1));
+
+            });
+            await task;
+        }
+        else
+        {
+            // Run Check
+            var task = Task.Run(async () =>
+            {
+                var runner = new Runner();
+
+                // Job of thread
+                await runner.Job_AccountFetchingWithoutTasks(new AccountCombo()
+                {
+                    Username = username,
+                    Password = password,
+                }, settings);
+
+                // Update accounts left counter
+                UpdateProgress(Convert.ToString(ACCOUNT_COUNT - 1));
+
+            });
+            await task;
+        }
 
         // Finalize
         UpdateProgress("0");
         StartButton.Enabled = true;
         QuickCheckButton.Enabled = true;
+        QuickCheckButton.Text = "Check";
         ProgressBar.Visible = false;
         ConsoleTextBox.Clear(); // Clears Console
         Console.WriteLine("Task Completed.");
@@ -387,5 +553,23 @@ public partial class Main : Form
         {
             MessageBox.Show("This many threads may rarely cause inaccurate checks. 1 thread per account.");
         }
+    }
+
+    private void ExecuteTasksOnAllCombosCheckBox_CheckedChanged(object sender, EventArgs e)
+    {
+        if (((CheckBox)sender).Checked)
+        {
+            TasksButton.Enabled = true;
+        }
+        else
+        {
+            TasksButton.Enabled = false;
+        }
+
+    }
+
+    private void TasksButton_Click(object sender, EventArgs e)
+    {
+        _uIUtility.LoadTasksViewAsDialog();
     }
 }

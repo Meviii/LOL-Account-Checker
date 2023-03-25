@@ -32,7 +32,7 @@ public partial class SingleAccount : Form
         InitializeView();
 
         // TEMP TILL IMPLEMENTED
-        ClaimEventRewardsCheckBox.Enabled = false;
+        //ClaimEventRewardsCheckBox.Enabled = false;
         BuyChampionShardsCheckBox.Enabled = false;
         //CraftKeysCheckBox.Enabled = false;
         //OpenChestsCheckBox.Enabled = false;
@@ -353,6 +353,11 @@ public partial class SingleAccount : Form
     }
 
     private void progressBar1_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void tabPage1_Click(object sender, EventArgs e)
     {
 
     }

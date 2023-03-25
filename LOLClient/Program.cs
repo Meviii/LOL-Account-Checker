@@ -9,8 +9,12 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net.Http;
+using Newtonsoft.Json;
+using System.Configuration;
 
 namespace AccountChecker;
+
 
 class Program
 {
@@ -21,7 +25,7 @@ class Program
         // test
         //var test = new MainTest();
         //test.TestRequest().Wait();
-        //return;
+        //return
 
         ApplicationConfiguration.Initialize();
         Application.EnableVisualStyles();
@@ -37,13 +41,13 @@ class Program
         else
         {
             // Run main form if settings file is populated.
-            Application.Run(new Main());
+            Application.Run(new Main(IsNewestVersion().Result));
         }
 
     }
 
     // Check if the settings.json file has any content.
-    static async Task<bool> IsSettingsFileEmpty()
+    private static async Task<bool> IsSettingsFileEmpty()
     {
         string filePath = $"{PathConfig.SettingsFile}";
 
@@ -66,4 +70,35 @@ class Program
         return true;
     }
 
+    private static async Task<bool> IsNewestVersion()
+    {
+        HttpClient client = new()
+        {
+            BaseAddress = new Uri("https://raw.githubusercontent.com/Meviii/LOL-Account-Checker/"),
+
+        };
+
+        var response = await client.GetAsync("main/VERSION.json");
+
+        if (response.IsSuccessStatusCode)
+        {
+            var data = JToken.Parse(await response.Content.ReadAsStringAsync());
+
+            var recentVersion = data["Version"].ToString();
+
+            string currentVersion;
+            try
+            {
+                currentVersion = ConfigurationManager.AppSettings["Version"];
+            }
+            catch { return false; }
+
+            if (recentVersion == currentVersion)
+            {
+                return true;
+            }
+
+        }
+        return false;
+    }
 }
