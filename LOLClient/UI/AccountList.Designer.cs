@@ -63,7 +63,7 @@ namespace AccountChecker
             accountsGridView.BackgroundColor = System.Drawing.Color.LightSkyBlue;
             accountsGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             accountsGridView.GridColor = System.Drawing.Color.LightSkyBlue;
-            accountsGridView.Location = new System.Drawing.Point(110, 142);
+            accountsGridView.Location = new System.Drawing.Point(109, 142);
             accountsGridView.Name = "accountsGridView";
             accountsGridView.ReadOnly = true;
             accountsGridView.RowTemplate.Height = 25;
@@ -91,7 +91,7 @@ namespace AccountChecker
             // ExportsFolderButton
             // 
             ExportsFolderButton.BackColor = System.Drawing.Color.LightCyan;
-            ExportsFolderButton.Location = new System.Drawing.Point(804, 91);
+            ExportsFolderButton.Location = new System.Drawing.Point(803, 91);
             ExportsFolderButton.Name = "ExportsFolderButton";
             ExportsFolderButton.Size = new System.Drawing.Size(129, 45);
             ExportsFolderButton.TabIndex = 22;
@@ -102,7 +102,7 @@ namespace AccountChecker
             // button1
             // 
             button1.BackColor = System.Drawing.Color.LightCyan;
-            button1.Location = new System.Drawing.Point(847, 585);
+            button1.Location = new System.Drawing.Point(846, 585);
             button1.Name = "button1";
             button1.Size = new System.Drawing.Size(86, 36);
             button1.TabIndex = 23;
@@ -112,7 +112,7 @@ namespace AccountChecker
             // 
             // SearchTextBox
             // 
-            SearchTextBox.Location = new System.Drawing.Point(444, 114);
+            SearchTextBox.Location = new System.Drawing.Point(443, 114);
             SearchTextBox.Name = "SearchTextBox";
             SearchTextBox.PlaceholderText = "Search Summoner";
             SearchTextBox.Size = new System.Drawing.Size(108, 23);
@@ -133,7 +133,6 @@ namespace AccountChecker
             Controls.Add(BackButton);
             Controls.Add(accountsGridView);
             Controls.Add(label1);
-            FormBorderStyle = FormBorderStyle.SizableToolWindow;
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "AccountList";
             StartPosition = FormStartPosition.CenterScreen;

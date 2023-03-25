@@ -42,11 +42,11 @@ public partial class AccountList : Form
         dataTable.Columns.Add("Level", typeof(int));
         dataTable.Columns.Add("BE", typeof(int));
         dataTable.Columns.Add("RP", typeof(int));
-        dataTable.Columns.Add("OE", typeof(int));
         dataTable.Columns.Add("Rank");
         dataTable.Columns.Add("Skins", typeof(int));
         dataTable.Columns.Add("Champions", typeof(int));
         dataTable.Columns.Add("Verified");
+        dataTable.Columns.Add("Last Game");
 
 
         foreach (var account in accounts)
@@ -57,11 +57,11 @@ public partial class AccountList : Form
                 account.Level,
                 account.BE,
                 account.RP,
-                account.OE,
                 $"{account.CurrentRank}",
                 account.Skins.Count,
                 account.Champions.Count,
-                account.IsEmailVerified
+                account.IsEmailVerified,
+                account.LastPlayDate
                 );
         }
 

@@ -244,6 +244,7 @@ namespace AccountChecker
             // 
             // Overview
             // 
+            Overview.BackColor = System.Drawing.Color.LightSkyBlue;
             Overview.Controls.Add(overviewGridView);
             Overview.Location = new System.Drawing.Point(4, 24);
             Overview.Name = "Overview";
@@ -251,7 +252,6 @@ namespace AccountChecker
             Overview.Size = new System.Drawing.Size(863, 475);
             Overview.TabIndex = 0;
             Overview.Text = "Overview";
-            Overview.UseVisualStyleBackColor = true;
             Overview.Click += Overview_Click;
             // 
             // overviewGridView
@@ -272,6 +272,7 @@ namespace AccountChecker
             // 
             // Champions
             // 
+            Champions.BackColor = System.Drawing.Color.LightSkyBlue;
             Champions.Controls.Add(ChampionsSearchTextBox);
             Champions.Controls.Add(championGridView);
             Champions.Location = new System.Drawing.Point(4, 24);
@@ -280,7 +281,6 @@ namespace AccountChecker
             Champions.Size = new System.Drawing.Size(863, 475);
             Champions.TabIndex = 1;
             Champions.Text = "Champions";
-            Champions.UseVisualStyleBackColor = true;
             // 
             // ChampionsSearchTextBox
             // 
@@ -310,6 +310,7 @@ namespace AccountChecker
             // 
             // Skins
             // 
+            Skins.BackColor = System.Drawing.Color.LightSkyBlue;
             Skins.Controls.Add(SkinsSearchTextBox);
             Skins.Controls.Add(skinsGridView);
             Skins.Location = new System.Drawing.Point(4, 24);
@@ -317,7 +318,6 @@ namespace AccountChecker
             Skins.Size = new System.Drawing.Size(863, 475);
             Skins.TabIndex = 2;
             Skins.Text = "Skins";
-            Skins.UseVisualStyleBackColor = true;
             // 
             // SkinsSearchTextBox
             // 
@@ -347,7 +347,7 @@ namespace AccountChecker
             // 
             // tabPage1
             // 
-            tabPage1.BackColor = System.Drawing.Color.White;
+            tabPage1.BackColor = System.Drawing.Color.LightSkyBlue;
             tabPage1.Controls.Add(label83);
             tabPage1.Controls.Add(ProgressBar);
             tabPage1.Controls.Add(flowLayoutPanel4);
@@ -362,6 +362,7 @@ namespace AccountChecker
             tabPage1.Size = new System.Drawing.Size(863, 475);
             tabPage1.TabIndex = 3;
             tabPage1.Text = "Tasks";
+            tabPage1.Click += tabPage1_Click;
             // 
             // label83
             // 
@@ -369,8 +370,8 @@ namespace AccountChecker
             label83.BackColor = System.Drawing.Color.Transparent;
             label83.FlatStyle = FlatStyle.Flat;
             label83.Font = new System.Drawing.Font("Segoe Print", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            label83.ForeColor = System.Drawing.Color.Black;
-            label83.Location = new System.Drawing.Point(575, 18);
+            label83.ForeColor = System.Drawing.Color.LightYellow;
+            label83.Location = new System.Drawing.Point(149, 21);
             label83.Name = "label83";
             label83.Size = new System.Drawing.Size(141, 33);
             label83.TabIndex = 25;
@@ -390,7 +391,7 @@ namespace AccountChecker
             // 
             flowLayoutPanel4.Controls.Add(panel77);
             flowLayoutPanel4.Controls.Add(panel78);
-            flowLayoutPanel4.Location = new System.Drawing.Point(465, 54);
+            flowLayoutPanel4.Location = new System.Drawing.Point(39, 57);
             flowLayoutPanel4.Name = "flowLayoutPanel4";
             flowLayoutPanel4.Size = new System.Drawing.Size(338, 93);
             flowLayoutPanel4.TabIndex = 20;
@@ -401,13 +402,13 @@ namespace AccountChecker
             panel77.Controls.Add(label84);
             panel77.Location = new System.Drawing.Point(3, 3);
             panel77.Name = "panel77";
-            panel77.Size = new System.Drawing.Size(335, 38);
+            panel77.Size = new System.Drawing.Size(330, 38);
             panel77.TabIndex = 13;
             // 
             // RemoveFriendsCheckBox
             // 
             RemoveFriendsCheckBox.AutoSize = true;
-            RemoveFriendsCheckBox.Location = new System.Drawing.Point(308, 13);
+            RemoveFriendsCheckBox.Location = new System.Drawing.Point(302, 13);
             RemoveFriendsCheckBox.Name = "RemoveFriendsCheckBox";
             RemoveFriendsCheckBox.Size = new System.Drawing.Size(15, 14);
             RemoveFriendsCheckBox.TabIndex = 1;
@@ -416,9 +417,11 @@ namespace AccountChecker
             // label84
             // 
             label84.AutoSize = true;
+            label84.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label84.ForeColor = System.Drawing.Color.LightYellow;
             label84.Location = new System.Drawing.Point(3, 12);
             label84.Name = "label84";
-            label84.Size = new System.Drawing.Size(91, 15);
+            label84.Size = new System.Drawing.Size(122, 21);
             label84.TabIndex = 0;
             label84.Text = "Remove Friends";
             // 
@@ -428,13 +431,13 @@ namespace AccountChecker
             panel78.Controls.Add(label82);
             panel78.Location = new System.Drawing.Point(3, 47);
             panel78.Name = "panel78";
-            panel78.Size = new System.Drawing.Size(335, 38);
+            panel78.Size = new System.Drawing.Size(330, 38);
             panel78.TabIndex = 14;
             // 
             // RemoveFriendRequestsCheckBox
             // 
             RemoveFriendRequestsCheckBox.AutoSize = true;
-            RemoveFriendRequestsCheckBox.Location = new System.Drawing.Point(308, 13);
+            RemoveFriendRequestsCheckBox.Location = new System.Drawing.Point(302, 13);
             RemoveFriendRequestsCheckBox.Name = "RemoveFriendRequestsCheckBox";
             RemoveFriendRequestsCheckBox.Size = new System.Drawing.Size(15, 14);
             RemoveFriendRequestsCheckBox.TabIndex = 1;
@@ -443,9 +446,11 @@ namespace AccountChecker
             // label82
             // 
             label82.AutoSize = true;
+            label82.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label82.ForeColor = System.Drawing.Color.LightYellow;
             label82.Location = new System.Drawing.Point(3, 12);
             label82.Name = "label82";
-            label82.Size = new System.Drawing.Size(136, 15);
+            label82.Size = new System.Drawing.Size(182, 21);
             label82.TabIndex = 0;
             label82.Text = "Remove Friend Requests";
             // 
@@ -455,8 +460,8 @@ namespace AccountChecker
             label42.BackColor = System.Drawing.Color.Transparent;
             label42.FlatStyle = FlatStyle.Flat;
             label42.Font = new System.Drawing.Font("Segoe Print", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            label42.ForeColor = System.Drawing.Color.Black;
-            label42.Location = new System.Drawing.Point(181, 150);
+            label42.ForeColor = System.Drawing.Color.LightYellow;
+            label42.Location = new System.Drawing.Point(169, 161);
             label42.Name = "label42";
             label42.Size = new System.Drawing.Size(91, 33);
             label42.TabIndex = 21;
@@ -468,8 +473,8 @@ namespace AccountChecker
             label43.BackColor = System.Drawing.Color.Transparent;
             label43.FlatStyle = FlatStyle.Flat;
             label43.Font = new System.Drawing.Font("Segoe Print", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            label43.ForeColor = System.Drawing.Color.Black;
-            label43.Location = new System.Drawing.Point(166, 19);
+            label43.ForeColor = System.Drawing.Color.LightYellow;
+            label43.Location = new System.Drawing.Point(591, 21);
             label43.Name = "label43";
             label43.Size = new System.Drawing.Size(125, 33);
             label43.TabIndex = 20;
@@ -497,9 +502,9 @@ namespace AccountChecker
             flowLayoutPanel2.Controls.Add(panel57);
             flowLayoutPanel2.Controls.Add(panel65);
             flowLayoutPanel2.Controls.Add(panel66);
-            flowLayoutPanel2.Location = new System.Drawing.Point(52, 183);
+            flowLayoutPanel2.Location = new System.Drawing.Point(40, 194);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new System.Drawing.Size(338, 238);
+            flowLayoutPanel2.Size = new System.Drawing.Size(338, 256);
             flowLayoutPanel2.TabIndex = 22;
             // 
             // panel39
@@ -514,7 +519,7 @@ namespace AccountChecker
             // CraftKeysCheckBox
             // 
             CraftKeysCheckBox.AutoSize = true;
-            CraftKeysCheckBox.Location = new System.Drawing.Point(134, 8);
+            CraftKeysCheckBox.Location = new System.Drawing.Point(134, 11);
             CraftKeysCheckBox.Name = "CraftKeysCheckBox";
             CraftKeysCheckBox.Size = new System.Drawing.Size(15, 14);
             CraftKeysCheckBox.TabIndex = 1;
@@ -523,9 +528,11 @@ namespace AccountChecker
             // label44
             // 
             label44.AutoSize = true;
+            label44.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label44.ForeColor = System.Drawing.Color.LightYellow;
             label44.Location = new System.Drawing.Point(3, 6);
             label44.Name = "label44";
-            label44.Size = new System.Drawing.Size(60, 15);
+            label44.Size = new System.Drawing.Size(80, 21);
             label44.TabIndex = 0;
             label44.Text = "Craft Keys";
             // 
@@ -535,13 +542,13 @@ namespace AccountChecker
             panel40.Controls.Add(label45);
             panel40.Location = new System.Drawing.Point(168, 3);
             panel40.Name = "panel40";
-            panel40.Size = new System.Drawing.Size(159, 32);
+            panel40.Size = new System.Drawing.Size(164, 32);
             panel40.TabIndex = 14;
             // 
             // OpenChestsCheckBox
             // 
             OpenChestsCheckBox.AutoSize = true;
-            OpenChestsCheckBox.Location = new System.Drawing.Point(135, 8);
+            OpenChestsCheckBox.Location = new System.Drawing.Point(135, 11);
             OpenChestsCheckBox.Name = "OpenChestsCheckBox";
             OpenChestsCheckBox.Size = new System.Drawing.Size(15, 14);
             OpenChestsCheckBox.TabIndex = 1;
@@ -550,9 +557,11 @@ namespace AccountChecker
             // label45
             // 
             label45.AutoSize = true;
+            label45.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label45.ForeColor = System.Drawing.Color.LightYellow;
             label45.Location = new System.Drawing.Point(4, 7);
             label45.Name = "label45";
-            label45.Size = new System.Drawing.Size(74, 15);
+            label45.Size = new System.Drawing.Size(98, 21);
             label45.TabIndex = 0;
             label45.Text = "Open Chests";
             // 
@@ -565,7 +574,7 @@ namespace AccountChecker
             panel41.Controls.Add(label53);
             panel41.Location = new System.Drawing.Point(3, 41);
             panel41.Name = "panel41";
-            panel41.Size = new System.Drawing.Size(329, 32);
+            panel41.Size = new System.Drawing.Size(329, 35);
             panel41.TabIndex = 18;
             // 
             // panel42
@@ -764,7 +773,7 @@ namespace AccountChecker
             // DisenchantSkinShardsCheckBox
             // 
             DisenchantSkinShardsCheckBox.AutoSize = true;
-            DisenchantSkinShardsCheckBox.Location = new System.Drawing.Point(300, 9);
+            DisenchantSkinShardsCheckBox.Location = new System.Drawing.Point(300, 12);
             DisenchantSkinShardsCheckBox.Name = "DisenchantSkinShardsCheckBox";
             DisenchantSkinShardsCheckBox.Size = new System.Drawing.Size(15, 14);
             DisenchantSkinShardsCheckBox.TabIndex = 1;
@@ -773,9 +782,11 @@ namespace AccountChecker
             // label53
             // 
             label53.AutoSize = true;
+            label53.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label53.ForeColor = System.Drawing.Color.LightYellow;
             label53.Location = new System.Drawing.Point(3, 6);
             label53.Name = "label53";
-            label53.Size = new System.Drawing.Size(135, 15);
+            label53.Size = new System.Drawing.Size(180, 21);
             label53.TabIndex = 0;
             label53.Text = "Disenchcant Skin Shards";
             // 
@@ -786,9 +797,9 @@ namespace AccountChecker
             panel49.Controls.Add(panel56);
             panel49.Controls.Add(DisenchantChampionShardsCheckBox);
             panel49.Controls.Add(label61);
-            panel49.Location = new System.Drawing.Point(3, 79);
+            panel49.Location = new System.Drawing.Point(3, 82);
             panel49.Name = "panel49";
-            panel49.Size = new System.Drawing.Size(329, 32);
+            panel49.Size = new System.Drawing.Size(329, 35);
             panel49.TabIndex = 17;
             // 
             // panel50
@@ -987,7 +998,7 @@ namespace AccountChecker
             // DisenchantChampionShardsCheckBox
             // 
             DisenchantChampionShardsCheckBox.AutoSize = true;
-            DisenchantChampionShardsCheckBox.Location = new System.Drawing.Point(300, 9);
+            DisenchantChampionShardsCheckBox.Location = new System.Drawing.Point(300, 12);
             DisenchantChampionShardsCheckBox.Name = "DisenchantChampionShardsCheckBox";
             DisenchantChampionShardsCheckBox.Size = new System.Drawing.Size(15, 14);
             DisenchantChampionShardsCheckBox.TabIndex = 1;
@@ -996,9 +1007,11 @@ namespace AccountChecker
             // label61
             // 
             label61.AutoSize = true;
+            label61.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label61.ForeColor = System.Drawing.Color.LightYellow;
             label61.Location = new System.Drawing.Point(3, 8);
             label61.Name = "label61";
-            label61.Size = new System.Drawing.Size(169, 15);
+            label61.Size = new System.Drawing.Size(222, 21);
             label61.TabIndex = 0;
             label61.Text = "Disenchcant Champion Shards";
             // 
@@ -1009,9 +1022,9 @@ namespace AccountChecker
             panel57.Controls.Add(panel64);
             panel57.Controls.Add(DisenchantEternalShardsCheckBox);
             panel57.Controls.Add(label69);
-            panel57.Location = new System.Drawing.Point(3, 117);
+            panel57.Location = new System.Drawing.Point(3, 123);
             panel57.Name = "panel57";
-            panel57.Size = new System.Drawing.Size(329, 32);
+            panel57.Size = new System.Drawing.Size(329, 35);
             panel57.TabIndex = 14;
             // 
             // panel58
@@ -1210,7 +1223,7 @@ namespace AccountChecker
             // DisenchantEternalShardsCheckBox
             // 
             DisenchantEternalShardsCheckBox.AutoSize = true;
-            DisenchantEternalShardsCheckBox.Location = new System.Drawing.Point(300, 9);
+            DisenchantEternalShardsCheckBox.Location = new System.Drawing.Point(300, 12);
             DisenchantEternalShardsCheckBox.Name = "DisenchantEternalShardsCheckBox";
             DisenchantEternalShardsCheckBox.Size = new System.Drawing.Size(15, 14);
             DisenchantEternalShardsCheckBox.TabIndex = 1;
@@ -1219,9 +1232,11 @@ namespace AccountChecker
             // label69
             // 
             label69.AutoSize = true;
+            label69.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label69.ForeColor = System.Drawing.Color.LightYellow;
             label69.Location = new System.Drawing.Point(4, 8);
             label69.Name = "label69";
-            label69.Size = new System.Drawing.Size(143, 15);
+            label69.Size = new System.Drawing.Size(191, 21);
             label69.TabIndex = 0;
             label69.Text = "Disenchant Eternal Shards";
             // 
@@ -1229,15 +1244,15 @@ namespace AccountChecker
             // 
             panel65.Controls.Add(OpenCapsulesOrbsShardsCheckBox);
             panel65.Controls.Add(label70);
-            panel65.Location = new System.Drawing.Point(3, 155);
+            panel65.Location = new System.Drawing.Point(3, 164);
             panel65.Name = "panel65";
-            panel65.Size = new System.Drawing.Size(329, 32);
+            panel65.Size = new System.Drawing.Size(329, 35);
             panel65.TabIndex = 14;
             // 
             // OpenCapsulesOrbsShardsCheckBox
             // 
             OpenCapsulesOrbsShardsCheckBox.AutoSize = true;
-            OpenCapsulesOrbsShardsCheckBox.Location = new System.Drawing.Point(300, 9);
+            OpenCapsulesOrbsShardsCheckBox.Location = new System.Drawing.Point(300, 12);
             OpenCapsulesOrbsShardsCheckBox.Name = "OpenCapsulesOrbsShardsCheckBox";
             OpenCapsulesOrbsShardsCheckBox.Size = new System.Drawing.Size(15, 14);
             OpenCapsulesOrbsShardsCheckBox.TabIndex = 1;
@@ -1246,9 +1261,11 @@ namespace AccountChecker
             // label70
             // 
             label70.AutoSize = true;
+            label70.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label70.ForeColor = System.Drawing.Color.LightYellow;
             label70.Location = new System.Drawing.Point(3, 7);
             label70.Name = "label70";
-            label70.Size = new System.Drawing.Size(206, 15);
+            label70.Size = new System.Drawing.Size(273, 21);
             label70.TabIndex = 0;
             label70.Text = "Open Capsules, Orbs, Random Shards";
             // 
@@ -1259,9 +1276,9 @@ namespace AccountChecker
             panel66.Controls.Add(panel73);
             panel66.Controls.Add(DisenchantWardSkinShardsCheckBox);
             panel66.Controls.Add(label78);
-            panel66.Location = new System.Drawing.Point(3, 193);
+            panel66.Location = new System.Drawing.Point(3, 205);
             panel66.Name = "panel66";
-            panel66.Size = new System.Drawing.Size(329, 32);
+            panel66.Size = new System.Drawing.Size(329, 35);
             panel66.TabIndex = 17;
             // 
             // panel67
@@ -1460,7 +1477,7 @@ namespace AccountChecker
             // DisenchantWardSkinShardsCheckBox
             // 
             DisenchantWardSkinShardsCheckBox.AutoSize = true;
-            DisenchantWardSkinShardsCheckBox.Location = new System.Drawing.Point(300, 9);
+            DisenchantWardSkinShardsCheckBox.Location = new System.Drawing.Point(300, 12);
             DisenchantWardSkinShardsCheckBox.Name = "DisenchantWardSkinShardsCheckBox";
             DisenchantWardSkinShardsCheckBox.Size = new System.Drawing.Size(15, 14);
             DisenchantWardSkinShardsCheckBox.TabIndex = 1;
@@ -1469,9 +1486,11 @@ namespace AccountChecker
             // label78
             // 
             label78.AutoSize = true;
+            label78.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label78.ForeColor = System.Drawing.Color.LightYellow;
             label78.Location = new System.Drawing.Point(4, 7);
             label78.Name = "label78";
-            label78.Size = new System.Drawing.Size(160, 15);
+            label78.Size = new System.Drawing.Size(214, 21);
             label78.TabIndex = 0;
             label78.Text = "Disenchant Ward Skin Shards";
             // 
@@ -1480,9 +1499,9 @@ namespace AccountChecker
             flowLayoutPanel3.Controls.Add(panel74);
             flowLayoutPanel3.Controls.Add(panel75);
             flowLayoutPanel3.Controls.Add(panel76);
-            flowLayoutPanel3.Location = new System.Drawing.Point(52, 54);
+            flowLayoutPanel3.Location = new System.Drawing.Point(477, 56);
             flowLayoutPanel3.Name = "flowLayoutPanel3";
-            flowLayoutPanel3.Size = new System.Drawing.Size(338, 93);
+            flowLayoutPanel3.Size = new System.Drawing.Size(341, 137);
             flowLayoutPanel3.TabIndex = 19;
             // 
             // panel74
@@ -1491,13 +1510,13 @@ namespace AccountChecker
             panel74.Controls.Add(label79);
             panel74.Location = new System.Drawing.Point(3, 3);
             panel74.Name = "panel74";
-            panel74.Size = new System.Drawing.Size(160, 38);
+            panel74.Size = new System.Drawing.Size(329, 35);
             panel74.TabIndex = 13;
             // 
             // ClaimEventRewardsCheckBox
             // 
             ClaimEventRewardsCheckBox.AutoSize = true;
-            ClaimEventRewardsCheckBox.Location = new System.Drawing.Point(134, 13);
+            ClaimEventRewardsCheckBox.Location = new System.Drawing.Point(298, 13);
             ClaimEventRewardsCheckBox.Name = "ClaimEventRewardsCheckBox";
             ClaimEventRewardsCheckBox.Size = new System.Drawing.Size(15, 14);
             ClaimEventRewardsCheckBox.TabIndex = 1;
@@ -1506,9 +1525,11 @@ namespace AccountChecker
             // label79
             // 
             label79.AutoSize = true;
+            label79.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label79.ForeColor = System.Drawing.Color.LightYellow;
             label79.Location = new System.Drawing.Point(3, 12);
             label79.Name = "label79";
-            label79.Size = new System.Drawing.Size(117, 15);
+            label79.Size = new System.Drawing.Size(156, 21);
             label79.TabIndex = 0;
             label79.Text = "Claim Event Rewards";
             // 
@@ -1516,15 +1537,15 @@ namespace AccountChecker
             // 
             panel75.Controls.Add(BuyChampionShardsCheckBox);
             panel75.Controls.Add(label80);
-            panel75.Location = new System.Drawing.Point(169, 3);
+            panel75.Location = new System.Drawing.Point(3, 44);
             panel75.Name = "panel75";
-            panel75.Size = new System.Drawing.Size(160, 38);
+            panel75.Size = new System.Drawing.Size(329, 35);
             panel75.TabIndex = 14;
             // 
             // BuyChampionShardsCheckBox
             // 
             BuyChampionShardsCheckBox.AutoSize = true;
-            BuyChampionShardsCheckBox.Location = new System.Drawing.Point(134, 13);
+            BuyChampionShardsCheckBox.Location = new System.Drawing.Point(298, 13);
             BuyChampionShardsCheckBox.Name = "BuyChampionShardsCheckBox";
             BuyChampionShardsCheckBox.Size = new System.Drawing.Size(15, 14);
             BuyChampionShardsCheckBox.TabIndex = 1;
@@ -1533,9 +1554,11 @@ namespace AccountChecker
             // label80
             // 
             label80.AutoSize = true;
+            label80.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label80.ForeColor = System.Drawing.Color.LightYellow;
             label80.Location = new System.Drawing.Point(3, 12);
             label80.Name = "label80";
-            label80.Size = new System.Drawing.Size(124, 15);
+            label80.Size = new System.Drawing.Size(164, 21);
             label80.TabIndex = 0;
             label80.Text = "Buy Champion Shards";
             // 
@@ -1543,15 +1566,15 @@ namespace AccountChecker
             // 
             panel76.Controls.Add(BuyBlueEssenceCheckBox);
             panel76.Controls.Add(label81);
-            panel76.Location = new System.Drawing.Point(3, 47);
+            panel76.Location = new System.Drawing.Point(3, 85);
             panel76.Name = "panel76";
-            panel76.Size = new System.Drawing.Size(160, 38);
+            panel76.Size = new System.Drawing.Size(329, 35);
             panel76.TabIndex = 14;
             // 
             // BuyBlueEssenceCheckBox
             // 
             BuyBlueEssenceCheckBox.AutoSize = true;
-            BuyBlueEssenceCheckBox.Location = new System.Drawing.Point(134, 13);
+            BuyBlueEssenceCheckBox.Location = new System.Drawing.Point(298, 13);
             BuyBlueEssenceCheckBox.Name = "BuyBlueEssenceCheckBox";
             BuyBlueEssenceCheckBox.Size = new System.Drawing.Size(15, 14);
             BuyBlueEssenceCheckBox.TabIndex = 1;
@@ -1560,9 +1583,11 @@ namespace AccountChecker
             // label81
             // 
             label81.AutoSize = true;
+            label81.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label81.ForeColor = System.Drawing.Color.LightYellow;
             label81.Location = new System.Drawing.Point(3, 12);
             label81.Name = "label81";
-            label81.Size = new System.Drawing.Size(97, 15);
+            label81.Size = new System.Drawing.Size(128, 21);
             label81.TabIndex = 0;
             label81.Text = "Buy Blue Essence";
             // 
@@ -1603,7 +1628,6 @@ namespace AccountChecker
             Controls.Add(BackButton);
             Controls.Add(accountNameTitle);
             Controls.Add(tabControl1);
-            FormBorderStyle = FormBorderStyle.SizableToolWindow;
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "SingleAccount";
             StartPosition = FormStartPosition.CenterScreen;

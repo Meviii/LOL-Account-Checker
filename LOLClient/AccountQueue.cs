@@ -1,5 +1,6 @@
 ﻿using AccountChecker.Models;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 
 namespace AccountChecker;
@@ -8,50 +9,36 @@ namespace AccountChecker;
 
 public static class AccountQueue
 {
-    // Queue to store AccountCombo objects.
-    private static Queue<AccountCombo> _queue = new();
+    // ConcurrentQueue to store AccountCombo objects.
+    private static readonly ConcurrentQueue<AccountCombo> _queue = new();
 
     // Enqueues an AccountCombo object.
     public static void Enqueue(AccountCombo account)
     {
-        lock (_queue)
-        {
-            _queue.Enqueue(account);
-        }
+        _queue.Enqueue(account);
     }
 
     // Dequeues an AccountCombo object.
-    public static AccountCombo Dequeue()
+    public static bool Dequeue(out AccountCombo account)
     {
-        lock (_queue)
-        {
-            return _queue.Dequeue();
-        }
+        return _queue.TryDequeue(out account);
     }
 
     // Checks if the queue is empty.
     public static bool IsEmpty()
     {
-        lock (_queue)
-        {
-            return _queue.Count == 0;
-        }
+        return !_queue.TryPeek(out _);
     }
 
     // Returns the number of elements in the queue.
     public static int Count()
     {
-        lock (_queue)
-        {
-            return _queue.Count;
-        }
+        return _queue.Count;
     }
 
     public static void Clear()
     {
-        lock (_queue)
-        {
-            _queue.Clear();
-        }
+        while (_queue.TryDequeue(out _)) ;
     }
 }
+

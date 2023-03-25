@@ -64,7 +64,9 @@ public class Runner
             CleanUp();
             return;
         }
-
+        
+        Main.SuccessfulAccounts += 1;
+        
         // If both RiotClientRunner and LeagueClientRunner succeed, print the completed username to the console
         Console.WriteLine($"Completed {combo.Username}");
         CleanUp();
@@ -95,6 +97,8 @@ public class Runner
             return false;
         }
 
+        Main.SuccessfulAccounts += 1;
+        
         // If both RiotClientRunner and LeagueClientRunner succeed, print the completed username to the console
         Console.WriteLine($"Completed {combo.Username}");
         CleanUp();
@@ -125,6 +129,8 @@ public class Runner
             CleanUp();
             return;
         }
+
+        Main.SuccessfulAccounts += 1;
 
         // If both RiotClientRunner and LeagueClientRunner succeed, print the completed username to the console
         Console.WriteLine($"Completed {combo.Username}");
@@ -228,9 +234,11 @@ public class Runner
             }
             _hextech = new(leagueConnection, _loot);
             await ExecuteHextechTasks(); // Executes Hextech tasks on account
+
+            _eventData = new(leagueConnection);
             await ExecuteEventTasks(); // Executes Event tasks on account
 
-            await _loot.RefreshLootAsync();
+           await _loot.RefreshLootAsync();
         }
 
         await _coreUtility.ExportAccount(_account); // Export account
@@ -258,6 +266,7 @@ public class Runner
         await _accountData.GetQueueStats();
         await _accountData.GetHonorStatsAsync();
         await _accountData.GetFriendsDataAsync();
+        await _accountData.GetLastPlayDateAsync();
     }
 
     // This method executes the wanted Hextech Tasks on an account asynchronously.
@@ -331,9 +340,12 @@ public class Runner
     {
         var tasks = await _coreUtility.ReadFromTasksConfigFile();
 
-        if (tasks[TasksConfig.ClaimEventRewards])
+        foreach (var task in tasks)
+        {
+            if (tasks[TasksConfig.ClaimEventRewards] && task.Value == true)
             {
-            return;
+                await _eventData.ClaimEventRewardsAsync();
+            }
         }
 
     }

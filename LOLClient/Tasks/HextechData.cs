@@ -27,11 +27,13 @@ public class HextechData
         }
     }
 
-    public async Task PostRecipeAsync(string recipeName,List<string> materials, int repeat = 1)
+    public async Task PostRecipeAsync(string recipeName,List<string> materials, int repeat = 1, int timeout = 8)
     {
-        await _connection.RequestAsync(HttpMethod.Post,
-                                       $"/lol-loot/v1/recipes/{recipeName}/craft?repeat={Convert.ToInt32(repeat)}",
-                                       materials, true);
+
+        var response = await _connection.RequestAsync(HttpMethod.Post,
+                                        $"/lol-loot/v1/recipes/{recipeName}/craft?repeat={Convert.ToInt32(repeat)}",
+                                        materials, true);
+
     }
 
     public async Task DisenchantEternalShards()
@@ -43,7 +45,7 @@ public class HextechData
 
             await PostRecipeAsync($"{eternal["type"]}_DISENCHANT", materials, Convert.ToInt32(eternal["count"].ToString()));
 
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
         }
     }
 
@@ -56,7 +58,7 @@ public class HextechData
 
             await PostRecipeAsync($"{champ["type"]}_disenchant", materials, Convert.ToInt32(champ["count"].ToString()));
 
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
         }
     }
 
@@ -69,7 +71,7 @@ public class HextechData
 
             await PostRecipeAsync($"{champ["type"]}_disenchant", materials, Convert.ToInt32(champ["count"].ToString()));
 
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
         }
     }
     public async Task DisenchantSkinShards()
@@ -81,7 +83,7 @@ public class HextechData
             
             await PostRecipeAsync($"{skin["type"]}_disenchant", materials, Convert.ToInt32(skin["count"].ToString()));
 
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
         }
     }
     public async Task CraftKeysAsync() {
@@ -135,8 +137,6 @@ public class HextechData
                 continue;
             }
         }
-
-        await OpenChestsAsync();
     }
 
     public async Task OpenLootAsync()

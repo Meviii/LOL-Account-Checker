@@ -46,15 +46,16 @@ public class Account
     public string BE { get; set; } = "0";
     public string RP { get; set; } = "0";
     public string OE { get; set; } = "0";
-    public List<Champion> Champions { get; set; } = new List<Champion>();
-    public List<Skin> Skins { get; set; } = new List<Skin>();
+    public List<Champion> Champions { get; set; } = new();
+    public List<Skin> Skins { get; set; } = new();
+    public string LastPlayDate { get; set; } = "Unknown";
     public bool ChatRestricted { get; set; }
     public bool LowPriorityQueue { get; set; }
-    public List<Skin> HextechSkins { get; set; } = new List<Skin>();
+    public List<Skin> HextechSkins { get; set; } = new();
     public bool IsEmailVerified { get; set; }
     public Rank CurrentRank { get; set; }
     public Rank HighestRank { get; set; }
-    public HonorLevel HonorLevel { get; set; }
-    public List<Friend> Friends { get; set; } = new List<Friend>();
+    public HonorLevel HonorLevel { get; set; } = new();
+    public List<Friend> Friends { get; set; } = new();
     public Account() { }
 }

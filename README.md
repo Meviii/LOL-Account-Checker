@@ -6,7 +6,7 @@ This program is a League of Legends account checker supporting multi threading w
 
 ![main](images/main.PNG)
 
-*Please be aware that this program is not 100% stable and can sometimes catch unknown exceptions.*
+*Please be aware that this program is not 100% stable and can rarely catch unknown exceptions.*
 
 ## Core Features
 
@@ -16,7 +16,8 @@ This program is a League of Legends account checker supporting multi threading w
 - Comprehensive details on each successfully checked account, including purchase dates, owned champions, owned skins, and more.  
 - Automatically execute Hextech Loot related tasks such as disenchanting, claiming etc.
 - Automatic removal of all friends and friend requests.
-- Re-queue system for failed accounts  
+- Claim event rewards
+- Re-queue system for accounts that failed due to errors.
 
 ## How to use
 
@@ -43,18 +44,23 @@ The program creates a Riot client to authenticate the user and a League client t
 - A League of Legends account
 
 ## Not Yet Implemented
-- Claiming event rewards and spending event tokens  
+- Spending event tokens  
 - Custom exports  
 - Export banned or failed(with reason) accounts
-- Friends list modification
 
 ## Application & Usage
 
 ### Main
 
-The main process that runs the whole account checking operation. It includes an option to choose the combo list which is the account text file (typically looks like {username}{delimiter}{password} eg. user:pass). The delimiter is the character that splits the username and password. 
+The main process that runs the whole account checking operation. It includes an option to choose the combo list which is the account text file (typically looks like {username}{delimiter}{password} eg. user:pass). The delimiter is the character that splits the username and password. Also provides a quick check feature and tasks configuration for all accounts in the loaded combolist.
 
 ![main](images/main.PNG)
+
+### Tasks
+
+The tasks available for executing for all accounts in the combolist. Located in the main view.
+
+![main](images/tasks.png)
 
 ### Settings
 

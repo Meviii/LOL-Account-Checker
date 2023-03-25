@@ -123,15 +123,37 @@ public class UIUtility
         new Settings().ShowDialog();
     }
 
+    // This method is responsible of opening the Tasks Form as a Dialog.
+    public void LoadTasksViewAsDialog()
+    {
+
+        // Loops over active forms and shows (or creates) the Tasks form.
+        foreach (Form form in Application.OpenForms)
+        {
+            if (form.GetType() == typeof(FeatureTasks))
+            {
+                form.Visible = true;
+                form.Show();
+                form.Focus();
+                return;
+            }
+        }
+
+        new FeatureTasks().ShowDialog();
+    }
+
     // This method initializes the provided progress bar.
     public void InitializeProgressBar(ProgressBar progressBar, int accountCount)
     {
+
         if (progressBar.InvokeRequired)
         {
             progressBar.Invoke(new Action(() => InitializeProgressBar(progressBar, accountCount)));
         }
         else
         {
+
+            progressBar.Value = 0;
             progressBar.Minimum = 0;
             progressBar.Maximum = accountCount;
         }

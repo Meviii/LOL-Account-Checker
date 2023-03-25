@@ -51,7 +51,7 @@ public class LeagueConnection : Connection
         return true;
     }
 
-    private async Task<bool> WaitForSessionAsync(int timeout = 12)
+    private async Task<bool> WaitForSessionAsync(int timeout = 15)
     {
         int counter = 0;
 
@@ -81,6 +81,7 @@ public class LeagueConnection : Connection
                     {
                         if (result["error"]["messageId"].ToString().ToLower() == "ACCOUNT_BANNED".ToLower())
                         {
+                            Main.FailAccounts += 1;
                             Console.WriteLine("Account banned.");
                             return false;
                         }else if (result["error"]["messageId"].ToString().ToLower() == "FAILED_TO_COMMUNICATE_WITH_LOGIN_QUEUE".ToLower())

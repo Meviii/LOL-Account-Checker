@@ -52,8 +52,17 @@ public class RiotAuth
             {
                 if (content["error"].ToString() == "auth_failure")
                 {
+                    Main.FailAccounts += 1;
                     return false;
                 }
+
+                if (content["error"].ToString() == "rate_limited")
+                {
+                    Console.WriteLine("Rate limited. Re-added to queue");
+                    AccountQueue.Enqueue(combo);
+                    return false;
+                }
+
             }
             
             if (content.SelectToken("errorCode") != null)
