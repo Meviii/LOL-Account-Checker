@@ -60,7 +60,7 @@ The main process that runs the whole account checking operation. It includes an 
 
 The tasks available for executing for all accounts in the combolist. Located in the main view.
 
-![main](images/tasks.png)
+![main](images/tasks.PNG)
 
 ### Settings
 
