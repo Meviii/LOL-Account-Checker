@@ -51,11 +51,10 @@ public class LeagueConnection : Connection
         return true;
     }
 
-    private async Task<bool> WaitForSessionAsync(int timeout = 15)
+    private async Task<bool> WaitForSessionAsync(int timeout = 12)
     {
-        int counter = 0;
 
-        while (true)
+        while (timeout > 0)
         {
             try
             {
@@ -93,22 +92,19 @@ public class LeagueConnection : Connection
                     }
                 }
 
-                if (counter == timeout)
-                {
-                    AccountQueue.Enqueue(_accountCombo);
-                    Console.WriteLine("Timed Out. Re-added to queue.");
-                    return false;
-                }
-
-                counter++;
+                timeout--;
                 Thread.Sleep(1500);
             }
             catch
             {
-                counter++;
+                timeout--;
                 // retry
             }
         }
+
+        AccountQueue.Enqueue(_accountCombo);
+        Console.WriteLine("Timed Out. Re-added to queue.");
+        return false;
     }
 
     private void CreateLeagueClient()
