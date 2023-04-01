@@ -385,7 +385,7 @@ public class AccountData
         if (data == null)
             return;
 
-        if (data["lowPriorityData"]["penaltyTime"].ToString() != "0.0")
+        if (data["lowPriorityData"]["penaltyTime"].ToString() != "0")
         {
             _account.LowPriorityQueue = true;
         }
