@@ -70,11 +70,9 @@ Must be set up before being granted access to the main view. It includes the "Ri
 
 ### Accounts
 
-*Note: To display an account, double click on summoner name cell*
-
 Lists all the accounts in the Exports folder in a grid view that displays general information about each account. Clicking on a specific row will open a view with more details about the account.
 
-![main](images/accounts.PNG)
+![main](images/accounts_update.PNG)
 
 ### Single Account
 
