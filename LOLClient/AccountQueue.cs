@@ -11,34 +11,50 @@ public static class AccountQueue
 {
     // ConcurrentQueue to store AccountCombo objects.
     private static readonly ConcurrentQueue<AccountCombo> _queue = new();
+    private static readonly object _lock = new();
 
     // Enqueues an AccountCombo object.
     public static void Enqueue(AccountCombo account)
     {
-        _queue.Enqueue(account);
+        lock (_lock)
+        {
+            _queue.Enqueue(account);
+        }
     }
 
     // Dequeues an AccountCombo object.
     public static bool Dequeue(out AccountCombo account)
     {
-        return _queue.TryDequeue(out account);
+        lock (_lock)
+        {
+            return _queue.TryDequeue(out account);
+        }
     }
 
     // Checks if the queue is empty.
     public static bool IsEmpty()
     {
-        return !_queue.TryPeek(out _);
+        lock (_lock)
+        {
+            return !_queue.TryPeek(out _);
+        }
     }
 
     // Returns the number of elements in the queue.
     public static int Count()
     {
-        return _queue.Count;
+        lock (_lock)
+        {
+            return _queue.Count;
+        }
     }
 
     public static void Clear()
     {
-        while (_queue.TryDequeue(out _)) ;
+        lock (_lock)
+        {
+            while (_queue.TryDequeue(out _)) ;
+        }
     }
 }
 

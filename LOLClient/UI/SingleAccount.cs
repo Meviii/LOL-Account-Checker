@@ -32,16 +32,8 @@ public partial class SingleAccount : Form
         InitializeView();
 
         // TEMP TILL IMPLEMENTED
-        //ClaimEventRewardsCheckBox.Enabled = false;
         BuyChampionShardsCheckBox.Enabled = false;
-        //CraftKeysCheckBox.Enabled = false;
-        //OpenChestsCheckBox.Enabled = false;
-        //OpenCapsulesOrbsShardsCheckBox.Enabled = false;
         BuyBlueEssenceCheckBox.Enabled = false;
-        //DisenchantSkinShardsCheckBox.Enabled = false;
-        //DisenchantEternalShardsCheckBox.Enabled = false;
-        //DisenchantChampionShardsCheckBox.Enabled = false;
-
 
     }
 

@@ -25,6 +25,25 @@ public partial class AccountList : Form
         _coreUtility = new CoreUtility();
         InitializeComponent();
         FillAccountsDataTableAsync();
+        LoadComboBox();
+    }
+
+    private void LoadComboBox()
+    {
+        // Default
+        RegionComboBox.Items.Add("None");
+        RegionComboBox.SelectedIndex = 0;
+
+        // Hard coded Regions. Better to use ENUM
+        RegionComboBox.Items.Add("NA");
+        RegionComboBox.Items.Add("EUW");
+        RegionComboBox.Items.Add("OCE");
+        RegionComboBox.Items.Add("EUNE");
+        RegionComboBox.Items.Add("RU");
+        RegionComboBox.Items.Add("TR");
+        RegionComboBox.Items.Add("BR");
+        RegionComboBox.Items.Add("LAS");
+        RegionComboBox.Items.Add("LAN");
     }
 
     private async void FillAccountsDataTableAsync()
@@ -142,10 +161,157 @@ public partial class AccountList : Form
                 // Show the filtered data
                 accountsGridView.DataSource = rows.CopyToDataTable();
             }
-            else
-            {
-            }
+
         }
     }
 
+    private void label4_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    // Filter by Region
+    private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    // Filter > Level 29 
+    private void checkBox1_CheckedChanged(object sender, EventArgs e)
+    {
+        if (FilterLevel29AboveCheckBox.Checked)
+        {
+            if (!FilterLevel30BelowCheckBox.Checked)
+            {
+                FilterLevel30BelowCheckBox.Enabled = false;
+            }
+        }
+        else
+        {
+            FilterLevel30BelowCheckBox.Enabled = true;
+        }
+    }
+
+    private void FilterButton_Click(object sender, EventArgs e)
+    {
+
+        if (_originalAccountsDataTable == null)
+            return;
+
+        string filterQuery = "";
+
+        accountsGridView.DataSource = _originalAccountsDataTable;
+
+        DataTable dataTable = accountsGridView.DataSource as DataTable;
+
+        // > Level 29 
+        if (FilterLevel29AboveCheckBox.Checked)
+        {
+            filterQuery += "Level > 29";
+        }
+
+        // < Level 30
+        if (FilterLevel30BelowCheckBox.Checked)
+        {
+            filterQuery += "Level < 30";
+        }
+
+        // Unverified
+        if (FilterUnVerifiedCheckBox.Checked)
+        {
+            if (FilterLevel29AboveCheckBox.Checked || FilterLevel30BelowCheckBox.Checked)
+            {
+                filterQuery += " AND Verified LIKE 'False'";
+            }
+            else
+            {
+                filterQuery += "Verified LIKE 'False'";
+            }
+        }
+
+        // Region
+        // HARD CODED FOR PROPER REGION SELECTION
+        string regionText = "";
+        if (RegionComboBox.Text == "EUW")
+        {
+            regionText = "Europe";
+        }
+        else if (RegionComboBox.Text == "NA")
+        {
+            regionText = "North America";
+        }
+        else if (RegionComboBox.Text == "OCE")
+        {
+            regionText = "Oceania";
+        }
+        else if (RegionComboBox.Text == "EUNE")
+        {
+            regionText = "EU Nordic & East";
+        }
+        else if (RegionComboBox.Text == "RU")
+        {
+            regionText = "Russia";
+        }
+        else if (RegionComboBox.Text == "TR")
+        {
+            regionText = "Turkey";
+        }
+        else if (RegionComboBox.Text == "LAS")
+        {
+            regionText = "Latin America South";
+        }
+        else if (RegionComboBox.Text == "LAN")
+        {
+            regionText = "Latin America North";
+        }
+        else if (RegionComboBox.Text == "BR")
+        {
+            regionText = "Brazil";
+        }
+
+        // Check if default is selected
+        if (RegionComboBox.SelectedIndex != 0)
+        {
+            if (FilterLevel29AboveCheckBox.Checked || 
+                FilterLevel30BelowCheckBox.Checked || 
+                FilterUnVerifiedCheckBox.Checked)
+            {
+                filterQuery += $" AND Region LIKE '%{regionText}%'";
+            }
+            else
+            {
+                filterQuery += $"Region LIKE '%{regionText}%'";
+            }
+        }
+
+        var rows = dataTable.Select(filterQuery);
+
+        // If no match found
+        if (rows.Length == 0)
+        {
+            // Create an empty DataTable with the same schema
+            DataTable emptyDataTable = dataTable.Clone();
+            accountsGridView.DataSource = emptyDataTable;
+            return;
+        }
+
+        // Show the filtered data
+        accountsGridView.DataSource = rows.CopyToDataTable();
+
+    }
+
+    private void FilterLevel30BelowCheckBox_CheckedChanged(object sender, EventArgs e)
+    {
+        if (FilterLevel30BelowCheckBox.Checked)
+        {
+            if (!FilterLevel29AboveCheckBox.Checked)
+            {
+                FilterLevel29AboveCheckBox.Enabled = false;
+            }
+        }
+        else
+        {
+            FilterLevel29AboveCheckBox.Enabled = true;
+        }
+    }
 }

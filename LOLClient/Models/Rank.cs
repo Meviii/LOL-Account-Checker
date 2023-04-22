@@ -38,6 +38,10 @@ public class Rank
     {
         if (Tier == "None")
             return "Unranked"; 
-        return $"{Tier} {Division}";
+
+        if (Wins == 0 && Losses == 0)
+            return $"{Tier} {Division}";
+
+        return $"{Tier} {Division}, Wins: {Wins}, Losses: {Losses}";
     }
 }

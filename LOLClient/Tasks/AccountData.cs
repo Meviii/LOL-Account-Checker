@@ -49,10 +49,10 @@ public class AccountData
 
     // Method that asynchronously makes a GET request to the League API's "/lol-champions/v1/owned-champions-minimal" endpoint
     // to retrieve the list of champions that the account owns in minimal form.
-    private async Task<JArray> RequestChampionsAsync()
+    private async Task<JArray> RequestChampionsAsync(int timeout = 8)
     {
         // Loop indefinitely until a successful response is received.
-        while (true)
+        while (timeout > 0)
         {
             // Make the GET request to the API.
             var response = await _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-champions/v1/owned-champions-minimal", null);
@@ -68,9 +68,12 @@ public class AccountData
                 }
             }
 
-            // Wait 5 seconds before retrying the request.
+            // Wait 1.5 seconds before retrying the request.
             Thread.Sleep(1500);
+            timeout--;
         }
+
+        return null; // enqueue account
     }
 
     // Method that asynchronously retrieves the list of champions owned by the account.
@@ -80,6 +83,9 @@ public class AccountData
 
         // Retrieve the list of champions using the RequestChampionsAsync method.
         var champs = await RequestChampionsAsync();
+
+        if (champs == null)
+            return null;
 
         // Filter the champions to only include those that are owned by the account.
         foreach (var champ in champs)
@@ -100,6 +106,9 @@ public class AccountData
     {
         // Retrieve the list of owned champions using the GetOwnedChampionsAsync method.
         var ownedChamps = await GetOwnedChampionsAsync();
+
+        if (ownedChamps == null)
+            return;
 
         // Initialize an empty list of Champion objects.
         var champs = new List<Champion>();
@@ -241,10 +250,10 @@ public class AccountData
 
     // This asynchronous method requests a list of all the skins owned by the current summoner.
     // If the request fails or returns an empty array, it will retry every 5 seconds until it succeeds.
-    private async Task<JArray> RequestSkinsAsync()
+    private async Task<JArray> RequestSkinsAsync(int timeout = 8)
     {
         // Keep retrying until the request succeeds.
-        while (true)
+        while (timeout > 0)
         {
             // Make an HTTP GET request to the "/lol-inventory/v2/inventory/CHAMPION_SKIN" endpoint using the _leagueConnection object.
             var response = await _leagueConnection.RequestAsync(HttpMethod.Get, "/lol-inventory/v2/inventory/CHAMPION_SKIN", null);
@@ -266,9 +275,11 @@ public class AccountData
             }
 
             // If the request fails or returns an empty array, wait for 5 seconds and try again.
-            Thread.Sleep(500);
+            Thread.Sleep(1500);
+            timeout--;
         }
 
+        return null;
     }
 
     // This asynchronous method returns a JSON array of all the skins that the current summoner owns.
@@ -276,6 +287,9 @@ public class AccountData
     {
         // Call the RequestSkinsAsync() method to get a list of all the skins.
         var skins = await RequestSkinsAsync();
+
+        if (skins == null)
+            return null;
 
         // Create a new JSON array to hold the owned skins.
         var ownedSkins = new JArray();
@@ -301,6 +315,9 @@ public class AccountData
     {
         // Initialize a list to store the owned skins
         var ownedSkins = await GetOwnedSkinsAsync();
+
+        if (ownedSkins == null)
+            return;
 
         // Load the skin data from file
         string filePath = $"{PathConfig.SkinsFile}";

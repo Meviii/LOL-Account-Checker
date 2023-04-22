@@ -7,11 +7,7 @@ using System.Net.Sockets;
 using System.Net;
 using System.Threading.Tasks;
 using System.Threading;
-using AccountChecker.Models;
 using Polly;
-using Polly.Extensions.Http;
-using Microsoft.VisualBasic.Devices;
-using Azure;
 
 namespace AccountChecker.Connections;
 public class Connection : IDisposable

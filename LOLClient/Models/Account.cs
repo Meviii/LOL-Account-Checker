@@ -9,7 +9,7 @@ namespace AccountChecker.Models;
 
 public class Account
 {
-    private static readonly Dictionary<string, string> regions = new()
+    private static readonly Dictionary<string, string> regions = new() // Better to use ENUM
     {
         { "NA", "North America" },
         { "EUW", "Europe West" },
@@ -27,7 +27,7 @@ public class Account
     public string Username { get; set; }
     public string Password { get; set; }
     public string Level { get; set; }
-    public string Region // better to be enum
+    public string Region
     { 
 
         get { return _region; }

@@ -11,7 +11,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.Diagnostics;
 using System.Configuration;
 
@@ -343,9 +342,6 @@ public partial class Main : Form
             Console.WriteLine($"Remaining Combos: {remainingCombos}");
             var tasks = new List<Task>();
 
-            UpdateSuccessAccounts();
-            UpdateFailAccounts();
-
             // Start a new task for each thread
             for (int i = 0; i < threadCount; i++)
             {
@@ -413,6 +409,9 @@ public partial class Main : Form
 
             // Get new queue count to care for retry accounts
             remainingCombos = AccountQueue.Count();
+
+            UpdateSuccessAccounts();
+            UpdateFailAccounts();
 
             // Clear the tasks list and perform cleanup
             tasks.Clear();
