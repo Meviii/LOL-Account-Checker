@@ -30,7 +30,7 @@ public class RiotAuth
         }
     }
 
-    private async Task<bool> CanAuthenticateAsync(AccountCombo combo)
+    private async Task<bool> CanAuthenticateAsync(AccountCombo combo, int timeout = 8)
     {
         
         var data = new Dictionary<string, object>()
@@ -40,51 +40,53 @@ public class RiotAuth
             {"persistLogin", false},
         };
 
-        while (true)
+        while (timeout > 0)
         {
             var response = await _connection.RequestAsync(HttpMethod.Put, "/rso-auth/v1/session/credentials", data);
             var content = JToken.Parse(await response.Content.ReadAsStringAsync());
 
-            // Log response
-            _coreUtility.LogToFile("Credentials_LOG.txt", $"{combo.Username} - {response.StatusCode} - \n{await response.Content.ReadAsStringAsync()}\n\n");
-
-            if (content.SelectToken("error") != null)
-            {
-                if (content["error"].ToString() == "auth_failure")
-                {
-                    Main.FailAccounts += 1;
-                    return false;
-                }
-
-                if (content["error"].ToString() == "rate_limited")
-                {
-                    Console.WriteLine("Rate limited. Re-added to queue");
-                    AccountQueue.Enqueue(combo);
-                    return false;
-                }
-
-            }
-            
-            if (content.SelectToken("errorCode") != null)
-            {
-                if (content["errorCode"].ToString() == "RPC_ERROR")
-                {
-                    Console.WriteLine("Riot Session error. Try again later.");
-                    _client.CloseClients();
-                    throw new Exception("Riot API Error. Try again in 5 minutes");
-                }
-            }
 
             if (response.IsSuccessStatusCode)
             {
+
+                // Log response
+                _coreUtility.LogToFile("Credentials_LOG.txt", $"{combo.Username} - {response.StatusCode} - \n{await response.Content.ReadAsStringAsync()}\n\n");
+
+                if (content.SelectToken("error") != null)
+                {
+                    if (content["error"].ToString() == "auth_failure")
+                    {
+                        Main.FailAccounts += 1;
+                        return false;
+                    }
+
+                    if (content["error"].ToString() == "rate_limited")
+                    {
+                        Console.WriteLine("Rate limited. Use VPN.");
+                        return false;
+                    }
+
+                }
+
+                if (content.SelectToken("errorCode") != null)
+                {
+                    if (content["errorCode"].ToString() == "RPC_ERROR")
+                    {
+                        Console.WriteLine("Riot Session error. Try again later.");
+                        _client.CloseClients();
+                        throw new Exception("Riot API Error. Try again in 5-10 minutes or use a VPN/Proxy");
+                    }
+                }
+
                 return true;
             }
-
-            Thread.Sleep(1000);
-
-            return false;
+            
+            Thread.Sleep(1500);
+            timeout--;
+            
         }
 
+        return false;
     }
 
     private async void AcceptEULA(int timeout = 10)
