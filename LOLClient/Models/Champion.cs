@@ -12,11 +12,7 @@ public class Champion
 
     public string Name { get; set; }
 
-    public string SquarePortraitPath { get; set; }
-
     public DateTime PurchaseDate { get; set; }
-
-    public string MasteryPoints { get; set; }
 
     public Champion() { }
 

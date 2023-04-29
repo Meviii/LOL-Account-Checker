@@ -8,6 +8,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -94,43 +95,31 @@ public class CoreUtility
     // This method loads a list of accounts from JSON files in a specified folder
     public async Task<List<Account>> LoadAccountsFromExportsFolderAsync()
     {
-        // Declare a JArray variable to hold the accounts
-        JArray accounts = new();
-
-        // Get the path of the exports folder
         string folderPath = $"{PathConfig.ExportsFolder}";
 
-        // If the exports folder does not exist, return null
         if (!Directory.Exists(folderPath))
             return null;
 
-        // Loop through each file in the exports folder
-        foreach (string filePath in Directory.GetFiles(folderPath))
-        {
-            // If the file exists and has a .json extension, attempt to parse its contents as a JObject
-            if (File.Exists(filePath) && filePath.EndsWith(".json"))
+        var fileTasks = Directory.GetFiles(folderPath)
+            .Where(filePath => filePath.EndsWith(".json"))
+            .Select(async filePath =>
             {
                 try
                 {
-                    // Read the contents of the file asynchronously and store them in a string variable
                     string content = await File.ReadAllTextAsync(filePath);
-
-                    // Parse the string as a JObject and store it in a variable
-                    var account = JObject.Parse(content);
-
-                    // Add the account to the accounts JArray
-                    accounts.Add(account);
+                    return JObject.Parse(content);
                 }
                 catch
                 {
-                    // If there is an error parsing the file, skip it and continue to the next one
-                    continue;
+                    return null;
                 }
-            }
-        }
+            });
 
-        // Convert the accounts JArray to a list of Account objects and return it
-        return JsonConvert.DeserializeObject<List<Account>>(accounts.ToString());
+        var accounts = (await Task.WhenAll(fileTasks))
+            .Where(account => account != null)
+            .ToList();
+
+        return JsonConvert.DeserializeObject<List<Account>>(JsonConvert.SerializeObject(accounts));
     }
 
     // This method returns a List holding tuples of each account extracted from the combolist. In <User,Pass> format
