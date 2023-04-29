@@ -48,9 +48,9 @@ public partial class AccountList : Form
 
     private async void FillAccountsDataTableAsync()
     {
-        var accounts = await _coreUtility.LoadAccountsFromExportsFolderAsync();
-        _accounts = accounts;
-        if (accounts == null)
+        _accounts = await _coreUtility.LoadAccountsFromExportsFolderAsync();
+        
+        if (_accounts == null)
         {
             return;
         }
@@ -68,7 +68,9 @@ public partial class AccountList : Form
         dataTable.Columns.Add("Last Game");
 
 
-        foreach (var account in accounts)
+        dataTable.BeginLoadData();
+
+        foreach (var account in _accounts)
         {
             dataTable.Rows.Add(
                 account.SummonerName,
@@ -83,6 +85,8 @@ public partial class AccountList : Form
                 account.LastPlayDate
                 );
         }
+
+        dataTable.EndLoadData();
 
         accountsGridView.DataSource = dataTable;
         _originalAccountsDataTable = dataTable;
