@@ -1,4 +1,5 @@
 ﻿using Microsoft.Identity.Client;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -28,6 +29,9 @@ public class Rank
 
     private string NormaliseString(string str)
     {
+        if (str.IsNullOrEmpty())
+            return str;
+
         var sb = new StringBuilder(str.ToLower());
         sb[0] = char.ToUpper(sb[0]);
 
@@ -36,7 +40,7 @@ public class Rank
 
     public override string ToString()
     {
-        if (Tier == "None")
+        if (Tier == "None" || Tier.IsNullOrEmpty())
             return "Unranked"; 
 
         if (Wins == 0 && Losses == 0)

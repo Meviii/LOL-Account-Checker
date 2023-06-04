@@ -356,7 +356,7 @@ public class AccountData
 
         if (data == null)
             return;
-
+        
         _account.CurrentRank = new Rank()
         {
             Tier = data["queueMap"]["RANKED_SOLO_5x5"]["tier"].ToString(),
