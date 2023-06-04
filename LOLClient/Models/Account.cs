@@ -58,4 +58,9 @@ public class Account
     public HonorLevel HonorLevel { get; set; } = new();
     public List<Friend> Friends { get; set; } = new();
     public Account() { }
+
+    public override string ToString()
+    {
+        return $"Summoner Name: {SummonerName}, Region: {Region}, BE: {BE}, RP: {RP}, Champs: {Champions.Count}, Skins: {Skins.Count}, Verified: {IsEmailVerified}";
+    }
 }

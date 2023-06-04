@@ -253,6 +253,8 @@ public class CoreUtility
     {
         lock (_lock)
         {
+            WriteToFile(account); // write to simple txt file
+
             // Build the file path for the JSON file based on the account's summoner name and the ExportsFolder directory.
             string filePath = $@"{PathConfig.ExportsFolder}{account.Username}.json";
             Console.WriteLine($"Saved to {filePath}");
@@ -271,5 +273,25 @@ public class CoreUtility
             File.WriteAllText(filePath, json);
         }
 
+    }
+
+    private void WriteToFile(Account account)
+    {
+        lock (_lock)
+        {
+            // Build the file path for the txt file based on the account's username.
+            string filePath = $@"{PathConfig.SimpleExportsFolder}{account.Username}.txt";
+
+            // Create the directory if it doesn't exist.
+            if (!Directory.Exists(PathConfig.SimpleExportsFolder))
+                Directory.CreateDirectory(PathConfig.SimpleExportsFolder);
+
+            // Create the JSON file if it doesn't exist and immediately dispose of the file stream to release the resources.
+            if (!File.Exists(filePath))
+                File.Create(filePath).Dispose();
+
+            // Write the JSON string to the file.
+            File.WriteAllText(filePath, account.ToString());
+        }
     }
 }
