@@ -4,6 +4,8 @@ using System.Threading;
 using System;
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
+using AccountChecker.Connections;
+using System.Linq;
 
 namespace AccountChecker;
 
@@ -18,9 +20,7 @@ public class Client
     private static readonly object _lock = new();
 
     // Constructor for the client
-    public Client()
-    {
-    }
+    public Client() { }
 
     // Starts a new process and adds it to the list of managed processes
     public int CreateClient(List<string> processArgs, string path)
