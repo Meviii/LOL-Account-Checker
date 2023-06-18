@@ -7,7 +7,9 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing.Text;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Reflection.Metadata;
 using System.Threading;
@@ -25,6 +27,8 @@ public class RiotConnection : Connection
     private static readonly object _lock = new();
     private readonly AccountCombo _accountCombo;
     private readonly CoreUtility _coreUtility;
+    public static bool SwitchToSingleThreadViaSingleClientOnly = false;
+
     public RiotConnection(AccountCombo accountCombo, Client client, string riotClientPath)
     {
         lock (_lock)
@@ -100,12 +104,11 @@ public class RiotConnection : Connection
         return false;
     }
 
-    public async Task<bool> WaitForLaunchAsync(int timeout = 30)
+    public async Task<bool> WaitForLaunchAsync(int timeout = 8)
     {
- 
-        var startTime = DateTime.Now;
+        int productContextPhaseCounter = 0;
 
-        while (true)
+        while (timeout != 0)
         {
             var response = await RequestAsync(HttpMethod.Get, "/rnet-lifecycle/v1/product-context-phase", null);
             var result = JToken.Parse(await response.Content.ReadAsStringAsync());
@@ -113,6 +116,37 @@ public class RiotConnection : Connection
             // Log result
             _coreUtility.LogToFile("ContextPhase_LOG.txt", $"{_accountCombo.Username} - {response.StatusCode} - \n{await response.Content.ReadAsStringAsync()}\n\n");
 
+            if (productContextPhaseCounter == 3)
+            {
+                SwitchToSingleThreadViaSingleClientOnly = true;
+
+                Console.WriteLine("Disabling multi threading...");
+                AccountQueue.Enqueue(_accountCombo);
+                return false;
+            }
+
+            if (result.ToString().ToLower() == "patchstatus".ToLower())
+            {
+                Console.WriteLine("League and Riot client update required...");
+                Console.WriteLine("If problem persists, program will automatically switch to single threading.");
+
+                productContextPhaseCounter += 1;
+            }
+
+            if (result.ToString().ToLower() == "eula".ToLower() || result.ToString().ToLower() == "waitingforeula".ToLower())
+            {
+                var eulaTimeout = 8;
+                while (eulaTimeout != 0)
+                {
+                    var eulaResponse = await RequestAsync(HttpMethod.Put, "/eula/v1/agreement/acceptance", null);
+
+                    if (eulaResponse.IsSuccessStatusCode)
+                        break;
+
+                    Thread.Sleep(1000);
+                    timeout--;
+                }
+            }
 
             if (result.ToString().ToLower() == "VngAccountRequired".ToLower())
             {
@@ -142,16 +176,13 @@ public class RiotConnection : Connection
                 return false;
             }
 
-            if ((DateTime.Now - startTime).TotalSeconds >= timeout)
-            {
-                Console.WriteLine("Failed to get product context phase. Re-added to queue.");
-                AccountQueue.Enqueue(_accountCombo);
-                return false;
-            }
-
-            Thread.Sleep(500);
+            Thread.Sleep(1500);
+            timeout--;
         }
-            
+
+        Console.WriteLine("Failed to get product context phase. Re-added to queue.");
+        AccountQueue.Enqueue(_accountCombo);
+        return false;
     }
 
     private void CreateRiotClient()
@@ -165,11 +196,13 @@ public class RiotConnection : Connection
                 "--remoting-auth-token=" + AuthToken,
                 "--launch-product=league_of_legends",
                 "--launch-patchline=live",
-                "--allow-multiple-clients",
                 "--locale=en_GB",
                 "--disable-auto-launch",
                 "--headless",
             };
+
+            if (!SwitchToSingleThreadViaSingleClientOnly)
+                processArgs.Add("--allow-multiple-clients");
 
             ProcessID = _client.CreateClient(processArgs, _riotClientPath);
         }
