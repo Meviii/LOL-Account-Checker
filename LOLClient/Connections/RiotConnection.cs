@@ -27,7 +27,6 @@ public class RiotConnection : Connection
     private static readonly object _lock = new();
     private readonly AccountCombo _accountCombo;
     private readonly CoreUtility _coreUtility;
-    public static bool SwitchToSingleThreadViaSingleClientOnly = false;
 
     public RiotConnection(AccountCombo accountCombo, Client client, string riotClientPath)
     {
@@ -95,93 +94,12 @@ public class RiotConnection : Connection
                 return false;
             }catch (AggregateException e)
             {
-                Console.WriteLine("Aggregate Exception at Authorization. Re adding to queue");
+                Console.WriteLine("Please stop checker and close all clients then retry.");
                 AccountQueue.Enqueue(_accountCombo);
                 return false;
             }
         }
 
-        return false;
-    }
-
-    public async Task<bool> WaitForLaunchAsync(int timeout = 8)
-    {
-        int productContextPhaseCounter = 0;
-
-        while (timeout != 0)
-        {
-            var response = await RequestAsync(HttpMethod.Get, "/rnet-lifecycle/v1/product-context-phase", null);
-            var result = JToken.Parse(await response.Content.ReadAsStringAsync());
-
-            // Log result
-            _coreUtility.LogToFile("ContextPhase_LOG.txt", $"{_accountCombo.Username} - {response.StatusCode} - \n{await response.Content.ReadAsStringAsync()}\n\n");
-
-            if (productContextPhaseCounter == 3)
-            {
-                SwitchToSingleThreadViaSingleClientOnly = true;
-
-                Console.WriteLine("Disabling multi threading...");
-                AccountQueue.Enqueue(_accountCombo);
-                return false;
-            }
-
-            if (result.ToString().ToLower() == "patchstatus".ToLower())
-            {
-                Console.WriteLine("League and Riot client update required...");
-                Console.WriteLine("If problem persists, program will automatically switch to single threading.");
-
-                productContextPhaseCounter += 1;
-            }
-
-            if (result.ToString().ToLower() == "eula".ToLower() || result.ToString().ToLower() == "waitingforeula".ToLower())
-            {
-                var eulaTimeout = 8;
-                while (eulaTimeout != 0)
-                {
-                    var eulaResponse = await RequestAsync(HttpMethod.Put, "/eula/v1/agreement/acceptance", null);
-
-                    if (eulaResponse.IsSuccessStatusCode)
-                        break;
-
-                    Thread.Sleep(1000);
-                    timeout--;
-                }
-            }
-
-            if (result.ToString().ToLower() == "VngAccountRequired".ToLower())
-            {
-                Console.WriteLine("\"VngAccountRequired\" error.");
-                Main.FailAccounts += 1;
-                return false;
-            }
-
-            if (result.ToString().ToLower() == "LeagueRegionElection".ToLower())
-            {
-                Thread.Sleep(2500);
-                AccountQueue.Enqueue(_accountCombo);
-                return false;
-            }
-
-            if (result.ToString().ToLower() == "WaitForLaunch".ToLower())
-            {
-                Thread.Sleep(1000);
-                return true;
-            }
-
-            if (result.ToString().ToLower() == "Login".ToLower())
-            {
-                // if account needs to be re authenticated
-                Console.WriteLine("\"Login\" error. Re-adding to queue");
-                AccountQueue.Enqueue(_accountCombo);
-                return false;
-            }
-
-            Thread.Sleep(1500);
-            timeout--;
-        }
-
-        Console.WriteLine("Failed to get product context phase. Re-added to queue.");
-        AccountQueue.Enqueue(_accountCombo);
         return false;
     }
 
@@ -199,10 +117,8 @@ public class RiotConnection : Connection
                 "--locale=en_GB",
                 "--disable-auto-launch",
                 "--headless",
+                "--allow-multiple-clients"
             };
-
-            if (!SwitchToSingleThreadViaSingleClientOnly)
-                processArgs.Add("--allow-multiple-clients");
 
             ProcessID = _client.CreateClient(processArgs, _riotClientPath);
         }

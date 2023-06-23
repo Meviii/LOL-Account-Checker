@@ -176,15 +176,6 @@ public class Runner
         _account.Username = combo.Username;
         _account.Password = combo.Password;
 
-        var didLaunch = await riotConnection.WaitForLaunchAsync(); // Wait for League Client to Launch. Must be processed after LOGIN
-
-        if (!didLaunch)
-        {
-            riotConnection.Dispose();
-            CleanUp();
-            return false;
-        }
-
         return true;
 
     }
