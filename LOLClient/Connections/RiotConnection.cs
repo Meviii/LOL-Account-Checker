@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace AccountChecker.Connections;
 
-public class RiotConnection : Connection
+public class RiotConnection : Connection, IDisposable
 {
 
     public string _riotClientPath;

@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace AccountChecker.Connections;
 
-public class LeagueConnection : Connection
+public class LeagueConnection : Connection, IDisposable
 {
     private readonly string _path;
     public Dictionary<string, object> RiotCredentials = null;
