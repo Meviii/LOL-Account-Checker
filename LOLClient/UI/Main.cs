@@ -339,8 +339,6 @@ public partial class Main : Form
         // Loop through combos until all have been processed
         while (remainingCombos > 0)
         {
-            if (RiotConnection.SwitchToSingleThreadViaSingleClientOnly)
-                threadCount = 1;
 
             Console.WriteLine($"Remaining Combos: {remainingCombos}");
             var tasks = new List<Task>();
