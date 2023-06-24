@@ -121,10 +121,8 @@ public class Connection : IDisposable
 
     private HttpClientHandler GetHandlerSettings()
     {
-        //var proxy = new WebProxy(""); proxy
         return new HttpClientHandler()
         {
-            //Proxy = proxy,
             ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
         };
     }
