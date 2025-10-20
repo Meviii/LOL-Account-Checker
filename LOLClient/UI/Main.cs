@@ -57,7 +57,6 @@ public partial class Main : Form
     }
     private readonly CoreUtility _coreUtility;
     private readonly UIUtility _uIUtility;
-    private static readonly object comboListLock = new();
 
     public Main(bool isNewestVersion = true)
     {
@@ -329,39 +328,27 @@ public partial class Main : Form
     public async Task<bool> RunTasksAsync(int threadCount, JObject settings)
     {
 
-        // Initialize variables
-        var remainingCombos = AccountQueue.Count();
-
-        // Limit thread count to remaining combos
-        if (threadCount > remainingCombos)
-            threadCount = remainingCombos;
+        // Limit thread count to queue size
+        var queueCount = AccountQueue.Count();
+        if (threadCount > queueCount)
+            threadCount = queueCount;
 
         // Loop through combos until all have been processed
-        while (remainingCombos > 0)
+        while (!AccountQueue.IsEmpty())
         {
-
-            Console.WriteLine($"Remaining Combos: {remainingCombos}");
+            var currentQueueCount = AccountQueue.Count();
+            Console.WriteLine($"Remaining Combos: {currentQueueCount}");
             var tasks = new List<Task>();
 
-            // Start a new task for each thread
-            for (int i = 0; i < threadCount; i++)
+            // Start a new task for each thread, up to the number of available items
+            var tasksToStart = Math.Min(threadCount, currentQueueCount);
+            for (int i = 0; i < tasksToStart; i++)
             {
-                if (remainingCombos == 0)
+                // Try to get a combo from the queue
+                if (!AccountQueue.Dequeue(out AccountCombo combo))
                 {
-                    UpdateSuccessAccounts();
-                    UpdateFailAccounts();
-
-                    await Task.WhenAll(tasks);
-                    tasks.Clear();
-                    return true;
-                }
-
-                AccountCombo combo;
-                lock (comboListLock)
-                {
-                    // Get the first combo from the queue
-                    
-                    AccountQueue.Dequeue(out combo);
+                    // Queue is empty, no more work to do in this batch
+                    break;
                 }
 
                 Console.WriteLine($"Starting task for {combo.Username}");
@@ -397,19 +384,13 @@ public partial class Main : Form
                     });
                 }
 
-                remainingCombos--;
-
-                // Remove the combo from the list and add the task to the tasks list
-                //comboList.RemoveAt(0);
+                // Add the task to the tasks list
                 tasks.Add(task);
 
             }
             
             // Wait for all tasks to complete before proceeding
             await Task.WhenAll(tasks);
-
-            // Get new queue count to care for retry accounts
-            remainingCombos = AccountQueue.Count();
 
             UpdateSuccessAccounts();
             UpdateFailAccounts();
@@ -418,8 +399,12 @@ public partial class Main : Form
             tasks.Clear();
         }
 
-        // Return false if the method did not complete successfully
-        return false;
+        // Final update after all work is complete
+        UpdateSuccessAccounts();
+        UpdateFailAccounts();
+
+        // Return true if the method completed successfully
+        return true;
     }
 
     private void UpdateAccountsLeft(string accountsLeft)
