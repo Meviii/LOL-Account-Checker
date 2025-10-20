@@ -119,6 +119,15 @@ public class AccountQueueTest
                     // Simulate some work
                     Thread.Sleep(1);
                 }
+                // Queue is empty, wait a bit and try one more time in case of race
+                Thread.Sleep(5);
+                while (AccountQueue.Dequeue(out var account))
+                {
+                    lock (lockObj)
+                    {
+                        dequeuedCount++;
+                    }
+                }
             }));
         }
         
@@ -161,7 +170,8 @@ public class AccountQueueTest
         {
             dequeueTasks.Add(Task.Run(() =>
             {
-                while (!AccountQueue.IsEmpty() || !enqueueTask.IsCompleted)
+                // Continue while either queue has items OR enqueue task is still running
+                while (true)
                 {
                     if (AccountQueue.Dequeue(out var account))
                     {
@@ -172,7 +182,12 @@ public class AccountQueueTest
                     }
                     else
                     {
-                        Thread.Sleep(5); // Wait a bit if queue is empty
+                        // Queue is empty - check if we should continue
+                        if (enqueueTask.IsCompleted && AccountQueue.IsEmpty())
+                        {
+                            break; // No more work to do
+                        }
+                        Thread.Sleep(5); // Wait a bit before retrying
                     }
                 }
             }));
